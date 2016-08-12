@@ -1,0 +1,19 @@
+.btn {
+  border: none;
+  background: gray;
+}
+
+.dude-btn {
+  @extend .btn;
+  background: brown;
+}
+
+.walter-btn {
+  @extend .btn;
+  background: green;
+}
+
+.donny-btn {
+  @extend .btn;
+  background: yellow;
+}
