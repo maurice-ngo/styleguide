@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>{{title}}</title>
+
+	{{#if fabricator}}
+		<link rel="stylesheet" href="fabricator.css">
+	{{/if}}
+	<link rel="stylesheet" href="../lib/styleguide.css">
+</head>
+<body>
+	{{#if fabricator}}
+		{{> f-icons}}
+		{{> f-menu}}
+		<div class="f-container">
+			{{> f-control-bar}}
+	{{/if}}
+
+	{% body %}
+
+	{{#if fabricator}}
+		</div>
+		<script src="fabricator.js"></script>
+	{{/if}}
+
+	<script src="../lib/styleguide.js"></script>
+</body>
+</html>
