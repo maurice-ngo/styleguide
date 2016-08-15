@@ -1,0 +1,21 @@
+/**
+
+  @page-header
+--------------------------------------------------------
+  modules/_page-header.scss
+--------------------------------------------------------
+
+  Page Header Styles : Mainly for PDP + PLP
+
+------------------------------------------------------ */
+
+.page-header {
+  background: $color__black;
+  text-align: center;
+  padding: rem(10);
+  &__title {
+    color: $color__white;
+    font-size: em(14);
+    margin: 0;
+  }
+}

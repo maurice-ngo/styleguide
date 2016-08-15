@@ -1,0 +1,59 @@
+/**
+
+  @product titles
+--------------------------------------------------------
+  modules/_product-titles.scss
+--------------------------------------------------------
+
+  Product's name and brand
+
+------------------------------------------------------ */
+
+.product-titles {
+  // .product-titles__name
+  // Product title
+  &__name {
+    @extend %headings;
+    @extend %u-ellipsis;
+    font-size: em(14);
+    line-height: 1.2;
+    &--font-primary {
+      font-family: $font-primary;
+      font-weight: normal;
+      font-size: em(12);
+      letter-spacing: em(0);
+      text-transform: none;
+    }
+  }
+
+  // .product-titles__brand
+  // Product title brand - smaller font and line height
+  &__brand {
+    @extend %headings;
+    @extend %u-ellipsis;
+    font-size: em(14);
+    line-height: 1.2;
+    &--font-primary {
+      font-family: $font-primary !important;
+      font-weight: normal;
+      font-size: em(12);
+      letter-spacing: em(0);
+      text-transform: none;
+      color: $color__grey;
+    }
+  }
+
+  // .product-titles__name--sm
+  // Product title small modifier
+  &--sm {
+    font-size: em(12);
+  }
+  &--long {
+    text-overflow: initial !important;
+    white-space: normal !important;
+    overflow: auto !important
+  }
+  &--grey {
+    color: $color__grey;
+  }
+}

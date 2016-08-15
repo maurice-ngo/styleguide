@@ -1,0 +1,27 @@
+/**
+
+  @modal
+--------------------------------------------------------
+  modules/_modal.scss
+--------------------------------------------------------
+
+  Modal Section
+
+------------------------------------------------------ */
+
+.modal {
+	background: white;
+	&__header {
+		background: $color__black;
+		padding: rem(18 14);
+		position: relative;
+		margin-bottom: rem(12);
+  	}
+	&__close {
+		position: absolute; 
+		right: 0;
+		top: 0;
+		color: $color__white;
+		padding: rem(22);
+	}
+}

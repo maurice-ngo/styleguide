@@ -1,3 +1,2 @@
-require('./atoms/atoms')
-require('./molecules/molecules')
-require('./organisms/organisms')
+require('./utils/utils')
+require('./base/base')
