@@ -1,0 +1,9 @@
+.form-item {
+  &--stacked {
+    margin: 12px 0;
+    
+    label {
+      display: block;
+    }
+  }
+}

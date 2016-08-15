@@ -1,0 +1,36 @@
+{
+  "name": "revolve-clothing-style-guide",
+  "version": "0.0.1",
+  "description": "Style guide for revolve clothing",
+  "main": "lib/styleguide.js",
+  "scripts": {
+    "start": "npm run clean && webpack-dev-server --config tools/webpack.styleguide-server.config.js",
+    "build": "npm run clean && webpack --config tools/webpack.styleguide.config.js",
+    "clean": "rimraf site lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@ext-git.dressbad.com:firesqk"
+  },
+  "author": "Revolve Clothing",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "browser-sync-webpack-plugin": "^1.0.1",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "fabricator-assemble": "^1.2.0",
+    "node-sass": "^3.4.2",
+    "opn": "^4.0.1",
+    "rimraf": "^2.5.2",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.8",
+    "webpack-dev-server": "^1.12.1",
+    "webpack-merge": "^0.12.0"
+  },
+  "dependencies": {},
+  "files": [
+    "lib"
+  ]
+}
