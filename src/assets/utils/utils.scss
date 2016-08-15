@@ -1,10 +1,5 @@
+@import "_config.scss";
 @import "_vars.scss";
-@import "_reset.scss";
-@import "_helpers.scss";
-@import "_fonts.scss";
-@import "_function-font-em.scss";
-@import "_function-rem.scss";
-@import "_print.scss";
 
 @import "mixins/_mixin-arrows.scss";
 @import "mixins/_mixin-breakpoints.scss";
@@ -18,3 +13,10 @@
 @import "mixins/_mixin-old-ie.scss";
 @import "mixins/_mixin-placeholder.scss";
 @import "mixins/_mixin-retina.scss";
+
+@import "_reset.scss";
+@import "_fonts.scss";
+@import "_helpers.scss";
+@import "_function-font-em.scss";
+@import "_function-rem.scss";
+@import "_print.scss";
