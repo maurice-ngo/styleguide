@@ -5,7 +5,8 @@
   "main": "lib/styleguide.js",
   "scripts": {
     "start": "npm run clean && webpack-dev-server --config tools/webpack.styleguide-server.config.js",
-    "build": "npm run clean && webpack --config tools/webpack.styleguide.config.js",
+    "build": "npm run clean && webpack -p --config tools/webpack.styleguide.config.js",
+    "watch": "npm run clean && webpack -w --config tools/webpack.styleguide.config.js",
     "clean": "rimraf site lib"
   },
   "repository": {
