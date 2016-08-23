@@ -1,20 +1,37 @@
-@import "_config.scss";
-@import "_vars.scss";
+@import 'config';
 
-@import "mixins/_arrows.scss";
-@import "mixins/_breakpoints.scss";
-@import "mixins/_burger.scss";
-@import "mixins/_clearfix.scss";
-@import "mixins/_flexbox.scss";
-@import "mixins/_font-face-importer.scss";
-@import "mixins/_gradual-media-queries.scss";
-@import "mixins/_is-mobile.scss";
-@import "mixins/_lang-font.scss";
-@import "mixins/_old-ie.scss";
-@import "mixins/_placeholder.scss";
-@import "mixins/_retina.scss";
+/***
 
-@import "_fonts.scss";
-@import "_helpers.scss";
-@import "_function-font-em.scss";
-@import "_function-rem.scss";
+  @lib
+---------------------------------------------------------
+
+  Your CSS begins with some global variables, a reset which
+  is basically Normalize, some mixins, and a print stylesheet.
+
+-----------------------------------------------------  */
+
+// Functions
+@import 'functions/rem';
+@import 'functions/font-em';
+
+// Vars
+@import 'vars';
+
+
+// Mixins
+@import 'mixins/breakpoints';
+@import 'mixins/arrows';
+@import 'mixins/burger';
+@import 'mixins/flexbox';
+@import 'mixins/retina';
+@import 'mixins/old-ie';
+@import 'mixins/is-mobile';
+@import 'mixins/clearfix';
+@import 'mixins/font-face-importer';
+@import 'mixins/lang-font';
+// @import 'mixins/gradual-media-queries';
+@import 'mixins/placeholder';
+
+
+// Global
+@import 'fonts';

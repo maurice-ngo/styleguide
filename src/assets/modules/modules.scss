@@ -1,49 +1,142 @@
-@import "../base/base.scss";
+@import "../lib/lib";
 
-@import "_aboutus.scss";
-@import "_accordion.scss";
-@import "_back-to-top.scss";
-@import "_badges.scss";
-@import "_branding.scss";
-@import "_burger-icon.scss";
-@import "_cc-icons.scss";
-@import "_currency_flags.scss";
-@import "_cycle.scss";
-@import "_dd-category.scss";
-@import "_dd-refine.scss";
-@import "_email-signup.scss";
-@import "_favorite-button.scss";
-@import "_favorites-chart.scss";
-@import "_fixed-corner.scss";
-@import "_gift-cert.scss";
-@import "_horizontal-scroll.scss";
-@import "_image-text-overlay.scss";
-@import "_mini-popup.scss";
-@import "_modals.scss";
-@import "_nav-list.scss";
-@import "_nav-side.scss";
-@import "_nav.scss";
-@import "_option-list.scss";
-@import "_page-header.scss";
-@import "_page-title.scss";
-@import "_prices.scss";
-@import "_product-badges.scss";
-@import "_product-quickview.scss";
-@import "_product-recs.scss";
-@import "_product-review.scss";
-@import "_product-sizes.scss";
-@import "_product-titles.scss";
-@import "_products-grid.scss";
-@import "_promo-landing.scss";
-@import "_revolve-me.scss";
-@import "_site-controls.scss";
-@import "_site-footer.scss";
-@import "_site-header.scss";
-@import "_site-search.scss";
-@import "_site-sign-up.scss";
-@import "_sizeguide.scss";
-@import "_stacked-menu.scss";
-@import "_table.scss";
-@import "_tabs.scss";
-@import "_text-field-single.scss";
-@import "_wedding-shop.scss";
+/***
+
+  @modules
+---------------------------------------------------------
+
+  Third Party
+
+---------------------------------------------------------  */
+// @import '~slick-carousel/slick/slick';
+
+/***
+
+  @modules
+---------------------------------------------------------
+
+  Reusable objects that are combinations
+  of elements and other modules.
+
+  When you create a new module, make sure the partial is
+  in the modules directory, and you import it below
+
+  Comment out any partial you don't need for this app.
+
+---------------------------------------------------------  */
+
+
+// Site Modules
+// @import 'site';
+@import 'site-header';
+// @import 'site-main';
+@import 'site-footer';
+
+// Component Modules
+// @import 'alerts';
+@import 'burger-icon';
+@import 'branding';
+@import 'site-search';
+@import 'site-sign-up';
+@import 'site-controls';
+@import 'currency_flags';
+@import 'cc-icons';
+// @import 'callouts';
+// @import 'chat';
+// @import 'dropdown';
+// @import 'heroes';
+@import 'modals';
+@import 'nav';
+@import 'nav-side';
+@import 'nav-list';
+// @import 'ntf';
+// @import 'tooltips';
+// @import 'crumbs';
+// @import 'region-flags';
+// @import 'sidebar';
+@import 'accordion';
+// @import 'thumbnails';
+// @import 'video-embeds';
+@import 'badges';
+@import 'dd-refine';
+@import 'dd-category';
+// @import 'search';
+@import 'prices';
+@import 'product-titles';
+// @import 'product-sections';
+// @import 'product-details';
+@import 'product-quickview';
+@import 'product-review';
+@import 'product-recs';
+// @import 'product-lists';
+@import 'products-grid';
+// @import 'carousel';
+// @import 'tags';
+@import 'cycle';
+@import 'tabs';
+// @import 'filters';
+// @import 'slidedown';
+// @import 'revolve-me';
+// @import 'pagination';
+// @import 'page-titles';
+// @import 'page-cta';
+@import 'image-text-overlay';
+@import 'back-to-top';
+// @import 'image-hover-outline';
+// @import 'text-field-single';
+@import 'stacked-menu';
+@import 'sizeguide';
+@import 'page-header';
+// @import 'payment-cards';
+// @import 'flag-country';
+// @import 'ipad-download-banner';
+// @import 'back-to-top';
+// @import 'button-icons';
+// @import 'accordion';
+
+// Feature Specific Modules
+// @import 'favorites';
+// @import 'favorites-onboard';
+@import 'favorites-chart';
+@import 'option-list';
+@import 'promo-landing';
+// @import 'wedding';
+// @import 'designers-a-z';
+// @import 'style-up-inbox';
+// @import 'refer-friend';
+@import 'favorite-button';
+@import 'revolve-me';
+// @import 'live-chat';
+// @import 'shop-size';
+// @import 'activewear';
+// @import 'order-summary';
+
+// Temp
+//
+// @import 'temp-holiday-vars-helpers';
+// @import 'temp-holiday-shop-15';
+// @import 'temp-holiday-countdown';
+// @import 'temp-holiday-snow';
+
+// A/B Test
+// @import 'ab-title';
+
+// Optimizely
+// @import 'optimizely-title';
+
+@import 'aboutus';
+@import 'text-field-single';
+@import 'page-title';
+@import 'wedding-shop';
+@import 'product-badges';
+@import 'mini-popup';
+@import 'fixed-corner';
+
+// Feature Specific Modules
+@import 'email-signup';
+@import 'gift-cert';
+@import 'horizontal-scroll';
+
+// NOT INCLUDED IN STYLES SENT OVER BY WALTER
+@import "product-sizes";
+@import "table";

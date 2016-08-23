@@ -1,17 +1,23 @@
-@import "../lib/lib.scss";
+@import '../lib/lib';
 
-@import "_body.scss";
-@import "_buttons.scss";
-@import "_code.scss";
-@import "_forms.scss";
-@import "_headings.scss";
-@import "_hr.scss";
-@import "_html.scss";
-@import "_icons.scss";
-@import "_images.scss";
-@import "_links.scss";
-@import "_lists.scss";
-@import "_push-buttons.scss";
-@import "_quotes.scss";
-@import "_tables.scss";
-@import "_text.scss";
+/***
+
+  @base
+---------------------------------------------------------
+
+  Global styles that do not require style guide elements
+
+-----------------------------------------------------  */
+
+// @import 'print';
+
+@import 'html';
+@import 'body';
+@import 'code';
+@import 'hr';
+@import 'images';
+@import 'links';
+@import 'quotes';
+@import 'reset';
+@import 'tables';
+@import 'text';
