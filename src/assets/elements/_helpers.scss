@@ -562,11 +562,8 @@
 */
 
 // Ellipsis overflow
-.u-ellipsis,
-%u-ellipsis {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
+.u-ellipsis {
+  @extend %u-ellipsis;
 }
 
 /* @u-no-wrap - @todo: move over mobile styles

@@ -27,16 +27,6 @@
 
 ------------------------------------------------------ */
 
-// Global Heading Placeholder
-%headings {
-  @extend %font-secondary--bold;
-  @include lang-font(japanese, bold);
-  @include lang-font(korean, bold);
-  color: $color__black;
-  letter-spacing: em(.07 * 12);
-  text-transform: uppercase;
-}
-
 // H1
 h1,
 %h1,
@@ -238,5 +228,3 @@ h6,
 // .black_wrapper {
 //   background-color: #000000;
 // }
-
-
