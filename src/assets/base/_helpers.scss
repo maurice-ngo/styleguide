@@ -477,9 +477,8 @@
 --------------------------------------------------------
 */
 
-.u-clearfix,
-%u-clearfix {
-  @include clearfix();
+.u-clearfix {
+  @extend %u-clearfix;
 }
 
 /* @clearfix
