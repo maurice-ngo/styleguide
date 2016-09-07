@@ -1,4 +1,6 @@
 const resolve = require('./path-helpers').resolve;
+const join = require('path').join;
+const SVGStore = require('webpack-svgstore-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const FabricatorPlugin = require('./fabricator-webpack-plugin');
 
@@ -40,6 +42,15 @@ module.exports = {
     	data: resolve('src/data/**/*'),
     	docs: resolve('src/docs/**/*.md')
     }),
-    new ExtractTextPlugin('[name].css')
+
+    new ExtractTextPlugin('[name].css'),
+
+    new SVGStore(
+      [ resolve('src', 'assets', 'elements', 'icons', '*.svg') ],
+      join('lib'),
+      {
+        name: 'sprite.svg'
+      }
+    )
   ]
 };
