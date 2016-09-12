@@ -2,6 +2,31 @@
  * CSS overrides for Revolve Style Guide
  */
 
+/* add revolve logo to menu (in place of overview) */
+.f-menu {
+  .icon--revolve-logo {
+    padding-left: 1.5rem;
+  }
+  .branding__logo {
+    color: #000;
+  }
+}
+
+/* move toggle controls to main container */
+.f-control-bar {
+  padding-top: 0;
+
+  .f-menu-toggle  {
+    float: left;
+    margin: 14px 18px 14px 0;
+  }
+
+ .f-controls {
+    float: left;
+    width: 24rem;
+  }
+}
+
 /* fabricator toggle icons are tiny */
 .f-control svg,
 .f-item-controls .f-control {
