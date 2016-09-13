@@ -2,6 +2,18 @@
  * CSS overrides for Revolve Style Guide
  */
 
+/* give the side nav some breathing room */
+.f-container {
+  padding: 0 24px;
+}
+
+/* help readability when viewing on large screen */
+@media (min-width: 967px) {
+  .f-container {
+    padding-right: 3%;
+  }
+}
+
 /* add revolve logo to menu (in place of overview) */
 .f-menu {
   .icon--revolve-logo {
@@ -25,6 +37,11 @@
     float: left;
     width: 24rem;
   }
+}
+
+/* override revolve's ul default styles that are messing up the side nav */
+.f-menu ul {
+  margin-left: 0;
 }
 
 /* fabricator toggle icons are tiny */
