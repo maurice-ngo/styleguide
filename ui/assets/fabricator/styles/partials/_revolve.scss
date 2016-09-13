@@ -58,3 +58,11 @@
 pre[class*='language-'] {
   font-size: inherit;
 }
+
+/* fix for favorite button's absolute position */
+#favorite-buttons\.default .f-item-preview {
+  position: relative;
+  width: 200px;
+  height: 80px;
+  border: 1px solid;
+}
