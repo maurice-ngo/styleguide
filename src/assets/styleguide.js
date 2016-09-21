@@ -1,5 +1,5 @@
 require('./lib/lib')
-require('./base/base')
+require('./helpers/helpers')
 require('./elements/elements')
 require('./modules/modules')
 require('./layouts/layouts')
