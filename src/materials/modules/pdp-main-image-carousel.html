@@ -1,11 +1,8 @@
 <!-- Image Slider -->
 <div class="slider_mpdp product-container" id="product-container" data-image-url="https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg">
-  <div class="fav_btn" style="z-index: 9999">
-    <a href="javascript:void(0);" onclick="heartProductM(this, 'TULA-WD273','', undefined, 'http://www.revolve.com/mobile/wedding/bride/dresses/wedding/?navsrc=wedding');heartAll(this);">
-      <span class="fav_heart " style='z-index: 10'></span>
-    </a>
-  </div>
-  
+
+  {{> favorite-buttons.default}}
+
   <div class="heroslides cycle-slideshow cycle-paused"
   data-cycle-slides=".cycle__slide"
   data-cycle-fx="scrollHorz"
