@@ -1,0 +1,32 @@
+<!-- Image Slider -->
+<div class="slider_mpdp product-container" id="product-container" data-image-url="https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg">
+  <div class="fav_btn" style="z-index: 9999">
+    <a href="javascript:void(0);" onclick="heartProductM(this, 'TULA-WD273','', undefined, 'http://www.revolve.com/mobile/wedding/bride/dresses/wedding/?navsrc=wedding');heartAll(this);">
+      <span class="fav_heart " style='z-index: 10'></span>
+    </a>
+  </div>
+  
+  <div class="heroslides cycle-slideshow cycle-paused"
+  data-cycle-slides=".cycle__slide"
+  data-cycle-fx="scrollHorz"
+  data-cycle-timeout="0"
+  data-cycle-pause-on-hover="true"
+  data-cycle-speed="500"
+  data-cycle-pager="#product-slide-pager"
+  data-cycle-log="false">
+    {{#each pdp.carousel}}
+    <div class="cycle__slide">
+      <img {{#unless @first}}class="js-defer-img"{{/unless}}
+      data-zoom="{{this}}"
+      {{#if @first}}
+      src="{{this}}"
+      {{else}}
+      data-src="{{this}}" src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="/>
+      {{/if}}
+    </div>
+    {{/each}}
+
+  </div><!-- end  .cycle-->
+</div><!-- end .slider_mpdp -->
+
+<div id="product-slide-pager" class="product-slide-pager cycle-pager"></div>
