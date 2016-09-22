@@ -99,9 +99,9 @@ $color__grey--lighter: #ccc;
 $color__grey--lightest: #eaeaea;
 $color__offwhite: #f4f4f4;
 $color__white: #fff;
-$color__blue: #c8ddea;
+$color__blue: #b3d4fc;
 $color__blue--dark: #2aa2d4;
-$color__pink: #fdcdca;
+$color__pink: #ffc9c9;
 $color__pink--light: #f4e8e8;
 $color__pink--dark: #e43fa4;
 $color__green:#d2f4d7;
@@ -198,7 +198,7 @@ $breakpoints: (
 
 // Define individual variables
 //
-// Base 
+// Base
 $base: map-get($breakpoints, n);
 
 // Extra Small: Small mobile

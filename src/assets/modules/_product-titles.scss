@@ -14,7 +14,6 @@
   // Product title
   &__name {
     @extend %headings;
-    @extend %u-ellipsis;
     font-size: em(14);
     line-height: 1.2;
     &--font-primary {
@@ -29,8 +28,6 @@
   // .product-titles__brand
   // Product title brand - smaller font and line height
   &__brand {
-    @extend %headings;
-    @extend %u-ellipsis;
     font-size: em(14);
     line-height: 1.2;
     &--font-primary {
@@ -40,6 +37,9 @@
       letter-spacing: em(0);
       text-transform: none;
       color: $color__grey;
+    }
+    a {
+      color: $color__black;
     }
   }
 

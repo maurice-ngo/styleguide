@@ -1,0 +1,40 @@
+---
+title: PDP Example
+fabricator: false
+---
+
+<style>
+  .product_info_div {
+    position: relative;
+    color: #717171;
+    text-align: center;
+    line-height: 20px;
+    font-family: "Karla", Arial, sans-serif;
+    margin: 14px auto 17.5px;
+    width: 97%;
+  }
+</style>
+
+<h1>PDP</h1>
+
+<div class="product_info_div">
+
+  <!-- Image Slider -->
+  {{> pdp-main-image-carousel}}
+  <!-- end .slider_mpdp -->
+
+  <!-- Product detail -->
+  <div class="product_detail_info">
+    {{> product-title-}}
+    {{> price-}}
+  </div>
+  <!--  end .product_detail_info -->
+
+  <!-- Add To Cart Form -->
+  <form method="post" id="addtocart" action="javascript:;">
+    {{> buttons.full- "add to bag"}}
+  </form>
+  <!--  end #addtocart -->
+
+
+</div>
