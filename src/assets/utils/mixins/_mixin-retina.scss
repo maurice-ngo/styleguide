@@ -24,7 +24,7 @@
 
 
 // Retina Background with svg support. Modernizr dependent
-$svg-path: '../img/svg/source' !default;
+$svg-path: '//is4.revolveassets.com/r/assets/mobile/source/icons' !default;
 $fallback-path: '../img/svg/fallbacks' !default;
 $fallback-extension: 'png' !default;
 $retina-suffix: '@2x';
@@ -34,10 +34,10 @@ $retina-suffix: '@2x';
         background-size: $size;
     }
     .no-svg &{
-        background-image: url(#{$fallback-path}/#{$name}.#{$fallback-extension});
+        background-image: url({#{$fallback-path}/#{$name}.#{$fallback-extension}});
 
         @media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-          background-image: url(#{$fallback-path}/#{$name}#{$retina-suffix}.#{$fallback-extension});
+          background-image: url({#{$fallback-path}/#{$name}#{$retina-suffix}.#{$fallback-extension}});
         }
     }
 }
