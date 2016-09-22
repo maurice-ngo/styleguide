@@ -18,40 +18,23 @@
   // .accordion__label
   &__label {
     position: relative;
-    padding: rem(20 0);
+    padding: rem(20 0 20 10);
     border-top: rem(2) solid $color__grey--lightest;
     cursor: pointer;
-    &:before,
-    &:after {
-      display: block;
+     &:before {
       position: absolute;
-      top: 50%;
       right: rem(10);
-      width: rem(3);
-      height: rem(9);
-      transform: translateY(-50%);
-      transition: all .5s ease;
-      background-color: $color__black;
-      content: '';
+      height: rem(10);
+      width: rem(10);
+      content: "";
+      display: block;
+      border-left: rem(2) solid $color__black;
+      border-bottom: rem(2) solid $color__black;
+      top: 50%;
+      margin-top: rem(-3);
+      transform: translate(0, -50%) rotate(-45deg);
+      transition: transform 0.2s linear;
     }
-    &:before {
-      transform: translate(rem(-2), rem(-4)) rotate(-45deg);
-      // add SASS parent nest style back after eagle
-      // .accordion__item--active & {
-      //   transform: translate(rem(2), rem(-4)) rotate(-45deg);
-      // }
-    }
-    &:after {
-      transform: translate(rem(2), rem(-4)) rotate(45deg);
-      // add SASS parent nest style back after eagle
-      // .accordion__item--active & {
-      //   transform: translate(rem(-2), rem(-4)) rotate(45deg);
-      // }
-    }
-    // add SASS parent nest style back after eagle
-    // .accordion__item--active & {
-    //   border-bottom: 0;
-    // }
   }
   // .accordion__content
   &__content {
@@ -62,15 +45,11 @@
   }
 }
 
-
 // Remove after eagle use parent nest style above
 .accordion__item--active .accordion__label {
   border-bottom: 0;
   &:before {
-    transform: translate(rem(2), rem(-4)) rotate(-45deg);
-  }
-  &:after {
-    transform: translate(rem(-2), rem(-4)) rotate(45deg);
+    transform: translate(0, 35%) rotate(-225deg);
   }
 }
 

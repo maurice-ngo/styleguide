@@ -8,57 +8,6 @@
   Slideshow Section
 
 ------------------------------------------------------ */
-.slick-slideshow {
-    &__slide {
-        display: block;
-    }
-}
-
-.slick-carousel {
-    &--extend{
-        width: 115%;
-    }
-    &__slide {
-        display: block;
-        padding-right: rem(3);
-        padding-left: rem(7);
-        img {
-            display: inline-block !important;
-            vertical-align: top;
-        }
-    }
-}
-
-.slick-dots {
-    position: absolute;
-    bottom: 0;
-    display: block;
-    width: 100%;
-    padding: 0;
-    list-style: none;
-    text-align: center;
-    margin-left: 0;
-    li {
-        position: relative;
-        display: inline-block;
-        button {
-            display: block;
-            padding: rem(5);
-            opacity: .50;
-            cursor: pointer;
-            color: transparent;
-            width: rem(15);
-            height: rem(15);
-            border: #fff solid rem(3);
-            background-color: #949494;
-            border-radius: 50%;
-            margin: rem(8);
-        }
-        &.slick-active button {
-            opacity: 1;
-        }
-    }
-}
 
 .cycle {
   &-slide {

@@ -123,7 +123,7 @@ select:focus {
 ------------------------------------------------------ */
 
 select {
-  // @include background-image('arrow-down');
+  @include background-image('arrow-down');
   width: auto;
   height: auto;
   padding-right: rem( 18 );
@@ -661,15 +661,8 @@ fieldset {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+.selection__dropdown--arrow {
+  position: absolute;
+  top: 24%;
+  right: 5%;
+}

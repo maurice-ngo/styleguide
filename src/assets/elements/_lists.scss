@@ -68,3 +68,11 @@ ol {
     }
   }
 }
+
+// Remove when old framework is removed
+ol {
+  list-style: decimal;
+}
+ul {
+  list-style: disc;
+}
