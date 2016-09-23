@@ -1,6 +1,8 @@
 ---
-notes: Handles most pricing views (i.e. PLP, PDP, BAG)
+notes: Handles sale prices
 ---
 
-<span class="prices__retail-strikethrough"> $100 </span>
-<span class="prices__markdown"> $50 </span>
+<p class="price u-margin-b--lg">
+  <span class="price price__retail-strikethrough">{{pdp.info.price}}</span>
+  <span class="price price__markdown">{{pdp.info.sale-price}}</span>
+</p>

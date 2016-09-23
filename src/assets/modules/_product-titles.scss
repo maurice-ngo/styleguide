@@ -13,9 +13,7 @@
   // .product-titles__name
   // Product title
   &__name {
-    @extend %headings;
-    font-size: em(14);
-    line-height: 1.2;
+    @extend %h3;
     &--font-primary {
       font-family: $font-primary;
       font-weight: normal;
@@ -28,8 +26,6 @@
   // .product-titles__brand
   // Product title brand - smaller font and line height
   &__brand {
-    font-size: em(14);
-    line-height: 1.2;
     &--font-primary {
       font-family: $font-primary !important;
       font-weight: normal;

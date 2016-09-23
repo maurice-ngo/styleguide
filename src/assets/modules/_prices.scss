@@ -8,11 +8,11 @@
   Prices for products
 
 ------------------------------------------------------ */
-.prices {
+.price {
   //prices__retail
+  @extend %h3;
+
   &__retail {
-    color: $color__black;
-    font-weight: bold;
     &-strikethrough {
       color: $color__grey;
       text-decoration: line-through;
@@ -21,9 +21,8 @@
   //prices__markdown
   &__markdown {
     color: $color__error;
-    font-weight: bold;
   }
-  // This is for price options on the PDP page. 
+  // This is for price options on the PDP page.
   // Toggle between prices using radio buttons.
   &-option {
     margin-bottom: 0;
