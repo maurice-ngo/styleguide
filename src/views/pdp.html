@@ -4,31 +4,31 @@ fabricator: false
 ---
 
 <style>
-  .product_info_div {
+  #header { margin: 0; }
+  #content {
     position: relative;
-    color: #717171;
     text-align: center;
-    line-height: 20px;
-    font-family: "Karla", Arial, sans-serif;
-    margin: 14px auto 17.5px;
-    width: 97%;
+    margin: 0 16px;
   }
 </style>
 
-<h1>PDP</h1>
+<h1 id="header" class="u-bg-color--black u-color--white u-padding-a--md u-padding-l--xl">PDP</h1>
 
-<div class="product_info_div">
+<div id="content">
 
-  <!-- Image Slider -->
-  {{> pdp-main-image-carousel}}
-  <!-- end .slider_mpdp -->
+  {{> favorite-buttons.default}}
 
-  <!-- Product detail -->
-  <div class="product_detail_info">
-    {{> product-title-}}
-    {{> price-}}
-  </div>
-  <!--  end .product_detail_info -->
+  <!-- Image Carousel -->
+  {{> product-image-carousel}}
+  <!-- end .product-image-carousel -->
+
+  <!-- Product Title -->
+  {{> product-title-}}
+  <!--  end .product-title -->
+
+  <!-- Price -->
+  {{> price-}}
+  <!--  end .price -->
 
   <!-- Add To Cart Form -->
   <form method="post" id="addtocart" action="javascript:;">
