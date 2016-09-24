@@ -24,6 +24,15 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['es2015']
+        }
+      },
+
+      {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap'),
         exclude: /node_modules/
