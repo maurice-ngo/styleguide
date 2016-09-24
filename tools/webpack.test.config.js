@@ -1,4 +1,3 @@
-const resolve = require('./path-helpers').resolve;
 const merge = require('webpack-merge');
 const config = require('./webpack.common.config');
 
