@@ -11,6 +11,7 @@
 
 .table {
   border: 0;
+  font-size: em(12);
   &__header {
     padding: rem(10);
     border: rem(1) solid $color__offwhite;
