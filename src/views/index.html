@@ -12,14 +12,12 @@ fabricator: true
 <section id="sections">
   <h1>Sections</h1>
 
-  <h2>Helpers</h2>
-  <p>{{sections.helpers}}</p>
+  {{#each sections}}
+  <h2>{{@key}}</h2>
 
-  <h2>Elements</h2>
-  <p>{{sections.elements}}</p>
+  <p>{{{this}}}</p>
+  {{/each}}
 
-  <h2>Modules</h2>
-  <p>{{sections.modules}}</p>
 </section>
 
 <section>
