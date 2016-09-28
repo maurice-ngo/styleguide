@@ -11,5 +11,13 @@
     "brand": "Tularosa",
     "price": "$298",
     "sale-price": "$149"
+  },
+  "options": {
+    "notifications": [
+      "product-notifications.one-left",
+      "product-notifications.preorder",
+      "product-notifications.final-sale",
+      "product-notifications.final-sale-sample-defect"
+    ]
   }
 }
