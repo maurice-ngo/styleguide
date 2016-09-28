@@ -3,38 +3,60 @@ title: PDP Example
 fabricator: false
 ---
 
+<!-- Styles -->
 <style>
-  #header { margin: 0; }
-  #content {
+  .pdp {
     position: relative;
     text-align: center;
-    margin: 0 16px;
   }
 </style>
 
-<h1 id="header" class="u-bg-color--black u-color--white u-padding-a--md u-padding-l--xl">PDP</h1>
-
-<div id="content">
-
-  {{> favorite-buttons.default}}
+<!-- Head -->
+{{> mock-head "pdp"}}
 
   <!-- Image Carousel -->
   {{> product-image-carousel}}
-  <!-- end .product-image-carousel -->
 
   <!-- Product Title -->
   {{> product-title-}}
-  <!--  end .product-title -->
 
   <!-- Price -->
   {{> price-}}
-  <!--  end .price -->
 
   <!-- Add To Cart Form -->
   <form method="post" id="addtocart" action="javascript:;">
-    {{> buttons.full- "add to bag"}}
+    {{> buttons.full- addToBag=true}}
   </form>
-  <!--  end #addtocart -->
 
+  <!-- Favorite button -->
+  {{> favorite-buttons.default}}
 
-</div>
+<!-- Foot -->
+{{> mock-foot}}
+
+<!-- Page Options -->
+{{> mock-page-options pdp.options.notifications}}
+
+<script>
+  (function () {
+    // callback to add product notification template to html
+    var addProductNotification = function (id) {
+      var msg = document.getElementById(id).innerHTML;
+      var form = document.getElementById("addtocart");
+      var btn = form.getElementsByClassName("btn--full")[0];
+
+      btn.insertAdjacentHTML('beforebegin', msg);
+    };
+
+    // list of options and their associated callback
+    var options = {
+      "product-notifications.one-left": addProductNotification,
+      "product-notifications.preorder": addProductNotification,
+      "product-notifications.final-sale": addProductNotification,
+      "product-notifications.final-sale-sample-defect": addProductNotification,
+    }
+
+    // execute helper function
+    applyParams(options);
+  })();
+</script>
