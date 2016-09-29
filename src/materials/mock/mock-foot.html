@@ -5,16 +5,5 @@
 <!-- Default Page w/ No Options -->
 {{> mock-page-options ""}}
 
-<script>
-  // execute all the options listed in url parameters
-  function applyParams(pageOptions) {
-    var docLocSearch = document.location.search;
-    var params = docLocSearch ? docLocSearch.substr(1).split('&') : [];
-
-    params.forEach(function (param) {
-      var fn = pageOptions[param];
-      if (typeof fn === 'function')
-        fn(param);
-    });
-  }
-</script>
+<!-- JavaScript for Mock Pages -->
+{{> mock-javascript}}

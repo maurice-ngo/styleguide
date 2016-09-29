@@ -12,51 +12,102 @@ fabricator: false
 </style>
 
 <!-- Head -->
-{{> mock-head "pdp"}}
+{{> mock-head "pdp" }}
 
   <!-- Image Carousel -->
-  {{> product-image-carousel}}
+  {{> product-image-carousel }}
 
   <!-- Product Title -->
-  {{> product-title-}}
+  {{> product-title- }}
 
   <!-- Price -->
-  {{> price-}}
+  {{> price- }}
 
   <!-- Add To Cart Form -->
-  <form method="post" id="addtocart" action="javascript:;">
-    {{> buttons.full- addToBag=true}}
+  <form method="post" action="">
+    {{> product-options.size }}<!-- remove space between inline-blocks
+ -->{{> product-options.color }}
+    {{> buttons.full- addToBag=true }}
   </form>
 
+  {{> estimated-delivery }}
+
   <!-- Favorite button -->
-  {{> favorite-buttons.default}}
+  {{> favorite-buttons.default }}
 
 <!-- Foot -->
-{{> mock-foot}}
+{{> mock-foot }}
 
 <!-- Page Options -->
-{{> mock-page-options pdp.options.notifications}}
+{{> mock-page-options pdp.options.notifications }}
 
 <script>
   (function () {
-    // callback to add product notification template to html
-    var addProductNotification = function (id) {
-      var msg = document.getElementById(id).innerHTML;
-      var form = document.getElementById("addtocart");
-      var btn = form.getElementsByClassName("btn--full")[0];
+    // functions to be run at window.onload
+    rc.q.push(setUrlParams);
+    rc.q.push(setSizeClass);
+    rc.q.push(setDeliveryDate);
+    rc.q.push(setupSizeChanges);
 
-      btn.insertAdjacentHTML('beforebegin', msg);
-    };
+    // setup url params
+    function setUrlParams() {
+      // callback to add product notification template to html
+      var addProductNotification = function (id) {
+        var btn = document.getElementById('addToBag');
+        var msg = document.getElementById(id).innerHTML;
 
-    // list of options and their associated callback
-    var options = {
-      "product-notifications.one-left": addProductNotification,
-      "product-notifications.preorder": addProductNotification,
-      "product-notifications.final-sale": addProductNotification,
-      "product-notifications.final-sale-sample-defect": addProductNotification,
+        // add notification
+        btn.insertAdjacentHTML('beforebegin', msg);
+      };
+
+      // list of options and their associated callback
+      var options = {
+        'product-notifications.one-left': addProductNotification,
+        'product-notifications.preorder': addProductNotification,
+        'product-notifications.final-sale': addProductNotification,
+        'product-notifications.final-sale-sample-defect': addProductNotification,
+      }
+
+      // execute helper function to apply url parameters
+      rc.applyParams(options);
     }
 
-    // execute helper function
-    applyParams(options);
+    // setup for product-option--size default color
+    var sizeDropdown = document.getElementById('size');
+    function setSizeClass() {
+      var className = 'default';
+      if (sizeDropdown.value === className)
+        rc.addClass(sizeDropdown, className);
+      else
+        rc.removeClass(sizeDropdown, className);
+    }
+
+    // set delivery date
+    var delivery = document.getElementById('estimated-delivery');
+    var date = delivery.getElementsByTagName('span')[0];
+    var defaultDateText = date.innerHTML;
+    var selectedSize;
+    function setDeliveryDate() {
+      // get the selectedSize after every change
+      selectedSize = sizeDropdown.options[sizeDropdown.selectedIndex];
+
+      // update date span
+      date.innerHTML = selectedSize.getAttribute('data-delivery-date') || defaultDateText;
+
+      // make preorder delivery-date red
+      if (selectedSize.getAttribute('data-preorder') === 'true')
+        rc.addClass(delivery, 'u-error')
+      else
+        rc.removeClass(delivery, 'u-error')
+    }
+
+    // setup size dropdown change events
+    function setupSizeChanges() {
+      sizeDropdown.addEventListener('change', function () {
+        setSizeClass();
+        setDeliveryDate();
+      });
+    }
+
   })();
 </script>
