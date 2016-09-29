@@ -144,52 +144,52 @@
 .u-margin {
   &-a {
     &--none    { margin: 0; }
-    &--xs      { margin: rem(6); }
-    &--sm      { margin: rem(8); }
-    &--md      { margin: rem(12); }
+    &--xs      { margin: rem(2); }
+    &--sm      { margin: rem(4); }
+    &--md      { margin: rem(8); }
     &--lg      { margin: rem(16); }
-    &--xl      { margin: rem(22); }
-    &--xxl     { margin: rem(30); }
+    &--xl      { margin: rem(24); }
+    &--xxl     { margin: rem(32); }
   }
 
   &-t {
     &--none   { margin-top: 0; }
-    &--xs      { margin-top: rem(2); }
-    &--sm      { margin-top: rem(4); }
-    &--md      { margin-top: rem(6); }
-    &--lg      { margin-top: rem(12); }
-    &--xl      { margin-top: rem(16); }
-    &--xxl     { margin-top: rem(22); }
+    &--xs     { margin-top: rem(2); }
+    &--sm     { margin-top: rem(4); }
+    &--md     { margin-top: rem(8); }
+    &--lg     { margin-top: rem(16); }
+    &--xl     { margin-top: rem(24); }
+    &--xxl    { margin-top: rem(32); }
   }
 
   &-r {
     &--none   { margin-right: 0; }
-    &--xs      { margin-right: rem(2); }
-    &--sm      { margin-right: rem(4); }
-    &--md      { margin-right: rem(6); }
-    &--lg      { margin-right: rem(12); }
-    &--xl      { margin-right: rem(16); }
-    &--xxl     { margin-right: rem(22); }
+    &--xs     { margin-right: rem(2); }
+    &--sm     { margin-right: rem(4); }
+    &--md     { margin-right: rem(8); }
+    &--lg     { margin-right: rem(16); }
+    &--xl     { margin-right: rem(24); }
+    &--xxl    { margin-right: rem(32); }
   }
 
   &-b {
     &--none   { margin-bottom: 0; }
-    &--xs      { margin-bottom: rem(2); }
-    &--sm      { margin-bottom: rem(4); }
-    &--md      { margin-bottom: rem(6); }
-    &--lg      { margin-bottom: rem(12); }
-    &--xl      { margin-bottom: rem(16); }
-    &--xxl     { margin-bottom: rem(22); }
+    &--xs     { margin-bottom: rem(2); }
+    &--sm     { margin-bottom: rem(4); }
+    &--md     { margin-bottom: rem(8); }
+    &--lg     { margin-bottom: rem(16); }
+    &--xl     { margin-bottom: rem(24); }
+    &--xxl    { margin-bottom: rem(32); }
   }
 
   &-l {
     &--none   { margin-left: 0; }
-    &--xs      { margin-left: rem(2); }
-    &--sm      { margin-left: rem(4); }
-    &--md      { margin-left: rem(6); }
-    &--lg      { margin-left: rem(12); }
-    &--xl      { margin-left: rem(16); }
-    &--xxl     { margin-left: rem(22); }
+    &--xs     { margin-left: rem(2); }
+    &--sm     { margin-left: rem(4); }
+    &--md     { margin-left: rem(8); }
+    &--lg     { margin-left: rem(16); }
+    &--xl     { margin-left: rem(24); }
+    &--xxl    { margin-left: rem(32); }
   }
 
   &--center {
