@@ -5,9 +5,6 @@
 
       // queue to hold all the functions and execute later
       'q': [],
-      push: function (fn) {
-        rc.q.push(fn);
-      },
 
       // execute options set by url parameters
       applyParams: function (pageOptions) {
@@ -47,14 +44,15 @@
 
     window.onload = function() {
       if (existingOnload) existingOnload();
-      //if (rc.onload) rc.onload();
       // loop thru all the functions in the queue
       var queue = rc.q || [];
       queue.forEach(function (fn) {
         fn.call();
       })
-      // reset push function to fire immediately
-      rc.q.push = function (fn) { fn.call(); };
+      // reset push to fire fn immediately
+      rc.q = {
+        push: function (fn) { fn.call(); }
+      };
     };
   })();
 </script>
