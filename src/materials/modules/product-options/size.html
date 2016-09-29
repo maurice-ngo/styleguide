@@ -1,0 +1,20 @@
+---
+notes:
+---
+
+<div class="product-option product-option--size">
+  <label for="size" class="product-option__label">Size</label>
+  <select id="size" class="product-option__select">
+    <option value="default">Select Size</option>
+  {{#each pdp.sizes}}
+    {{#if this.oos}}
+      <option data-delivery-date="{{this.delivery-date}}" value="{{this.value}}" disabled>{{this.label}} (Out of Stock)</option>
+    {{else if this.preorder}}
+      <option data-delivery-date="{{this.delivery-date}}" data-preorder="true" value="{{this.value}}">{{this.label}}</option>
+    {{else}}
+      <option data-delivery-date="{{this.delivery-date}}" value="{{this.value}}">{{this.label}}</option>
+    {{/if}}
+  {{/each}}
+    <option data-show-bis="true">Can't find your size?</option>
+  </select>
+</div>

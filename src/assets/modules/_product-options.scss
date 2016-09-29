@@ -1,0 +1,74 @@
+/**
+
+  @product options
+--------------------------------------------------------
+  modules/_product-options.scss
+--------------------------------------------------------
+
+  Product's options (size & color)
+
+------------------------------------------------------ */
+
+// this value should come from elsewhere, but i cannot find it
+$small-browser: 300px;
+
+.product-option {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  margin-bottom: rem(8);
+  background-color: $color__grey--lighter;
+  z-index: 1; // need this for the label overlap trickery
+
+  @media (max-width: $small-browser) {
+    width: 100%;
+  }
+
+  // .product-option--size
+  &--size {
+    border-right: rem(4) solid $color__white;
+    @media (max-width: $small-browser) {
+      border: none;
+    }
+  }
+  // .product-option--color
+  &--color {
+    border-left: rem(4) solid $color__white;
+    @media (max-width: $small-browser) {
+      border: none;
+    }
+  }
+
+  // .product-option__label, .product-option__select
+  &__label,
+  &__select {
+    background-color: transparent;
+  }
+  // .product-option__label
+  &__label {
+    position: absolute;
+    top: rem(12);
+    left: rem(16);
+    z-index: -1; // to stay behind the select it overlaps
+    font-size: em(10);
+    text-align: left;
+    // override default form styles
+    margin-bottom: 0;
+  }
+  // .product-option__select
+  &__select {
+    @extend %h4;
+    display: block;
+    padding: rem(30 24 15 16);
+    z-index: 2; // to stay behind the select it overlaps
+    background-size: rem(16 16);
+    // override default form styles
+    width: 100%;
+    border-color: transparent;
+    border-width: rem(16);
+    box-shadow: none;
+    &.default {
+      color: $color__grey--light;
+    }
+  }
+}
