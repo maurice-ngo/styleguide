@@ -43,33 +43,26 @@ fabricator: false
 
 <script>
   (function () {
-    // functions to be run at window.onload
-    rc.q.push(setUrlParams);
+    // queue functions for window.onload
     rc.q.push(setSizeClass);
     rc.q.push(setDeliveryDate);
     rc.q.push(setupSizeChanges);
 
-    // setup url params
-    function setUrlParams() {
-      // callback to add product notification template to html
-      var addProductNotification = function (id) {
-        var btn = document.getElementById('addToBag');
-        var msg = document.getElementById(id).innerHTML;
+    // apply url parameters
+    rc.applyParams({
+      'product-notifications.one-left': addProductNotification,
+      'product-notifications.preorder': addProductNotification,
+      'product-notifications.final-sale': addProductNotification,
+      'product-notifications.final-sale-sample-defect': addProductNotification,
+    });
 
-        // add notification
-        btn.insertAdjacentHTML('beforebegin', msg);
-      };
+    // callback to add product notification template to html
+    function addProductNotification(id) {
+      var btn = document.getElementById('addToBag');
+      var msg = document.getElementById(id).innerHTML;
 
-      // list of options and their associated callback
-      var options = {
-        'product-notifications.one-left': addProductNotification,
-        'product-notifications.preorder': addProductNotification,
-        'product-notifications.final-sale': addProductNotification,
-        'product-notifications.final-sale-sample-defect': addProductNotification,
-      }
-
-      // execute helper function to apply url parameters
-      rc.applyParams(options);
+      // add notification
+      btn.insertAdjacentHTML('beforebegin', msg);
     }
 
     // setup for product-option--size default color
