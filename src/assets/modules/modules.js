@@ -1,3 +1,7 @@
-require('./modules.scss')
+import $ from 'jquery';
+import './modules.scss';
+import './accordion';
 
-require('./accordion')
+$(document).ready(() => {
+  $('.js-accordion').accordion();
+});
