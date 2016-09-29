@@ -3,7 +3,7 @@ notes: The default, large button style.
 ---
 
 {{#if addToBag}}
-  <a class="btn btn--full u-margin-t--lg" href="?added-to-bag">Add to Bag</a>
+  <button type="submit" id="addToBag" class="btn btn--full" href="?confirm">Add to Bag</button>
 {{else}}
   {{!-- default button that takes a string or prints default text --}}
   <a class="btn btn--full" href="">{{#if this}}{{this}}{{else}}Full Black Button{{/if}}</a>
