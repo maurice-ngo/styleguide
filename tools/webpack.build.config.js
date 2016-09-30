@@ -20,7 +20,7 @@ module.exports = merge(config, {
     new ExtractTextPlugin('[name].css'),
 
     new SVGStore(
-      [ resolve('src', 'assets', 'elements', 'icons', '*.svg') ],
+      [ resolve('src', 'assets', 'svg', 'icons', '*.svg') ],
       join('lib'),
       {
         name: 'sprite.svg'
