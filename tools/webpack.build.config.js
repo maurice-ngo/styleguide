@@ -12,6 +12,10 @@ module.exports = merge(config, {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap'),
         exclude: /node_modules/
+      }, {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+        include: /svg\/backgrounds/
       }
     ],
   },

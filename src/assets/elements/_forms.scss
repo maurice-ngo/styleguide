@@ -123,7 +123,7 @@ select:focus {
 ------------------------------------------------------ */
 
 select {
-  @include background-image('arrow-down');
+  @include background-image('arrow-down--thin');
   width: auto;
   height: auto;
   padding-right: rem( 18 );

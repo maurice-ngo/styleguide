@@ -6,6 +6,10 @@ Webpack plugins and loaders use these specific file locations to work their magi
 
 Duplication of svg's across these subdirectories is fine. There are no dependencies across subdirectories, and there is no reason a single svg cannot live in multiple places. That said, feel free to delete anything we no longer want, because git.
 
+#### `backgrounds`
+
+Images referenced thru CSS `background` properties live here. The `svg-url-loader` loader replaces the url within the `background-image(url)` with a `utf-8` encoded string. These svg's are not processed at build time, so there is no harm in leaving unreferenced images in here.
+
 #### `icons`
 
 Images reference thru HTML `<svg>` elements live here. The `webpack-svgstore-plugin` plugin compiles these svg's into a single sprite `/lib/sprite.svg` during the build process. Because this plugin compiles ALL these svg's, it's imperative that we do not leave unused svg's in this directory. Doing so has negative impacts on build time, and (more importantly for the user) increases file size leading to slower page rendering.
