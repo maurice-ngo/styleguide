@@ -28,9 +28,9 @@ fabricator: false
     {{> product-options.size }}<!-- remove space between inline-blocks
  -->{{> product-options.color }}
     {{> buttons.full- addToBag=true }}
+    {{> product-estimated-delivery }}
   </form>
 
-  {{> estimated-delivery }}
 
   <!-- Favorite button -->
   {{> favorite-buttons.default }}
@@ -44,9 +44,9 @@ fabricator: false
 <script>
   (function () {
     // queue functions for window.onload
-    rc.q.push(setSizeClass);
-    rc.q.push(setDeliveryDate);
-    rc.q.push(setupSizeChanges);
+    //rc.q.push(setSizeClass);
+    //rc.q.push(setDeliveryDate);
+    //rc.q.push(setupSizeChanges);
 
     // apply url parameters
     rc.applyParams({
@@ -64,43 +64,5 @@ fabricator: false
       // add notification
       btn.insertAdjacentHTML('beforebegin', msg);
     }
-
-    // setup for product-option--size default color
-    var sizeDropdown = document.getElementById('size');
-    function setSizeClass() {
-      var className = 'default';
-      if (sizeDropdown.value === className)
-        rc.addClass(sizeDropdown, className);
-      else
-        rc.removeClass(sizeDropdown, className);
-    }
-
-    // set delivery date
-    var delivery = document.getElementById('estimated-delivery');
-    var date = delivery.getElementsByTagName('span')[0];
-    var defaultDateText = date.innerHTML;
-    var selectedSize;
-    function setDeliveryDate() {
-      // get the selectedSize after every change
-      selectedSize = sizeDropdown.options[sizeDropdown.selectedIndex];
-
-      // update date span
-      date.innerHTML = selectedSize.getAttribute('data-delivery-date') || defaultDateText;
-
-      // make preorder delivery-date red
-      if (selectedSize.getAttribute('data-preorder') === 'true')
-        rc.addClass(delivery, 'u-error')
-      else
-        rc.removeClass(delivery, 'u-error')
-    }
-
-    // setup size dropdown change events
-    function setupSizeChanges() {
-      sizeDropdown.addEventListener('change', function () {
-        setSizeClass();
-        setDeliveryDate();
-      });
-    }
-
   })();
 </script>
