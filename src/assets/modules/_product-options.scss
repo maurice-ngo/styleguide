@@ -9,9 +9,6 @@
 
 ------------------------------------------------------ */
 
-// this value should come from elsewhere, but i cannot find it
-$small-browser: 300px;
-
 .product-option {
   position: relative;
   display: inline-block;
@@ -20,22 +17,20 @@ $small-browser: 300px;
   background-color: $color__grey--lighter;
   z-index: 1; // need this for the label overlap trickery
 
-  @media (max-width: $small-browser) {
+  @include bp-until($small-mobile) {
     width: 100%;
   }
 
   // .product-option--size
   &--size {
-    border-right: rem(4) solid $color__white;
-    @media (max-width: $small-browser) {
-      border: none;
+    @include bp-at-least($small-mobile) {
+      border-right: rem(4) solid $color__white;
     }
   }
   // .product-option--color
   &--color {
-    border-left: rem(4) solid $color__white;
-    @media (max-width: $small-browser) {
-      border: none;
+    @include bp-at-least($small-mobile) {
+      border-left: rem(4) solid $color__white;
     }
   }
 
