@@ -64,8 +64,10 @@ $small-browser: 300px;
     background-size: rem(16 16);
     // override default form styles
     width: 100%;
-    border-color: transparent;
-    border-width: rem(16);
+    border: {
+      color: transparent;
+      width: rem(16);
+    }
     box-shadow: none;
     &.default {
       color: $color__grey--light;
