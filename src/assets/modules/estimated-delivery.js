@@ -21,10 +21,7 @@
     date.text(selected.getAttribute('data-delivery-date') || defaultDateText);
 
     // make preorder delivery-date red
-    if (selected.getAttribute('data-preorder') === 'true')
-      delivery.addClass('u-error');
-    else
-      delivery.removeClass('u-error');
+    delivery.toggleClass('u-error', selected.getAttribute('data-preorder') === 'true');
   });
 
   // run once immediately
