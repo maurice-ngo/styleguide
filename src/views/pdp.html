@@ -24,7 +24,8 @@ fabricator: false
   {{> price- }}
 
   <!-- Add To Cart Form -->
-  <form method="post" action="">
+  <form method="GET" action="">
+    <input type="hidden" name="confirm" value="true" />
     {{> product-options.size }}<!-- remove space between inline-blocks
  -->{{> product-options.color }}
     {{> buttons.full- addToBag=true }}

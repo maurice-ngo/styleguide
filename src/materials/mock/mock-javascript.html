@@ -10,12 +10,18 @@
       applyParams: function (pageOptions) {
         var docLocSearch = document.location.search;
         var params = docLocSearch ? docLocSearch.substr(1).split('&') : [];
+        var pair, key, value, fn;
 
         params.forEach(function (param) {
-          var fn = pageOptions[param];
+          pair = param.split('=');
+          key = pair[0];
+          value = pair[1] || true;
+          fn = pageOptions[key];
+
           if (typeof fn === 'function')
             fn(param);
         });
+
       },
 
       // helper functions to add and remove a class
