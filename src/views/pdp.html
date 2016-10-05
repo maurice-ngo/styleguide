@@ -1,18 +1,13 @@
 ---
-title: PDP Example
+title: pdp
+data-json: pdp
+page-options: mock-page-options
 fabricator: false
+layout: mock-page
+content-styles: |
+  position: relative;
+  text-align: center;
 ---
-
-<!-- Styles -->
-<style>
-  .pdp {
-    position: relative;
-    text-align: center;
-  }
-</style>
-
-<!-- Head -->
-{{> mock-head "pdp" }}
 
   <!-- Image Carousel -->
   {{> product-image-carousel }}
@@ -32,15 +27,8 @@ fabricator: false
     {{> product-estimated-delivery }}
   </form>
 
-
   <!-- Favorite button -->
   {{> favorite-buttons.default }}
-
-<!-- Foot -->
-{{> mock-foot }}
-
-<!-- Page Options -->
-{{> mock-page-options pdp.options.notifications }}
 
 <script>
   (function () {

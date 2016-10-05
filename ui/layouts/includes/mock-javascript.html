@@ -19,7 +19,7 @@
           fn = pageOptions[key];
 
           if (typeof fn === 'function')
-            fn(param);
+            rc.q.push(function () { fn(param); });
         });
 
       },

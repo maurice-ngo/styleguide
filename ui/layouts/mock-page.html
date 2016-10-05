@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{{title}}</title>
+
+  <!-- Styles -->
+  <style>
+    #content {
+      {{{content-styles}}}
+    }
+  </style>
+	<link rel="stylesheet" href="../lib/styleguide.css">
+
+  <!-- JavaScript for Mock Pages -->
+  {{> mock-javascript }}
+</head>
+
+<body>
+  <!-- Head -->
+  <h1 id="header" class="u-bg-color--black u-color--white u-padding-a--md u-padding-l--xl u-margin-a--none">{{title}}</h1>
+
+  <!-- Content -->
+  <div id="content" class="u-margin-l--lg u-margin-r--lg">
+
+    <!-- Page content passed in from view html -->
+    {% body %}
+
+  </div>
+
+  <!-- Default Page w/ No Options -->
+  {{> mock-page-options (lookup (lookup ./this data-json) 'mock-page-options')}}
+
+	<script src="../lib/styleguide.js"></script>
+
+	<script>
+		(function(doc) {
+			var sprite = '../lib/sprite.svg';
+			var xhr = new XMLHttpRequest();
+			xhr.open('GET', sprite, true);
+			xhr.overrideMimeType('image/svg+xml');
+			xhr.send();
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4) {
+					var el = document.createElement('div');
+					el.innerHTML = xhr.responseText;
+					el.id = 'svg-sprite';
+					doc.body.appendChild(el);
+				}
+			};
+		}(document));
+	</script>
+</body>
+</html>

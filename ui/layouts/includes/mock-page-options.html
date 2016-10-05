@@ -1,5 +1,9 @@
+<h1 class="u-bg-color--black u-color--white u-margin-t--xl u-margin-b--none u-padding-a--xl">page options:</h1>
+
 <ul class="u-bg-color--black u-margin-a--none u-padding-r--lg u-padding-l--xxl">
 
+  <li>
+    <a href="?" class="u-text--lg u-color--white">default page with no options</a>
 {{#each this}}
   <li>
     <a href="?{{this}}" class="u-text--lg u-color--white u-invert--link u-ellipsis">{{this}}</a>
@@ -8,9 +12,6 @@
       {{> (lookup ../this @index)}}
     </script>
     <!-- end handlebars template -->
-{{else}}
-  <li>
-    <a href="?" class="u-text--lg u-color--white">default page with no options</a>
 {{/each}}
 
 </ul>

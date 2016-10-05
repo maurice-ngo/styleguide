@@ -41,12 +41,10 @@
       "value": "/mobile/toesox-bella-half-toe-sock-in-heather-grey-lime/dp/TOER-WT3/?d=Womens"
     }
   ],
-  "options": {
-    "notifications": [
-      "product-notifications.one-left",
-      "product-notifications.preorder",
-      "product-notifications.final-sale",
-      "product-notifications.final-sale-sample-defect"
-    ]
-  }
+  "mock-page-options": [
+    "product-notifications.one-left",
+    "product-notifications.preorder",
+    "product-notifications.final-sale",
+    "product-notifications.final-sale-sample-defect"
+  ]
 }
