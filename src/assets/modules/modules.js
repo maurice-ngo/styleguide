@@ -3,8 +3,8 @@ import './modules.scss';
 import './accordion';
 
 require('./accordion')
-require('./estimated-delivery')
-require('./size-dropdown-color')
+require('./product-delivery')
+require('./product-size-style')
 require('./product-color-change')
 
 $(document).ready(() => {

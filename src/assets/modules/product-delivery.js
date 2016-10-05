@@ -1,6 +1,6 @@
 // update delivery date
 (function ($) {
-  var delivery = $('.estimated-delivery');
+  var delivery = $('.product-delivery');
   // only continue if needed
   if (!delivery.length) return;
 
