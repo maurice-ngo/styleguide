@@ -4,14 +4,14 @@
   // only continue if needed
   if (!sizeDropdown.length) return;
 
+  var selected;
+
   // run whenever size dropdown changes
   sizeDropdown.change(function () {
-    var selected = this.options[this.selectedIndex];
+    selected = this.options[this.selectedIndex];
 
-    if (selected.value === 'default')
-      $(this).addClass('default');
-    else
-      $(this).removeClass('default');
+    // toggleClass based on selected.value
+    $(this).toggleClass('default', selected.value === 'default');
   });
 
   // run once immediately
