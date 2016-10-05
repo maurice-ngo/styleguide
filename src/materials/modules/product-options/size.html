@@ -7,12 +7,12 @@ notes:
   <select id="size" class="product-option__select">
     <option value="default">Select Size</option>
   {{#each pdp.sizes}}
-    {{#if this.oos}}
-      <option data-delivery-date="{{this.delivery-date}}" value="{{this.value}}" disabled>{{this.label}} (Out of Stock)</option>
-    {{else if this.preorder}}
-      <option data-delivery-date="{{this.delivery-date}}" data-preorder="true" value="{{this.value}}">{{this.label}}</option>
+    {{#if oos}}
+      <option data-delivery-date="{{delivery-date}}" value="{{value}}" disabled>{{label}} (Out of Stock)</option>
+    {{else if preorder}}
+      <option data-delivery-date="{{delivery-date}}" data-preorder="true" value="{{value}}">{{label}}</option>
     {{else}}
-      <option data-delivery-date="{{this.delivery-date}}" value="{{this.value}}">{{this.label}}</option>
+      <option data-delivery-date="{{delivery-date}}" value="{{value}}">{{label}}</option>
     {{/if}}
   {{/each}}
     <option data-show-bis="true">Can't find your size?</option>
