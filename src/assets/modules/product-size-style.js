@@ -1,19 +1,46 @@
-// setup for product-option--size default color
-(function ($) {
-  var sizeDropdown = $('.product-option--size .product-option__select');
-  // only continue if needed
-  if (!sizeDropdown.length) return;
+import $ from 'jquery';
 
-  var selected;
+// Settings
+export const pluginName = 'sizeStyle';
 
-  // run whenever size dropdown changes
-  sizeDropdown.change(function () {
-    selected = this.options[this.selectedIndex];
+// In case there are ever defaults
+export const DEFAULTS = {
+};
 
-    // toggleClass based on selected.value
-    $(this).toggleClass('default', selected.value === 'default');
+export default class Plugin {
+  constructor(element, options) {
+    this.element = element;
+    this.options = $.extend( {}, DEFAULTS, options) ;
+
+    this.init();
+  }
+
+  init() {
+    // local reference to this.element
+    var sizeDropdown = $(this.element);
+    // declare variables to be used within change function
+    var selected;
+
+    // run whenever size dropdown changes
+    sizeDropdown.change(function () {
+      selected = this.options[this.selectedIndex];
+
+      // toggleClass based on selected.value
+      $(this).toggleClass('default', selected.value === 'default');
+    });
+
+    // run once immediately
+    sizeDropdown.change();
+  }
+};
+
+
+// Plugin wrapped ctor
+$.fn[pluginName] = function ( options ) {
+  return this.each(function () {
+    if (!$.data(this, 'plugin_' + pluginName)) {
+      $.data(this, 'plugin_' + pluginName,
+      new Plugin( this, options ));
+    }
   });
-
-  // run once immediately
-  sizeDropdown.change();
-})($);
+}
