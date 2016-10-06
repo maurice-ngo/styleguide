@@ -63,9 +63,6 @@ pre[class*='language-'] {
  * CSS to help modules live without wrappers
  */
 
-/* some variables to help us along the way */
-$product-img-url: ;
-
 /* fix for favorite button's absolute position */
 #favorite-buttons\.default .f-item-preview {
   position: relative;
@@ -74,6 +71,7 @@ $product-img-url: ;
   border: 1px solid;
 }
 
+/* fix for badges absolute position */
 #badges\.01-product .f-item-preview,
 #badges\.final-sale .f-item-preview,
 #badges\.wedding .f-item-preview {
@@ -81,4 +79,9 @@ $product-img-url: ;
   width: 320px;
   height: 483px;
   background: url('//is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=320:*') no-repeat center center;
+}
+
+/* center product added confirmation modal */
+#modals\.product-added-confirmation .f-item-preview {
+  text-align: center;
 }
