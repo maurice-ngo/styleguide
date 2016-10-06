@@ -3,7 +3,11 @@ notes: |
   - For a smaller variation use the `.product-titles--sm` modifier alongside the original classes
 ---
 
-<h1 class="product-titles__name product-titles--sm u-margin-b--none" property="name">{{pdp.info.name}}</h1>
-<p class="product-titles__brand product-titles--sm u-margin-b--none u-margin-t--sm" property="brand">
-  <a href="#" title="{{pdp.info.brand}}">{{pdp.info.brand}}</a>
+<h1 class="product-titles__name product-titles--sm u-margin-t--lg u-margin-b--sm" property="name">
+  {{#if pdp}}{{pdp.info.name}}{{else}}{{this.name}}{{/if}}
+</h1>
+<p class="product-titles__brand product-titles--sm u-margin-b--sm" property="brand">
+  <a href="#" title="{{pdp.info.brand}}">
+    {{#if pdp}}{{pdp.info.brand}}{{else}}{{this.brand}}{{/if}}
+  </a>
 </p>
