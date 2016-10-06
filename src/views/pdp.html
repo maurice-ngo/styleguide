@@ -30,6 +30,11 @@ content-styles: |
   <!-- Favorite button -->
   {{> favorite-buttons.default }}
 
+  <!-- Modal: Product Added to Bag -->
+  <script id="product-added-confirmation" type="text/x-handlebars-template">
+    {{> modals.product-added-confirmation pdp }}
+  </script>
+
 <script>
   (function () {
     // queue functions for window.onload
@@ -42,6 +47,7 @@ content-styles: |
       'product-notifications.one-left': addProductNotification,
       'product-notifications.preorder': addProductNotification,
       'product-notifications.final-sale': addProductNotification,
+      'product-notifications.final-sale-sample-defect': addProductNotification,
       'product-notifications.final-sale-sample-defect': addProductNotification,
     });
 
