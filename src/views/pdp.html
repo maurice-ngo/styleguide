@@ -21,8 +21,8 @@ content-styles: |
   <!-- Add To Cart Form -->
   <form method="GET" action="">
     <input type="hidden" name="confirm" value="true" />
-    {{> product-options.size }}<!-- remove space between inline-blocks
- -->{{> product-options.color }}
+    {{> product-options.size }}
+    {{> product-options.color }}
     {{> buttons.full- addToBag=true }}
     {{> product-estimated-delivery }}
   </form>
@@ -38,9 +38,6 @@ content-styles: |
 <script>
   (function () {
     // queue functions for window.onload
-    //rc.q.push(setSizeClass);
-    //rc.q.push(setDeliveryDate);
-    //rc.q.push(setupSizeChanges);
 
     // apply url parameters
     rc.applyParams({
@@ -52,7 +49,36 @@ content-styles: |
       'product-notifications.final-sale': addProductNotification,
       'product-notifications.final-sale-sample-defect': addProductNotification,
       'product-notifications.final-sale-sample-defect': addProductNotification,
+      'product-options.out-of-stock': updateSize,
+      'product-options.one-color': updateColor,
+      'product-options.one-size': updateSize,
+      'price-on-sale': updatePrice,
     });
+
+    // callback to update product options
+    function updateColor(id) {
+      updateProductOption('color', id);
+    }
+
+    // callback to update product options
+    function updateSize(id) {
+      updateProductOption('size', id);
+    }
+
+    // helper function to update product options
+    function updateProductOption(element, id) {
+      var option = document.getElementsByClassName('product-option--' + element)[0];
+
+      // replace the existing product option
+      option.outerHTML = document.getElementById(id).innerHTML;
+    }
+
+    // callback to update price
+    function updatePrice(id) {
+      var price = document.getElementsByClassName('price')[0];
+
+      price.outerHTML = document.getElementById(id).innerHTML;
+    }
 
     // callback to add badge to product images
     function addBadge(id) {
@@ -65,7 +91,7 @@ content-styles: |
 
     // callback to add product notification template to html
     function addProductNotification(id) {
-      var btn = document.getElementById('addToBag');
+      var btn = document.getElementsByClassName('btn--add-to-bag')[0];
       var msg = document.getElementById(id).innerHTML;
 
       // add notification

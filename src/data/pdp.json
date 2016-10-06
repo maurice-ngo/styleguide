@@ -49,6 +49,10 @@
     "product-notifications.one-left",
     "product-notifications.preorder",
     "product-notifications.final-sale",
-    "product-notifications.final-sale-sample-defect"
+    "product-notifications.final-sale-sample-defect",
+    "product-options.out-of-stock",
+    "product-options.one-color",
+    "product-options.one-size",
+    "price-on-sale"
   ]
 }

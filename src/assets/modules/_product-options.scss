@@ -14,7 +14,7 @@
 
 .product-option {
   position: relative;
-  display: inline-block;
+  float: left;
   width: 50%;
   margin-bottom: rem(8);
   background-color: $color__grey--lighter;
@@ -34,6 +34,16 @@
   &--color {
     @include bp-at-least($small-mobile) {
       border-left: rem(4) solid $color__white;
+    }
+  }
+  // .product-option--oos
+  &--oos {
+    background-color: $color__pink--light;
+    .product-option__select {
+      padding: rem(23 14 21);
+      line-height: rem(16);
+      text-align: center;
+      color: $color__error;
     }
   }
 
@@ -64,11 +74,23 @@
     width: 100%;
     border: {
       color: transparent;
-      width: rem(16);
+      width: 0;
     }
+    border-right-width: rem(16);
     box-shadow: none;
+    // .product-option__select.default
     &.default {
       color: $color__grey--light;
+    }
+    // .product-option__select--one
+    &--one {
+      margin-bottom: 0;
+      line-height: rem(15);
+      text-align: left;
+      &:disabled {
+        color: inherit;
+        opacity: 1;
+      }
     }
   }
 }
