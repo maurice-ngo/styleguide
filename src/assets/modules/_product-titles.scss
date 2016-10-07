@@ -43,6 +43,7 @@
   // Product title small modifier
   &--sm {
     font-size: em(12);
+    line-height: em(16);
   }
   &--long {
     text-overflow: initial !important;

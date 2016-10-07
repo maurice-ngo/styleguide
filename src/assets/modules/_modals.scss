@@ -39,7 +39,7 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
 	}
 	&__container {
 	  display: table;
-	  position: absolute;  
+	  position: absolute;
 	  top: 0;
 	  right: 0;
 	  bottom: 0;
@@ -55,7 +55,7 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
 	  vertical-align: middle;
 	}
 	&__close {
-		position: absolute; 
+		position: absolute;
 		right: 0;
 		top: 0;
 		color: $color__white;
@@ -70,8 +70,8 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
 	    padding: rem( 40 );
 	    transform: translate(-50%, -50%);
 	    border: 1px solid $color__border;
-	    background: $modal__block-bgcolor-solid; 
-	    overflow-y: auto; 
+	    background: $modal__block-bgcolor-solid;
+	    overflow-y: auto;
     // .modal__block-col
     &-col {
       padding: rem( 2 10 );
@@ -121,7 +121,7 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
 
       overflow-y: scroll;
     }
-}
+	}
 	 // .modal__subtitle
   &__subtitle {
     font-size: em( 16 );
@@ -136,6 +136,14 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
   &__image {
     min-width: rem(300);
   }
+	&--added-confirmation {
+		margin: rem(0 32);
+		padding: rem(16);
+		background-color: $color__white;
+		&__img {
+			width: 30%;
+		}
+	}
 }
 .popup-container {
   position: relative;
@@ -158,7 +166,7 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
 
 
 .modal__x-thin {
-  position: absolute; 
+  position: absolute;
   right: 0;
   top: 0;
 }
