@@ -1,11 +1,11 @@
 {
   "image": "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=960:*",
   "carousel": [
-    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V5.jpg?resize=960:*",
     "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=960:*",
     "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V2.jpg?resize=960:*",
     "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V3.jpg?resize=960:*",
-    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V4.jpg?resize=960:*"
+    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V4.jpg?resize=960:*",
+    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V5.jpg?resize=960:*"
   ],
   "info": {
     "name": "x REVOLVE Wyoming Gown in Off White",
@@ -43,6 +43,9 @@
     }
   ],
   "mock-page-options": [
+    "badges.product",
+    "badges.final-sale",
+    "badges.wedding",
     "product-notifications.one-left",
     "product-notifications.preorder",
     "product-notifications.final-sale",
