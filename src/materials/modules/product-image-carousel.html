@@ -1,13 +1,15 @@
-<div class="product-image-carousel u-margin--center" style="position:relative;">
+<div class="product-image-carousel u-margin--center">
+  <div class="product-image-carousel__imgs">
 
-  {{#each pdp.carousel}}
-  <img class="product-image-carousel__img" data-zoom="{{this}}"
-    {{#if @first}}
-      src="{{this}}"
-    {{else}}
-      data-lazy="{{this}}"
-    {{/if}}
-  />
-  {{/each}}
+    {{#each pdp.carousel}}
+    <img class="product-image-carousel__img" data-zoom="{{this}}"
+      {{#if @first}}
+        src="{{this}}"
+      {{else}}
+        data-lazy="{{this}}"
+      {{/if}}
+    />
+    {{/each}}
 
+  </div>
 </div>
