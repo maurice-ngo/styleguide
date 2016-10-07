@@ -12,6 +12,10 @@ module.exports = merge(config, {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract('style', 'css?sourceMap!sass?sourceMap'),
         exclude: /node_modules/
+      }, {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+        include: /svg\/backgrounds/
       }
     ],
   },
@@ -20,7 +24,7 @@ module.exports = merge(config, {
     new ExtractTextPlugin('[name].css'),
 
     new SVGStore(
-      [ resolve('src', 'assets', 'elements', 'icons', '*.svg') ],
+      [ resolve('src', 'assets', 'svg', 'icons', '*.svg') ],
       join('lib'),
       {
         name: 'sprite.svg'
