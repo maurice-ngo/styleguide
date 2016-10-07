@@ -34,11 +34,16 @@ export default class Plugin {
       modal.innerHTML = document.getElementById(template).innerHTML;
       document.getElementById('content').appendChild(modal);
 
-      // set up the continue/close button
-      $('.modal__continue').click(function(e) {
-        e.preventDefault();
-        // close modal
-        modal.style.display = 'none';
+      // set up the click listener to close modal
+      $('.modal').click(function(e) {
+        var target = $(e.target);
+
+        // close if it's the background or the 'continue' link
+        if (target.hasClass('modal') || target.hasClass('modal__continue')) {
+          e.preventDefault();
+          // close modal
+          modal.style.display = 'none';
+        }
       });
     });
   }
