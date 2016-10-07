@@ -1,40 +1,57 @@
 ---
-title: PDP Example
+title: pdp
+data-json: pdp
+page-options: mock-page-options
 fabricator: false
+layout: mock-page
+content-styles: |
+  position: relative;
+  text-align: center;
 ---
 
-<style>
-  #header { margin: 0; }
-  #content {
-    position: relative;
-    text-align: center;
-    margin: 0 16px;
-  }
-</style>
-
-<h1 id="header" class="u-bg-color--black u-color--white u-padding-a--md u-padding-l--xl">PDP</h1>
-
-<div id="content">
-
-  {{> favorite-buttons.default}}
-
   <!-- Image Carousel -->
-  {{> product-image-carousel}}
-  <!-- end .product-image-carousel -->
+  {{> product-image-carousel }}
 
   <!-- Product Title -->
-  {{> product-title-}}
-  <!--  end .product-title -->
+  {{> product-title- }}
 
   <!-- Price -->
-  {{> price-}}
-  <!--  end .price -->
+  {{> price- }}
 
   <!-- Add To Cart Form -->
-  <form method="post" id="addtocart" action="javascript:;">
-    {{> buttons.full- "add to bag"}}
+  <form method="GET" action="">
+    <input type="hidden" name="confirm" value="true" />
+    {{> product-options.size }}<!-- remove space between inline-blocks
+ -->{{> product-options.color }}
+    {{> buttons.full- addToBag=true }}
+    {{> product-estimated-delivery }}
   </form>
-  <!--  end #addtocart -->
 
+  <!-- Favorite button -->
+  {{> favorite-buttons.default }}
 
-</div>
+<script>
+  (function () {
+    // queue functions for window.onload
+    //rc.q.push(setSizeClass);
+    //rc.q.push(setDeliveryDate);
+    //rc.q.push(setupSizeChanges);
+
+    // apply url parameters
+    rc.applyParams({
+      'product-notifications.one-left': addProductNotification,
+      'product-notifications.preorder': addProductNotification,
+      'product-notifications.final-sale': addProductNotification,
+      'product-notifications.final-sale-sample-defect': addProductNotification,
+    });
+
+    // callback to add product notification template to html
+    function addProductNotification(id) {
+      var btn = document.getElementById('addToBag');
+      var msg = document.getElementById(id).innerHTML;
+
+      // add notification
+      btn.insertAdjacentHTML('beforebegin', msg);
+    }
+  })();
+</script>
