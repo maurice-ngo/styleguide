@@ -38,6 +38,7 @@ content-styles: |
 <script>
   (function () {
     // queue functions for window.onload
+    rc.q.push(setupColorValues);
 
     // apply url parameters
     rc.applyParams({
@@ -54,6 +55,19 @@ content-styles: |
       'product-options.one-size': updateSize,
       'price-on-sale': updatePrice,
     });
+
+    // this is a mock page, and other color pages don't exist, so this hack...
+    function setupColorValues() {
+      var select = document.getElementById('color');
+      var options = select.getElementsByTagName('option');
+      var opt, len = options.length;
+
+      while (len--) {
+        opt = options[len];
+        opt.setAttribute('data-value', opt.getAttribute('value'));
+        opt.setAttribute('value', document.location.href);
+      }
+    }
 
     // callback to update product options
     function updateColor(id) {
