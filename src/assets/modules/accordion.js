@@ -1,108 +1,213 @@
+/**
+ * Responsible for creating an accordion based on elements existing in the DOM
+ * @module accordion
+ */
+
 import $ from 'jquery';
+import 'jquery-colorbox';
 
-// Settings
-export const pluginName = "accordion";
+import registerJQueryPlugin from '../lib/register-jquery-plugin';
 
+export const PLUGIN_NAME = 'accordion';
+export const CLICK_EVENT = 'click';
+export const AUTO_VALUE = 'auto';
+export const CHECKED_ATTR = 'checked';
 export const DEFAULTS = {
-  accItem             : ".accordion__item",
-  accContent          : ".accordion__content",
-  accActive           : "accordion__item--active",
-  accRadio            : "js-accordion-radio",
-  accLabel            : ".accordion__label",
-  accSpeed            : 500,
-  accToggle           : false,
-  onComplete : function () {}
+  accItem: '.accordion__item',
+  accContent: '.accordion__content',
+  accActive: 'accordion__item--active',
+  accRadio: 'js-accordion-radio',
+  accLabel: '.accordion__label',
+  accSpeed: 500,
+  accToggle: false,
+  accDataToggleAttr: 'toggle',
+  onComplete: () => {}
 };
 
-// Ctor
-export default class Plugin {
-  constructor(element, options) {
-    this.element    = element;
-    this.options    = $.extend( {}, DEFAULTS, options) ;
-    this._defaults  = DEFAULTS;
-    this._name      = pluginName;
+// Expose the function as a jQuery plugin for ease of use
+registerJQueryPlugin(PLUGIN_NAME, accordion);
 
-    this.init();
+/**
+ * Initializes an accordion based on provided parameters.
+ * @param {HTMLElement} el - An element containing the elements for the
+ * accordion
+ * @param {Object} options - Options used for wiring up the accordion
+ * @see DEFAULTS
+ */
+export default function accordion(el, options = {}) {
+  const $el = $(el);
+  const opts = mergeOptions($el, options)
+
+  applyDefaultsToActive($el, opts);
+  applyDefaultsToRadio($el, opts);
+  applyEventHandlers($el, opts);
+};
+
+/**
+ * Merges together all the options and the various conditions in which they
+ * can be set.
+ * @param  {jQuery} $el - The container element
+ * @param  {Object} [options={}] - Any options provided upon initialization
+ * @return {Object} Immutable version of the options
+ */
+const mergeOptions = ($el, options = {}) => {
+  let opts = Object.assign({}, DEFAULTS, options);
+  const { accDataToggleAttr } = opts;
+
+  if ($el.data(accDataToggleAttr) === true) {
+    opts = Object.assign({}, opts, { accToggle: true })
   }
 
-  init() {
-    var e       = $( this.element );
-    var opts    = this.options;
-    var item    = e.find( opts.accItem );
-    var itemLabel = e.find(opts.accLabel);
+  return opts;
+};
 
-    if (e.data("toggle") === true) {
-      opts.accToggle = true;
+/**
+ * Handles any sort of defaults when the accordion is called upon.
+ * @param  {jQuery} $el - The container element
+ * @param  {Object} options - Any options provided upon initialization
+ * @param  {string} options.accActive - Selector representing the active
+ * className
+ * @param  {string} options.accContent - Selector representing the content for
+ * the tab
+ */
+const applyDefaultsToActive = ($el, { accActive, accContent }) => {
+  $(`.${accActive}`, $el)
+    .find(accContent)
+    .css({ height: AUTO_VALUE });
+};
+
+/**
+ * Handles any sort of defaults when the accordion is using radio buttons.
+ * @param  {jQuery} $el - The container element
+ * @param  {Object} options - Any options provided upon initialization
+ * @param  {string} options.accActive - Selector representing the active
+ * className
+ * @param  {string} options.accContent - Selector representing the content for
+ * the tab
+ * @param  {string} options.accItem - Selector representing the tab
+ * @param  {string} options.accRadio - Selector representing a radio button
+ */
+const applyDefaultsToRadio = ($el, { accActive, accContent, accItem, accRadio }) => {
+  $(`.${accRadio}:${CHECKED_ATTR}`, $el)
+    .parents(accItem)
+    .addClass(accActive)
+    .find(accContent)
+    .css({ height: AUTO_VALUE });
+};
+
+/**
+ * Applies any sort of event handlers for the accordion.
+ * @param {jQuery} $el - Containing the elements for the accordion
+ * @param {Object} options - Options used for wiring up the accordion
+ * @see DEFAULTS
+ */
+const applyEventHandlers = ($el, opts = {}) => {
+  const { accLabel } = opts;
+
+  $el
+    .find(accLabel)
+    .on(CLICK_EVENT, evt => itemClickHandler(evt, $el, opts));
+};
+
+/**
+ * Handles the click event when a label has been iteracted with.
+ * @param {jQuery.Event} evt - A jQuery event
+ * @param {HTMLElement} currentTarget - The current target interacted with
+ * @param {jQuery} $el - Containing the elements for the accordion
+ * @param {Object} opts - Options passed along from initialization
+ */
+const itemClickHandler = ({ currentTarget }, $el, opts) => {
+  const { accActive, accItem, accToggle } = opts;
+  const $parent = $(currentTarget).closest(accItem);
+
+  if (!$parent.hasClass(accActive)) {
+    if (!accToggle) {
+      closeActiveTab($el, opts);
     }
 
-    $("."+opts.accActive).find(opts.accContent).css({height: "auto"});
-    $(".js-accordion-radio:checked", e).parents(opts.accItem).addClass(opts.accActive).find(opts.accContent).css({height: "auto"});
+    openTab($el, $parent, opts);
+  } else {
+    closeExistingActiveTab($parent, opts);
+  }
+};
 
-    itemLabel.on( "click" , function() {
-      var evt = $(this);
-      var accItemParent = evt.closest(opts.accItem)
+/**
+ * Opens a tab and provides any DOM manipulation and styles used to show a tab.
+ * @param {jQuery} $el - Containing the elements for the accordion
+ * @param {jQuery} $parent - The parent of the interacted label
+ * @param  {Object} options - Any options provided upon initialization
+ * @param  {string} options.accActive - Selector representing the active
+ * className
+ * @param  {string} options.accContent - Selector representing the content for
+ * the tab
+ * @param  {string} options.accRadio - Selector representing a radio button
+ * @param  {number} options.accSpeed - Speed in ms for the closing animation
+ * @param  {Function} options.onComplete - Called on when animation has
+ * completed
+ */
+const openTab = ($el, $parent, { accActive, accContent, accRadio, accSpeed, onComplete }) => {
+  const content = $parent.find(accContent);
+  content.css({ height: AUTO_VALUE });
 
+  const contentHeight = content.outerHeight(true);
 
-      if(!accItemParent.hasClass(opts.accActive)) {
-        var contentHeight = 0;
-        var content = accItemParent.find( opts.accContent );
-
-        content.css({ height: "auto" });
-        contentHeight = content.outerHeight( true );
-
-        //  Opens the clicked accordion item
-        content.css({ height: 0 }).stop().animate(
-          { height: contentHeight },
-          opts.accSpeed,
-          function(){
-            content.css({height: "auto" })
-            if( e.attr("data-resize-colorbox") === "true" ) {
-              $.colorbox.resize();
-            }
-            opts.onComplete();
-          }
-        );
-
-        if(!opts.accToggle) {
-
-          // Closes the active accordion item
-          $("."+opts.accActive).find(opts.accContent).stop().animate(
-            { height: 0 },
-            opts.accSpeed,
-            function() {
-              $(this).removeAttr("style");
-
-            }
-          );
-
-          // Remove all active accordion class
-          item.removeClass( opts.accActive );
-        }
-        // Assign active accordion class to new clicked accordion item
-        accItemParent.addClass( opts.accActive );
-        accItemParent.children(".js-accordion-radio").prop("checked", true);
-      } else {
-        // If clicked accordion item is active close that shit
-        accItemParent.find(opts.accContent).stop().animate(
-          { height: 0 },
-          opts.accSpeed,
-          function() {
-            $(this).removeAttr("style");
-            accItemParent.removeClass( opts.accActive );
-
-          }
-        );
+  content.css({ height: 0 }).stop().animate(
+    { height: contentHeight },
+    accSpeed,
+    function() {
+      content.css({height: AUTO_VALUE })
+      if($el.attr('data-resize-colorbox') === 'true') {
+        $.colorbox.resize();
       }
-    } );
-  }
-}
-
-// Plugin wrapped ctor
-$.fn[pluginName] = function ( options ) {
-  return this.each(function () {
-    if (!$.data(this, 'plugin_' + pluginName)) {
-      $.data(this, 'plugin_' + pluginName,
-      new Plugin( this, options ));
+      onComplete();
     }
-  });
-}
+  );
+
+  $parent
+    .addClass(accActive)
+    .children(accRadio).prop(CHECKED_ATTR, true);
+};
+
+/**
+ * Closes the active tab
+ * @param  {jQuery} $parent - The parent containing the entire tab.
+ * @param  {Object} options - Any options provided upon initialization
+ * @param  {string} options.accActive - Selector representing the active
+ * className
+ * @param  {string} options.accContent - Selector representing the content for
+ * the tab
+ * @param  {string} options.accItem - Selector representing the tab
+ * @param  {number} options.accSpeed - Speed in ms for the closing animation
+ */
+const closeActiveTab = ($el, { accActive, accContent, accItem, accSpeed }) => {
+  $(`.${accActive}`, $el).find(accContent).stop().animate(
+    { height: 0 },
+    accSpeed,
+    function() {
+      $(this).removeAttr('style');
+    }
+  );
+
+  $el.find(accItem).removeClass(accActive);
+};
+
+/**
+ * Closes an existing tab that has directly been interacted with.
+ * @param  {jQuery} $parent - The parent containing the entire tab.
+ * @param  {Object} options - Any options provided upon initialization
+ * @param  {string} options.accActive - Selector representing the active
+ * className
+ * @param  {string} options.accContent - Selector representing the content for
+ * the tab
+ * @param  {number} options.accSpeed - Speed in ms for the closing animation
+ */
+const closeExistingActiveTab = ($parent, { accActive, accContent, accSpeed }) => {
+  $parent.find(accContent).stop().animate(
+    { height: 0 },
+    accSpeed,
+    function() {
+      $(this).removeAttr('style');
+      $parent.removeClass(accActive);
+    }
+  );
+};
