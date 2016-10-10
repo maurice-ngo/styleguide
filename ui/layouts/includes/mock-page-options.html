@@ -1,12 +1,12 @@
 <h1 class="u-bg-color--black u-color--white u-margin-t--xl u-margin-b--none u-padding-a--xl">page options:</h1>
 
-<ul class="u-bg-color--black u-margin-a--none u-padding-r--lg u-padding-l--xxl">
+<ul class="u-bg-color--black u-margin-a--none u-padding-a--xl u-padding-t--none">
 
   <li>
-    <a href="?" class="u-text--lg u-color--white">default page with no options</a>
+    <a href="?" class="u-text-lg u-color--white">default page with no options</a>
 {{#each this}}
   <li>
-    <a href="?{{this}}" class="u-text--lg u-color--white u-invert--link u-ellipsis">{{this}}</a>
+    <a href="?{{this}}" class="u-text-lg u-color--white u-invert--link u-ellipsis">{{this}}</a>
     <!-- handlebars template -->
     <script id="{{this}}" type="text/x-handlebars-template">
       {{> (lookup ../this @index)}}
