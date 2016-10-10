@@ -136,14 +136,18 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
   &__image {
     min-width: rem(300);
   }
-	&--added-confirmation {
-		margin: rem(0 32);
-		padding: rem(16);
-		background-color: $color__white;
-		&__img {
-			width: 30%;
-		}
-	}
+  &--added-confirmation {
+    margin: rem(0 32);
+    padding: rem(16);
+    background-color: $color__white;
+    &__img {
+      width: 30%;
+    }
+    transition: all .3s;
+    .u-conceal & {
+      transform: translateY(-100%);
+    }
+  }
 }
 .popup-container {
   position: relative;

@@ -75,6 +75,23 @@
   }
 }
 
+/*
+  @reveal & conceal effects
+  slowly change visibility (good for modals, etc)
+---------------------------------------------------------
+ */
+
+.u-reveal {
+  visibility: visible;
+  transition: all .3s;
+}
+
+.u-conceal {
+  opacity: 0;
+  visibility: hidden;
+  transition: all .3s;
+}
+
 // mixin to allow brief consistent assignment of sizes across padding & margin
 @mixin loop-thru-sides($prop, $widths) {
   // $sides: map used to build padding & margin css

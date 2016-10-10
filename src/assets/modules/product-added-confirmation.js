@@ -19,30 +19,38 @@ export default class Plugin {
   init() {
     // cache this.options.template id
     var template = this.options.template;
+    var CONCEAL_CLASS = 'u-conceal';
 
     // create the modal now, so we don't recreate on every submit
     var modal = document.createElement('DIV');
-    modal.className = 'modal';
+    // to override the default modal display: none
+    modal.style.display = 'block';
+    // hide using visibility, for transform
+    modal.className = 'modal ' + CONCEAL_CLASS;
+    modal.innerHTML = document.getElementById(template).innerHTML;
+
+    // add modal once
+    document.getElementById('content').appendChild(modal);
+    // (unfortunately, waiting to append this when needed [in the form submit below] ruins our transition effect)
 
     // when the form submits, show the modal
     var form = $(this.element).closest('form');
 
     form.submit(function(e) {
       e.preventDefault();
-      // add modal
-      modal.style.display = 'block';
-      modal.innerHTML = document.getElementById(template).innerHTML;
-      document.getElementById('content').appendChild(modal);
+
+      // reveal modal
+      $(modal).removeClass(CONCEAL_CLASS);
 
       // set up the click listener to close modal
       $('.modal').click(function(e) {
         var target = $(e.target);
 
-        // close if it's the background or the 'continue' link
+        // conceal if click is on the background or the 'continue' link
         if (target.hasClass('modal') || target.hasClass('modal__continue')) {
           e.preventDefault();
-          // close modal
-          modal.style.display = 'none';
+          // conceal modal again
+          $(this).addClass(CONCEAL_CLASS);
         }
       });
     });
