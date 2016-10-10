@@ -9,6 +9,9 @@
 
   <!-- Styles -->
   <style>
+    a.icon--revolve-logo {
+      width: 4.5em;
+    }
     #content {
       {{{content-styles}}}
     }
@@ -21,7 +24,9 @@
 
 <body>
   <!-- Head -->
-  <h1 id="header" class="u-bg-color--black u-color--white u-padding-a--md u-padding-l--xl u-margin-a--none">{{title}}</h1>
+  <header class="u-bg-color--black u-color--white u-padding-a--md u-uppercase u-text-xl">
+    {{> revolve-logo }} / {{title}}
+  </header>
 
   <!-- Content -->
   <div id="content" class="u-margin-l--lg u-margin-r--lg">
