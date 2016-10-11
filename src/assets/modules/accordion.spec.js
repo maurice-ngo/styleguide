@@ -1,4 +1,7 @@
-import Accordion, { DEFAULTS as defaults } from './accordion';
+import accordion, {
+  DEFAULTS as defaults,
+  CLICK_EVENT,
+} from './accordion';
 import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
@@ -6,12 +9,23 @@ import chaiJquery from 'chai-jquery';
 chai.use(chaiJquery);
 
 describe('Accordion', () => {
-  const assertNoHeight = ($el) => {
+  const assertNoHeight = $el => {
     expect($el.get(0).style.height).to.equal('');
   };
 
-  const assertHeightAuto = ($el) => {
+  const assertHeightAuto = $el => {
     expect($el.get(0).style.height).to.equal('auto');
+  };
+
+  const createAccordionWithFixture = fixtureName => {
+    fixture.load(`${fixtureName}.html`);
+    const $container = $(fixture.el).find('.accordion');
+
+    accordion($container.get(0), {
+      accSpeed: 0
+    });
+
+    return $container;
   };
 
   beforeEach(() => {
@@ -26,12 +40,7 @@ describe('Accordion', () => {
     let $container;
 
     beforeEach(() => {
-      fixture.load('accordian-1.html');
-      $container = $(fixture.el).find('.accordion');
-
-      new Accordion($container.get(0), {
-        accSpeed: 0
-      });
+      $container = createAccordionWithFixture('accordian-1');
     });
 
     it('should show the first tab as the active on initial load', () => {
@@ -44,7 +53,7 @@ describe('Accordion', () => {
       const $tabs = $container.find(defaults.accItem);
       const $activeTab = $tabs.eq(0);
       const $openTab = $tabs.eq(1);
-      $openTab.find(defaults.accLabel).click();
+      $openTab.find(defaults.accLabel).trigger(CLICK_EVENT);
 
       expect($activeTab).to.not.have.class(defaults.accActive);
       assertNoHeight($activeTab.find(defaults.accContent))
@@ -55,23 +64,61 @@ describe('Accordion', () => {
 
     it('should close tab when interacted with and open', () => {
       const $tab = $container.find(defaults.accItem).eq(1);
-      $tab.find(defaults.accLabel).click();
+      $tab.find(defaults.accLabel).trigger(CLICK_EVENT);
       expect($tab).to.have.class(defaults.accActive);
 
-      $tab.find(defaults.accLabel).click();
+      $tab.find(defaults.accLabel).trigger(CLICK_EVENT);
       expect($tab).to.not.have.class(defaults.accActive);
     });
   });
 
   describe('when n number of tabs can actively be open', () => {
+    let $container;
+
+    const getItems = () => {
+      return $container.find(defaults.accItem);
+    };
+
+    const assertActiveItems = (...items) => {
+      items.forEach($item => {
+        expect($item).to.have.class(defaults.accActive);
+      });
+    };
+
     beforeEach(() => {
-      // load second fixture
+      $container = createAccordionWithFixture('accordian-2');
     });
 
-    it('should have no tabs open', () => {
+    it('should have the first tab open', () => {
+      assertActiveItems(getItems().eq(0));
     });
 
-    it('should open two tabs and leave them both open', () => {
-    })
-  })
+    it('should open the second tab and leave the first open by default', () => {
+      const $items = getItems();
+      const $firstItem = $items.eq(0);
+      const $secondItem = $items.eq(1);
+      $secondItem.find(defaults.accLabel).trigger(CLICK_EVENT);
+      assertActiveItems(...[$firstItem, $secondItem]);
+    });
+
+    it('should open the second and third tab and leave the first open by default', () => {
+      const $items = getItems();
+      const $firstItem = $items.eq(0);
+      const $secondItem = $items.eq(1);
+      const $thirdItem = $items.eq(2);
+      $secondItem.find(defaults.accLabel).trigger(CLICK_EVENT);
+      $thirdItem.find(defaults.accLabel).trigger(CLICK_EVENT);
+      assertActiveItems(...[$firstItem, $secondItem, $thirdItem]);
+    });
+
+    it('should open the second and then close the first tab', () => {
+      const $items = getItems();
+      const $firstItem = $items.eq(0);
+      const $secondItem = $items.eq(1);
+      $firstItem.find(defaults.accLabel).trigger(CLICK_EVENT);
+      $secondItem.find(defaults.accLabel).trigger(CLICK_EVENT);
+      assertActiveItems($secondItem);
+      expect($firstItem).to.not.have.class(defaults.accActive);
+    });
+  });
 });

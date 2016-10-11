@@ -1,12 +1,11 @@
 import $ from 'jquery';
+
 import './modules.scss';
 import './accordion';
-
-require('./accordion')
-require('./product-size-style')
-require('./product-delivery-update')
-require('./product-added-confirmation')
-require('./product-color-change')
+import './product-size-style';
+import './product-delivery-update';
+import './product-added-confirmation';
+import './product-color-change';
 
 $(document).ready(() => {
   $('.js-accordion').accordion();

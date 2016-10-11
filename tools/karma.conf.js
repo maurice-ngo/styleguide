@@ -5,7 +5,7 @@ module.exports = function(config) {
   config.set({
     basePath: resolve(__dirname, '..'),
 
-    frameworks: ['mocha', 'fixture', 'jquery-2.1.0'],
+    frameworks: ['mocha', 'fixture', 'jquery-2.1.0', 'sinon'],
 
     files: [
       'src/assets/test-index.js',
