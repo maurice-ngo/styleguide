@@ -39,18 +39,21 @@ export default class Plugin {
     form.submit(function(e) {
       e.preventDefault();
 
-      // reveal modal
-      $(modal).removeClass(CONCEAL_CLASS);
+      // create jQuery object from modal
+      var confirmation = $(modal);
 
-      // set up the click listener to close modal
-      $('.modal').click(function(e) {
+      // reveal confirmation modal
+      confirmation.removeClass(CONCEAL_CLASS);
+
+      // set up the click listener to close confirmation modal
+      confirmation.click(function(e) {
         var target = $(e.target);
 
         // conceal if click is on the background or the 'continue' link
         if (target.hasClass('modal') || target.hasClass('modal__continue')) {
           e.preventDefault();
           // conceal modal again
-          $(this).addClass(CONCEAL_CLASS);
+          confirmation.addClass(CONCEAL_CLASS);
         }
       });
     });
