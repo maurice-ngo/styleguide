@@ -1,1 +1,1 @@
-require('./helpers.scss')
+import './helpers.scss';
