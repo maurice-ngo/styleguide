@@ -28,7 +28,7 @@ describe('Accordion', () => {
     return $container;
   };
 
-  beforeEach(() => {
+  before(() => {
     fixture.setBase('src/materials/modules');
   });
 
