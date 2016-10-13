@@ -29,9 +29,9 @@ export default function colorChange(el, options = {}) {
  * @param {HTMLElement} dropdown - The select dropdown
  */
 const attachChangeListener = (dropdown, { redirectFunc }) => {
-  dropdown.change(({ currentTarget }) => {
+  dropdown.change(({ currentTarget: { options, selectedIndex } }) => {
     // get selected after every change
-    let selected = currentTarget.options[currentTarget.selectedIndex];
+    let selected = options[selectedIndex];
 
     // change location.href
     if (selected.value) {
