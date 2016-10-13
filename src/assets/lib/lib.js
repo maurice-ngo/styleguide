@@ -1,7 +1,9 @@
-require('./lib.scss')
-require('slick-carousel')
+import './lib.scss';
+import 'slick-carousel';
 
-window.jQuery = window.$ = require('jquery');
+import $ from 'jquery';
+
+window.jQuery = $;
 
 $('document').ready(function () {
   $('.product-image-carousel__imgs').slick({

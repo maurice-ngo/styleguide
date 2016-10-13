@@ -1,1 +1,1 @@
-require('./elements.scss')
+import './elements.scss';
