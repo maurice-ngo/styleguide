@@ -29,8 +29,8 @@ export default function sizeStyle(el) {
  * Attaches change event to select dropdown.
  * @param {HTMLElement} dropdown - The select dropdown
  */
-const attachChangeListener = (dropdown) => {
-  dropdown.change(evt => toggleStyle(evt) );
+const attachChangeListener = dropdown => {
+  dropdown.change(evt => toggleStyle(evt));
 };
 
 /**
@@ -38,18 +38,16 @@ const attachChangeListener = (dropdown) => {
  * @param {HTMLElement} currentTarget - The current target interacted with
  */
 const toggleStyle = ({ currentTarget }) => {
+  const { options, selectedIndex } = currentTarget;
   // get the selected option
-  let selected = currentTarget.options[currentTarget.selectedIndex];
+  const { value } = options[selectedIndex];
 
   // toggleClass based on selected.value
-  $(currentTarget).toggleClass('default', selected.value === 'default');
+  $(currentTarget).toggleClass(DEFAULT_CLASS, value === 'default');
 };
 
 /**
  * Runs once to update on page load.
  * @param {HTMLElement} dropdown - The select dropdown
  */
-const runOnce = (dropdown) => {
-  // run once immediately, for default "select size"
-  dropdown.change();
-};
+const runOnce = dropdown => dropdown.change();
