@@ -6,6 +6,13 @@
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 
+export const ERROR_CLASS = 'u-error';
+export const DELIVERY_DATE_ATTR = 'data-delivery-date';
+export const PREORDER_ATTR = 'data-preorder';
+export const SIZE_CLASS = 'product-option--size';
+export const SELECT_CLASS = 'product-option__select';
+export const INFO_EL = 'span';
+
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'deliveryUpdate';
 registerJQueryPlugin(PLUGIN_NAME, deliveryUpdate);
@@ -30,9 +37,9 @@ export default function deliveryUpdate(el) {
  * @param {HTMLElement} el - The element containing the text
  * @return {HTMLElement} Immutable reference to size dropdown
  */
-const findDropdown = (el) => {
+const findDropdown = el => {
   let form = el.closest('form');
-  return form.find('.product-option--size .product-option__select');
+  return form.find(`.${SIZE_CLASS} .${SELECT_CLASS}`);
 };
 
 /**
@@ -42,17 +49,17 @@ const findDropdown = (el) => {
  */
 const attachChangeListener = (dropdown, delivery) => {
   // estimated delivery text
-  const dateSpan = delivery.children('span');
+  const dateSpan = delivery.children(INFO_EL);
   // cache the default dext
   const defaultText = dateSpan.text();
 
-  dropdown.change(({currentTarget}) => {
+  dropdown.change(({ currentTarget: { options, selectedIndex } }) => {
     // get selected after every change
-    let selected = currentTarget.options[currentTarget.selectedIndex];
+    let selected = options[selectedIndex];
 
     // update date span
-    dateSpan.text(selected.getAttribute('data-delivery-date') || defaultText);
+    dateSpan.text(selected.getAttribute(DELIVERY_DATE_ATTR) || defaultText);
     // make preorder delivery-date red
-    delivery.toggleClass('u-error', selected.getAttribute('data-preorder') === 'true');
+    delivery.toggleClass(ERROR_CLASS, selected.getAttribute(PREORDER_ATTR) === 'true');
   });
 };
