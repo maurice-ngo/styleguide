@@ -13,7 +13,7 @@ import deliveryUpdate, {
 
 chai.use(chaiJquery);
 
-describe.only('product delivery update', () => {
+describe('product delivery update', () => {
   let $productOption;
   let $delivery;
   const defaultText = 'That rug really tied the room together.';
@@ -40,23 +40,23 @@ describe.only('product delivery update', () => {
   };
 
   beforeEach(() => {
-    const optionsMarkup = Object.keys(options).map(name => {
-      const opt = options[name];
-      return `
-        <option
-          value="${name}"
-          ${opt.dd ? `${DELIVERY_DATE_ATTR}="${opt.text}"` : ''}
-          ${opt.preorder ? `${PREORDER_ATTR}="true"` : ''}>
-          ${opt.text}
-        </option>
-      `;
-    }).join('');
-
     fixture.set(`
       <form>
         <label class="${SIZE_CLASS}">
           Quotes
-          <select id="product-option" class="${SELECT_CLASS}">${optionsMarkup}</select>
+          <select id="product-option" class="${SELECT_CLASS}">
+            ${Object.keys(options).map(name => {
+              const opt = options[name];
+              return `
+                <option
+                  value="${name}"
+                  ${opt.dd ? `${DELIVERY_DATE_ATTR}="${opt.text}"` : ''}
+                  ${opt.preorder ? `${PREORDER_ATTR}="true"` : ''}>
+                  ${opt.text}
+                </option>
+              `;
+            }).join('')}
+          </select>
         </label>
         <p class="delivery">The dude says: <${INFO_EL}>${defaultText}</${INFO_EL}></p>
       </form>

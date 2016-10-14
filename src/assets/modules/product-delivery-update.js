@@ -38,7 +38,7 @@ export default function deliveryUpdate(el) {
  * @return {HTMLElement} Immutable reference to size dropdown
  */
 const findDropdown = el => {
-  let form = el.closest('form');
+  const form = el.closest('form');
   return form.find(`.${SIZE_CLASS} .${SELECT_CLASS}`);
 };
 
@@ -55,7 +55,7 @@ const attachChangeListener = (dropdown, delivery) => {
 
   dropdown.change(({ currentTarget: { options, selectedIndex } }) => {
     // get selected after every change
-    let selected = options[selectedIndex];
+    const selected = options[selectedIndex];
 
     // update date span
     dateSpan.text(selected.getAttribute(DELIVERY_DATE_ATTR) || defaultText);
