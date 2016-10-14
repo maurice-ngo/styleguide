@@ -1,40 +1,35 @@
+/**
+ * Forwards user to new page when changing color dropdown
+ * @module colorChange
+ */
+
 import $ from 'jquery';
+import registerJQueryPlugin from '../lib/register-jquery-plugin';
 
-// Settings
-export const pluginName = 'colorChange';
+// Expose the function as a jQuery plugin for ease of use
+export const PLUGIN_NAME = 'colorChange';
+registerJQueryPlugin(PLUGIN_NAME, colorChange);
 
-// In case there are ever defaults
-export const DEFAULTS = {
+/**
+ * Initializes color dropdown changes.
+ * @param {HTMLElement} el - The select dropdown we're attaching to
+ */
+export default function colorChange(el) {
+  // run whenever size dropdown changes
+  attachChangeListener($(el));
 };
 
-export default class Plugin {
-  constructor(element, options) {
-    this.element = element;
-    this.options = $.extend( {}, DEFAULTS, options) ;
+/**
+ * Attaches change event to select dropdown.
+ * @param {HTMLElement} dropdown - The select dropdown
+ */
+const attachChangeListener = (dropdown) => {
+  dropdown.change(({currentTarget}) => {
+    // get selected after every change
+    let selected = currentTarget.options[currentTarget.selectedIndex];
 
-    this.init();
-  }
-
-  init() {
-    var selected;
-
-    $(this.element).change(function () {
-      // get selected.value
-      selected = this.options[this.selectedIndex];
-
-      // change location.href
-      if (selected.value)
-        document.location.href = selected.value;
-    })
-  }
+    // change location.href
+    if (selected.value)
+      document.location.href = selected.value;
+  })
 };
-
-// Plugin wrapped ctor
-$.fn[pluginName] = function ( options ) {
-  return this.each(function () {
-    if (!$.data(this, 'plugin_' + pluginName)) {
-      $.data(this, 'plugin_' + pluginName,
-      new Plugin( this, options ));
-    }
-  });
-}

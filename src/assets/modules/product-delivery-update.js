@@ -1,54 +1,58 @@
+/**
+ * Updates 'estimated delivery' text to reflect size chosen
+ * @module deliveryUpdate
+ */
+
 import $ from 'jquery';
+import registerJQueryPlugin from '../lib/register-jquery-plugin';
 
-// Settings
-export const pluginName = 'deliveryUpdate';
+// Expose the function as a jQuery plugin for ease of use
+export const PLUGIN_NAME = 'deliveryUpdate';
+registerJQueryPlugin(PLUGIN_NAME, deliveryUpdate);
 
-// In case there are ever defaults
-export const DEFAULTS = {
+/**
+ * Initializes 'estimated delivery' text changes.
+ * @param {HTMLElement} el - The element containing the text
+ */
+export default function deliveryUpdate(el) {
+  // local jQuery reference to el
+  const delivery = $(el);
+
+  // find the correct size dropdown
+  const sizeDropdown = findDropdown(delivery);
+
+  // run whenever size dropdown changes
+  attachChangeListener(sizeDropdown, delivery);
 };
 
-export default class Plugin {
-  constructor(element, options) {
-    this.element = element;
-    this.options = $.extend( {}, DEFAULTS, options) ;
-
-    this.init();
-  }
-
-  init() {
-    // local reference to this.element
-    var delivery = $(this.element);
-    // declare variables to be used within change function
-    var dateSpan, defaultDateText, selected;
-
-    // find the correct size dropdown
-    var form = delivery.closest('form');
-    var sizeDropdown = form.find('.product-option--size .product-option__select');
-
-    // run whenever size dropdown changes
-    sizeDropdown.change(function () {
-      // estimated delivery text, only get once
-      dateSpan = dateSpan || delivery.children('span');
-      // cache the default dext, only get once
-      defaultDateText = defaultDateText || dateSpan.text();
-      // get selected after every change
-      selected = this.options[this.selectedIndex];
-
-      // update date span
-      dateSpan.text(selected.getAttribute('data-delivery-date') || defaultDateText);
-
-      // make preorder delivery-date red
-      delivery.toggleClass('u-error', selected.getAttribute('data-preorder') === 'true');
-    });
-  }
+/**
+ * Finds specified dropdown within a shared parent form.
+ * @param {HTMLElement} el - The element containing the text
+ * @return {HTMLElement} Immutable reference to size dropdown
+ */
+const findDropdown = (el) => {
+  let form = el.closest('form');
+  return form.find('.product-option--size .product-option__select');
 };
 
-// Plugin wrapped ctor
-$.fn[pluginName] = function ( options ) {
-  return this.each(function () {
-    if (!$.data(this, 'plugin_' + pluginName)) {
-      $.data(this, 'plugin_' + pluginName,
-      new Plugin( this, options ));
-    }
+/**
+ * Attaches change event to select dropdown.
+ * @param {HTMLElement} dropdown - The select dropdown
+ * @param {HTMLElement} delivery - The element containing the delivery text
+ */
+const attachChangeListener = (dropdown, delivery) => {
+  // estimated delivery text
+  const dateSpan = delivery.children('span');
+  // cache the default dext
+  const defaultText = dateSpan.text();
+
+  dropdown.change(({currentTarget}) => {
+    // get selected after every change
+    let selected = currentTarget.options[currentTarget.selectedIndex];
+
+    // update date span
+    dateSpan.text(selected.getAttribute('data-delivery-date') || defaultText);
+    // make preorder delivery-date red
+    delivery.toggleClass('u-error', selected.getAttribute('data-preorder') === 'true');
   });
-}
+};

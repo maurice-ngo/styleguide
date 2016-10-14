@@ -1,1 +1,1 @@
-require('./base.scss')
+import './base.scss';
