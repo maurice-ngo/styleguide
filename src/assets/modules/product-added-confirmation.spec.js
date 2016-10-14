@@ -17,10 +17,6 @@ describe('product added confirmation', () => {
   let $el;
   let $target;
 
-  before(() => {
-    fixture.setBase('src/materials/modules');
-  });
-
   beforeEach(() => {
     fixture.set(`
       <form id="some-form"><div id="form-content">in a form</div></form>

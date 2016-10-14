@@ -11,10 +11,6 @@ describe('color change', () => {
   let $dropdown;
   let redirectFunc;
 
-  before(() => {
-    fixture.setBase('src/materials/modules');
-  });
-
   beforeEach(() => {
     fixture.set(`
       <select name="lebowski" id="lebowski-select">
