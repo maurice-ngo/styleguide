@@ -13,14 +13,16 @@ registerJQueryPlugin(PLUGIN_NAME, addedConfirmation);
 export const TEMPLATE_ID = 'product-added-confirmation';
 export const TARGET_WRAP_ID = 'content';
 export const CONCEAL_CLASS = 'u-conceal';
+export const MODAL_CLASS = 'modal';
+export const MODAL_CONTINUE_CLASS = 'modal__continue';
 
 /**
  * Initializes color dropdown changes.
  * @param {HTMLElement} el - The select dropdown we're attaching to
  */
 export default function addedConfirmation(el) {
-    const modal = createModal();
-    attachSubmitListener(el, modal);
+  const modal = createModal();
+  attachSubmitListener(el, modal);
 };
 
 /**
@@ -31,7 +33,7 @@ const createModal = () => {
   // create the modal now, so we don't recreate on every submit
   let modal = document.createElement('DIV');
 
-  modal.className = 'modal ' + CONCEAL_CLASS;
+  modal.className = `${MODAL_CLASS} ${CONCEAL_CLASS}`;
   modal.innerHTML = document.getElementById(TEMPLATE_ID).innerHTML;
   // to override the default modal display: none
   modal.style.display = 'block';
@@ -46,12 +48,12 @@ const createModal = () => {
  * Click listener to close confirmation modal
  * @param {jQuery} el - The confirmation modal to show
  */
-const attachClickListener = (el) => {
+const attachClickListener = el => {
   el.click(evt => {
-    let target = $(evt.toElement);
+    const target = $(evt.target);
 
     // conceal if click is on the background or the 'continue' link
-    if (target.hasClass('modal') || target.hasClass('modal__continue')) {
+    if (target.hasClass(MODAL_CLASS) || target.hasClass(MODAL_CONTINUE_CLASS)) {
       evt.preventDefault();
       // conceal modal again
       el.addClass(CONCEAL_CLASS);
@@ -66,12 +68,13 @@ const attachClickListener = (el) => {
  */
 const attachSubmitListener = (target, confirmation) => {
   // when the form submits, show the modal
-  let form = $(target).closest('form');
+  const form = $(target).closest('form');
+  const $confirmation = $(confirmation);
 
-  form.submit(function(e) {
+  form.submit(e => {
     e.preventDefault();
 
     // reveal confirmation modal
-    $(confirmation).removeClass(CONCEAL_CLASS);
+    $confirmation.removeClass(CONCEAL_CLASS);
   });
 };
