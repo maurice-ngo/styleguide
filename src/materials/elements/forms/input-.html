@@ -1,0 +1,17 @@
+---
+notes: |
+  These are our default input text field styles. Here are some basic rules when writing markup for form inputs:
+
+    1. Inputs should always be inside of a `<form>` element.
+    1. All inputs should have a corresponding label element with matching `for` and `id` attributes for accessibility and proper functionality
+    1. Each coupled `label` and `input` elements should be surrounded by the `.field` class
+
+  The error colored background and border will be displayed in browsers that support the `:invalid` pseudo class, but we'll be using a JS validator on all forms to ensure progressive enhancement and browsers will also be receiving the `.is-error` class on the invalid input's surround `.field` block.  The invalid states below are seen when a user inputs an incorrect value for the specified input type.
+---
+
+<form action="" class="form">
+  <div class="field">
+    <label for="username-1">Username</label>
+    <input type="text" id="username-1" name="username" placeholder="Placeholder">
+  </div>
+</form>

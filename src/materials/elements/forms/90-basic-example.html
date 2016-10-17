@@ -1,0 +1,63 @@
+---
+notes: |
+  Radio and Checkbox inputs are built with the `input` element--with their respective attributes--and the `label` element which requires a modifier class with the name of the input type e.g., `.label--checkbox`. The radio and checkbox elements need to be nested within the label element
+---
+
+<form class="form">
+  <header>
+    <h2 class="form__title">Title of this form</h2>
+  </header>
+
+  <fieldset>
+    <legend>Personal Information</legend>
+    <div class="field">
+      <label class="field__label" for="exInput1">Your Name</label>
+      <input class="field__input" id="exInputA" type="email" required="required" placeholder="Your name">
+      <span class="field__feedback">Error text</span>
+      <span class="field__hint">Optional field hint</span>
+    </div>
+    <div class="field">
+      <label class="field__label" for="exInputB">Your Email</label>
+      <input class="field__input" id="exInput2" type="email" required="required" placeholder="Your email">
+      <span class="field__feedback"></span>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="field">
+      <label class="field__label">Choose your favorite</label>
+      <div class="field__input-group">
+        <label class="label--radio" for="favFood-1"><input id="favFood-1" name="favFood" type="radio" value="pizza"> Pizza</label>
+        <label class="label--radio" for="favFood-2"><input id="favFood-2" name="favFood" type="radio" value="tacos"> Tacos</label>
+        <label class="label--radio" for="favFood-3"><input id="favFood-3" name="favFood" type="radio" value="burgers"> Burgers</label>
+      </div>
+      <span class="field__feedback"></span>
+      <span class="field__hint"></span>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="field">
+      <label class="field__label">Select one</label>
+      <select name="schramburger">
+        <option value="value-1">Option 1</option>
+        <option value="value-2">Option 2</option>
+        <option value="value-3">Option 3</option>
+        <option value="value-4">Option 4</option>
+      </select>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <div class="field">
+      <label class="field__label">Your message</label>
+      <textarea class="field__input" placeholder="Textarea placeholder"></textarea>
+      <span class="field__feedback"></span>
+      <span class="field__hint"></span>
+    </div>
+  </fieldset>
+
+  <footer class="form__actions">
+    <input type="submit" class="btn btn--block" value="Submit">
+  </footer>
+</form>

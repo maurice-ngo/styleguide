@@ -3,14 +3,32 @@ title: Revolve Clothing | Styleguide
 fabricator: true
 ---
 
-<h1>Overview</h1>
+<h1>Revolve Clothing Style Guide</h1>
 
-<p>If I could say a few words, I would be a better public speaker.</p>
+<section>
+  <p>Global CSS settings, fundamental HTML elements styled and enhanced with extendible classes, and an advanced grid system.</p>
+</section>
 
-<p>In the meantime, here are some {{lebowski.name}} references:</p>
+<section id="sections">
+  <h1>Sections</h1>
 
-<ul>
-  {{#each lebowski.aliases}}
-    <li>{{this}}</li>
-  {{/each}}
-</ul>
+  <h2>Helpers</h2>
+  <p>{{sections.helpers}}</p>
+
+  <h2>Elements</h2>
+  <p>{{sections.elements}}</p>
+
+  <h2>Modules</h2>
+  <p>{{sections.modules}}</p>
+</section>
+
+<section>
+  <h1>How to Use</h1>
+
+  <p>This style guide is <a href="#sections">organized into sections</a> that group together components used throughout the website. Each component includes the HTML necessary to add it to the website, which can be copy+pasted, and modified to your use. By default, this HTML is hidden from view and can be revealed using the "Toggle Code" button, either in the global nav or for each individual component.
+  <svg style="width:16px; height:16px;">
+    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#f-icon-code"></use>
+  </svg>
+
+  <p>Many components also include "notes", which provide further detail on how they can be used.
+</section>

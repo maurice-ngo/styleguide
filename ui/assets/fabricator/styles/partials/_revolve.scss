@@ -1,0 +1,68 @@
+/**
+ * CSS overrides for Revolve Style Guide
+ */
+
+/* give the side nav some breathing room */
+.f-container {
+  padding: 0 24px;
+}
+
+/* help readability when viewing on large screen */
+@media (min-width: 967px) {
+  .f-container {
+    padding-right: 3%;
+  }
+}
+
+/* add revolve logo to menu (in place of overview) */
+.f-menu {
+  .icon--revolve-logo {
+    padding-left: 1.5rem;
+  }
+  .branding__logo {
+    color: #000;
+  }
+}
+
+/* move toggle controls to main container */
+.f-control-bar {
+  padding-top: 0;
+
+  .f-menu-toggle  {
+    float: left;
+    margin: 14px 18px 14px 0;
+  }
+
+ .f-controls {
+    float: left;
+    width: 20rem;
+  }
+}
+
+/* override revolve's ul default styles that are messing up the side nav */
+.f-menu ul {
+  margin-left: 0;
+}
+
+/* fabricator toggle icons are tiny */
+.f-control svg,
+.f-item-controls .f-control {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* fabricator is shrinking our text */
+.f-menu a,
+.f-menu .f-menu__heading,
+.f-item-notes,
+pre[class*='language-'] {
+  font-size: inherit;
+}
+
+/* fix for favorite button's absolute position */
+#favorite-buttons\.default .f-item-preview {
+  position: relative;
+  width: 200px;
+  height: 80px;
+  border: 1px solid;
+}

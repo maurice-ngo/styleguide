@@ -1,3 +1,5 @@
-require('./atoms/atoms')
-require('./molecules/molecules')
-require('./organisms/organisms')
+require('./lib/lib')
+require('./helpers/helpers')
+require('./elements/elements')
+require('./modules/modules')
+require('./layouts/layouts')

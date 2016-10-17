@@ -17,3 +17,7 @@ $settings: (
 @import 'partials/item';
 @import 'partials/layout';
 @import 'partials/menu';
+
+// revolve style overrides
+@import 'partials/revolve'
+// CODE REVIEW: is this the best place to include? does this hurt our approach to "upgrading" to future versions of fabricator? am i better off including this thru a new entry point?

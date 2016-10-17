@@ -1,0 +1,37 @@
+/**
+
+  @product Recs
+--------------------------------------------------------
+  modules/_product-recs.scss
+--------------------------------------------------------
+
+  Product Recs Section
+
+------------------------------------------------------ */
+.product-recs {
+  padding: rem(25 0 0 14);
+  border-top: rem(1) solid  #ebebeb;
+  margin-top: rem(30);
+}
+.product-recs__hed {
+  @extend %font-secondary;
+  font-weight: bold;
+  font-size: em(13);
+  text-transform: uppercase;
+  letter-spacing: .125em;
+  margin-bottom: rem(17);
+}
+.product-recs__wrap {
+  white-space: nowrap;
+  overflow-x: scroll;
+}
+.product-recs__product {
+  display: inline-block;
+  width: 25%;
+  margin-right: 3%;
+  vertical-align: top;
+  & img {
+    width: 100%;
+    height: auto;
+  }
+}
