@@ -66,10 +66,20 @@
   // .product-badge--wedding
   &--wedding {
     background-color: $wedding-shop-color;
+    color: $color__black;
+  }
+  // .product-badge--top-left
+  &--top-left {
+    top: 16px;
+    left: 0;
   }
   // .product-badge--bottom
   &--bottom {
     bottom: 0;
+  }
+  // .product-badge--inline
+  &--inline {
+    width: auto;
   }
 }
 
