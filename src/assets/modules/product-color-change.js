@@ -19,9 +19,9 @@ const DEFAULT_OPTIONS = {
  * @param {HTMLElement} el - The select dropdown we're attaching to
  */
 export default function colorChange(el, options = {}) {
-  const ops = Object.assign({}, DEFAULT_OPTIONS, options);
+  const opts = Object.assign({}, DEFAULT_OPTIONS, options);
   // run whenever size dropdown changes
-  attachChangeListener($(el), options);
+  attachChangeListener($(el), opts);
 };
 
 /**
