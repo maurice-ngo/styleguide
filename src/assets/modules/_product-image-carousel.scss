@@ -1,4 +1,6 @@
 .product-image-carousel {
+  position: relative;
+
   // .pdp-main-image-carousel__imgs
   &__imgs {
     overflow: hidden;
