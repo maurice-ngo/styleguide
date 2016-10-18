@@ -11,7 +11,8 @@
     "watch:test": "npm run karma",
     "karma": "cross-env NODE_ENV=test karma start tools/karma.conf.js",
     "karma:single": "npm run karma -- --single-run=true --browsers=PhantomJS --no-colors",
-    "clean": "rimraf site lib"
+    "clean": "rimraf site lib",
+    "deploy": "./tools/github-deploy.sh"
   },
   "repository": {
     "type": "git",
