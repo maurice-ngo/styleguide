@@ -10,7 +10,7 @@
 ------------------------------------------------------ */
 
 .accordion {
-  $accordion-gutter: 10;
+  $accordion-gutter: 16;
 
   border-bottom: rem(2) solid $color__grey--lighter;
   // .accordion__item
@@ -25,7 +25,7 @@
     cursor: pointer;
     &:before {
       position: absolute;
-      right: rem(10);
+      right: rem($accordion-gutter + 2);
       height: rem(10);
       width: rem(10);
       content: "";
