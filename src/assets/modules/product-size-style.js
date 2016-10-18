@@ -39,11 +39,14 @@ const attachChangeListener = dropdown => {
  */
 const toggleStyle = ({ currentTarget }) => {
   const { options, selectedIndex } = currentTarget;
-  // get the selected option
-  const { value } = options[selectedIndex];
 
-  // toggleClass based on selected.value
-  $(currentTarget).toggleClass(DEFAULT_CLASS, value === 'default');
+  if (options) {
+    // get the selected option
+    const { value = '' } = options[selectedIndex];
+
+    // toggleClass based on selected.value
+    $(currentTarget).toggleClass(DEFAULT_CLASS, value === 'default');
+  }
 };
 
 /**
