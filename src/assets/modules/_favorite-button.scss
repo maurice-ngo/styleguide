@@ -21,7 +21,6 @@
   cursor: pointer;
   z-index: 6;
   // .favorite-button--active
-  &:hover,
   &--active,
   // adding .active class to abide to heartProduct harded coded function
   .active {
@@ -53,7 +52,6 @@
   // .favorite-button__container
   &__container {
     cursor: pointer;
-    &:hover .favorite-button,
     &--active .favorite-button {
       background: $color__womens;
       .favorite-button__icon {
@@ -65,10 +63,6 @@
 }
 
 .favorite-button--men {
-  &:hover {
-    background: $color__mens;
-    border-color: $color__mens;
-  }
   &.favorite-button--active,
   // adding .active class to abide to heartProduct harded coded function
   &.active {
