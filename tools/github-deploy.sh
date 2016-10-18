@@ -1,3 +1,5 @@
+#!/bin/bash
+
 project=$1
 
 if [ -z $project ]; then
