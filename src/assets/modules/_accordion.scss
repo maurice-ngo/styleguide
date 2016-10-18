@@ -40,9 +40,13 @@
 
     &:active {
       background: $color__black;
-      color: $color__white;
+
       &:before {
         border-color: $color__white;
+      }
+
+      > div {
+        color: $color__white;
       }
     }
   }
