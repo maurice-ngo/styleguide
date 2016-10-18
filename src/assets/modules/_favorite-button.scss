@@ -31,9 +31,14 @@
       stroke: $color__black;
     }
   }
+
   &:focus {
     border-color: $color__grey--lightest;
+    .icon {
+      fill: $color__black;
+    }
   }
+
   // .favorite-button__icon
   &__icon {
     width: rem( 22 );
