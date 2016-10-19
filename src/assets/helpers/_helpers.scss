@@ -39,6 +39,12 @@
   opacity: 0;
 }
 
+// hide with opacity
+.u-hide-opacity {
+  opacity: 0;
+}
+
+
 // Responsive hiders
 // Min Width @ $small-mobile
 @include bp-at-least($small-mobile) {
@@ -247,6 +253,7 @@
   // Palettes
   &--color-xdark      { border-color: $color__black; }
   &--color-dark       { border-color: $color__grey; }
+  &--color-grey-md     { border-color: $color__grey--md; }
   &--color-medium     { border-color: $color__grey--light; }
   &--color-light      { border-color: $color__grey--lighter; }
   &--color-lightest   { border-color: $color__grey--lightest; }
