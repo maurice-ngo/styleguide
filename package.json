@@ -34,6 +34,7 @@
     "css-loader": "^0.23.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "fabricator-assemble": "^1.2.0",
+    "handlebars-loader": "^1.4.0",
     "ignore-loader": "^0.1.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",
