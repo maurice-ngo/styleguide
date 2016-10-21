@@ -3,7 +3,7 @@ const FabricatorPlugin = require('./fabricator-webpack-plugin');
 
 module.exports = {
   entry: {
-    'site/fabricator': resolve('ui', 'assets', 'fabricator', 'fabricator.js'),
+    'site/fabricator': resolve('ui', 'assets', 'fabricator.js'),
     'lib/styleguide': resolve('src', 'assets', 'styleguide.js')
   },
 
