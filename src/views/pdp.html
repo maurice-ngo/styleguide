@@ -1,36 +1,32 @@
 ---
-title: pdp
-data-json: pdp
-page-options: mock-page-options
+title: Product Detail Page
+page-name: pdp
 fabricator: false
 layout: mock-page
-content-styles: |
-  position: relative;
-  text-align: center;
 ---
 
-  <!-- Image Carousel -->
-  {{> product-image-carousel }}
+<!-- Image Carousel -->
+{{> product-image-carousel }}
 
-  <!-- Product Title -->
-  {{> product-title- }}
+<!-- Product Title -->
+{{> product-title- }}
 
-  <!-- Price -->
-  {{> price- }}
+<!-- Price -->
+{{> price- }}
 
-  <!-- Add To Cart Form -->
-  <form method="GET" action="">
-    <input type="hidden" name="confirm" value="true" />
-    {{> product-options.size }}
-    {{> product-options.color }}
-    {{> buttons.full- addToBag=true }}
-    {{> product-estimated-delivery }}
-  </form>
+<!-- Add To Cart Form -->
+<form method="GET" action="">
+  <input type="hidden" name="confirm" value="true" />
+  {{> product-options.size }}
+  {{> product-options.color }}
+  {{> buttons.full- addToBag=true }}
+  {{> product-estimated-delivery }}
+</form>
 
-  <!-- Favorite button -->
-  {{> favorite-buttons.default }}
+<!-- Favorite button -->
+{{> favorite-buttons.default }}
 
-  <!-- Modal: Product Added to Bag -->
-  <script id="product-added-confirmation" type="text/x-handlebars-template">
-    {{> modals.product-added-confirmation pdp }}
-  </script>
+<!-- Modal: Product Added to Bag -->
+<script id="product-added-confirmation" type="text/x-handlebars-template">
+  {{> modals.product-added-confirmation pdp }}
+</script>
