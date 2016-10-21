@@ -4,6 +4,7 @@ const FabricatorPlugin = require('./fabricator-webpack-plugin');
 module.exports = {
   entry: {
     'site/fabricator': resolve('ui', 'assets', 'fabricator.js'),
+    'site/mock': resolve('ui', 'assets', 'mock.js'),
     'lib/styleguide': resolve('src', 'assets', 'styleguide.js')
   },
 
