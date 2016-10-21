@@ -28,6 +28,10 @@ module.exports = {
           resolve('ui', 'assets')
         ],
         exclude: /node_modules/
+      }, {
+        test: /\.html$/,
+        loader: 'handlebars-loader',
+        extensions: '.html'
       }
     ]
   },
