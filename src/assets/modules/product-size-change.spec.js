@@ -36,9 +36,10 @@ describe('product size change', () => {
   });
 
   it('should run updates upon selecting from the dropdown', () => {
+    const dropdown = $dropdown[0];
     $dropdown.trigger('change');
 
-    expect(runUpdates).to.have.been.calledWith(evt);
+    expect(runUpdates).to.have.been.calledWith(dropdown, dropdown.options, dropdown.selectedIndex);
   });
 
 });

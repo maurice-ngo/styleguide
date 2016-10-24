@@ -3,22 +3,21 @@ import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
 import priceUpdate from './product-price-update';
-import sizeChange from './product-size-change';
+import sizeChange, { PRICE_ATTR } from './product-size-change';
 
 chai.use(chaiJquery);
 
 describe('product price update', () => {
   let $dropdown;
   const options = {
-    'default': `default`,
-    'no-money': 'There never was any money',
-    'park-ranger': 'What are you, a fucking park ranger now?',
-    'great-plan': `That's a great plan, Walter`,
+    'no-money': 234,
+    'park-ranger': 12,
   };
 
   beforeEach(() => {
     fixture.set(`
       <select id="dropdown">
+        <option data-price="234">default</option>
         ${Object.keys(options)
           .map(name => `<option value="${name}">${options[name]}</option>`)
           .join('')}
@@ -32,21 +31,13 @@ describe('product price update', () => {
     fixture.cleanup();
   });
 
-  it('should capture the default value initially', () => {
-    expect($dropdown).to.have.value('default').and
-      .to.have.class(DEFAULT_CLASS);
+  it('should capture the default price initially', () => {
+    expect($dropdown).to.have.attribute(PRICE_ATTR);
   });
 
-  it('should capture non default value initially', () => {
+  it('should capture price on change', () => {
     $dropdown.val('park-ranger');
     sizeChange($dropdown);
-    expect($dropdown).to.have.value('park-ranger');
-  });
-
-  it('should change value and not have a default class', () => {
-    $dropdown
-      .val('no-money')
-      .trigger('change');
-    expect($dropdown).to.not.have.class(DEFAULT_CLASS);
+    expect($dropdown).to.have.value('12');
   });
 });

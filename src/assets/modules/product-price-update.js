@@ -8,8 +8,7 @@ import $ from'jquery';
 import regularTemplate from '../../materials/modules/price/01-regular.html'
 import saleTemplate from '../../materials/modules/price/02-on-sale.html'
 
-export const REGULAR_PRICE = 'data-regular-price';
-export const PRICE = 'data-price';
+export const PRICE_ATTR = 'data-price';
 
 /**
  * Update price based on selected value.
@@ -18,25 +17,24 @@ export const PRICE = 'data-price';
  * @param {Number} selectedIndex - Which option is selected
  */
 export default function updatePrice(select, options, selectedIndex) {
-  // get the selected option
-  const price = options[selectedIndex].getAttribute();
-  const regularPrice = options[0].getAttribute(REGULAR_PRICE);
+  // get the price element
   const priceEl = $(select).closest('.product').find('.price');
-  const data = {
+  // set up data for handlebars template
+  const price = options[selectedIndex].getAttribute(PRICE_ATTR);
+  const regularPrice = options[0].getAttribute(PRICE_ATTR);
+  let data = {
     'pdp': {
       'price': price,
       'regular-price': regularPrice
     }
   }
 
-  if (!regularPrice)
-    return console.log('data-regular-price missing from default option');
-
-  // update price to either sale or regularPrice
-  if (!price)
+  if (!price) { // if no price, use regular price
+    data.pdp.price = regularPrice;
     priceEl.html(regularTemplate(data));
-  else if (parseFloat(price) < parseFloat(regularPrice))
+  } else if (parseFloat(price) < parseFloat(regularPrice)) { // if on sale, use price
     priceEl.html(saleTemplate(data));
-  else
+  } else { // if price is the same or higher than regular price, use price
     priceEl.html(regularTemplate(data));
+  }
 };
