@@ -1,4 +1,8 @@
 {
+  "name": "x REVOLVE Wyoming Gown in Off White",
+  "brand": "Tularosa",
+  "regular-price": 298,
+  "price": 99,
   "image": "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=960:*",
   "carousel": [
     "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=960:*",
@@ -7,43 +11,41 @@
     "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V4.jpg?resize=960:*",
     "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V5.jpg?resize=960:*"
   ],
-  "info": {
-    "name": "x REVOLVE Wyoming Gown in Off White",
-    "brand": "Tularosa",
-    "price": "$298",
-  },
   "sizes": [
     {
       "value": "S",
       "label": "S",
-      "delivery-date": "Jan 1 - Jan 3"
+      "delivery-date": "Jan 1 - Jan 3",
+      "price": 298
     }, {
       "value": "M",
       "label": "M",
       "delivery-date": "Feb 7 - Feb 9",
+      "price": 298,
       "preorder": true
     }, {
       "value": "L",
       "label": "L",
       "delivery-date": "Jan 1 - Jan 3",
-      "sale-price": "$189",
+      "price": 189,
       "one-left": true
     }, {
       "value": "LT",
       "label": "LT",
       "delivery-date": "Jan 1 - Jan 3",
+      "price": 298,
       "oos": true
     }, {
       "value": "XL",
       "label": "XL",
       "delivery-date": "Jan 1 - Jan 3",
-      "sale-price": "$99",
+      "price": 99,
       "final-sale": true
     }, {
       "value": "XXL",
       "label": "XXL",
       "delivery-date": "Jan 1 - Jan 3",
-      "sale-price": "$99",
+      "price": 99,
       "final-sale": true,
       "sample-defect": true
     }

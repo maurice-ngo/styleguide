@@ -4,10 +4,10 @@ notes: |
 ---
 
 <h1 class="product-titles__name u-margin-t--none u-margin-b--xs" property="name">
-  {{#if pdp}}{{pdp.info.name}}{{else}}{{this.name}}{{/if}}
+  {{pdp.name}}
 </h1>
 <p class="product-titles__brand u-text-lg u-margin-b--xs" property="brand">
   <a href="#" title="{{#if pdp}}{{pdp.info.brand}}{{else}}{{this.brand}}{{/if}}">
-    {{#if pdp}}{{pdp.info.brand}}{{else}}{{this.brand}}{{/if}}
+    {{pdp.brand}}
   </a>
 </p>

@@ -6,19 +6,9 @@ notes:
   <h2 class="u-margin-t--lg">Item Added to Bag</h2>
 
   <div class="modal--added-confirmation__info">
-  {{#if this.image}}
-    <img class="modal--added-confirmation__img" src="{{this.image}}" />
-  {{else}}
     <img class="modal--added-confirmation__img" src="{{pdp.image}}" />
-  {{/if}}
-
-  {{#if this.info}}
-    {{> product-title-small this.info }}
-    {{> price-small this.info.price }}
-  {{else}}
     {{> product-title-small pdp.info }}
-    {{> price-small pdp.info.price }}
-  {{/if}}
+    {{> price.small pdp.info.price }}
   </div>
 
   {{> buttons.full- viewBag=true }}
