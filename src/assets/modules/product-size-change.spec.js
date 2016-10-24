@@ -6,7 +6,7 @@ import sizeChange from './product-size-change';
 
 chai.use(chaiJquery);
 
-describe.only('product size change', () => {
+describe('product size change', () => {
   let $dropdown;
   const options = {
     'default': `default`,

@@ -7,6 +7,7 @@
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 import toggleStyle from './product-size-style';
+import updatePrice from './product-price-update';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'sizeChange';
@@ -16,8 +17,18 @@ registerJQueryPlugin(PLUGIN_NAME, sizeChange);
  * List of all updates made on change.
  * @param {HTMLElement} evt - The select dropdown we're attaching to
  */
-const runUpdates = (evt) => {
-  toggleStyle(evt);
+export const runUpdates = ({ currentTarget }) => {
+  const { options, selectedIndex } = currentTarget;
+
+  if (options) {
+    /*
+  console.log('*** select:', typeof currentTarget, currentTarget)
+  console.log('*** options:', typeof options, options)
+  console.log('*** selectedIndex:', typeof selectedIndex, selectedIndex)
+    */
+    toggleStyle(currentTarget, options, selectedIndex);
+    updatePrice(currentTarget, options, selectedIndex);
+  }
 };
 
 /**

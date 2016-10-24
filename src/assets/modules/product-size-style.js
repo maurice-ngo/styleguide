@@ -9,16 +9,14 @@ export const DEFAULT_CLASS = 'default';
 
 /**
  * Toggle style of dropdown based on selected value.
- * @param {HTMLElement} currentTarget - The current target interacted with
+ * @param {HTMLElement} select - The current target interacted with
+ * @param {HTMLElements} options - List of options within currentTarget
+ * @param {Number} selectedIndex - Which option is selected
  */
-export default function toggleStyle({ currentTarget }) {
-  const { options, selectedIndex } = currentTarget;
+export default function toggleStyle(select, options, selectedIndex) {
+  // get the selected option
+  const { value = '' } = options[selectedIndex];
 
-  if (options) {
-    // get the selected option
-    const { value = '' } = options[selectedIndex];
-
-    // toggleClass based on selected.value
-    $(currentTarget).toggleClass(DEFAULT_CLASS, value === 'default');
-  }
+  // toggleClass based on selected.value
+  $(select).toggleClass(DEFAULT_CLASS, value === 'default');
 };
