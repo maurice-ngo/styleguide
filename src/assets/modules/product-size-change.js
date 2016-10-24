@@ -21,18 +21,17 @@ registerJQueryPlugin(PLUGIN_NAME, sizeChange);
  * @param {HTMLElement} evt - The select dropdown we're attaching to
  */
 export const runUpdates = ({ currentTarget }) => {
+  const wrap = $(currentTarget).closest('.product');
+  // whether input or select, find the chosen element
   const { options, selectedIndex } = currentTarget;
+  const chosen = options ? options[selectedIndex] : currentTarget;
 
-  if (options) {
-    const wrap = $(currentTarget).closest('.product');
-    const defaultOption = options[0];
-    const chosen = options[selectedIndex];
-
+  updatePrice(wrap, chosen, options);
+  showNotification(chosen);
+  updateCTA(wrap, chosen);
+  updateDelivery(wrap, chosen);
+  if (options) { // select dropdown
     toggleStyle(currentTarget, chosen);
-    updatePrice(wrap, defaultOption, chosen);
-    showNotification(chosen);
-    updateDelivery(wrap, chosen);
-    updateCTA(wrap, chosen);
   }
 };
 
@@ -41,6 +40,7 @@ export const runUpdates = ({ currentTarget }) => {
  * @param {HTMLElement} el - The select dropdown we're attaching to
  */
 export default function sizeChange(el) {
+  //if (el.nodeType === 'INPUT')
   // local jQuery reference to el
   const dropdown = $(el);
 

@@ -7,6 +7,7 @@ import $ from'jquery';
 
 export const PREORDER = 'Preorder This Item';
 export const OOS = 'Notify Me / Special Order';
+export const DEFAULT = 'Add To Bag';
 
 /**
  * Update CTA text based on selected value.
@@ -27,6 +28,8 @@ const update = (option) => {
     return OOS;
   else if (check('preorder'))
     return PREORDER;
+  else
+    return DEFAULT;
 
   function check(attr) {
     return option.getAttribute('data-' + attr)

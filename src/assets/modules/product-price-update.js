@@ -8,20 +8,22 @@ import $ from'jquery';
 import regularTemplate from '../../materials/modules/price/01-regular.html'
 import saleTemplate from '../../materials/modules/price/02-on-sale.html'
 
+export const REGULAR_PRICE_ATTR = 'data-regular-price';
 export const PRICE_ATTR = 'data-price';
 
 /**
  * Update price based on selected value.
  * @param {jQueryElement} wrap - The closest '.product' wrap from the select
- * @param {HTMLElement} defaultOption - Default selected option of select dropdown
  * @param {HTMLElement} chosen - Selected option of select dropdown
+ * @param {HTMLElements} options - List of options in select dropdown
  */
-export default function updatePrice(wrap, defaultOption, chosen) {
+export default function updatePrice(wrap, chosen, options) {
   // get the price element
   const priceEl = wrap.find('.price');
   // set up data for handlebars template
   const price = chosen.getAttribute(PRICE_ATTR);
-  const regularPrice = defaultOption.getAttribute(PRICE_ATTR);
+  const defaultOption = options ? options[0] : chosen;
+  const regularPrice = defaultOption.getAttribute(REGULAR_PRICE_ATTR) || defaultOption.getAttribute(PRICE_ATTR);
   let data = {
     'pdp': {
       'price': price,

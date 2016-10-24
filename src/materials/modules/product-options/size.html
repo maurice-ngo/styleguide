@@ -6,7 +6,7 @@ notes:
   <label for="size" class="product-option__label">Size</label>
   <select id="size" class="product-option__select u-ellipsis">
     <!-- add the product's "regular price" to the default option, for comparison -->
-    <option value="default" data-delivery-date="{{pdp.delivery-date}}" data-price="{{pdp.regular-price}}">Select Size</option>
+    <option value="default" data-delivery-date="{{pdp.delivery-date}}" data-regular-price="{{pdp.regular-price}}">Select Size</option>
   {{#each pdp.sizes}}
     <!-- attach size-specific data to each option, including price -->
     <option data-delivery-date="{{delivery-date}}" value="{{value}}" data-price="{{price}}"

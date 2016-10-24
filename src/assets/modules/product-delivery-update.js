@@ -19,7 +19,6 @@ export const INFO_EL = 'span';
  * @param {HTMLElement} chosen - Selected option of select dropdown
  */
 export default function updateDelivery(wrap, chosen) {
-  console.log(typeof chosen)
   // get the delivery text
   const delivery = wrap.find(DELIVERY_CLASS);
   // estimated delivery text
