@@ -32,7 +32,11 @@ module.exports = {
       }, {
         test: /\.html$/,
         loader: 'handlebars-loader',
-        extensions: '.html'
+        query: {
+          partialDirs: [
+            resolve('src', 'materials'),
+          ]
+        }
       }
     ]
   },
