@@ -8,6 +8,9 @@ import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 import toggleStyle from './product-size-style';
 import updatePrice from './product-price-update';
+import showNotification from './product-notification-show';
+import updateCTA from './product-cta-update';
+import updateDelivery from './product-delivery-update';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'sizeChange';
@@ -21,13 +24,15 @@ export const runUpdates = ({ currentTarget }) => {
   const { options, selectedIndex } = currentTarget;
 
   if (options) {
-    /*
-  console.log('*** select:', typeof currentTarget, currentTarget)
-  console.log('*** options:', typeof options, options)
-  console.log('*** selectedIndex:', typeof selectedIndex, selectedIndex)
-    */
-    toggleStyle(currentTarget, options, selectedIndex);
-    updatePrice(currentTarget, options, selectedIndex);
+    const wrap = $(currentTarget).closest('.product');
+    const defaultOption = options[0];
+    const chosen = options[selectedIndex];
+
+    toggleStyle(currentTarget, chosen);
+    updatePrice(wrap, defaultOption, chosen);
+    showNotification(chosen);
+    updateDelivery(wrap, chosen);
+    updateCTA(wrap, chosen);
   }
 };
 

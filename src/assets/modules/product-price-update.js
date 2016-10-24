@@ -12,16 +12,16 @@ export const PRICE_ATTR = 'data-price';
 
 /**
  * Update price based on selected value.
- * @param {HTMLElement} select - The current target interacted with
- * @param {HTMLElements} options - List of options within currentTarget
- * @param {Number} selectedIndex - Which option is selected
+ * @param {jQueryElement} wrap - The closest '.product' wrap from the select
+ * @param {HTMLElement} defaultOption - Default selected option of select dropdown
+ * @param {HTMLElement} chosen - Selected option of select dropdown
  */
-export default function updatePrice(select, options, selectedIndex) {
+export default function updatePrice(wrap, defaultOption, chosen) {
   // get the price element
-  const priceEl = $(select).closest('.product').find('.price');
+  const priceEl = wrap.find('.price');
   // set up data for handlebars template
-  const price = options[selectedIndex].getAttribute(PRICE_ATTR);
-  const regularPrice = options[0].getAttribute(PRICE_ATTR);
+  const price = chosen.getAttribute(PRICE_ATTR);
+  const regularPrice = defaultOption.getAttribute(PRICE_ATTR);
   let data = {
     'pdp': {
       'price': price,
