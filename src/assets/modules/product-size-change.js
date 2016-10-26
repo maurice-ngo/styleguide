@@ -30,7 +30,9 @@ export const runUpdates = ({ currentTarget }) => {
   showNotification(chosen);
   updateCTA(wrap, chosen);
   updateDelivery(wrap, chosen);
-  if (options) { // select dropdown
+
+  // only for select dropdown
+  if (options) {
     toggleStyle(currentTarget, chosen);
   }
 };
@@ -40,7 +42,6 @@ export const runUpdates = ({ currentTarget }) => {
  * @param {HTMLElement} el - The select dropdown we're attaching to
  */
 export default function sizeChange(el) {
-  //if (el.nodeType === 'INPUT')
   // local jQuery reference to el
   const dropdown = $(el);
 
