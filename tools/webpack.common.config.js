@@ -1,6 +1,6 @@
 const resolve = require('./path-helpers').resolve;
 const FabricatorPlugin = require('./fabricator-webpack-plugin');
-const { join } = require('path');
+const join = require('path').join;
 
 module.exports = {
   entry: {
@@ -16,7 +16,7 @@ module.exports = {
 
   resolveLoader: {
     alias: {
-      strip-gray-matter: join(__dirname, 'strip-gray-matter')
+      'strip-gray-matter': join(__dirname, 'strip-gray-matter')
     }
   },
 
