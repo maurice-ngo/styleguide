@@ -1,5 +1,6 @@
 const resolve = require('./path-helpers').resolve;
 const FabricatorPlugin = require('./fabricator-webpack-plugin');
+const { join } = require('path');
 
 module.exports = {
   entry: {
@@ -11,6 +12,12 @@ module.exports = {
   output: {
     path: resolve(),
     filename: '[name].js'
+  },
+
+  resolveLoader: {
+    alias: {
+      strip-gray-matter: join(__dirname, 'strip-gray-matter')
+    }
   },
 
   resolve: {
@@ -31,12 +38,10 @@ module.exports = {
         exclude: /node_modules/
       }, {
         test: /\.html$/,
-        loader: 'handlebars-loader',
-        query: {
-          partialDirs: [
-            resolve('src', 'materials'),
-          ]
-        }
+        loaders: [
+          'handlebars-loader?' + JSON.stringify({ partialDirs: [ resolve('src', 'materials') ] }),
+          'strip-gray-matter'
+        ]
       }
     ]
   },
