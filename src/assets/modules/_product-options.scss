@@ -24,6 +24,13 @@
     width: 100%;
   }
 
+  &:active {
+    background-color: $color__black;
+    label, select {
+      color: $color__white;
+    }
+  }
+
   // .product-option--size
   &--size {
     @include bp-at-least($small-mobile) {
