@@ -36,25 +36,25 @@ const changeColorValues = () => {
 /**
  * Callback to add badge template to product images when option is selected
  */
-function addBadge( ) {
+function addBadge( opt ) {
   const target = document.querySelector('.product__image');
 
   // add badge
-  target.insertAdjacentHTML('beforeend', this.html);
+  target.insertAdjacentHTML('beforeend', opt.html);
 }
 
 /**
  * Callback to upate color dropdown, based on selected option
  */
-function updateColor( ) {
-  updateProductOption('color', this.html);
+function updateColor( opt ) {
+  updateProductOption('color', opt.html);
 }
 
 /**
  * Callback to upate size dropdown, based on selected option
  */
-function updateSize( ) {
-  updateProductOption('size', this.html);
+function updateSize( opt ) {
+  updateProductOption('size', opt.html);
 }
 
 /**

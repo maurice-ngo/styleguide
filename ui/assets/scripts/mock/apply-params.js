@@ -13,7 +13,7 @@ export default function applyParams( option ) {
   const params = splitParams(document.location.search);
 
   if (params[id] && typeof callback === 'function')
-    callback.call(option, id);
+    callback(option);
 }
 
 /**
