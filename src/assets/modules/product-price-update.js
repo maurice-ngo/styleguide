@@ -28,7 +28,7 @@ export const TEMPLATES = {
  * @param {jQueryElement} wrapEl - Product wrap
  * @param {String} wrapBlockClass - The BEM block class of the wrap
  * @param {HTMLElement} chosen - Selected option of select dropdown (or input for 1 size)
- * @param {HTMLElements} sizeEl - Size select element (or input for 1 size)
+ * @param {HTMLElement} sizeEl - Size select element (or input for 1 size)
  * @param {String} templateStyle - Style of template to be used (TEMPLATES object defined above)
  */
 export default function updatePrice(wrapEl, wrapBlockClass, chosen, sizeEl, templateStyle = 'default') {

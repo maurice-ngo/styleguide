@@ -25,6 +25,11 @@ export default function showNotification(chosen) {
   $wrap.html(notify(chosen));
 }
 
+/**
+ * Choose template for notification.
+ * @param {HTMLElement} option - Selected option of select dropdown
+ * @return {String} Handlebars template from import above
+ */
 const notify = (option) => {
   // if data-attr, show notification
   if (check('sample-defect'))

@@ -35,6 +35,8 @@ export default function addedConfirmation() {
 /**
  * External method to display confirmation modal.
  * @param {HTMLElement} modal - The confirmation modal to show
+ * @param {HTMLElement} chosen - Selected option of select dropdown (or input for 1 size)
+ * @param {HTMLElement} sizeEl - Size select element (or input for 1 size)
  */
 export const displayConfirmation = (modal, chosen, sizeEl) => {
   const $modal = $(modal);

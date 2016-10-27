@@ -52,10 +52,11 @@ const attachSubmitHandler = (btn, confirmation) => {
 /**
  * Checks that size is chosen.
  * @param {jQueryElement} el - The size select/input
+ * @return {HTMLElement} Element that's been chosen
  */
 const check = el => {
   if (!el) // did not find SIZE_SELECTOR within the form
-    return false;
+    return;
 
   const tagName = el.tagName;
 
@@ -66,5 +67,5 @@ const check = el => {
     return el.options[el.selectedIndex];
 
   $(el).focus(); // this is not working on desktop (crossing fingers for mobile)
-  return false; // SELECT is still on default option
+  return; // SELECT is still on default option
 };

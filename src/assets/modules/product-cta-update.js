@@ -22,6 +22,11 @@ export default function updateCTA(wrap, chosen) {
   btn.text(update(chosen));
 };
 
+/**
+ * Get the text based on chosen
+ * @param {HTMLElement} chosen - Selected option of select dropdown
+ * @return {String} Text to display on CTA btn
+ */
 const update = (option) => {
   // if data-attr, show notification
   if (check('oos'))
