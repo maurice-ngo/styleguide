@@ -75,10 +75,10 @@ const updateInfo = (product, modal) => {
   const name = product.find(`.${PRODUCT_NAME_CLASS}`);
   const brand = product.find(`.${PRODUCT_BRAND_CLASS} a`);
   const data = {
-    'pdp': {
-      'name': name.text(),
-      'brand': brand.text(),
-      'brandLink': brand.attr('href'),
+    pdp: {
+      name: name.text(),
+      brand: brand.text(),
+      brandLink: brand.attr('href'),
     }
   }
   const $info = modal.find(`.${MODAL_BLOCK_CLASS}__info`);

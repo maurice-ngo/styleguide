@@ -13,13 +13,13 @@ import smallSaleTemplate from '../../materials/modules/price/small-on-sale.html'
 export const REGULAR_PRICE_ATTR = 'data-regular-price';
 export const PRICE_ATTR = 'data-price';
 export const TEMPLATES = {
-  'default': {
-    'regular': regularTemplate,
-    'sale': saleTemplate,
+  regular: {
+    regular: regularTemplate,
+    sale: saleTemplate,
   },
-  'small': {
-    'regular': smallTemplate,
-    'sale': smallSaleTemplate,
+  small: {
+    regular: smallTemplate,
+    sale: smallSaleTemplate,
   }
 };
 
@@ -31,7 +31,7 @@ export const TEMPLATES = {
  * @param {HTMLElement} sizeEl - Size select element (or input for 1 size)
  * @param {String} templateStyle - Style of template to be used (TEMPLATES object defined above)
  */
-export default function updatePrice(wrapEl, wrapBlockClass, chosen, sizeEl, templateStyle = 'default') {
+export default function updatePrice(wrapEl, wrapBlockClass, chosen, sizeEl, templateStyle = 'regular') {
   // get the price element
   const $price = wrapEl.find(`.${wrapBlockClass}__price`);
   // set up data for handlebars template
@@ -39,12 +39,12 @@ export default function updatePrice(wrapEl, wrapBlockClass, chosen, sizeEl, temp
   const regularPrice = defaultOption.getAttribute(REGULAR_PRICE_ATTR) || defaultOption.getAttribute(PRICE_ATTR);
   const price = chosen.getAttribute(PRICE_ATTR) || regularPrice;
   const data = {
-    'pdp': {
-      'price': price,
+    pdp: {
+      price: price,
       'regular-price': regularPrice
     }
   }
-  const template = (parseFloat(price) < parseFloat(regularPrice)) ? TEMPLATES[templateStyle]['sale'] : TEMPLATES[templateStyle]['regular'];
+  const template = (parseFloat(price) < parseFloat(regularPrice)) ? TEMPLATES[templateStyle].sale : TEMPLATES[templateStyle].regular;
 
   $price.html(template(data));
 };
