@@ -15,6 +15,6 @@ const list = document.getElementById(UL_ID);
 export default function addOptionLink({ title, id }) {
   const li = document.createElement('li');
 
-  li.innerHTML = `<a href="?${id}">{title}</a>`;
+  li.innerHTML = `<a href="?${id}">${title}</a>`;
   list.appendChild(li);
 }
