@@ -26,9 +26,7 @@ const splitParams = ( str = '?' ) => {
   let obj = {};
 
   params.forEach( param => {
-    const pair = param.split('=');
-    const key = pair[0];
-    const value = pair[1] || true;
+    const [ key, value = true ] = param.split('=');
 
     obj[key] = value;
   })
