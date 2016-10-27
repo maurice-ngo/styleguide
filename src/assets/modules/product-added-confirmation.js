@@ -81,7 +81,6 @@ const updateInfo = (product, modal) => {
       'brandLink': brand.attr('href'),
     }
   }
-  console.log(data)
   const $info = modal.find(`.${MODAL_BLOCK_CLASS}__info`);
 
   $info.html(infoTemplate(data));
