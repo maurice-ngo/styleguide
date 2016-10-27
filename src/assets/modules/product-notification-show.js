@@ -42,7 +42,7 @@ const notify = (option) => {
     return preorder;
 
   function check(attr) {
-    return option.getAttribute('data-' + attr)
+    return !!option.getAttribute('data-' + attr)
       && option.getAttribute('data-' + attr) === 'true';
   }
 }
