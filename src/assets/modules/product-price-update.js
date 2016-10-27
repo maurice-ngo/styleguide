@@ -13,7 +13,7 @@ import smallSaleTemplate from '../../materials/modules/price/small-on-sale.html'
 export const REGULAR_PRICE_ATTR = 'data-regular-price';
 export const PRICE_ATTR = 'data-price';
 export const TEMPLATES = {
-  regular: {
+  medium: {
     regular: regularTemplate,
     sale: saleTemplate,
   },
@@ -31,7 +31,7 @@ export const TEMPLATES = {
  * @param {HTMLElement} sizeEl - Size select element (or input for 1 size)
  * @param {String} templateStyle - Style of template to be used (TEMPLATES object defined above)
  */
-export default function updatePrice(wrapEl, wrapBlockClass, chosen, sizeEl, templateStyle = 'regular') {
+export default function updatePrice(wrapEl, wrapBlockClass, chosen, sizeEl, templateStyle = 'medium') {
   // get the price element
   const $price = wrapEl.find(`.${wrapBlockClass}__price`);
   // set up data for handlebars template
