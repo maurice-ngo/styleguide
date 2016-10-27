@@ -1,10 +1,11 @@
-<div class="product-image-carousel u-margin--center">
-  <div class="product-image-carousel__imgs">
+<div class="product__image u-margin--center">
+  <div class="product__image--carousel">
 
     {{#each pdp.carousel}}
-    <img class="product-image-carousel__img" data-zoom="{{this}}"
+    <img class="product__image--carousel__image" data-zoom="{{this}}"
       {{#if @first}}
         src="{{this}}"
+        alt="{{../pdp.brand}} {{../pdp.name}}"
       {{else}}
         data-lazy="{{this}}"
       {{/if}}

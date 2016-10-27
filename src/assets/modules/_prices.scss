@@ -13,7 +13,7 @@
   @extend %h3;
 
   &__retail {
-    &-strikethrough {
+    &--strikethrough {
       color: $color__grey;
       text-decoration: line-through;
     }

@@ -37,7 +37,7 @@ const changeColorValues = () => {
  * Callback to add badge template to product images when option is selected
  */
 function addBadge( ) {
-  const target = document.querySelector('.product-image-carousel');
+  const target = document.querySelector('.product__image');
 
   // add badge
   target.insertAdjacentHTML('beforeend', this.html);
