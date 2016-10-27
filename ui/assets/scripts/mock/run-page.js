@@ -7,7 +7,7 @@ import pdp from './pdp'
 
 // Object to hold all the imported pages (above)
 const page = {
-  'pdp': pdp,
+  pdp: pdp,
 }
 
 /**
