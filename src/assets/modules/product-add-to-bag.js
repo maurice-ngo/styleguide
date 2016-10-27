@@ -33,40 +33,38 @@ export default function addToBag(el) {
  * @param {HTMLElement} confirmation - The confirmation modal to show
  */
 const attachSubmitHandler = (btn, confirmation) => {
-  // when the form submits, show the modal
   const form = $(btn).closest('form');
+  const sizeEl = form.find(SIZE_SELECTOR)[0];
   const $confirmation = $(confirmation);
 
+  // when the form submits, show the modal
   form.submit(e => {
     e.preventDefault();
 
     // check that size is chosen
-    const chosen = checkSize(form);
+    const chosen = check(sizeEl);
 
     if (chosen) // display the confirmation modal
-      displayConfirmation(confirmation, chosen);
+      displayConfirmation(confirmation, chosen, sizeEl);
   });
 };
 
 /**
  * Checks that size is chosen.
- * @param {jQueryElement} form - The form being submitted
+ * @param {jQueryElement} el - The size select/input
  */
-const checkSize = form => {
-  const size = form.find(SIZE_SELECTOR)[0];
-  const tagName = size.tagName;
+const check = el => {
+  if (!el) // did not find SIZE_SELECTOR within the form
+    return false;
 
-  if (tagName === 'INPUT') // size is INPUT whenever there is only 1 size
-    return size;
+  const tagName = el.tagName;
 
-  if (tagName === 'SELECT') {
-    if (size.selectedIndex) { // size is chosen from SELECT
-      return size.options[size.selectedIndex];
-    } else { // SELECT is still on default option
-      $(size).focus();
-      return 0;
-    }
-  }
+  if (tagName === 'INPUT') // el is INPUT whenever there is only 1 size
+    return el;
 
-  return false; // something went wrong?
+  if (tagName === 'SELECT' && el.selectedIndex) // el is chosen from SELECT
+    return el.options[el.selectedIndex];
+
+  $(el).focus(); // this is not working on desktop (crossing fingers for mobile)
+  return false; // SELECT is still on default option
 };

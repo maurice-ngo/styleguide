@@ -7,36 +7,44 @@ import $ from'jquery';
 
 import regularTemplate from '../../materials/modules/price/01-regular.html'
 import saleTemplate from '../../materials/modules/price/02-on-sale.html'
+import smallTemplate from '../../materials/modules/price/small.html'
+import smallSaleTemplate from '../../materials/modules/price/small-on-sale.html'
 
 export const REGULAR_PRICE_ATTR = 'data-regular-price';
 export const PRICE_ATTR = 'data-price';
+export const TEMPLATES = {
+  'default': {
+    'regular': regularTemplate,
+    'sale': saleTemplate,
+  },
+  'small': {
+    'regular': smallTemplate,
+    'sale': smallSaleTemplate,
+  }
+};
 
 /**
  * Update price based on selected value.
- * @param {jQueryElement} wrap - The closest '.product' wrap from the select
- * @param {HTMLElement} chosen - Selected option of select dropdown
- * @param {HTMLElements} options - List of options in select dropdown
+ * @param {jQueryElement} wrapEl - Product wrap
+ * @param {String} wrapBlockClass - The BEM block class of the wrap
+ * @param {HTMLElement} chosen - Selected option of select dropdown (or input for 1 size)
+ * @param {HTMLElements} sizeEl - Size select element (or input for 1 size)
+ * @param {String} templateStyle - Style of template to be used (TEMPLATES object defined above)
  */
-export default function updatePrice(wrap, chosen, options) {
+export default function updatePrice(wrapEl, wrapBlockClass, chosen, sizeEl, templateStyle = 'default') {
   // get the price element
-  const priceEl = wrap.find('.price');
+  const $price = wrapEl.find(`.${wrapBlockClass}__price`);
   // set up data for handlebars template
-  const price = chosen.getAttribute(PRICE_ATTR);
-  const defaultOption = options ? options[0] : chosen;
+  const defaultOption = sizeEl.options ? sizeEl.options[0] : chosen;
   const regularPrice = defaultOption.getAttribute(REGULAR_PRICE_ATTR) || defaultOption.getAttribute(PRICE_ATTR);
-  let data = {
+  const price = chosen.getAttribute(PRICE_ATTR) || regularPrice;
+  const data = {
     'pdp': {
       'price': price,
       'regular-price': regularPrice
     }
   }
+  const template = (parseFloat(price) < parseFloat(regularPrice)) ? TEMPLATES[templateStyle]['sale'] : TEMPLATES[templateStyle]['regular'];
 
-  if (!price) { // if no price, use regular price
-    data.pdp.price = regularPrice;
-    priceEl.html(regularTemplate(data));
-  } else if (parseFloat(price) < parseFloat(regularPrice)) { // if on sale, use price
-    priceEl.html(saleTemplate(data));
-  } else { // if price is the same or higher than regular price, use price
-    priceEl.html(regularTemplate(data));
-  }
+  $price.html(template(data));
 };

@@ -16,17 +16,19 @@ import updateDelivery from './product-delivery-update';
 export const PLUGIN_NAME = 'sizeChange';
 registerJQueryPlugin(PLUGIN_NAME, sizeChange);
 
+export const PRODUCT_BLOCK_CLASS = 'product';
+
 /**
  * List of all updates made on change.
  * @param {HTMLElement} evt - The select dropdown we're attaching to
  */
 export const runUpdates = ({ currentTarget }) => {
-  const wrap = $(currentTarget).closest('.product');
+  const wrap = $(currentTarget).closest(`.${PRODUCT_BLOCK_CLASS}`);
   // whether input or select, find the chosen element
   const { options, selectedIndex } = currentTarget;
   const chosen = options ? options[selectedIndex] : currentTarget;
 
-  updatePrice(wrap, chosen, options);
+  updatePrice(wrap, PRODUCT_BLOCK_CLASS, chosen, currentTarget);
   showNotification(chosen);
   updateCTA(wrap, chosen);
   updateDelivery(wrap, chosen);
