@@ -3,17 +3,17 @@
  * @module pdp
  */
 
-import Option from './option'
+import addOption from './option'
 
 /**
  * List of functions to run for page setup
  */
 export default function pdp() {
-  new Option('Wedding Badge', 'badges.wedding', addBadge);
-  new Option('Product Badge', 'badges.product', addBadge);
-  new Option('Out of Stock', 'product-options.out-of-stock', updateSize);
-  new Option('One Color', 'product-options.one-color', updateColor);
-  new Option('One Size', 'product-options.one-size', updateSize);
+  addOption('Wedding Badge', 'badges.wedding', addBadge);
+  addOption('Product Badge', 'badges.product', addBadge);
+  addOption('Out of Stock', 'product-options.out-of-stock', updateSize);
+  addOption('One Color', 'product-options.one-color', updateColor);
+  addOption('One Size', 'product-options.one-size', updateSize);
 
   changeColorValues();
 }

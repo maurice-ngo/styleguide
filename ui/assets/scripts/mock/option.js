@@ -13,20 +13,16 @@ import getTemplate from './get-template'
  * @param {String} id - id of the template (correlates to the handlebars partial)
  * @param {Function} callback - function to run when applying params
  */
-export default class Option {
-  constructor( title, id, callback ) {
-    this.title = title;
-    this.id = id;
-    this.callback = callback;
-    this.html = getTemplate(id);
+export default function addOption( title, id, callback ) {
+  const opt = {
+    title: title,
+    id: id,
+    callback: callback,
+    html: getTemplate(id),
+  };
 
-    this.init(this);
-  }
-
-  init() {
-    // adds link to 'page options' list
-    addLink(this);
-    // applies option to page when chosen
-    applyParams(this);
-  }
+  // adds link to 'page options' list
+  addLink(opt);
+  // applies option to page when chosen
+  applyParams(opt);
 }
