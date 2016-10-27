@@ -3,11 +3,7 @@ notes: |
   - Use `.block` class to add additional spacing to product titles
 ---
 
-<h1 class="product-titles__name u-margin-t--none u-margin-b--xs" property="name">
-  {{#if pdp}}{{pdp.info.name}}{{else}}{{this.name}}{{/if}}
-</h1>
-<p class="product-titles__brand u-text-lg u-margin-b--xs" property="brand">
-  <a href="#" title="{{#if pdp}}{{pdp.info.brand}}{{else}}{{this.brand}}{{/if}}">
-    {{#if pdp}}{{pdp.info.brand}}{{else}}{{this.brand}}{{/if}}
-  </a>
+<h1 class="product__name u-margin-t--none u-margin-b--xs">{{pdp.name}}</h1>
+<p class="product__brand u-text-lg u-margin-b--xs">
+  <a href="{{pdp.brandLink}}" title="{{pdp.brand}}">{{pdp.brand}}</a>
 </p>

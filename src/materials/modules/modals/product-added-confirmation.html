@@ -5,21 +5,15 @@ notes:
 <div class="modal--added-confirmation u-border-a u-border--xs u-border--color-medium">
   <h2 class="u-margin-t--lg">Item Added to Bag</h2>
 
+  <img class="modal--added-confirmation__image" src="{{pdp.image}}" />
   <div class="modal--added-confirmation__info">
-  {{#if this.image}}
-    <img class="modal--added-confirmation__img" src="{{this.image}}" />
-  {{else}}
-    <img class="modal--added-confirmation__img" src="{{pdp.image}}" />
-  {{/if}}
-
-  {{#if this.info}}
-    {{> product-title-small this.info }}
-    {{> price-small this.info.price }}
-  {{else}}
-    {{> product-title-small pdp.info }}
-    {{> price-small pdp.info.price }}
-  {{/if}}
+    {{#if pdp}}{{> product-title-small }}{{/if}}
+    {{! nested partials only work on server (not for javascript) }}
   </div>
+  <p class="modal--added-confirmation__price price--sm u-margin-b--lg">
+    {{#if pdp}}{{> price.small }}{{/if}}
+    {{! nested partials only work on server (not for javascript) }}
+  </p>
 
   {{> buttons.full- viewBag=true }}
   <p class="u-padding-a--lg u-margin-t--lg u-margin-b--none u-text-lg">

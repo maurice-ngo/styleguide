@@ -2,12 +2,11 @@ import $ from'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
-import sizeStyle, { DEFAULT_CLASS } from './product-size-style';
-import sizeChange from './product-size-change';
+import showNotification from './product-notification-show';
 
 chai.use(chaiJquery);
 
-describe('product size style', () => {
+describe('product notification show', () => {
   let $dropdown;
   const options = {
     'default': `default`,
@@ -15,6 +14,7 @@ describe('product size style', () => {
     'park-ranger': 'What are you, a fucking park ranger now?',
     'great-plan': `That's a great plan, Walter`,
   };
+  let runUpdates;
 
   beforeEach(() => {
     fixture.set(`
@@ -25,28 +25,21 @@ describe('product size style', () => {
       </select>
     `);
     $dropdown = $(fixture.el).find('#dropdown');
+    runUpdates = sinon.spy();
+
     sizeChange($dropdown);
   });
 
   afterEach(() => {
+    runUpdates.reset();
     fixture.cleanup();
   });
 
-  it('should capture the default value initially', () => {
-    expect($dropdown).to.have.value('default').and
-      .to.have.class(DEFAULT_CLASS);
+  it('should run updates upon selecting from the dropdown', () => {
+    const dropdown = $dropdown[0];
+    $dropdown.trigger('change');
+
+    expect(runUpdates).to.have.been.calledWith(dropdown, dropdown.options, dropdown.selectedIndex);
   });
 
-  it('should capture non default value initially', () => {
-    $dropdown.val('park-ranger');
-    sizeChange($dropdown);
-    expect($dropdown).to.have.value('park-ranger');
-  });
-
-  it('should change value and not have a default class', () => {
-    $dropdown
-      .val('no-money')
-      .trigger('change');
-    expect($dropdown).to.not.have.class(DEFAULT_CLASS);
-  });
 });

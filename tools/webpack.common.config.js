@@ -1,15 +1,23 @@
 const resolve = require('./path-helpers').resolve;
 const FabricatorPlugin = require('./fabricator-webpack-plugin');
+const join = require('path').join;
 
 module.exports = {
   entry: {
-    'site/fabricator': resolve('ui', 'assets', 'fabricator', 'fabricator.js'),
+    'site/fabricator': resolve('ui', 'assets', 'fabricator.js'),
+    'site/mock': resolve('ui', 'assets', 'mock.js'),
     'lib/styleguide': resolve('src', 'assets', 'styleguide.js')
   },
 
   output: {
     path: resolve(),
     filename: '[name].js'
+  },
+
+  resolveLoader: {
+    alias: {
+      'strip-gray-matter': join(__dirname, 'strip-gray-matter')
+    }
   },
 
   resolve: {
@@ -30,8 +38,10 @@ module.exports = {
         exclude: /node_modules/
       }, {
         test: /\.html$/,
-        loader: 'handlebars-loader',
-        extensions: '.html'
+        loaders: [
+          'handlebars-loader?' + JSON.stringify({ partialDirs: [ resolve('src', 'materials') ] }),
+          'strip-gray-matter'
+        ]
       }
     ]
   },

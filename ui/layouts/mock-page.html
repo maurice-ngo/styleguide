@@ -8,18 +8,9 @@
   <title>{{title}}</title>
 
   <!-- Styles -->
-  <style>
-    a.icon--revolve-logo {
-      width: 4.5em;
-    }
-    #content {
-      {{{content-styles}}}
-    }
-  </style>
+	<link rel="stylesheet" href="../site/mock.css">
 	<link rel="stylesheet" href="../lib/styleguide.css">
 
-  <!-- JavaScript for Mock Pages -->
-  {{> mock-javascript }}
 </head>
 
 <body>
@@ -29,18 +20,36 @@
   </header>
 
   <!-- Content -->
-  <div id="content" class="u-margin-l--lg u-margin-r--lg">
+  <div id="content" class="{{page-name}} u-margin-l--lg u-margin-r--lg">
 
     <!-- Page content passed in from view html -->
     {% body %}
 
   </div>
 
-  <!-- Default Page w/ No Options -->
-  {{> mock-page-options (lookup (lookup ./this data-json) 'mock-page-options')}}
+  <!-- Handlebars Templates -->
+  {{> mock-templates (lookup (lookup ./this page-name) 'templates')}}
+  <!-- These templates are used by the mock to show various versions of the PDP.
+       In the mock they are applied using javascript whenever the correct options are set in the url parameters.
+       On the website, these should be applied on the server side (in the HTML), in the same location where the javascript adds them now. -->
 
+  <footer class="u-bg-color--black u-margin-t--xl">
+    <h1 class="u-color--white u-margin-b--none u-padding-a--xl">page options:</h1>
+    <ul id="mock-page-options" class="u-margin-a--none u-padding-a--xl u-padding-t--none">
+      <li><a href="?">Default Page w/ No Options</a>
+    </ul>
+  <footer>
+
+  <!-- JavaScript for Mock Pages -->
+  <script>
+    window.pageName = '{{page-name}}';
+  </script>
+	<script src="../site/mock.js"></script>
+
+  <!-- Style Guide JavaScript -->
 	<script src="../lib/styleguide.js"></script>
 
+  <!-- SVG Sprites -->
 	<script>
 		(function(doc) {
 			var sprite = '../lib/sprite.svg';

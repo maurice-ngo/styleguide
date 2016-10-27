@@ -139,8 +139,9 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
   &--added-confirmation {
     margin: rem(0 32);
     padding: rem(16);
+    text-align: center;
     background-color: $color__white;
-    &__img {
+    &__image {
       width: 30%;
     }
     transition: all .3s;

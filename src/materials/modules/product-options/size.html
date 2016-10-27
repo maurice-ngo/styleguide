@@ -5,15 +5,17 @@ notes:
 <div class="product-option product-option--size">
   <label for="size" class="product-option__label">Size</label>
   <select id="size" class="product-option__select u-ellipsis">
-    <option value="default">Select Size</option>
+    <!-- add the product's "regular price" to the default option, for comparison -->
+    <option value="default" data-delivery-date="{{pdp.delivery-date}}" data-regular-price="{{pdp.regular-price}}">Select Size</option>
   {{#each pdp.sizes}}
-    {{#if oos}}
-      <option data-delivery-date="{{delivery-date}}" value="{{value}}" disabled>{{label}} (Out of Stock)</option>
-    {{else if preorder}}
-      <option data-delivery-date="{{delivery-date}}" data-preorder="true" value="{{value}}">{{label}}</option>
-    {{else}}
-      <option data-delivery-date="{{delivery-date}}" value="{{value}}">{{label}}</option>
-    {{/if}}
+    <!-- attach size-specific data to each option, including price -->
+    <option data-delivery-date="{{delivery-date}}" value="{{value}}" data-price="{{price}}"
+      {{#if oos}}disabled{{/if}}
+      {{#if preorder}}data-preorder="true"{{/if}}
+      {{#if one-left}}data-one-left="true"{{/if}}
+      {{#if final-sale}}data-final-sale="true"{{/if}}
+      {{#if sample-defect}}data-sample-defect="true"{{/if}}
+    >{{label}}{{#if oos}} (Out of Stock){{/if}}</option>
   {{/each}}
     <option data-show-bis="true">Can't find your size?</option>
   </select>

@@ -1,176 +1,40 @@
 ---
-title: pdp
-data-json: pdp
-page-options: mock-page-options
+title: Product Detail Page
+page-name: pdp
 fabricator: false
 layout: mock-page
-content-styles: |
-  position: relative;
-  text-align: center;
 ---
 
-  <!-- Image Carousel -->
-  {{> product-image-carousel }}
+<section class="product">
 
-  <!-- Product Title -->
-  {{> product-title- }}
+<!-- Image Carousel -->
+{{> product-image-carousel }}
 
-  <!-- Price -->
-  {{> price- }}
+<!-- Product Title -->
+{{> product-title- }}
 
-  <!-- Add To Cart Form -->
-  <form method="GET" action="">
-    <input type="hidden" name="confirm" value="true" />
-    {{> product-options.size }}
-    {{> product-options.color }}
-    {{> buttons.full- addToBag=true }}
-    {{> product-estimated-delivery }}
-  </form>
+<!-- Price -->
+<div class="product__price u-margin-b--lg">
+  {{> price.regular }}
+</div>
 
-  <!-- Favorite button -->
-  {{> favorite-buttons.default }}
+<!-- Add To Cart Form -->
+<form method="GET" action="">
+  <input type="hidden" name="confirm" value="true" />
+  {{> product-options.size }}
+  {{> product-options.color }}
+  <!-- wrapper for product notifications -->
+  <div id="product-notifications"></div>
+  {{> buttons.full- addToBag=true }}
+  {{> product-estimated-delivery }}
+</form>
 
-  <!-- Modal: Product Added to Bag -->
-  <script id="product-added-confirmation" type="text/x-handlebars-template">
-    {{> modals.product-added-confirmation pdp }}
-  </script>
+<!-- Favorite button -->
+{{> favorite-buttons.default }}
 
-<script>
-  (function () {
-    // queue functions for window.onload
-    rc.q.push(setupColorValues);
+</section>
 
-    // apply url parameters
-    rc.applyParams({
-      'badges.product': addBadge,
-      'badges.final-sale': function() {
-        addProductNotification('product-notifications.final-sale');
-      },
-      'badges.wedding': addBadge,
-      'product-notifications.one-left': addProductNotification,
-      'product-notifications.preorder': addProductNotification,
-      'product-notifications.final-sale': addProductNotification,
-      'product-notifications.final-sale-sample-defect': addProductNotification,
-      'product-options.out-of-stock': updateSize,
-      'product-options.one-color': updateColor,
-      'product-options.one-size': updateSize,
-      'price-on-sale': updatePrice,
-    });
-
-    // this is a mock page, and other color pages don't exist, so this hack...
-    function setupColorValues() {
-      var select = document.getElementById('color');
-      var options = select.getElementsByTagName('option');
-      var opt, len = options.length;
-
-      while (len--) {
-        opt = options[len];
-        opt.setAttribute('data-value', opt.getAttribute('value'));
-        opt.setAttribute('value', document.location.href);
-      }
-    }
-
-    // callback to update product options
-    function updateColor(id) {
-      updateProductOption('color', id);
-    }
-
-    // callback to update product options
-    function updateSize(id) {
-      updateProductOption('size', id);
-    }
-
-    // helper function to update product options
-    function updateProductOption(element, id) {
-      var option = document.getElementsByClassName('product-option--' + element)[0];
-
-      // replace the existing product option
-      option.outerHTML = document.getElementById(id).innerHTML;
-    }
-
-    // callback to update price
-    function updatePrice(id) {
-      var price = document.getElementsByClassName('price')[0];
-
-      price.outerHTML = document.getElementById(id).innerHTML;
-    }
-
-    // callback to add badge to product images
-    function addBadge(id) {
-      var target = document.querySelector('.product-image-carousel');
-      var badge = document.getElementById(id).innerHTML;
-
-      // add badge
-      target.insertAdjacentHTML('beforeend', badge);
-    }
-
-    // callback to add product notification template to html
-    function addProductNotification(id) {
-      var btn = document.getElementsByClassName('btn--add-to-bag')[0];
-      var msg = document.getElementById(id).innerHTML;
-
-      // add notification
-      btn.insertAdjacentHTML('beforebegin', msg);
-    }
-
-    function overrideCTAButton(el) {
-      function updateCTAText(text) {
-        return function() {
-          el.textContent = text;
-        };
-      }
-
-      rc.applyParams({
-        'product-notifications.preorder': updateCTAText('Preorder This Item'),
-        'product-options.out-of-stock': updateCTAText('Notify Me / Special Order')
-      });
-    }
-
-    function overrideDeliveryOptions(el) {
-      rc.applyParams({
-        'product-notifications.preorder': function() {
-          el.classList.add('u-error');
-        },
-        'product-options.out-of-stock': function() {
-          el.parentNode.removeChild(el);
-        }
-      });
-    }
-
-    function overridePrice(el) {
-      function replacePriceWithTemplate(templateSelector) {
-        return function() {
-          var priceEl = document.createElement('div');
-          priceEl.innerHTML = document.querySelector(templateSelector).innerHTML;
-          el.parentNode.replaceChild(priceEl.firstChild.nextSibling, el);
-        };
-      }
-
-      rc.applyParams({
-        'badges.final-sale': replacePriceWithTemplate('#price-on-sale'),
-        'product-notifications.final-sale': replacePriceWithTemplate('#price-on-sale'),
-        'product-notifications.final-sale-sample-defect': replacePriceWithTemplate('#price-on-sale')
-      });
-    }
-
-    function overrideSize(selectEl) {
-      function setOptionByIndex(i) {
-        return function() {
-          var evt = new Event('change');
-          selectEl.selectedIndex = i;
-          selectEl.dispatchEvent(evt);
-        };
-      }
-
-      rc.applyParams({
-        'product-options.one-color': setOptionByIndex(1),
-        'product-notifications.final-sale-sample-defect': setOptionByIndex(1)
-      });
-    }
-
-    overrideDeliveryOptions(document.querySelector('.product-delivery'));
-    overrideCTAButton(document.querySelector('.btn--add-to-bag'));
-    overridePrice(document.querySelector('.price'));
-    overrideSize(document.querySelector('#size'));
-  })();
+<!-- Modal: Product Added to Bag -->
+<script id="product-added-confirmation" type="text/x-handlebars-template">
+  {{> modals.product-added-confirmation }}
 </script>

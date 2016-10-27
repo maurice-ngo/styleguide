@@ -1,0 +1,21 @@
+header {
+  a.icon--revolve-logo {
+    width: 4.5em;
+  }
+}
+
+#content {
+  &.pdp {
+    position: relative;
+    text-align: center;
+  }
+}
+
+footer li a {
+  color: white;
+  font-size: 14px;
+
+  &:hover {
+    color: white;
+  }
+}

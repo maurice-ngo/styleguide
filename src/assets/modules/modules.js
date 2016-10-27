@@ -2,15 +2,15 @@ import $ from 'jquery';
 
 import './modules.scss';
 import './accordion';
-import './product-size-style';
-import './product-delivery-update';
-import './product-added-confirmation';
+import './product-size-change';
+import './product-add-to-bag';
 import './product-color-change';
+import './product-oos';
 
 $(document).ready(() => {
   $('.js-accordion').accordion();
-  $('.product-option--size .product-option__select').sizeStyle();
-  $('.product-delivery').deliveryUpdate();
+  $('.product-option--size .product-option__select').sizeChange();
   $('.product-option--color .product-option__select').colorChange();
-  $('.btn--add-to-bag').addedConfirmation();
+  $('.btn--add-to-bag').addToBag();
+  $('.product-option--oos').oosProduct();
 });
