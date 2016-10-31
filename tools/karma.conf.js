@@ -9,6 +9,7 @@ module.exports = function(config) {
 
     files: [
       'src/assets/test-index.js',
+      'src/materials/elements/favorite-buttons/*.html',
       'src/materials/modules/*.html'
     ],
 
@@ -18,6 +19,7 @@ module.exports = function(config) {
 
     preprocessors: {
       'src/assets/test-index.js': ['webpack', 'sourcemap'],
+      'src/materials/elements/favorite-buttons/*.html': ['html2js'],
       'src/materials/modules/*.html': ['html2js']
     },
 
