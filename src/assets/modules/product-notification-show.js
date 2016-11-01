@@ -11,13 +11,13 @@ import oneLeft from '../../materials/modules/product-notifications/one-left.html
 import preorder from '../../materials/modules/product-notifications/preorder.html';
 
 export const WRAP_ID = 'product-notifications';
-export const $wrap = $(document.getElementById(WRAP_ID));
 
 /**
  * Update price based on selected value.
  * @param {HTMLElement} chosen - Selected option of select dropdown
  */
 export default function showNotification(chosen) {
+  const $wrap = $(document.getElementById(WRAP_ID));
   // clean up existing notification
   $wrap.empty();
 
