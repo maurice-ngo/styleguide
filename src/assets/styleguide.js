@@ -1,5 +1,6 @@
-require('./lib/lib')
-require('./helpers/helpers')
-require('./elements/elements')
-require('./modules/modules')
-require('./layouts/layouts')
+import './lib/lib';
+import './base/base';
+import './elements/elements';
+import './helpers/helpers';
+import './modules/modules';
+import './layouts/layouts';

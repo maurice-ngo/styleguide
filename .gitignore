@@ -8,3 +8,6 @@ npm-debug.log
 
 site/*
 lib/*
+/coverage
+/repos
+/junit

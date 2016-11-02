@@ -1,0 +1,12 @@
+---
+notes:
+---
+
+<div class="product-option product-option--color">
+  <label for="color" class="product-option__label">Color</label>
+  <select id="color" class="product-option__select">
+  {{#each pdp.colors}}
+    <option value="{{this.value}}">{{this.label}}</option>
+  {{/each}}
+  </select>
+</div>

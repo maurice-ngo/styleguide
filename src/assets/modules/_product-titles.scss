@@ -9,14 +9,10 @@
 
 ------------------------------------------------------ */
 
-.product-titles {
-  // .product-titles__name
-  // Product title
+.product {
+  // .product__name
   &__name {
-    @extend %headings;
-    @extend %u-ellipsis;
-    font-size: em(14);
-    line-height: 1.2;
+    @extend %h3;
     &--font-primary {
       font-family: $font-primary;
       font-weight: normal;
@@ -26,13 +22,8 @@
     }
   }
 
-  // .product-titles__brand
-  // Product title brand - smaller font and line height
+  // .product__brand
   &__brand {
-    @extend %headings;
-    @extend %u-ellipsis;
-    font-size: em(14);
-    line-height: 1.2;
     &--font-primary {
       font-family: $font-primary !important;
       font-weight: normal;
@@ -41,19 +32,23 @@
       text-transform: none;
       color: $color__grey;
     }
+    a {
+      color: $color__black;
+    }
   }
 
-  // .product-titles__name--sm
-  // Product title small modifier
-  &--sm {
-    font-size: em(12);
-  }
-  &--long {
-    text-overflow: initial !important;
-    white-space: normal !important;
-    overflow: auto !important
-  }
-  &--grey {
-    color: $color__grey;
+  &__name,
+  &__brand {
+    // .product__name--sm
+    // .product__brand--sm
+    &--sm {
+      font-size: em(12);
+      line-height: em(16);
+    }
+    &--long {
+      text-overflow: initial !important;
+      white-space: normal !important;
+      overflow: auto !important
+    }
   }
 }
