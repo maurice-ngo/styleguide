@@ -10,3 +10,4 @@ site/*
 lib/*
 /coverage
 /repos
+/junit
