@@ -1,4 +1,5 @@
 var resolve = require('path').resolve;
+var join = require('path').join;
 var webpackConfig = require('./webpack.test.config');
 
 module.exports = function(config) {
@@ -53,6 +54,12 @@ module.exports = function(config) {
 
     webpackMiddleware: {
       stats: 'errors-only'
+    },
+
+    junitReporter: {
+      outputDir: join(process.env.CIRCLE_TEST_REPORTS || '', 'junit'),
+      outputFile: 'test-results.xml',
+      useBrowserName: false
     }
   })
 }

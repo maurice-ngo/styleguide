@@ -5,13 +5,13 @@
   "main": "lib/styleguide.js",
   "scripts": {
     "start": "webpack-dev-server --config tools/webpack.development.config.js",
-    "test": "npm run karma:single",
+    "test": "npm run karma:single -- --reporters mocha,junit,coverage",
     "build": "cross-env NODE_ENV=production webpack -p --config tools/webpack.build.config.js",
     "watch": "webpack -w --config tools/webpack.build.config.js",
     "watch:test": "npm run karma",
     "karma": "cross-env NODE_ENV=test karma start tools/karma.conf.js",
     "karma:single": "npm run karma -- --single-run=true --browsers=PhantomJS --no-colors",
-    "clean": "rimraf site lib",
+    "clean": "rimraf site lib junit",
     "deploy": "npm run build && ./tools/github-deploy.sh"
   },
   "repository": {
@@ -45,6 +45,7 @@
     "karma-fixture": "^0.2.6",
     "karma-html2js-preprocessor": "^0.1.0",
     "karma-jquery": "^0.1.0",
+    "karma-junit-reporter": "^1.1.0",
     "karma-mocha": "^0.2.1",
     "karma-mocha-reporter": "^1.1.5",
     "karma-phantomjs-launcher": "^1.0.0",
