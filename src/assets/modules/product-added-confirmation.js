@@ -18,16 +18,21 @@ export const PRODUCT_IMG_CLASS = `${PRODUCT_BLOCK_CLASS}__image--carousel__image
 export const PRODUCT_NAME_CLASS = `${PRODUCT_BLOCK_CLASS}__name`;
 export const PRODUCT_BRAND_CLASS = `${PRODUCT_BLOCK_CLASS}__brand`;
 
+const DEFAULT_OPTIONS = {
+  container: document.body,
+};
+
 /**
  * Creates confirmation modal, adds click handler, and appends immediately
  * @param {HTMLElement} el - The select dropdown we're attaching to
  * @return {HTMLElement} Immutable modal element
  */
-export default function addedConfirmation() {
+export default function addedConfirmation(options = {}) {
+  const { container } = Object.assign({}, DEFAULT_OPTIONS, options);
   const modal = create();
 
   applyClickClose(modal);
-  append(modal);
+  append(modal, container);
 
   return modal;
 }
@@ -59,6 +64,7 @@ export const displayConfirmation = (modal, chosen, sizeEl) => {
  */
 const updateImage = (product, modal) => {
   const productImage = product.find(`.${PRODUCT_IMG_CLASS}`)[1];
+  debugger;
   // slick pushes the last img to first, so use index 1
   const img = modal.find(`.${MODAL_BLOCK_CLASS}__image`)[0];
 
@@ -105,9 +111,9 @@ const create = () => {
  * Appends el to target.
  * @param {HTMLElement} el - The confirmation modal to show
  */
-const append = (el) => {
+const append = (el, container) => {
   // (unfortunately, waiting to append this when needed [in the form submit] ruins our transition effect)
-  document.body.appendChild(el);
+  container.appendChild(el);
 };
 
 /**

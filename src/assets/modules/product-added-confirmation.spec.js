@@ -1,50 +1,64 @@
 import $ from'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
+import modalTemplate from '../../materials/modules/modals/product-added-confirmation.html';
+import productTitleTemplate from '../../materials/modules/product-title-.html';
+import productImageCarouselTemplate from '../../materials/modules/product-image-carousel.html';
 
 chai.use(chaiJquery);
 
 import addedConfirmation, {
+  displayConfirmation,
   MODAL_CLASS,
   MODAL_CONTINUE_CLASS,
   TEMPLATE_ID,
-  TARGET_WRAP_ID,
   CONCEAL_CLASS,
 } from './product-added-confirmation';
 
 describe('product added confirmation', () => {
   let $fixture;
-  let $el;
-  let $target;
+  let $modal;
+  const productInfo = {
+    name: 'The Dude',
+    brand: 'Lebowski',
+    brandLink: 'http://lebowski.me',
+    carousel: ['#', '#']
+  };
 
   beforeEach(() => {
     fixture.set(`
-      <form id="some-form"><div id="form-content">in a form</div></form>
-      <div id="${TARGET_WRAP_ID}"></div>
-      <div id="${TEMPLATE_ID}">
-        <button class="${MODAL_CONTINUE_CLASS}">Continue</button>
+      <div class="product">
+        ${productTitleTemplate({ pdp: productInfo })}
+        ${productImageCarouselTemplate({ pdp: productInfo })}
       </div>
+
+      <script id="${TEMPLATE_ID}" type="text/the-dude-abides">
+        ${modalTemplate()}
+      </script>
     `);
     $fixture = $(fixture.el);
-    $el = $fixture.find('#form-content');
-    $target = $fixture.find(`#${TARGET_WRAP_ID}`);
-    addedConfirmation($el[0]);
+    $modal = $(addedConfirmation({ container: $fixture[0] }));
   });
 
   afterEach(() => {
     fixture.cleanup();
   });
 
-  describe('in the modal', () => {
+  describe('when setting up the modal', () => {
+    it('should render the modal to the DOM', () => {
+      expect($modal)
+        .to.have.class(CONCEAL_CLASS)
+        .and
+        .to.have.class(MODAL_CLASS);
+    });
+
     it('should insert the modal', () => {
-      const $modal = $target.find('.modal');
       expect($modal).to.exist
         .and.to.have.class(CONCEAL_CLASS)
         .and.to.have.css('display', 'block');
     });
 
     it('should add the conceal class when modal class has been interacted with', () => {
-      const $modal = $target.find('.modal');
       $modal
         .removeClass(CONCEAL_CLASS)
         .trigger('click');
@@ -53,8 +67,7 @@ describe('product added confirmation', () => {
     });
 
     it('should add the conceal class when modal continue class has been interacted with', () => {
-      const $modal = $target.find('.modal');
-      const target = $target.find(`.${MODAL_CONTINUE_CLASS}`);
+      const target = $fixture.find(`.${MODAL_CONTINUE_CLASS}`);
       $modal
         .removeClass(CONCEAL_CLASS)
         .trigger('click', { target });
@@ -63,11 +76,15 @@ describe('product added confirmation', () => {
     });
   });
 
-  describe('when submitting the form', () => {
-    it('should remove the conceal class', () => {
-      $fixture.find('#some-form').trigger('submit');
-      const $modal = $target.find('.modal');
-      expect($modal).to.not.have.class(CONCEAL_CLASS);
+  describe('when displaying confirmation', () => {
+    it('should populate product info', () => {
+      $modal;
+      displayConfirmation($modal[0], $('<div/>')[0], $('<select><option/></select>')[0]);
+      expect($modal.find('.product__name')).to.have.text(productInfo.name);
+      expect($modal.find('.product__brand a'))
+        .to.have.text(productInfo.brand)
+        .and
+        .to.have.attr('href', productInfo.brandLink);
     });
   });
 });
