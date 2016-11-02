@@ -29,7 +29,7 @@ module.exports = function(config) {
     reporters: ['mocha', 'coverage'],
 
     coverageReporter: {
-      dir: 'coverage',
+      dir: process.env.CIRCLE_ARTIFACTS || 'coverage',
       reporters: [
         { type: 'html', subdir: 'report-html' },
         { type: 'lcov', subdir: 'report-lcov' }
