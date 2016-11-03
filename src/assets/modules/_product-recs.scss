@@ -9,28 +9,35 @@
 
 ------------------------------------------------------ */
 .product-recs {
-  padding: rem(25 0 0 14);
-  border-top: rem(1) solid  #ebebeb;
-  margin-top: rem(30);
-}
-.product-recs__hed {
-  @extend %font-secondary;
-  font-weight: bold;
-  font-size: em(13);
-  text-transform: uppercase;
-  letter-spacing: .125em;
-  margin-bottom: rem(17);
-}
-.product-recs__wrap {
+  margin: 0;
+  padding: rem( 16 );
   white-space: nowrap;
   overflow-x: scroll;
-}
-.product-recs__product {
-  display: inline-block;
-  width: 25%;
-  margin-right: 3%;
-  vertical-align: top;
-  & img {
+
+  &__hed {
+    margin: 0;
+    padding: rem( 16 16 0 16 );
+    border-top: rem( 1 ) solid #ebebeb;
+  }
+
+  &__product {
+    display: inline-block;
+    width: 35%;
+    margin-right: rem( 16 );
+    text-align: center;
+    line-height: $base-line-height;
+  }
+
+  &__brand {
+    font-weight: bold;
+  }
+
+  &__link,
+  &__img {
+    display: block;
+  }
+
+  &__img {
     width: 100%;
     height: auto;
   }
