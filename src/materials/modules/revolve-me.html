@@ -1,0 +1,16 @@
+<div class="revolve-me">
+  <h3 class="h1 revolve-me__hed u-margin-a--lg">#RevolveMe</h3>
+
+  <p class="u-text-lg u-margin-a--lg">Tag a photo on {{> icons.ig size="md" }} or {{> icons.social-twitter size="md" }} for a chance to be featured in our gallery
+  </p>
+
+  <div class="revolve-me__carousel">
+  {{#each pdp.revolve-me}}
+    <img class="revolve-me__image" data-lazy="{{this}}" />
+  {{/each}}
+  </div>
+
+  <p class="u-margin-a--lg">
+    {{> buttons.full- href="revolve-me.html" text="View Gallery" }}
+  </p>
+</div>
