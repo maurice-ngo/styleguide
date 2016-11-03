@@ -11,7 +11,6 @@ import './product-oos';
 $(document).ready(() => {
   $('.product__image--carousel').slick({
     lazyLoad: 'progressive',
-    // lazyLoad: 'ondemand', // could save bandwidth, but seems buggy
     dots: true,
     dotsClass: 'product__image--carousel__dots',
     appendDots: '.product__image',
@@ -24,7 +23,6 @@ $(document).ready(() => {
   $('.product-option--oos').oosProduct();
   $('.revolve-me__carousel').slick({
     lazyLoad: 'progressive',
-    //adaptiveHeight: true,
     variableWidth: true,
     arrows: false
   });
