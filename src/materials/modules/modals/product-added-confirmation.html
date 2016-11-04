@@ -3,20 +3,20 @@ notes:
 ---
 
 <div class="modal--added-confirmation u-border-a u-border--xs u-border--color-medium">
-  <h2 class="u-margin-t--lg">Item Added to Bag</h2>
+  <h2 class="u-margin-t--xl">Item Added to Bag</h2>
 
   <img class="modal--added-confirmation__image" src="{{pdp.image}}" />
   <div class="modal--added-confirmation__info">
     {{#if pdp}}{{> product-title-small }}{{/if}}
     {{! nested partials only work on server (not for javascript) }}
   </div>
-  <p class="modal--added-confirmation__price price--sm u-margin-b--lg">
+  <p class="modal--added-confirmation__price price--sm u-margin-b--xl">
     {{#if pdp}}{{> price.small }}{{/if}}
     {{! nested partials only work on server (not for javascript) }}
   </p>
 
   {{> buttons.full- viewBag=true }}
-  <p class="u-padding-a--lg u-margin-t--lg u-margin-b--none u-text-lg">
+  <p class="u-padding-a--xl u-margin-t--lg u-margin-b--none u-text-lg">
     <a href="./" class="link link--underline modal__continue">Continue Shopping</a>
   </p>
 </div>

@@ -93,7 +93,7 @@
 }
 
 // mixin to allow brief consistent assignment of sizes across padding & margin
-@mixin loop-thru-sides($prop, $widths) {
+@mixin loop-thru-sides($prop) {
   // $sides: map used to build padding & margin css
   // element: css property -suffix indicating side
   $sides: (
@@ -102,6 +102,16 @@
     r: '-right',
     b: '-bottom',
     l: '-left'
+  );
+
+  $widths: (
+    none: 0,
+    xs  : rem( 2 ),
+    sm  : rem( 4 ),
+    md  : rem( 8 ),
+    lg  : rem( 12 ),
+    xl  : rem( 16 ),
+    xxl : rem( 24 ),
   );
 
   // loop thru sides to append element to className
@@ -120,30 +130,12 @@
 
 // @padding-helpers
 .u-padding {
-  $widths: (
-    none: 0,
-    xs  : rem(2),
-    sm  : rem(4),
-    md  : rem(6),
-    lg  : rem(12),
-    xl  : rem(16),
-    xxl : rem(22)
-  );
-  @include loop-thru-sides('padding', $widths);
+  @include loop-thru-sides('padding');
 }
 
 // @margin-helpers
 .u-margin {
-  $widths: (
-    none: 0,
-    xs  : rem(2),
-    sm  : rem(4),
-    md  : rem(8),
-    lg  : rem(16),
-    xl  : rem(24),
-    xxl : rem(32)
-  );
-  @include loop-thru-sides('margin', $widths);
+  @include loop-thru-sides('margin');
 
   &--center {
     margin-right: auto;
