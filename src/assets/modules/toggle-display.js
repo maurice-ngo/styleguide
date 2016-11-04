@@ -63,13 +63,12 @@ const applyEventHandlers = ($el, opts = {}) => {
  * @param {Object} opts - Options passed along from initialization
  */
 const itemClickHandler = ({ currentTarget }, $el, opts) => {
-  var toggleThis = $($el.attr('data-toggle-this'));
-
+  var $toggleThis = $($el.attr('data-toggle-this'));
   if($el.hasClass("is-active")) {
-    toggleThis.slideUp();
+    $toggleThis.slideUp();
     $el.removeClass("is-active");
   } else {
-    toggleThis.slideDown();
+    $toggleThis.slideDown();
     $el.addClass("is-active");
   }
 };

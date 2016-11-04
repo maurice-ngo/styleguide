@@ -30,7 +30,7 @@
 	<script src="../lib/styleguide.js"></script>
 
 	<script>
-		(function(doc) {
+		(function(doc, $) {
 			var sprite = '../lib/sprite.svg';
 			var xhr = new XMLHttpRequest();
 			xhr.open('GET', sprite, true);
@@ -42,9 +42,25 @@
 					el.innerHTML = xhr.responseText;
 					el.id = 'svg-sprite';
 					doc.body.appendChild(el);
+					populateSVGLibary();
 				}
 			};
-		}(document));
+
+			function populateSVGLibary() {
+				var $svgContainer = $('.js-svg-libary');
+				if($svgContainer.length >0) {
+					var svgLibHTML = "";
+					var svgSymbol = $('#svg-sprite').find('symbol');
+					svgSymbol.each( function() {
+
+						var svgName = $(this).attr('id').replace('icon-','');
+
+						svgLibHTML += "<div class='grid__col'><a href='#icons."+svgName.replace("--", "-")+"'>"+svgName+"</a><div class='f-graphic-bg'><span class='icon icon--xl icon--"+svgName+"'><svg><use xlink:href='#icon-"+svgName+"'></use></svg></span></div></div>";
+					} );
+					$svgContainer.html(svgLibHTML);
+				}
+            };
+		}(document, jQuery));
 	</script>
 </body>
 </html>
