@@ -3,6 +3,8 @@
  * @module pdp
  */
 
+import $ from 'jquery'
+
 import addOption from './option'
 
 /**
@@ -16,7 +18,20 @@ export default function pdp() {
   addOption('One Size', 'product-options.one-size', updateSize);
 
   changeColorValues();
+  muteLinks(document.getElementsByClassName('product-recs__link'));
 }
+
+/**
+ * This is a mock page, and other product pages don't exist, so this hack...
+ */
+const muteLinks = links => {
+  const uri = document.location.href;
+  let i = links.length;
+
+  while (i--) {
+    links[i].setAttribute('href', uri);
+  }
+};
 
 /**
  * This is a mock page, and other color pages don't exist, so this hack...

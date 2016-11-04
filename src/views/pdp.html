@@ -5,7 +5,7 @@ fabricator: false
 layout: mock-page
 ---
 
-<section class="product">
+<section class="product u-margin-l--lg u-margin-r--lg">
 
 <!-- Image Carousel -->
 {{> product-image-carousel }}
@@ -32,6 +32,13 @@ layout: mock-page
 <!-- Favorite button -->
 {{> favorite-buttons.default }}
 
+</section>
+
+<section>
+  <!-- Product Recs -->
+  {{> product-recs hed="You May Also Like" }}
+  {{> product-recs hed="Recently Viewed" }}
+  {{> product-recs hed="Styled With" }}
 </section>
 
 <!-- Modal: Product Added to Bag -->
