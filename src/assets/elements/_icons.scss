@@ -37,7 +37,6 @@
   }
 }
 
-
 // Default icon style
 .icon {
   display: inline-block;
@@ -54,68 +53,40 @@
     height: inherit;
     vertical-align: middle;
   }
-}
 
-.icon--xxs {
-  width: rem(5);
-  height: rem(5);
-  // If IE 8 fallback to default icon size
-  @include old-ie {
-    @extend %icon-ie-size;
+  // icon sizes
+
+  // mixin to allow brief consistent setup of icon sizes
+  @mixin icon-size($value) {
+    width: rem( $value );
+    height: rem( $value );
+    // If IE 8 fallback to default icon size
+    @include old-ie {
+      @extend %icon-ie-size;
+    }
   }
-}
 
-.icon--xs {
-  width: rem(8);
-  height: rem(8);
-  // If IE 8 fallback to default icon size
-  @include old-ie {
-    @extend %icon-ie-size;
+  // note: default size is set above for .icon
+  &--xxs {
+    @include icon-size( 5 );
   }
-}
-
-.icon--sm {
-  width: rem(12);
-  height: rem(12);
-  // If IE 8 fallback to default icon size
-  @include old-ie {
-    @extend %icon-ie-size;
+  &--xs {
+    @include icon-size( 8 );
   }
-}
-
-.icon--md {
-  width: rem(16);
-  height: rem(16);
-  // If IE 8 fallback to default icon size
-  @include old-ie {
-    @extend %icon-ie-size;
+  &--sm {
+    @include icon-size( 12 );
   }
-}
-
-.icon--lg {
-  width: rem(28);
-  height: rem(28);
-  // If IE 8 fallback to default icon size
-  @include old-ie {
-    @extend %icon-ie-size;
+  &--md {
+    @include icon-size( 16 );
   }
-}
-
-.icon--xl {
-  width: rem(34);
-  height: rem(34);
-  // If IE 8 fallback to default icon size
-  @include old-ie {
-    @extend %icon-ie-size;
+  &--lg {
+    @include icon-size( 28 );
   }
-}
-
-.icon--xxl {
-  width: rem(46);
-  height: rem(46);
-  // If IE 8 fallback to default icon size
-  @include old-ie {
-    @extend %icon-ie-size;
+  &--xl {
+    @include icon-size( 34 );
+  }
+  &--xxl {
+    @include icon-size( 46 );
   }
 }
 
