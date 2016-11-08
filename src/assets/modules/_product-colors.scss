@@ -1,0 +1,42 @@
+.product-colors {
+    margin-left: 0;
+    &__item {
+        position:relative;
+        display: inline-block;
+        float: none;
+        margin: 1px 4px 0 0;
+        border-radius: 100px;
+        border: 2px solid #fff;
+        z-index: 2;
+        cursor: pointer;
+    }
+    &__input {
+        &:checked + label {
+            border: 2px solid #000;
+        }
+        position: absolute;
+        left: -9999em;
+    }
+    &__button {
+        display: block;
+        width: 21px;
+        height: 21px;
+        border: 1px solid #e4e4e4;
+        border-radius: 100px;
+        span {
+            text-indent: -9999em;
+            display: block;
+            position: absolute;
+        }
+        img {
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+        }
+    }
+    &__image {
+        display: block;
+        width: 37px;
+        height: 21px;
+    }
+}
