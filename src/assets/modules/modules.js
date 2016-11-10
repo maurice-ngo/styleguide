@@ -21,9 +21,4 @@ $(document).ready(() => {
   $('.product-option--color .product-option__select').colorChange();
   $('.btn--add-to-bag').addToBag();
   $('.product-option--oos').oosProduct();
-  $('.revolve-me__carousel').slick({
-    lazyLoad: 'progressive',
-    variableWidth: true,
-    arrows: false
-  });
 });

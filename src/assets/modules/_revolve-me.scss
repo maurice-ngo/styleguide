@@ -15,11 +15,16 @@
   &__carousel {
     overflow: hidden;
     text-align: left;
+    white-space: nowrap;
+    overflow-x: scroll;
+    padding-left: rem( 16 );
+    font-size: 0;
   }
   &__image {
+    display: inline-block;
     height: rem( 140 );
     width: auto;
-    padding-left: rem( 16 );
+    margin-right: rem( 16 );
   }
   .icon {
     margin: rem( 0 2 );
