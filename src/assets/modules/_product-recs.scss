@@ -10,7 +10,7 @@
 ------------------------------------------------------ */
 .product-recs {
   margin: 0;
-  padding: rem( 16 );
+  padding: rem( 16 0 16 16 );
   white-space: nowrap;
   overflow-x: scroll;
 
@@ -22,7 +22,7 @@
 
   &__product {
     display: inline-block;
-    width: 35%;
+    width: 40%;
     margin-right: rem( 16 );
     line-height: $base-line-height;
   }
