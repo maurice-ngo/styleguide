@@ -3,7 +3,7 @@
  * @module updatePrice
  */
 
-import $ from'jquery';
+import $ from 'jquery';
 
 import regularTemplate from '../../materials/modules/price/01-regular.html'
 import saleTemplate from '../../materials/modules/price/02-on-sale.html'

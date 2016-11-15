@@ -3,7 +3,7 @@
  * @module updateCTA
  */
 
-import $ from'jquery';
+import $ from 'jquery';
 
 export const PREORDER = 'Preorder This Item';
 export const OOS = 'Notify Me / Special Order';
