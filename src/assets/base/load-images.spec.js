@@ -14,14 +14,16 @@ describe('load image', () => {
     '//:walter',
     '//:donald',
   ]
+  const imgMap = NEW_SRC.map(src => `
+    <img src="${OLD_SRC}" ${DATA_ATTR}="${src}" />
+  `).join('');
+
   let $fixture;
 
   beforeEach(() => {
     $fixture = $(fixture.set(`
       <div>
-        <img src="${OLD_SRC}" ${DATA_ATTR}="${NEW_SRC[0]}" />
-        <img src="${OLD_SRC}" ${DATA_ATTR}="${NEW_SRC[1]}" />
-        <img src="${OLD_SRC}" ${DATA_ATTR}="${NEW_SRC[2]}" />
+        ${imgMap}
       </div>
     `));
   });
