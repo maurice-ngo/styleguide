@@ -31,8 +31,7 @@ describe('load image', () => {
   afterEach(() => fixture.cleanup());
 
   it('should update src to not be original source', () => {
-    const images = $fixture.find(`img`);
-    const $images = $(images);
+    const $images = $fixture.find(`img`);
 
     $images.loadImage();
     expect($images).to.not.have.attr('src', OLD_SRC);
