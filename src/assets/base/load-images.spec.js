@@ -9,10 +9,11 @@ chai.use(chaiJquery);
 describe('load image', () => {
   const DATA_ATTR = DEFAULT_OPTIONS.attr;
   const OLD_SRC = '//:0';
+  // these janky url's needed for karma browser tests
   const NEW_SRC = [
-    '//:jeffrey',
-    '//:walter',
-    '//:donald',
+    'http://:jeffrey/',
+    'http://:walter/',
+    'http://:donald/',
   ]
   const imgMap = NEW_SRC.map(src => `
     <img src="${OLD_SRC}" ${DATA_ATTR}="${src}" />
@@ -38,17 +39,11 @@ describe('load image', () => {
   });
 
   it('should update src attribute of all images to match deferred attribute', () => {
-    const images = $fixture.find(`img`);
-    let len = images.length;
+    const $images = $fixture.find(`img`);
 
-    $(images).loadImage();
+    $images.loadImage();
+    const sources = $.makeArray($images).map(img => img.src);
 
-    // please help: is there better syntax to check this in 1 line? (like above)
-    // i cannot find how to compare to an array, only strings
-    while ( len-- ) {
-      const $image = $(images[len]);
-      const src = NEW_SRC[len];
-      expect($image).to.have.attr('src', src);
-    }
+    expect(sources).to.eql(NEW_SRC);
   });
 });
