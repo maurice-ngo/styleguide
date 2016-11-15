@@ -1,4 +1,4 @@
-import $ from'jquery';
+import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
@@ -9,19 +9,22 @@ chai.use(chaiJquery);
 describe('load image', () => {
   const DATA_ATTR = DEFAULT_OPTIONS.attr;
   const OLD_SRC = '//:0';
+  // these janky url's needed for karma browser tests
   const NEW_SRC = [
-    'http://s3.drafthouse.com/images/made/big-lebowski-4_758_426_81_s_c1.jpg',
-    'http://s3.drafthouse.com/images/made/big-lebowski-4_758_426_81_s_c1.jpg',
-    'http://s3.drafthouse.com/images/made/big-lebowski-4_758_426_81_s_c1.jpg',
+    'http://:jeffrey/',
+    'http://:walter/',
+    'http://:donald/',
   ]
+  const imgMap = NEW_SRC.map(src => `
+    <img src="${OLD_SRC}" ${DATA_ATTR}="${src}" />
+  `).join('');
+
   let $fixture;
 
   beforeEach(() => {
     $fixture = $(fixture.set(`
       <div>
-        <img src="${OLD_SRC}" ${DATA_ATTR}="${NEW_SRC[0]}" />
-        <img src="${OLD_SRC}" ${DATA_ATTR}="${NEW_SRC[1]}" />
-        <img src="${OLD_SRC}" ${DATA_ATTR}="${NEW_SRC[2]}" />
+        ${imgMap}
       </div>
     `));
   });
@@ -29,25 +32,18 @@ describe('load image', () => {
   afterEach(() => fixture.cleanup());
 
   it('should update src to not be original source', () => {
-    const images = $fixture.find(`img`);
-    const $images = $(images);
+    const $images = $fixture.find(`img`);
 
     $images.loadImage();
     expect($images).to.not.have.attr('src', OLD_SRC);
   });
 
   it('should update src attribute of all images to match deferred attribute', () => {
-    const images = $fixture.find(`img`);
-    let len = images.length;
+    const $images = $fixture.find(`img`);
 
-    $(images).loadImage();
+    $images.loadImage();
+    const sources = $.makeArray($images).map(img => img.src);
 
-    // please help: is there better syntax to check this in 1 line? (like above)
-    // i cannot find how to compare to an array, only strings
-    while ( len-- ) {
-      const $image = $(images[len]);
-      const src = NEW_SRC[len];
-      expect($image).to.have.attr('src', src);
-    }
+    expect(sources).to.eql(NEW_SRC);
   });
 });

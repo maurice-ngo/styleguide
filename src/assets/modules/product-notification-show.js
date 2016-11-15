@@ -3,7 +3,7 @@
  * @module showNotification
  */
 
-import $ from'jquery';
+import $ from 'jquery';
 
 import finalSale from '../../materials/modules/product-notifications/final-sale.html';
 import sampleDefect from '../../materials/modules/product-notifications/final-sale-sample-defect.html';

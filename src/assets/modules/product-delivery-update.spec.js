@@ -1,4 +1,4 @@
-import $ from'jquery';
+import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 import sizeTemplate from '../../materials/modules/product-options/size.html';

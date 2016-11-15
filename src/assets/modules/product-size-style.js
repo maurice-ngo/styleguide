@@ -3,7 +3,7 @@
  * @module sizeStyle
  */
 
-import $ from'jquery';
+import $ from 'jquery';
 
 export const DEFAULT_CLASS = 'default';
 
