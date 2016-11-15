@@ -10,9 +10,9 @@ describe('load image', () => {
   const DATA_ATTR = DEFAULT_OPTIONS.attr;
   const OLD_SRC = '//:0';
   const NEW_SRC = [
-    'http://s3.drafthouse.com/images/made/big-lebowski-4_758_426_81_s_c1.jpg',
-    'http://s3.drafthouse.com/images/made/big-lebowski-4_758_426_81_s_c1.jpg',
-    'http://s3.drafthouse.com/images/made/big-lebowski-4_758_426_81_s_c1.jpg',
+    '//:jeffrey',
+    '//:walter',
+    '//:donald',
   ]
   let $fixture;
 
