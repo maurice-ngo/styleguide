@@ -3,18 +3,17 @@
  * @module addOptionLink
  */
 
-export const UL_ID = 'mock-page-options';
-const list = document.getElementById(UL_ID);
+const MOCK_PAGE_OPTIONS = document.getElementById('mock-page-options');
 
 /**
  * Create & append link
  * @param {String} title - the link's text to display
- * @param {String} id - correlates to the id of the template/partial,
- *   used to apply corresponding options to the page
+ * @param {String} params - ampersand-delimited GET parameters used to apply options
+ *       likely to correspond with id's of the handlebars partials
  */
-export default function addOptionLink({ title, id }) {
+export default function addOptionLink( title, params, list = MOCK_PAGE_OPTIONS ) {
   const li = document.createElement('li');
 
-  li.innerHTML = `<a href="?${id}">${title}</a>`;
+  li.innerHTML = `<a href="?${params}">${title}</a>`;
   list.appendChild(li);
 }
