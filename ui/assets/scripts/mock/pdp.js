@@ -5,18 +5,32 @@
 
 import $ from 'jquery'
 
-import addOption from './option'
+import addOption from './add-option-link'
+import applyParams from './apply-params'
 
 /**
  * List of functions to run for page setup
  */
 export default function pdp() {
-  addOption('Wedding Badge', 'badges.wedding', addBadge);
-  addOption('Product Badge', 'badges.product', addBadge);
-  addOption('Out of Stock', 'product-options.out-of-stock', updateSize);
-  addOption('One Color', 'product-options.one-color', updateColor);
-  addOption('One Size', 'product-options.one-size', updateSize);
+  // add option links to mock page footer
+  addOption('Wedding Badge', 'badges.wedding');
+  addOption('Product Badge', 'badges.product');
+  addOption('Out of Stock', 'product-options.out-of-stock');
+  addOption('Out of Stock, On Sale', 'product-options.out-of-stock&on-sale');
+  addOption('One Color', 'product-options.one-color');
+  addOption('One Size', 'product-options.one-size');
 
+  // apply new templates
+  applyParams('badges.wedding', addBadge);
+  applyParams('badges.product', addBadge);
+  applyParams('product-options.out-of-stock', updateSize);
+  applyParams('product-options.one-color', updateColor);
+  applyParams('product-options.one-size', updateSize);
+
+  // apply variations to those templates
+  applyParams('on-sale', updatePriceToSale);
+
+  // apply mock hacks
   changeColorValues();
   muteLinks(document.getElementsByClassName('product-recs__link'));
 }
@@ -70,6 +84,19 @@ function updateColor( opt ) {
  */
 function updateSize( opt ) {
   updateProductOption('size', opt.html);
+}
+
+/**
+ * Callback to upate price to sale
+ */
+function updatePriceToSale( opt ) {
+  const oneSize = document.querySelector('span.product-option__select--one');
+  const price = oneSize.getAttribute('data-price');
+  const salePrice = parseFloat(price)/2 + '';
+
+  // update price to sale
+  oneSize.setAttribute('data-regular-price', price);
+  oneSize.setAttribute('data-price', salePrice);
 }
 
 /**
