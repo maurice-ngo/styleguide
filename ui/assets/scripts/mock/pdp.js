@@ -16,9 +16,19 @@ export default function pdp() {
   addOption('Wedding Badge', 'badges.wedding');
   addOption('Product Badge', 'badges.product');
   addOption('Out of Stock', 'product-options.out-of-stock');
-  addOption('Out of Stock, On Sale', 'product-options.out-of-stock&on-sale');
+  addOption('Out of Stock & On Sale', 'product-options.out-of-stock&on-sale');
   addOption('One Color', 'product-options.one-color');
   addOption('One Size', 'product-options.one-size');
+  addOption('All Sizes In Stock', 'in-stock');
+  addOption('All Sizes Preorder', 'preorder');
+  addOption('All Sizes OOS', 'oos');
+  addOption('All Sizes In Stock & On Sale', 'in-stock&on-sale');
+  addOption('All Sizes On Sale', 'on-sale');
+  addOption('All Sizes OOS & On Sale', 'oos&on-sale');
+  addOption('One Size Preorder', 'product-options.one-size&preorder');
+  addOption('One Size OOS', 'product-options.one-size&oos');
+  addOption('One Size On Sale', 'product-options.one-size&on-sale');
+  addOption('One Size OOS & On Sale', 'product-options.one-size&oos&on-sale');
 
   // apply new templates
   applyParams('badges.wedding', addBadge);
@@ -28,12 +38,19 @@ export default function pdp() {
   applyParams('product-options.one-size', updateSize);
 
   // apply variations to those templates
-  applyParams('on-sale', updatePriceToSale);
+  applyParams('on-sale', updateToOnSale);
+  applyParams('in-stock', updateToInStock);
+  applyParams('preorder', updateToPreorder);
+  applyParams('oos', updateToOOS);
 
   // apply mock hacks
   changeColorValues();
   muteLinks(document.getElementsByClassName('product-recs__link'));
 }
+
+function updateToInStock() {}
+function updateToPreorder() {}
+function updateToOOS() {}
 
 /**
  * This is a mock page, and other product pages don't exist, so this hack...
@@ -89,14 +106,18 @@ function updateSize( opt ) {
 /**
  * Callback to upate price to sale
  */
-function updatePriceToSale( opt ) {
-  const oneSize = document.querySelector('span.product-option__select--one');
-  const price = oneSize.getAttribute('data-price');
-  const salePrice = parseFloat(price)/2 + '';
+function updateToOnSale( opt ) {
+  const el = document.getElementById('size');
+  const options = el.options;
+  // if it's a select, get the first option, otherwise use el
+  const shown = options ? options[0] : el;
+
+  const price = shown.getAttribute('data-price') || shown.getAttribute('data-regular-price');
+  const regularPrice = parseFloat(price) + 10 + '';
 
   // update price to sale
-  oneSize.setAttribute('data-regular-price', price);
-  oneSize.setAttribute('data-price', salePrice);
+  shown.setAttribute('data-price', price);
+  shown.setAttribute('data-regular-price', regularPrice);
 }
 
 /**
