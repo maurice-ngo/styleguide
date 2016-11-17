@@ -16,19 +16,15 @@ export default function pdp() {
   addOption('Wedding Badge', 'badges.wedding');
   addOption('Product Badge', 'badges.product');
   addOption('Out of Stock', 'product-options.out-of-stock');
-  addOption('Out of Stock & On Sale', 'product-options.out-of-stock&on-sale');
+  addOption('Out of Stock: On Sale', 'product-options.out-of-stock&on-sale');
   addOption('One Color', 'product-options.one-color');
   addOption('One Size', 'product-options.one-size');
-  addOption('All Sizes In Stock', 'in-stock');
+  addOption('One Size: Preorder', 'product-options.one-size&preorder');
+  addOption('One Size: On Sale', 'product-options.one-size&on-sale');
   addOption('All Sizes Preorder', 'preorder');
-  addOption('All Sizes OOS', 'oos');
-  addOption('All Sizes In Stock & On Sale', 'in-stock&on-sale');
   addOption('All Sizes On Sale', 'on-sale');
-  addOption('All Sizes OOS & On Sale', 'oos&on-sale');
-  addOption('One Size Preorder', 'product-options.one-size&preorder');
-  addOption('One Size OOS', 'product-options.one-size&oos');
-  addOption('One Size On Sale', 'product-options.one-size&on-sale');
-  addOption('One Size OOS & On Sale', 'product-options.one-size&oos&on-sale');
+  addOption('All Sizes In Stock', 'in-stock');
+  addOption('All Sizes In Stock & On Sale', 'in-stock&on-sale');
 
   // apply new templates
   applyParams('badges.wedding', addBadge);
@@ -41,16 +37,11 @@ export default function pdp() {
   applyParams('on-sale', updateToOnSale);
   applyParams('in-stock', updateToInStock);
   applyParams('preorder', updateToPreorder);
-  applyParams('oos', updateToOOS);
 
   // apply mock hacks
   changeColorValues();
   muteLinks(document.getElementsByClassName('product-recs__link'));
 }
-
-function updateToInStock() {}
-function updateToPreorder() {}
-function updateToOOS() {}
 
 /**
  * This is a mock page, and other product pages don't exist, so this hack...
@@ -128,4 +119,37 @@ function updateProductOption( element, template ) {
 
   // replace the existing product option
   option.outerHTML = template;
+}
+
+/**
+ * Callback to upate all sizes to "in stock"
+ */
+function updateToInStock() {
+  updateSizes(size => {
+    if (size.text)
+      size.text = size.text.replace(' (Out of Stock)', '');
+    size.removeAttribute('disabled');
+  });
+}
+
+/**
+ * Callback to upate all sizes to "preorder"
+ */
+function updateToPreorder() {
+  updateSizes(size => {
+    size.setAttribute('data-preorder', 'true');
+  });
+}
+
+/**
+ * Helper function to update all sizes (or single size) with callback
+ */
+function updateSizes(callback) {
+  const el = document.getElementById('size');
+  const options = el.options || [ el ];
+  let len = options.length;
+
+  while (len--) {
+    callback(options[len]);
+  }
 }
