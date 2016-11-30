@@ -2,10 +2,8 @@
 notes: The default, large button style.
 ---
 
-{{#if addToBag}}
-  <button type="submit" class="btn btn--full btn--add-to-bag">Add to Bag</button>
-{{else if viewBag}}
-  <a class="btn btn--full" href="./shopping-bag.html">View Bag / Checkout</a>
+{{#if href}}
+  <a href="{{href}}" class="btn btn--full {{class}}">{{{text}}}</a>
 {{else}}
-  <a class="btn btn--full" href="{{href}}">{{#if text}}{{text}}{{else}}Full Black Button{{/if}}</a>
+  <button type="submit" class="btn btn--full {{class}}">{{{text}}}</button>
 {{/if}}

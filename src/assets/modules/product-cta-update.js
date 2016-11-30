@@ -6,11 +6,17 @@
 import $ from 'jquery';
 
 import { ON_SALE_CLASS } from './product-price-update';
+import ctaAddToBag from '../../materials/modules/cta-buttons/add-to-bag.html'
+import ctaPreorder from '../../materials/modules/cta-buttons/preorder.html'
+import ctaNotifyMeSpecial from '../../materials/modules/cta-buttons/notify-me-special.html'
+import ctaNotifyMe from '../../materials/modules/cta-buttons/notify-me.html'
 
-export const PREORDER = 'Preorder This Item';
-export const OOS = 'Notify Me / Special Order';
-export const OOS_SALE = 'Notify Me When Available';
-export const DEFAULT = 'Add To Bag';
+export const CTA_CLASS = '.product__cta';
+export let cta = {
+  oos: ctaNotifyMe,
+  preorder: ctaPreorder,
+  default: ctaAddToBag,
+};
 
 /**
  * Update CTA text based on selected value.
@@ -19,10 +25,13 @@ export const DEFAULT = 'Add To Bag';
  */
 export default function updateCTA($wrap, chosen) {
   // get the cta
-  const btn = $wrap.find('button[type="submit"]');
+  const cta = $wrap.find(CTA_CLASS);
+
+  if ($wrap.hasClass(ON_SALE_CLASS))
+    cta.oos = ctaNotifyMeSpecial;
 
   // update cta text
-  btn.text(update(chosen, $wrap));
+  cta.html(update(chosen, $wrap));
 };
 
 /**
@@ -33,12 +42,17 @@ export default function updateCTA($wrap, chosen) {
 const update = (option, $wrap) => {
   // if data-attr, show notification
   if (check('oos'))
-    return $wrap.hasClass(ON_SALE_CLASS) ? OOS_SALE : OOS;
+    return true ? ctaNotifyMeSpecial : ctaNotifyMe;
   else if (check('preorder'))
-    return PREORDER;
+    return ctaPreorder;
   else
-    return DEFAULT;
+    return ctaAddToBag;
 
+  /**
+   * Checks for the existence of data-attribute, and returns truthiness
+   * @param {String} attr - Data attribute
+   * @return {Boolean} If the attribute is true
+   */
   function check(attr) {
     return !!option.getAttribute('data-' + attr)
       && option.getAttribute('data-' + attr) === 'true';
