@@ -53,12 +53,12 @@ const muteLinks = links => {
 const changeColorValues = () => {
   const select = document.getElementById('color');
   const options = select.getElementsByTagName('option');
-  let opt, len = options.length;
+  let len = options.length;
 
   while (len--) {
-    opt = options[len];
-    opt.setAttribute('data-value', opt.getAttribute('value'));
-    opt.setAttribute('value', document.location.href);
+    const opt = options[len];
+    opt.setAttribute('data-href-original', opt.getAttribute('data-href'));
+    opt.setAttribute('data-href', document.location.href);
   }
 };
 

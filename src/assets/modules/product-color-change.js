@@ -1,41 +1,41 @@
 /**
- * Forwards user to new page when changing color dropdown
+ * Attaches change event listener to color dropdown, firing necessary updates
+ * (typically attached to '.product-option--color .product-option__select')
  * @module colorChange
  */
 
 import $ from 'jquery';
+import redirectHref from '../lib/redirect-href';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'colorChange';
 registerJQueryPlugin(PLUGIN_NAME, colorChange);
 
-const DEFAULT_OPTIONS = {
-  redirectFunc: val => document.location.href = val,
+/**
+ * List of all updates made on change.
+ * @param {HTMLElement} evt - The select dropdown we're attaching to
+ */
+export const runUpdates = ({ currentTarget }) => {
+  // whether input or select, find the chosen element
+  const { options, selectedIndex } = currentTarget;
+  const chosen = options ? options[selectedIndex] : currentTarget;
+
+  redirectHref(chosen);
 };
 
 /**
  * Initializes color dropdown changes.
  * @param {HTMLElement} el - The select dropdown we're attaching to
  */
-export default function colorChange(el, options = {}) {
-  const opts = Object.assign({}, DEFAULT_OPTIONS, options);
-  // run whenever size dropdown changes
-  attachChangeListener($(el), opts);
+export default function colorChange(el) {
+  const dropdown = $(el);
+
+  attachChangeListener(dropdown);
 };
 
 /**
  * Attaches change event to select dropdown.
  * @param {HTMLElement} dropdown - The select dropdown
  */
-const attachChangeListener = (dropdown, { redirectFunc }) => {
-  dropdown.change(({ currentTarget: { options, selectedIndex } }) => {
-    // get selected after every change
-    let selected = options[selectedIndex];
-
-    // change location.href
-    if (selected.value) {
-      redirectFunc(selected.value);
-    }
-  })
-};
+const attachChangeListener = dropdown => dropdown.change(evt => runUpdates(evt));
