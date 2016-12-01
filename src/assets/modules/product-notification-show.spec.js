@@ -21,7 +21,7 @@ describe('product notification show', () => {
       ${sizeTemplate(data)}
     `);
 
-    return $(fixture.el).find('.product-option');
+    return $(fixture.el).find('.product__option');
   };
 
   afterEach(() => fixture.cleanup());

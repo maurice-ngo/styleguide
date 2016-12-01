@@ -3,7 +3,7 @@ import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
 import sizeStyle, { DEFAULT_CLASS } from './product-size-style';
-import sizeChange from './product-size-change';
+import sizeChange, { PRODUCT_BLOCK_CLASS, SIZE_ELEMENT_CLASS, SELECT_ELEMENT_CLASS } from './product-size-change';
 
 chai.use(chaiJquery);
 
@@ -18,13 +18,17 @@ describe('product size style', () => {
 
   beforeEach(() => {
     fixture.set(`
-      <select id="dropdown">
-        ${Object.keys(options)
-          .map(name => `<option value="${name}">${options[name]}</option>`)
-          .join('')}
-      </select>
+      <div class="${PRODUCT_BLOCK_CLASS}">
+        <div class="${SIZE_ELEMENT_CLASS}">
+          <select class="${SELECT_ELEMENT_CLASS}">
+            ${Object.keys(options)
+              .map(name => `<option value="${name}">${options[name]}</option>`)
+              .join('')}
+          </select>
+        </div>
+      </div>
     `);
-    $dropdown = $(fixture.el).find('#dropdown');
+    $dropdown = $(fixture.el).find(`.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`);
     sizeChange($dropdown);
   });
 

@@ -12,7 +12,7 @@
 
 ------------------------------------------------------ */
 
-.product-option {
+.product__option {
   position: relative;
   float: left;
   width: 50%;
@@ -31,22 +31,22 @@
     }
   }
 
-  // .product-option--size
+  // .product__option--size
   &--size {
     @include bp-at-least($small-mobile) {
       border-right: rem(4) solid $color__white;
     }
   }
-  // .product-option--color
+  // .product__option--color
   &--color {
     @include bp-at-least($small-mobile) {
       border-left: rem(4) solid $color__white;
     }
   }
-  // .product-option--oos
+  // .product__option--oos
   &--oos {
     background-color: $color__pink--light;
-    .product-option__select {
+    .product__option-select {
       padding: rem(23 14 21);
       line-height: rem(16);
       text-align: center;
@@ -54,13 +54,13 @@
     }
   }
 
-  // .product-option__label, .product-option__select
-  &__label,
-  &__select {
+  // .product__option-label, .product__option-select
+  &-label,
+  &-select {
     background-color: transparent;
   }
-  // .product-option__label
-  &__label {
+  // .product__option-label
+  &-label {
     position: absolute;
     top: rem(12);
     left: rem(16);
@@ -70,8 +70,8 @@
     // override default form styles
     margin-bottom: 0;
   }
-  // .product-option__select
-  &__select {
+  // .product__option-select
+  &-select {
     @extend %h4;
     display: block;
     padding: rem(30 24 15 16);
@@ -85,11 +85,11 @@
     }
     border-right-width: rem(16);
     box-shadow: none;
-    // .product-option__select.default
+    // .product__option-select.default
     &.default {
       color: $color__grey--light;
     }
-    // .product-option__select--one
+    // .product__option-select--one
     &--one {
       margin-bottom: 0;
       line-height: rem(15);
