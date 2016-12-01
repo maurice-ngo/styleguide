@@ -25,9 +25,9 @@ export default function createProductData($wrap) {
   const product = {
     // DOM references
     wrap: $wrap[0],
-    sizeEl: sizeEl,
+    sizeEl,
     // product info
-    regularPrice: regularPrice,
+    regularPrice,
     // useful booleans
     oneSize: !options,
     allInStock: options ? !any(hasAttr, 'data-oos') : !hasAttr(chosen, 'data-oos'),
