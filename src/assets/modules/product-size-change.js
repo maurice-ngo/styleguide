@@ -43,8 +43,6 @@ const attachChangeListener = (wrap, dropdown) => dropdown.change(({ currentTarge
   // whether input or select, find the chosen element
   const { options, selectedIndex } = currentTarget;
   const chosen = options ? options[selectedIndex] : currentTarget;
-  const defaultOption = options ? options[0] : chosen;
-
 
   // run updates
   updatePrice(wrap, PRODUCT_BLOCK_CLASS, chosen, currentTarget);
