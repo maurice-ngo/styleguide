@@ -11,6 +11,8 @@ import updatePrice from './product-price-update';
 import showNotification from './product-notification-show';
 import updateCTA from './product-cta-update';
 import updateDelivery from './product-delivery-update';
+import redirectHref from '../lib/redirect-href';
+import updateUnavailable from './product-unavailable-update';
 import createProductData, { updateChosenData } from '../lib/create-product-data';
 
 // Expose the function as a jQuery plugin for ease of use
@@ -47,18 +49,21 @@ const attachChangeListener = data => $(data.sizeEl).change( evt => {
   const { options, selectedIndex } = sizeEl;
   const chosen = options ? options[selectedIndex] : sizeEl;
 
+  updateChosenData(data, chosen);
+
   // run updates
+  redirectHref(chosen);
   updatePrice($wrap, PRODUCT_BLOCK_CLASS, chosen, sizeEl);
   showNotification(chosen);
   updateCTA($wrap, chosen);
   updateDelivery($wrap, chosen);
+  updateUnavailable(data);
 
   // only for select dropdown
   if (options) {
     toggleStyle(sizeEl, chosen);
   }
 });
-
 
 /**
  * Runs once to update on page load.

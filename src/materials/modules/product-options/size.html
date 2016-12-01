@@ -17,6 +17,6 @@ notes:
       {{#if sample-defect}}data-sample-defect="true"{{/if}}
     >{{label}}{{#if oos}} (Out of Stock){{/if}}</option>
   {{/each}}
-    <option value="notify-me" data-show-bis="true">Can't find your size?</option>
+    {{> product-options.unavailable href="./cant-find-your-size.html" }}
   </select>
 </div>
