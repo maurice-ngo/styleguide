@@ -17,17 +17,36 @@ export const PLUGIN_NAME = 'sizeChange';
 registerJQueryPlugin(PLUGIN_NAME, sizeChange);
 
 export const PRODUCT_BLOCK_CLASS = 'product';
+export const SIZE_ELEMENT_CLASS = `${PRODUCT_BLOCK_CLASS}__option--size`;
+export const SELECT_ELEMENT_CLASS = `${PRODUCT_BLOCK_CLASS}__option-select`;
 
 /**
- * List of all updates made on change.
- * @param {HTMLElement} evt - The select dropdown we're attaching to
+ * Initializes size changes.
+ * @param {HTMLElement} el - The select dropdown we're attaching to
  */
-export const runUpdates = ({ currentTarget }) => {
-  const wrap = $(currentTarget).closest(`.${PRODUCT_BLOCK_CLASS}`);
+export default function sizeChange(el) {
+  // local jQuery reference to el
+  const dropdown = $(el);
+  const $wrap = dropdown.closest(`.${PRODUCT_BLOCK_CLASS}`);
+
+  //attachChangeListener(data);
+  attachChangeListener($wrap, dropdown);
+  runOnce(dropdown);
+};
+
+/**
+ * Attaches change event to select dropdown.
+ * @param {HTMLElement} dropdown - The select dropdown
+ */
+const attachChangeListener = (wrap, dropdown) => dropdown.change(({ currentTarget }) => {
+
   // whether input or select, find the chosen element
   const { options, selectedIndex } = currentTarget;
   const chosen = options ? options[selectedIndex] : currentTarget;
+  const defaultOption = options ? options[0] : chosen;
 
+
+  // run updates
   updatePrice(wrap, PRODUCT_BLOCK_CLASS, chosen, currentTarget);
   showNotification(chosen);
   updateCTA(wrap, chosen);
@@ -37,25 +56,8 @@ export const runUpdates = ({ currentTarget }) => {
   if (options) {
     toggleStyle(currentTarget, chosen);
   }
-};
+});
 
-/**
- * Initializes size changes.
- * @param {HTMLElement} el - The select dropdown we're attaching to
- */
-export default function sizeChange(el) {
-  // local jQuery reference to el
-  const dropdown = $(el);
-
-  attachChangeListener(dropdown);
-  runOnce(dropdown);
-};
-
-/**
- * Attaches change event to select dropdown.
- * @param {HTMLElement} dropdown - The select dropdown
- */
-const attachChangeListener = dropdown => dropdown.change(evt => runUpdates(evt));
 
 /**
  * Runs once to update on page load.

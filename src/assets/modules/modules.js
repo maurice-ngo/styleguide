@@ -17,8 +17,8 @@ $(document).ready(() => {
     arrows: false
   });
   $('.js-accordion').accordion();
-  $('.product-option--size .product-option__select').sizeChange();
-  $('.product-option--color .product-option__select').colorChange();
+  $('.product__option--size .product__option-select').sizeChange();
+  $('.product__option--color .product__option-select').colorChange();
   $('.btn--add-to-bag').addToBag();
   $('.product-option--oos').oosProduct();
 });
