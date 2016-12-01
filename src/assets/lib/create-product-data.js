@@ -22,7 +22,7 @@ export default function createProductData($wrap) {
   const regularPrice = defaultOption.getAttribute(REGULAR_PRICE_ATTR) || defaultOption.getAttribute(PRICE_ATTR);
 
   // instantiate object, adding properties that apply to the whole dropdown
-  let product = {
+  const product = {
     // DOM references
     wrap: $wrap[0],
     sizeEl: sizeEl,
@@ -87,9 +87,10 @@ function isOnSale(el, regularPrice) {
  * @param {HTMLElement} chosen - The chosen option
  */
 export const updateChosenData = (product, chosen) => {
-  let data = {
+  const data = {
     el: chosen,
-  }
+  };
+
   // add individual properties for chosen
   addData('delivery-date');
   addData('sample-defect');
