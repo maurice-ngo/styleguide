@@ -31,56 +31,15 @@ export default function createProductData($wrap) {
     chosen: {},
     // useful booleans
     oneSize: !options,
-    allInStock: options ? !any(hasAttr, 'data-oos') : !hasAttr(chosen, 'data-oos'),
-    allPreorder: options ? all(hasAttr, 'data-preorder') : hasAttr(chosen, 'data-preorder'),
-    allOnSale: options ? all(isOnSale, regularPrice) : isOnSale(chosen, regularPrice),
+    allInStock: options ? !any(options, hasAttr, 'data-oos') : !hasAttr(chosen, 'data-oos'),
+    allPreorder: options ? all(options, hasAttr, 'data-preorder') : hasAttr(chosen, 'data-preorder'),
+    allOnSale: options ? all(options, isOnSale, regularPrice) : isOnSale(chosen, regularPrice),
   };
 
   updateChosenData(product, chosen);
 
   return product;
-
-  // Helper function to determine if an option has an attr
-  function hasAttr(option, attr) {
-    return !!(option.getAttribute(attr)
-           && option.getAttribute(attr) !== 'false')
-  }
-
-  // helper function to determine if any options have an attr
-  function any(comparison, attr) {
-    let len = options.length;
-
-    while (len--) {
-      const option = options[len];
-      if (option.value !== 'unavailable'
-       && comparison(option, attr)) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  // helper function to determine if all options have an attr
-  function all(comparison, attr) {
-    let len = options.length;
-
-    while (len--) {
-      const option = options[len];
-      if (option.value !== 'unavailable'
-       && !comparison(option, attr)) {
-        return false;
-      }
-    }
-    return true;
-  }
 };
-
-// helper function to determine if option is on sale
-function isOnSale(el, regularPrice) {
-  const price = el['price'] || el.getAttribute(PRICE_ATTR);
-
-  return !!(parseFloat(price) < parseFloat(regularPrice));
-}
 
 /**
  * Updates product data object whenever chosen option is changed
@@ -88,27 +47,88 @@ function isOnSale(el, regularPrice) {
  * @param {HTMLElement} chosen - The chosen option
  */
 export const updateChosenData = (product, chosen) => {
-  const data = {
+  product.chosen = {
     el: chosen,
+    'delivery-date': getAttr(chosen, 'delivery-date'),
+    'sample-defect': getAttr(chosen, 'sample-defect'),
+    'final-sale': getAttr(chosen, 'final-sale'),
+    'one-left': getAttr(chosen, 'one-left'),
+    preorder: getAttr(chosen, 'preorder'),
+    oos: getAttr(chosen, 'oos'),
+    price: getAttr(chosen, 'price'),
+    isOnSale: isOnSale(chosen, product.regularPrice),
   };
-
-  // add individual properties for chosen
-  addData('delivery-date');
-  addData('sample-defect');
-  addData('final-sale');
-  addData('one-left');
-  addData('preorder');
-  addData('oos');
-  addData('price');
-
-  // add 'on sale' booleans
-  data.isOnSale = isOnSale(chosen, product.regularPrice);
-
-  product.chosen = data;
-
-  // helper function to get product data attributes
-  function addData(attr) {
-    const val = chosen.getAttribute(`data-${attr}`) || false;
-    data[attr] = (val && val !== 'false') ? (val === 'true') || val || true : false;
-  }
 };
+
+/**
+ * Helper function to determine if an option has an attr
+ * @param {HTMLElement} option - The select option element
+ * @param {String} attr - The attribute we're checking for
+ */
+const hasAttr = (option, attr) => {
+  return !!(option.getAttribute(attr)
+         && option.getAttribute(attr) !== 'false')
+};
+
+/**
+ * Helper function to determine if any options have an attr
+ * @param {HTMLElements} options - List of select options
+ * @param {Function} comparison - Callback function to evaluate the comparison
+ * @param {String} attr - The attribute we're comparing
+ * @return {Boolean} Whether comparison was successful on any options
+ */
+const any = (options, comparison, attr) => {
+  let len = options.length;
+
+  while (len--) {
+    const option = options[len];
+    if (option.value !== 'unavailable'
+     && comparison(option, attr)) {
+      return true;
+    }
+  }
+  return false;
+};
+
+/**
+ * Helper function to determine if all options have an attr
+ * @param {HTMLElements} options - List of select options
+ * @param {Function} comparison - Callback function to evaluate the comparison
+ * @param {String} attr - The attribute we're comparing
+ * @return {Boolean} Whether comparison was successful on all options
+ */
+const all = (options, comparison, attr) => {
+  let len = options.length;
+
+  while (len--) {
+    const option = options[len];
+    if (option.value !== 'unavailable'
+     && !comparison(option, attr)) {
+      return false;
+    }
+  }
+  return true;
+};
+
+/**
+ * Helper function to determine if option is on sale
+ * @param {Object|HTMLElement} item - Item for which we're comparing price
+ * @param {String} regularPrice - The item's regular price
+ * @return {Boolean} Whether price is less than regualarPrice
+ */
+const isOnSale = (item, regularPrice) => {
+  const price = item.price || item.getAttribute(PRICE_ATTR);
+
+  return parseFloat(price) < parseFloat(regularPrice);
+};
+
+/**
+ * Helper function to get product data attributes
+ * @param {HTMLElement} option - The select option element
+ * @param {String} attr - The attribute we're checking for
+ * @return {String|Boolean} The attribute value (or existence)
+ */
+function getAttr(option, attr) {
+  const val = option.getAttribute(`data-${attr}`) || false;
+  return (val && val !== 'false') ? (val === 'true') || val || true : false;
+}
