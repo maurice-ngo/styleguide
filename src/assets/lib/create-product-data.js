@@ -28,13 +28,14 @@ export default function createProductData($wrap) {
     sizeEl,
     // product info
     regularPrice,
+    chosen: {},
     // useful booleans
     oneSize: !options,
     allInStock: options ? !any(hasAttr, 'data-oos') : !hasAttr(chosen, 'data-oos'),
     allPreorder: options ? all(hasAttr, 'data-preorder') : hasAttr(chosen, 'data-preorder'),
+    allOnSale: options ? all(isOnSale, regularPrice) : isOnSale(chosen, regularPrice),
   };
 
-  product.allOnSale = options ? all(isOnSale, regularPrice) : isOnSale(chosen, regularPrice);
   updateChosenData(product, chosen);
 
   return product;
