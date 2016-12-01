@@ -11,6 +11,7 @@ import updatePrice from './product-price-update';
 import showNotification from './product-notification-show';
 import updateCTA from './product-cta-update';
 import updateDelivery from './product-delivery-update';
+import createProductData, { updateChosenData } from '../lib/create-product-data';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'sizeChange';
@@ -26,39 +27,41 @@ export const SELECT_ELEMENT_CLASS = `${PRODUCT_BLOCK_CLASS}__option-select`;
  */
 export default function sizeChange(el) {
   // local jQuery reference to el
-  const dropdown = $(el);
-  const $wrap = dropdown.closest(`.${PRODUCT_BLOCK_CLASS}`);
+  const $dropdown = $(el);
+  const $wrap = $dropdown.closest(`.${PRODUCT_BLOCK_CLASS}`);
+  const data = createProductData($wrap);
 
-  //attachChangeListener(data);
-  attachChangeListener($wrap, dropdown);
-  runOnce(dropdown);
+  attachChangeListener(data);
+  runOnce($dropdown);
 };
 
 /**
  * Attaches change event to select dropdown.
- * @param {HTMLElement} dropdown - The select dropdown
+ * @param {Object} data - Object containing relevant data about the product
  */
-const attachChangeListener = (wrap, dropdown) => dropdown.change(({ currentTarget }) => {
+const attachChangeListener = data => $(data.sizeEl).change( evt => {
+  const { wrap, sizeEl } = data;
+  const $wrap = $(wrap);
 
   // whether input or select, find the chosen element
-  const { options, selectedIndex } = currentTarget;
-  const chosen = options ? options[selectedIndex] : currentTarget;
+  const { options, selectedIndex } = sizeEl;
+  const chosen = options ? options[selectedIndex] : sizeEl;
 
   // run updates
-  updatePrice(wrap, PRODUCT_BLOCK_CLASS, chosen, currentTarget);
+  updatePrice($wrap, PRODUCT_BLOCK_CLASS, chosen, sizeEl);
   showNotification(chosen);
-  updateCTA(wrap, chosen);
-  updateDelivery(wrap, chosen);
+  updateCTA($wrap, chosen);
+  updateDelivery($wrap, chosen);
 
   // only for select dropdown
   if (options) {
-    toggleStyle(currentTarget, chosen);
+    toggleStyle(sizeEl, chosen);
   }
 });
 
 
 /**
  * Runs once to update on page load.
- * @param {HTMLElement} dropdown - The select dropdown
+ * @param {jQueryElement} dropdown - The select dropdown
  */
 const runOnce = dropdown => dropdown.change();
