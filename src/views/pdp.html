@@ -19,13 +19,12 @@ layout: mock-page
 </div>
 
 <!-- Add To Cart Form -->
-<form method="GET" action="">
-  <input type="hidden" name="confirm" value="true" />
+<form method="GET" action="/shopping-bag.html">
   {{> product-options.size }}
   {{> product-options.color }}
   <!-- wrapper for product notifications -->
-  <div id="product-notifications" class="u-clear-both u-clearfix"></div>
-  {{> buttons.full- addToBag=true }}
+  <div class="product__notification" class="u-clear-both u-clearfix"></div>
+  <div class="product__cta">{{> cta-buttons.add-to-bag }}</div>
   {{> product-estimated-delivery }}
 </form>
 

@@ -10,7 +10,7 @@ import sampleDefect from '../../materials/modules/product-notifications/final-sa
 import oneLeft from '../../materials/modules/product-notifications/one-left.html';
 import preorder from '../../materials/modules/product-notifications/preorder.html';
 
-export const WRAP_ID = 'product-notifications';
+export const WRAP_ID = 'product-notification';
 
 /**
  * Update price based on selected value.
