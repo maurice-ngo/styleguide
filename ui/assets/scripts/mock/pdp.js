@@ -129,6 +129,7 @@ function updateToInStock() {
     if (size.text)
       size.text = size.text.replace(' (Out of Stock)', '');
     size.removeAttribute('disabled');
+    size.removeAttribute('data-oos');
   });
 }
 
