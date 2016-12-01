@@ -2,11 +2,10 @@ import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
-import showNotification, {
-  WRAP_ID,
-} from './product-notification-show';
-import sizeTemplate from '../../materials/modules/product-options/size.html';
+import showNotification, { NOTIFICATION_CLASS } from './product-notification-show';
+import { updateChosenData } from '../lib/create-product-data';
 
+import productTemplate from '../../materials/modules/product.html';
 import finalSale from '../../materials/modules/product-notifications/final-sale.html';
 import sampleDefect from '../../materials/modules/product-notifications/final-sale-sample-defect.html';
 import oneLeft from '../../materials/modules/product-notifications/one-left.html';
@@ -15,21 +14,26 @@ import preorder from '../../materials/modules/product-notifications/preorder.htm
 chai.use(chaiJquery);
 
 describe('product notification show', () => {
-  const renderSizeTemplate = (data = {}) => {
-    fixture.set(`
-      <div id="${WRAP_ID}"></div>
-      ${sizeTemplate(data)}
-    `);
+  let product;
 
-    return $(fixture.el).find('.product__option');
-  };
+  beforeEach(() => {
+    product = {
+      wrap: fixture.el,
+      chosen: {},
+    }
+  });
 
   afterEach(() => fixture.cleanup());
 
+  it('should confirm the notification wrap is there', () => {
+    fixture.set(productTemplate({}));
+    expect($(`.${NOTIFICATION_CLASS}`)).to.have.length.above(0);
+  });
+
   it('should remove any existing elements from the wrap', () => {
-    fixture.set(`<div id="${WRAP_ID}">things</div>`);
-    showNotification($('<option/>')[0]);
-    expect($(`#${WRAP_ID}`).html()).to.be.empty;
+    fixture.set(productTemplate({}));
+    showNotification(product);
+    expect($(`.${NOTIFICATION_CLASS}`).html()).to.be.empty;
   });
 
   it('should render the various option values', () => {
@@ -60,9 +64,10 @@ describe('product notification show', () => {
           [tt.input]: true,
         }]
       };
-      const $productOption = renderSizeTemplate({ pdp });
-      showNotification($productOption.find(`option[value="${value}"]`)[0]);
-      expect($(`#${WRAP_ID}`)).to.have.html(tt.expected());
+      fixture.set(productTemplate({ pdp }));
+      updateChosenData(product, $(fixture.el).find(`option[value="${value}"]`)[0])
+      showNotification(product);
+      expect($(`.${NOTIFICATION_CLASS}`)).to.have.html(tt.expected());
     });
   });
 });

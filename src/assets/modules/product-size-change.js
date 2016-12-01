@@ -22,6 +22,7 @@ registerJQueryPlugin(PLUGIN_NAME, sizeChange);
 export const PRODUCT_BLOCK_CLASS = 'product';
 export const SIZE_ELEMENT_CLASS = `${PRODUCT_BLOCK_CLASS}__option--size`;
 export const SELECT_ELEMENT_CLASS = `${PRODUCT_BLOCK_CLASS}__option-select`;
+export const SIZE_SELECTOR = `.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`
 
 /**
  * Initializes size changes.
@@ -54,7 +55,7 @@ const attachChangeListener = data => $(data.sizeEl).change( evt => {
   // run updates
   redirectHref(chosen);
   updatePrice($wrap, PRODUCT_BLOCK_CLASS, chosen, sizeEl);
-  showNotification(chosen);
+  showNotification(data);
   updateCTA($wrap, chosen);
   updateDelivery($wrap, chosen);
   updateUnavailable(data);

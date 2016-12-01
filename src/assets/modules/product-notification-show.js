@@ -10,39 +10,35 @@ import sampleDefect from '../../materials/modules/product-notifications/final-sa
 import oneLeft from '../../materials/modules/product-notifications/one-left.html';
 import preorder from '../../materials/modules/product-notifications/preorder.html';
 
-export const WRAP_ID = 'product-notification';
+export const NOTIFICATION_CLASS = 'product__notification';
 
 /**
  * Update price based on selected value.
- * @param {HTMLElement} chosen - Selected option of select dropdown
+ * @param {Object} product - The product's data object
  */
-export default function showNotification(chosen) {
-  const $wrap = $(document.getElementById(WRAP_ID));
+export default function showNotification({ wrap, chosen }) {
+  const $el = $(wrap).find(`.${NOTIFICATION_CLASS}`);
+
   // clean up existing notification
-  $wrap.empty();
+  $el.empty();
 
   // show template
-  $wrap.html(notify(chosen));
+  $el.html(notify(chosen));
 }
 
 /**
  * Choose template for notification.
- * @param {HTMLElement} option - Selected option of select dropdown
+ * @param {Object} option - Selected option of select dropdown
  * @return {String} Handlebars template from import above
  */
 const notify = (option) => {
   // if data-attr, show notification
-  if (check('sample-defect'))
+  if (option['sample-defect'])
     return sampleDefect;
-  else if (check('final-sale'))
+  else if (option['final-sale'])
     return finalSale;
-  else if (check('one-left'))
+  else if (option['one-left'])
     return oneLeft;
-  else if (check('preorder'))
+  else if (option.preorder)
     return preorder;
-
-  function check(attr) {
-    return !!option.getAttribute('data-' + attr)
-      && option.getAttribute('data-' + attr) === 'true';
-  }
-}
+};

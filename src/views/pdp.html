@@ -5,32 +5,8 @@ fabricator: false
 layout: mock-page
 ---
 
-<section class="product u-margin-l--xl u-margin-r--xl">
-
-<!-- Image Carousel -->
-{{> product-image-carousel }}
-
-<!-- Product Title -->
-{{> product-title- }}
-
-<!-- Price -->
-<div class="product__price u-margin-b--xl">
-  {{> price.regular }}
-</div>
-
-<!-- Add To Cart Form -->
-<form method="GET" action="/shopping-bag.html">
-  {{> product-options.size }}
-  {{> product-options.color }}
-  <!-- wrapper for product notifications -->
-  <div class="product__notification" class="u-clear-both u-clearfix"></div>
-  <div class="product__cta">{{> cta-buttons.add-to-bag }}</div>
-  {{> product-estimated-delivery }}
-</form>
-
-<!-- Favorite button -->
-{{> favorite-buttons.default }}
-
+<section class="u-margin-l--xl u-margin-r--xl">
+  {{> product }}
 </section>
 
 <section>
