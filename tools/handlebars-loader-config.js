@@ -1,3 +1,4 @@
+const path = require('path');
 const fs = require('fs');
 const join = require('path').join;
 const Promise = require('bluebird');
@@ -20,13 +21,14 @@ function handlebarsLoaderConfig(options) {
       const filename = request.replace(/\./g, '/');
       const promises = options.dirs.map(function(dir) {
         const partialPath = join(dir, filename + options.extension)
+
         return fs.accessAsync(partialPath, fs.constants ? fs.constants.F_OK : fs.F_OK)
           .then(function() {
             return partialPath;
           })
-          // Allow for rejection to fall through since errors will simply get
-          // rejected and will be picked up on build tim
-          .catch(function() {});
+          .catch(function() {
+            return findFileByNumberedPrefix(dir, filename, options.extension);
+          });
       });
 
       Promise
@@ -39,7 +41,31 @@ function handlebarsLoaderConfig(options) {
               cb(null, filename);
             }
           });
-      });
+        })
     }
   };
+}
+
+function findFileByNumberedPrefix(dir, filepath, extension) {
+  const parts = filepath.split(path.sep);
+  const filename = parts.pop() + extension;
+  parts.unshift(dir);
+
+  var fullDir = path.join.apply(path, parts);
+
+  return new Promise(function(resolve, reject) {
+    fs.readdirAsync(fullDir).then(function(files) {
+      var actual;
+
+      files.forEach(function(file) {
+        if (new RegExp('^[\\d]+\-' + filename).test(file)) {
+          actual = path.join(fullDir, file);
+        }
+      });
+
+      resolve(actual);
+    }, function() {
+      resolve();
+    });
+  });
 }
