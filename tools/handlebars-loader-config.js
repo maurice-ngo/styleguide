@@ -51,7 +51,7 @@ function findFileByNumberedPrefix(dir, filepath, extension) {
   const filename = parts.pop() + extension;
   parts.unshift(dir);
 
-  var fullDir = path.join.apply(path, parts);
+  const fullDir = path.join.apply(path, parts);
 
   return new Promise(function(resolve, reject) {
     fs.readdirAsync(fullDir).then(function(files) {
