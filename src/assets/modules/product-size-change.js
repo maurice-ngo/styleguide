@@ -56,7 +56,7 @@ const attachChangeListener = data => $(data.sizeEl).change( evt => {
   redirectHref(chosen);
   updatePrice($wrap, PRODUCT_BLOCK_CLASS, chosen, sizeEl);
   showNotification(data);
-  updateCTA($wrap, chosen);
+  updateCTA(data);
   updateDelivery($wrap, chosen);
   updateUnavailable(data);
 
