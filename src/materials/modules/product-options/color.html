@@ -6,7 +6,7 @@ notes: JavaScript forwards a user when `color` dropdown is changed. This is base
   <label for="color" class="product__option-label">Color</label>
   <select id="color" class="product__option-select">
   {{#each pdp.colors}}
-    <option value="{{this.label}}" data-href="{{this.href}}">{{this.label}}</option>
+    <option data-href="{{this.href}}">{{this.label}}</option>
   {{/each}}
   </select>
 </div>

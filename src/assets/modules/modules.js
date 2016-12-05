@@ -9,7 +9,7 @@ import './product-color-change';
 import './product-oos';
 
 $(document).ready(() => {
-  $('.product__image--carousel').slick({
+  $('.product .product__image--carousel').slick({
     lazyLoad: 'progressive',
     dots: true,
     dotsClass: 'product__image--carousel__dots',
@@ -17,8 +17,8 @@ $(document).ready(() => {
     arrows: false
   });
   $('.js-accordion').accordion();
-  $('.product__option--size .product__option-select').sizeChange();
-  $('.product__option--color .product__option-select').colorChange();
-  $('.btn--add-to-bag').addToBag();
-  $('.product-option--oos').oosProduct();
+  $('.product .product__option--size .product__option-select').sizeChange();
+  $('.product .product__option--color .product__option-select').colorChange();
+  $('.product .product__cta button[type="submit"]').addToBag();
+  $('.product .product-option--oos').oosProduct();
 });

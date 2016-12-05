@@ -1,8 +1,5 @@
 import $ from 'jquery';
 import chai, { expect } from 'chai';
-import sinonChai from 'sinon-chai';
-
-chai.use(sinonChai);
 
 import updateUnavailable, { VALUE } from './product-unavailable-update';
 

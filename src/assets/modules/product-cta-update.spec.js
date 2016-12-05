@@ -9,7 +9,7 @@ import productTemplate from '../../materials/modules/product.html';
 
 chai.use(chaiJquery);
 
-describe.only('product cta update', () => {
+describe('product cta update', () => {
   let $fixture;
   let product;
   const NEW_HTML = '<span>this is some new html</span>';
