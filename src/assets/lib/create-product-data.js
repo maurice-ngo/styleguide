@@ -57,6 +57,7 @@ export const updateChosenData = (product, chosen) => {
     oos: getAttr(chosen, 'oos'),
     price: getAttr(chosen, 'price'),
     isOnSale: isOnSale(chosen, product.regularPrice),
+    value: chosen.value || '',
   };
 };
 
