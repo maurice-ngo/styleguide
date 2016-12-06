@@ -129,6 +129,8 @@ const isOnSale = (item, regularPrice) => {
  * @return {String|Boolean} The attribute value (or existence)
  */
 function getAttr(option, attr) {
+const getAttr = (option, attr) => {
   const val = option.getAttribute(`data-${attr}`) || false;
   return (val && val !== 'false') ? (val === 'true') || val || true : false;
 }
+};

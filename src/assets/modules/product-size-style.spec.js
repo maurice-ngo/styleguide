@@ -15,6 +15,9 @@ describe('product size style', () => {
     'park-ranger': 'What are you, a fucking park ranger now?',
     'great-plan': `That's a great plan, Walter`,
   };
+  const changeOptions = {
+    update: sizeStyle,
+  }
 
   beforeEach(() => {
     fixture.set(`
@@ -29,12 +32,10 @@ describe('product size style', () => {
       </div>
     `);
     $dropdown = $(fixture.el).find(`.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`);
-    sizeChange($dropdown);
+    sizeChange($dropdown[0], changeOptions);
   });
 
-  afterEach(() => {
-    fixture.cleanup();
-  });
+  afterEach(() => fixture.cleanup());
 
   it('should capture the default value initially', () => {
     expect($dropdown).to.have.value('default').and
@@ -43,14 +44,13 @@ describe('product size style', () => {
 
   it('should capture non default value initially', () => {
     $dropdown.val('park-ranger');
-    sizeChange($dropdown);
+    sizeChange($dropdown[0], changeOptions);
     expect($dropdown).to.have.value('park-ranger');
   });
 
   it('should change value and not have a default class', () => {
-    $dropdown
-      .val('no-money')
-      .trigger('change');
+    $dropdown.val('no-money')
+    sizeChange($dropdown[0], changeOptions);
     expect($dropdown).to.not.have.class(DEFAULT_CLASS);
   });
 });

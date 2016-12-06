@@ -9,13 +9,13 @@ export const DEFAULT_CLASS = 'default';
 
 /**
  * Toggle style of dropdown based on selected value.
- * @param {HTMLElement} select - The current target interacted with
+ * @param {HTMLElement} sizeEl - The current target interacted with
  * @param {HTMLElement} chosen - Selected option
  */
-export default function toggleStyle(select, chosen) {
+export default function sizeStyle({ sizeEl, chosen }) {
   // get the selected option
   const { value = '' } = chosen;
 
   // toggleClass based on selected.value
-  $(select).toggleClass(DEFAULT_CLASS, value === 'default');
+  $(sizeEl).toggleClass(DEFAULT_CLASS, value === 'default');
 };

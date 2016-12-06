@@ -25,9 +25,8 @@ describe('product size change', () => {
   afterEach(() => fixture.cleanup());
 
   it('should fire off a change event with the proper DOM structure', () => {
-    const selector = `.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`;
-    const $size = $fixture.find(selector);
-    sizeChange($size);
+    const $size = $fixture.find(`.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`);
+    sizeChange($size, { update: () => {} });
     $size.find('option[value="1"]').trigger('change');
   });
 });
