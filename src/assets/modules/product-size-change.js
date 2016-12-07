@@ -31,8 +31,9 @@ const DEFAULT_OPTIONS = {
 /**
  * Initializes size changes.
  * @param {HTMLElement} el - The select dropdown we're attaching to
+ * @param {Object} options.update - Function fired to update page on size change
  */
-export default function sizeChange(el, options) {
+export default function sizeChange(el, options = {}) {
   const { update } = Object.assign({}, DEFAULT_OPTIONS, options);
   // local jQuery reference to el
   const $dropdown = $(el);
