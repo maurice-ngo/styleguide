@@ -39,7 +39,7 @@ describe('product cta update', () => {
   });
 
   it('should throw an error when the CTA wrap does not exist', () => {
-    $(data.wrap).empty()[0];
+    $(data.wrap).empty();
     expect(() => updateCTA(data)).to.throw(Error);
   });
 
