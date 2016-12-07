@@ -32,12 +32,13 @@ describe('product size style', () => {
       </div>
     `);
     $dropdown = $(fixture.el).find(`.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`);
-    sizeChange($dropdown[0], changeOptions);
   });
 
   afterEach(() => fixture.cleanup());
 
   it('should capture the default value initially', () => {
+    sizeChange($dropdown[0], changeOptions);
+    $dropdown.trigger('change');
     expect($dropdown).to.have.value('default').and
       .to.have.class(DEFAULT_CLASS);
   });
@@ -45,12 +46,14 @@ describe('product size style', () => {
   it('should capture non default value initially', () => {
     $dropdown.val('park-ranger');
     sizeChange($dropdown[0], changeOptions);
+    $dropdown.trigger('change');
     expect($dropdown).to.have.value('park-ranger');
   });
 
   it('should change value and not have a default class', () => {
     $dropdown.val('no-money')
     sizeChange($dropdown[0], changeOptions);
+    $dropdown.trigger('change');
     expect($dropdown).to.not.have.class(DEFAULT_CLASS);
   });
 });
