@@ -29,7 +29,15 @@ const DEFAULT_OPTIONS = {
  */
 export default function addedConfirmation(options = {}) {
   const { container } = Object.assign({}, DEFAULT_OPTIONS, options);
-  const modal = create();
+  const template = document.getElementById(TEMPLATE_ID);
+  // if the template is not included,
+  // throw an error and return nothing
+  if (!template) {
+    throw new Error(`No template (#${TEMPLATE_ID}) was found`);
+    return;
+  }
+
+  const modal = create(template);
 
   applyClickClose(modal);
   append(modal, container);
@@ -64,7 +72,6 @@ export const displayConfirmation = (modal, chosen, sizeEl) => {
  */
 const updateImage = (product, modal) => {
   const productImage = product.find(`.${PRODUCT_IMG_CLASS}`)[1];
-  debugger;
   // slick pushes the last img to first, so use index 1
   const img = modal.find(`.${MODAL_BLOCK_CLASS}__image`)[0];
 
@@ -94,14 +101,15 @@ const updateInfo = (product, modal) => {
 
 /**
  * Creates div.modal.
+ * @param {HTMLElement} template - Modal template
  * @return {HTMLElement} Immutable modal element
  */
-const create = () => {
+const create = template => {
   // create the modal now, so we don't recreate on every submit
   let div = document.createElement('DIV');
 
   div.className = `${MODAL_CLASS} ${CONCEAL_CLASS}`;
-  div.innerHTML = document.getElementById(TEMPLATE_ID).innerHTML;
+  div.innerHTML = template.innerHTML;
   div.style.display = 'block'; // to override the default modal display: none
 
   return div;

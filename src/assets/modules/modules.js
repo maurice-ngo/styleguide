@@ -9,16 +9,19 @@ import './product-color-change';
 import './product-oos';
 
 $(document).ready(() => {
-  $('.product__image--carousel').slick({
+  $('.js-accordion').accordion();
+
+  const $product = $('.product');
+
+  $product.find('.product__image--carousel').slick({
     lazyLoad: 'progressive',
     dots: true,
     dotsClass: 'product__image--carousel__dots',
     appendDots: '.product__image',
     arrows: false
   });
-  $('.js-accordion').accordion();
-  $('.product__option--size .product__option-select').sizeChange();
-  $('.product__option--color .product__option-select').colorChange();
-  $('.btn--add-to-bag').addToBag();
-  $('.product-option--oos').oosProduct();
+  $product.find('product__option--size .product__option-select').sizeChange().trigger('change');
+  $product.find('product__option--color .product__option-select').colorChange();
+  $product.find('product__cta button[type="submit"]').addToBag();
+  $product.find('product-option--oos').oosProduct({ $wrap: $product });
 });

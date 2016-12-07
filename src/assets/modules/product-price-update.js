@@ -12,7 +12,6 @@ import smallSaleTemplate from '../../materials/modules/price/small-on-sale.html'
 
 export const REGULAR_PRICE_ATTR = 'data-regular-price';
 export const PRICE_ATTR = 'data-price';
-export const ON_SALE_CLASS = 'on-sale';
 export const TEMPLATES = {
   medium: {
     regular: regularTemplate,
@@ -48,6 +47,5 @@ export default function updatePrice($wrapEl, wrapBlockClass, chosen, sizeEl, tem
   const isOnSale = !!(parseFloat(price) < parseFloat(regularPrice));
   const template = isOnSale ? TEMPLATES[templateStyle].sale : TEMPLATES[templateStyle].regular;
 
-  $wrapEl.toggleClass(ON_SALE_CLASS, isOnSale)
   $price.html(template(data));
 };

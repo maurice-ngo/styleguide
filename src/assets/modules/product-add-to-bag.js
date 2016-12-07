@@ -7,12 +7,11 @@
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 import addedConfirmation, { displayConfirmation } from './product-added-confirmation';
+import { SIZE_SELECTOR } from './product-size-change';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'addToBag';
 registerJQueryPlugin(PLUGIN_NAME, addToBag);
-
-export const SIZE_SELECTOR = '.product-option--size .product-option__select';
 
 /**
  * Initializes color dropdown changes.
@@ -22,10 +21,16 @@ export default function addToBag(el) {
   // create & add confirmation modal once up front
   const confirmation = addedConfirmation();
 
-  // attach handler to el
-  attachSubmitHandler(el, confirmation);
+  if (!confirmation) {
+    // if no modal is returned,
+    // throw an error (and form will submit as god intended)
+    throw new Error(`No template (#${TEMPLATE_ID}) was found`);
+  }
+  else {
+    // attach handler to el
+    attachSubmitHandler(el, confirmation);
+  }
 }
-
 
 /**
  * Adds 'submit' listener to parent 'form'.
