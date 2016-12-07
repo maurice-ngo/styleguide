@@ -21,7 +21,7 @@ export default function addToBag(el) {
   // create & add confirmation modal once up front
   const confirmation = addedConfirmation();
 
-  if (!template) {
+  if (!confirmation) {
     // if no modal is returned,
     // throw an error (and form will submit as god intended)
     throw new Error(`No template (#${TEMPLATE_ID}) was found`);

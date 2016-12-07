@@ -10,7 +10,8 @@ import ctaPreorder from '../../materials/modules/cta-buttons/preorder.html'
 import ctaNotifyMeSpecial from '../../materials/modules/cta-buttons/notify-me-special.html'
 import ctaNotifyMe from '../../materials/modules/cta-buttons/notify-me.html'
 
-export const CTA_SELECTOR = '.product__cta';
+export { ctaAddToBag, ctaPreorder, ctaNotifyMeSpecial, ctaNotifyMe, };
+export const CTA_WRAP_CLASS = 'product__cta';
 const DEFAULT_OPTIONS = {
   chooseCTA,
 };
@@ -23,11 +24,16 @@ const DEFAULT_OPTIONS = {
  * @param {Boolean} preorder - Whether the chosen size is preorder only
  * @param {Boolean} allOnSale - Whether all sizes are on sale
  */
-export default function updateCTA({ wrap, chosen, allOnSale }, options = {}) {
+export default function updateCTA({ wrap, chosen = {}, allOnSale }, options = {}) {
   const { oos, preorder } = chosen;
   const { chooseCTA } = Object.assign({}, DEFAULT_OPTIONS, options);
 
-  $(wrap).find(CTA_SELECTOR).html(chooseCTA(oos, allOnSale, preorder));
+  const $cta = $(wrap).find(`.${CTA_WRAP_CLASS}`);
+  if (!$cta.length) {
+    throw new Error(`No .${CTA_WRAP_CLASS} was found`);
+  }
+
+  $cta.html(chooseCTA(oos, allOnSale, preorder));
 };
 
 /**
@@ -37,6 +43,11 @@ export default function updateCTA({ wrap, chosen, allOnSale }, options = {}) {
  * @param {Boolean} allOnSale - Whether all sizes are on sale
  */
 function chooseCTA(oos, allOnSale, preorder) {
-  return oos ? allOnSale ? ctaNotifyMe : ctaNotifyMeSpecial
-         : preorder ? ctaPreorder : ctaAddToBag;
+  if (oos) {
+    return allOnSale ? ctaNotifyMe : ctaNotifyMeSpecial;
+  }
+  if (preorder) {
+    return ctaPreorder;
+  }
+  return ctaAddToBag;
 }

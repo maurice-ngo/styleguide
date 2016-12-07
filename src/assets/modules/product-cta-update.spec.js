@@ -2,46 +2,72 @@ import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
-import updateCTA, { CTA_SELECTOR } from './product-cta-update';
 import { PRODUCT_BLOCK_CLASS } from './product-size-change';
-
-import productTemplate from '../../materials/modules/product.html';
+import updateCTA, {
+  CTA_WRAP_CLASS,
+  ctaAddToBag,
+  ctaPreorder,
+  ctaNotifyMeSpecial,
+  ctaNotifyMe,
+} from './product-cta-update';
 
 chai.use(chaiJquery);
 
 describe('product cta update', () => {
   let $fixture;
-  let product;
-  const NEW_HTML = '<span>this is some new html</span>';
-  const options = {
-    chooseCTA: () => {
-      return NEW_HTML;
-    },
-  };
+  let $ctaWrap;
+  let data;
 
   beforeEach(() => {
-    fixture.set(productTemplate({}));
+    fixture.set(`
+      <div class="${PRODUCT_BLOCK_CLASS}">
+        <div class="${CTA_WRAP_CLASS}"></div>
+      </div>
+    `);
     $fixture = $(fixture.el);
-    product = $fixture.find(`.${PRODUCT_BLOCK_CLASS}`);
+    $ctaWrap = $fixture.find(`.${CTA_WRAP_CLASS}`);
+    data = {
+      wrap: $fixture.find(`.${PRODUCT_BLOCK_CLASS}`)[0],
+      chosen: {},
+    };
   });
 
   afterEach(() => fixture.cleanup());
 
-  it('should find the CTA wrap', () => {
-    expect($(CTA_SELECTOR)).to.have.length.above(0);
+  it('should not throw an error when the CTA wrap exists', () => {
+    expect(() => updateCTA(data)).to.not.throw(Error);
   });
 
-  it('should update the CTA wrap.html' , () => {
-    const data = {
-      wrap: product,
-      allOnSale: false,
-      chosen: {
-        oos: false,
-        preorder: false,
-      },
-    };
-    updateCTA(data, options);
-    const ctaWrap = $(CTA_SELECTOR);
-    expect(ctaWrap.html()).to.equal(NEW_HTML);
+  it('should throw an error when the CTA wrap does not exist', () => {
+    $(data.wrap).empty();
+    expect(() => updateCTA(data)).to.throw(Error);
+  });
+
+  it('should show the ADD TO BAG CTA by default', () => {
+    const ctaTemplate = ctaAddToBag();
+    updateCTA(data);
+    expect($ctaWrap).to.have.html(ctaTemplate);
+  });
+
+  it('should show the NOTIFY ME CTA when the chosen size is out of stock and all stock is on sale', () => {
+    const ctaTemplate = ctaNotifyMe();
+    data.allOnSale = true;
+    data.chosen.oos = true;
+    updateCTA(data);
+    expect($ctaWrap).to.have.html(ctaTemplate);
+  });
+
+  it('should show the NOTIFY ME / SPECIAL ORDER CTA when the chosen size is out of stock and all stock is not on sale', () => {
+    const ctaTemplate = ctaNotifyMeSpecial();
+    data.chosen.oos = true;
+    updateCTA(data);
+    expect($ctaWrap).to.have.html(ctaTemplate);
+  });
+
+  it('should show the PREORDER CTA when the chosen size is on preorder', () => {
+    const ctaTemplate = ctaPreorder();
+    data.chosen.preorder = true;
+    updateCTA(data);
+    expect($ctaWrap).to.have.html(ctaTemplate);
   });
 });

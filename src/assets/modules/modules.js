@@ -20,7 +20,7 @@ $(document).ready(() => {
     appendDots: '.product__image',
     arrows: false
   });
-  $product.find('product__option--size .product__option-select').sizeChange();
+  $product.find('product__option--size .product__option-select').sizeChange().trigger('change');
   $product.find('product__option--color .product__option-select').colorChange();
   $product.find('product__cta button[type="submit"]').addToBag();
   $product.find('product-option--oos').oosProduct({ $wrap: $product });
