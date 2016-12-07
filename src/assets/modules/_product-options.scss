@@ -17,7 +17,7 @@
   float: left;
   width: 50%;
   margin-bottom: rem(8);
-  background-color: $color__grey--lighter;
+  background-color: $color__offwhite;
   z-index: 1; // need this for the label overlap trickery
 
   @include bp-until($small-mobile) {
@@ -95,7 +95,8 @@
       line-height: rem(15);
       text-align: left;
       &:disabled {
-        color: inherit;
+        -webkit-text-fill-color: $color__black;
+        color: $color__black;
         opacity: 1;
       }
     }
