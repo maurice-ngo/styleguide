@@ -2,13 +2,14 @@ import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
-import updateCTA, { CTA_WRAP_CLASS } from './product-cta-update';
 import { PRODUCT_BLOCK_CLASS } from './product-size-change';
-
-import ctaAddToBag from '../../materials/modules/cta-buttons/add-to-bag.html'
-import ctaPreorder from '../../materials/modules/cta-buttons/preorder.html'
-import ctaNotifyMeSpecial from '../../materials/modules/cta-buttons/notify-me-special.html'
-import ctaNotifyMe from '../../materials/modules/cta-buttons/notify-me.html'
+import updateCTA, {
+  CTA_WRAP_CLASS,
+  ctaAddToBag,
+  ctaPreorder,
+  ctaNotifyMeSpecial,
+  ctaNotifyMe,
+} from './product-cta-update';
 
 chai.use(chaiJquery);
 

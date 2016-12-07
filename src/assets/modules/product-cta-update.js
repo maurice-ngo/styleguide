@@ -10,6 +10,7 @@ import ctaPreorder from '../../materials/modules/cta-buttons/preorder.html'
 import ctaNotifyMeSpecial from '../../materials/modules/cta-buttons/notify-me-special.html'
 import ctaNotifyMe from '../../materials/modules/cta-buttons/notify-me.html'
 
+export { ctaAddToBag, ctaPreorder, ctaNotifyMeSpecial, ctaNotifyMe, };
 export const CTA_WRAP_CLASS = 'product__cta';
 const DEFAULT_OPTIONS = {
   chooseCTA,
