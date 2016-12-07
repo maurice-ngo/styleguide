@@ -95,6 +95,7 @@
       line-height: rem(15);
       text-align: left;
       &:disabled {
+        -webkit-text-fill-color: $color__black;
         color: $color__black;
         opacity: 1;
       }
