@@ -6,7 +6,7 @@ import sizeStyle, { DEFAULT_CLASS } from './product-size-style';
 
 chai.use(chaiJquery);
 
-describe.only('product size style', () => {
+describe('product size style', () => {
   let $dropdown;
   let sizeEl;
 
