@@ -18,10 +18,11 @@ $(document).ready(() => {
     dots: true,
     dotsClass: 'product__image--carousel__dots',
     appendDots: '.product__image',
-    arrows: false
+    arrows: false,
+    infinite: false,
   });
-  $product.find('product__option--size .product__option-select').sizeChange().trigger('change');
-  $product.find('product__option--color .product__option-select').colorChange();
-  $product.find('product__cta button[type="submit"]').addToBag();
-  $product.find('product-option--oos').oosProduct({ $wrap: $product });
+  $product.find('.product__option--size .product__option-select').sizeChange().trigger('change');
+  $product.find('.product__option--color .product__option-select').colorChange();
+  $product.find('.product__cta button[type="submit"]').addToBag();
+  $product.find('.product-option--oos').oosProduct({ $wrap: $product });
 });

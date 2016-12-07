@@ -241,7 +241,7 @@ $btn-border-width  : 2;
   text-transform: uppercase;
   white-space: initial;
   cursor: pointer;
-  &:hover 
+  &:hover,
   &:active,
   &:focus,
   &.active {
@@ -492,4 +492,3 @@ input:checked + .btn--grey-dark {
     border: rem(0);
   }
 }
-
