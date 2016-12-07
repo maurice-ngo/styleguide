@@ -107,32 +107,4 @@ describe('product price update', () => {
       }
     }));
   });
-
-  it('should show an item on sale with a class of on-sale on the wrap', () => {
-    const $wrap = $fixture.find('#wrap');
-
-    updatePrice(
-      $wrap,
-      WRAP_BLOCK_CLASS,
-      $fixture.find('option[value="8.00"]')[0],
-      $fixture.find('#size')[0],
-      'medium',
-    );
-
-    expect($wrap).to.have.class(ON_SALE_CLASS);
-  });
-
-  it('should show an item not on sale without a class of on-sale on the wrap', () => {
-    const $wrap = $fixture.find('#wrap');
-
-    updatePrice(
-      $wrap,
-      WRAP_BLOCK_CLASS,
-      $fixture.find('option[value="20.00"]')[0],
-      $fixture.find('#size')[0],
-      'medium',
-    );
-
-    expect($wrap).to.not.have.class(ON_SALE_CLASS);
-  });
 });

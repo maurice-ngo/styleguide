@@ -17,11 +17,11 @@ registerJQueryPlugin(PLUGIN_NAME, oosProduct);
  * Initializes changes for oos product.
  * @param {HTMLElement} el - The select dropdown we're attaching to
  */
-export default function oosProduct(el) {
-  const wrap = $(el).closest('.product');
+export default function oosProduct(el, options = {}) {
+  const $wrap = options.$wrap || $(el).closest('.product');
   const chosen = document.createElement('li');
   chosen.setAttribute('data-oos', 'true')
 
-  updateDelivery(wrap, chosen);
-  updateCTA(wrap, chosen);
+  updateDelivery($wrap, chosen);
+  updateCTA($wrap, chosen);
 };
