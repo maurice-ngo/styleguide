@@ -41,7 +41,6 @@ export default function sizeChange(el, options = {}) {
   const data = createProductData($wrap);
 
   attachChangeListener(data, update);
-  runOnce($dropdown);
 };
 
 /**
@@ -52,12 +51,6 @@ export default function sizeChange(el, options = {}) {
 const attachChangeListener = (data, update) => $(data.sizeEl).change( evt => {
   update(data)
 });
-
-/**
- * Runs once to update on page load.
- * @param {jQueryElement} dropdown - The select dropdown
- */
-const runOnce = dropdown => dropdown.change();
 
 /**
  * Attaches change event to select dropdown.

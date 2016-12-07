@@ -17,7 +17,7 @@ $(document).ready(() => {
     arrows: false
   });
   $('.js-accordion').accordion();
-  $('.product .product__option--size .product__option-select').sizeChange();
+  $('.product .product__option--size .product__option-select').sizeChange().trigger('change');
   $('.product .product__option--color .product__option-select').colorChange();
   $('.product .product__cta button[type="submit"]').addToBag();
   $('.product .product-option--oos').oosProduct();

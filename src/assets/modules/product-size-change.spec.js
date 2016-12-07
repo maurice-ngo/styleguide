@@ -1,10 +1,12 @@
 import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
+import sinonChai from 'sinon-chai';
 
 import sizeChange, { PRODUCT_BLOCK_CLASS, SIZE_ELEMENT_CLASS, SELECT_ELEMENT_CLASS } from './product-size-change';
 
 chai.use(chaiJquery);
+chai.use(sinonChai);
 
 describe('product size change', () => {
   let $fixture;
@@ -25,8 +27,11 @@ describe('product size change', () => {
   afterEach(() => fixture.cleanup());
 
   it('should fire off a change event with the proper DOM structure', () => {
+    const update = sinon.spy();
     const $size = $fixture.find(`.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`);
-    sizeChange($size, { update: () => {} });
-    $size.find('option[value="1"]').trigger('change');
+    sizeChange($size, { update });
+    $size.val('2').trigger('change');
+    expect(update).to.have.been.calledOnce;
+    update.reset();
   });
 });
