@@ -3,7 +3,7 @@ import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 import modalTemplate from '../../materials/modules/modals/product-added-confirmation.html';
 import productTitleTemplate from '../../materials/modules/product-title-.html';
-import productImageCarouselTemplate from '../../materials/modules/product-image-carousel.html';
+import productImageCarouselTemplate from '../../materials/modules/image-carousel.html';
 
 chai.use(chaiJquery);
 
@@ -21,15 +21,19 @@ describe('product added confirmation', () => {
   const productInfo = {
     name: 'The Dude',
     brand: 'Lebowski',
+    alt: 'El Duderino',
     brandLink: 'http://lebowski.me',
-    carousel: ['#', '#']
+    images: ['#', '#']
   };
 
   beforeEach(() => {
     fixture.set(`
       <div class="product">
         ${productTitleTemplate({ pdp: productInfo })}
-        ${productImageCarouselTemplate({ pdp: productInfo })}
+        ${productImageCarouselTemplate(productInfo)}
+        <select id="size">
+          <option />
+        </select>
       </div>
 
       <script id="${TEMPLATE_ID}" type="text/the-dude-abides">
@@ -78,10 +82,12 @@ describe('product added confirmation', () => {
 
   describe('when displaying confirmation', () => {
     it('should populate product info', () => {
+      const $sizeEl = $fixture.find('#size');
+      const chosen = $sizeEl.find('option:selected')[0];
       $modal;
-      displayConfirmation($modal[0], $('<div/>')[0], $('<select><option/></select>')[0]);
-      expect($modal.find('.product__name')).to.have.text(productInfo.name);
-      expect($modal.find('.product__brand a'))
+      displayConfirmation($modal[0], chosen, $sizeEl[0]);
+      expect($modal.find('.product-name')).to.have.text(productInfo.name);
+      expect($modal.find('.product-brand a'))
         .to.have.text(productInfo.brand)
         .and
         .to.have.attr('href', productInfo.brandLink);

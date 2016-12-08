@@ -13,21 +13,23 @@ chai.use(chaiJquery);
 
 describe('product delivery update', () => {
   let $product;
-  const templateData = {
-    'delivery-date': 'never',
-    'regular-price': 'things?',
-    sizes: [
-      { 'delivery-date': 'foo', value: 'yo', price: 'sweet' },
-    ]
-  };
+  let data;
+  const ORIGINAL_DATE = 'cool';
+  const NEW_DATE = 'beans';
 
   beforeEach(() => {
     $product = $(fixture.set(`
       <div class="product">
-      ${sizeTemplate({ pdp: templateData })}
       ${estimatedDeliveryTemplate()}
       </div>
     `));
+
+    data = {
+      wrap: $product[0],
+      chosen: {
+        'delivery-date': ORIGINAL_DATE,
+      },
+    };
   });
 
   afterEach(() => {
@@ -35,16 +37,16 @@ describe('product delivery update', () => {
   });
 
   it('should should use the default delivery date', () => {
-    deliveryUpdate($product, $product.find('option[value="default"]')[0]);
+    deliveryUpdate(data);
     const $delivery = $product.find(DELIVERY_CLASS);
     const $info = $delivery.find(INFO_EL);
-    expect($info).to.have.text(templateData['delivery-date']);
+    expect($info).to.have.text(ORIGINAL_DATE);
   });
 
   it('should should use a selected delivery date', () => {
-    const [size] = templateData.sizes;
-    deliveryUpdate($product, $product.find(`[value="${size.value}"]`)[0]);
+    data.chosen['delivery-date'] = NEW_DATE;
+    deliveryUpdate(data);
     const $info = $product.find(DELIVERY_CLASS).find(INFO_EL);
-    expect($info).to.have.text(size['delivery-date']);
+    expect($info).to.have.text(NEW_DATE);
   });
 });
