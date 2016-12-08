@@ -1,9 +1,8 @@
 ---
-notes: |
-  - Use `.block` class to add additional spacing to product titles
+notes: Product Titles include the Product name & Brand name
 ---
 
-<h1 class="product__name u-margin-t--none u-margin-b--xs">{{pdp.name}}</h1>
-<p class="product__brand u-text-lg u-margin-b--xs">
-  <a href="{{pdp.brandLink}}" title="{{pdp.brand}}">{{pdp.brand}}</a>
+<h1 class="product-name">{{pdp.name}}</h1>
+<p class="product-brand">
+  <a href="{{pdp.brandLink}}" title="{{pdp.brand}}" class="product-brand__link">{{pdp.brand}}</a>
 </p>
