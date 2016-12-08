@@ -20,9 +20,7 @@ export const PLUGIN_NAME = 'sizeChange';
 registerJQueryPlugin(PLUGIN_NAME, sizeChange);
 
 export const PRODUCT_BLOCK_CLASS = 'product';
-export const SIZE_ELEMENT_CLASS = `${PRODUCT_BLOCK_CLASS}__option--size`;
-export const SELECT_ELEMENT_CLASS = `${PRODUCT_BLOCK_CLASS}__option-select`;
-export const SIZE_SELECTOR = `.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`
+export const SIZE_ELEMENT_CLASS = 'product-size__select';
 
 const DEFAULT_OPTIONS = {
   update: runUpdates,
@@ -35,10 +33,7 @@ const DEFAULT_OPTIONS = {
  */
 export default function sizeChange(el, options = {}) {
   const { update } = Object.assign({}, DEFAULT_OPTIONS, options);
-  // local jQuery reference to el
-  const $dropdown = $(el);
-  const $wrap = $dropdown.closest(`.${PRODUCT_BLOCK_CLASS}`);
-  const data = createProductData($wrap);
+  const data = createProductData(el);
 
   attachChangeListener(data, update);
 };
@@ -68,10 +63,10 @@ function runUpdates( data ) {
 
   // run updates
   redirectHref(chosen);
-  updatePrice($wrap, PRODUCT_BLOCK_CLASS, chosen, sizeEl);
+  updatePrice(data);
   showNotification(data);
   updateCTA(data);
-  updateDelivery($wrap, chosen);
+  updateDelivery(data);
   updateUnavailable(data);
 
   // only for select dropdown

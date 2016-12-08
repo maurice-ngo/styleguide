@@ -7,7 +7,7 @@
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 import addedConfirmation, { displayConfirmation } from './product-added-confirmation';
-import { SIZE_SELECTOR } from './product-size-change';
+import { SIZE_ELEMENT_CLASS } from './product-size-change';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'addToBag';
@@ -39,8 +39,7 @@ export default function addToBag(el) {
  */
 const attachSubmitHandler = (btn, confirmation) => {
   const form = $(btn).closest('form');
-  const sizeEl = form.find(SIZE_SELECTOR)[0];
-  const $confirmation = $(confirmation);
+  const sizeEl = form.find(`.${SIZE_ELEMENT_CLASS}`)[0];
 
   // when the form submits, show the modal
   form.submit(e => {
@@ -60,7 +59,7 @@ const attachSubmitHandler = (btn, confirmation) => {
  * @return {HTMLElement} Element that's been chosen
  */
 const check = el => {
-  if (!el) // did not find SIZE_SELECTOR within the form
+  if (!el) // did not find SIZE_ELEMENT_CLASS within the form
     return;
 
   const tagName = el.tagName;

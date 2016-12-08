@@ -4,16 +4,24 @@
  * @module createProductData
  */
 
-import { PRODUCT_BLOCK_CLASS, SIZE_ELEMENT_CLASS, SELECT_ELEMENT_CLASS } from '../modules/product-size-change';
-import { PRICE_ATTR, REGULAR_PRICE_ATTR } from '../modules/product-price-update';
+import $ from 'jquery';
+
+import { SIZE_ELEMENT_CLASS } from '../modules/product-size-change';
+
+const PRICE_ATTR = 'data-price';
+const REGULAR_PRICE_ATTR = 'data-regular-price';
+const DEFAULT_OPTIONS = {
+  wrapBlockClass: 'product',
+};
 
 /**
  * Creates a javascript object containing product data
- * @param {jQueryElement} $wrap - The .product wrap
+ * @param {jQueryElement} sizeEl - The size element (select, input, etc)
  # @return {Object} Contains relevant data to a product
  */
-export default function createProductData($wrap) {
-  const sizeEl = $wrap.find(`.${SIZE_ELEMENT_CLASS} .${SELECT_ELEMENT_CLASS}`)[0];
+export default function createProductData(sizeEl, opts = {}) {
+  const { wrapBlockClass } = Object.assign({}, DEFAULT_OPTIONS, opts);
+  const $wrap = $(sizeEl).closest(`.${wrapBlockClass}`);
 
   // whether input or select, find the chosen element
   const { options, selectedIndex } = sizeEl;
@@ -25,6 +33,7 @@ export default function createProductData($wrap) {
   const product = {
     // DOM references
     wrap: $wrap[0],
+    wrapBlockClass,
     sizeEl,
     // product info
     regularPrice,
@@ -47,6 +56,8 @@ export default function createProductData($wrap) {
  * @param {HTMLElement} chosen - The chosen option
  */
 export const updateChosenData = (product, chosen) => {
+  const { regularPrice } = product;
+  const price = getAttr(chosen, 'price') || regularPrice;
   product.chosen = {
     el: chosen,
     'delivery-date': getAttr(chosen, 'delivery-date'),
@@ -55,8 +66,8 @@ export const updateChosenData = (product, chosen) => {
     'one-left': getAttr(chosen, 'one-left'),
     preorder: getAttr(chosen, 'preorder'),
     oos: getAttr(chosen, 'oos'),
-    price: getAttr(chosen, 'price'),
-    isOnSale: isOnSale(chosen, product.regularPrice),
+    price,
+    isOnSale: parseFloat(price) < parseFloat(regularPrice),
     value: chosen.value || '',
   };
 };
@@ -113,12 +124,12 @@ const all = (options, comparison, attr) => {
 
 /**
  * Helper function to determine if option is on sale
- * @param {Object|HTMLElement} item - Item for which we're comparing price
+ * @param {HTMLElement} option - Option for which we're comparing price
  * @param {String} regularPrice - The item's regular price
  * @return {Boolean} Whether price is less than regualarPrice
  */
-const isOnSale = (item, regularPrice) => {
-  const price = item.price || item.getAttribute(PRICE_ATTR);
+const isOnSale = (option, regularPrice) => {
+  const price = option.getAttribute(PRICE_ATTR);
 
   return parseFloat(price) < parseFloat(regularPrice);
 };
