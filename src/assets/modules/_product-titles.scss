@@ -9,46 +9,42 @@
 
 ------------------------------------------------------ */
 
-.product {
-  // .product__name
-  &__name {
-    @extend %h3;
-    &--font-primary {
-      font-family: $font-primary;
-      font-weight: normal;
-      font-size: em(12);
-      letter-spacing: em(0);
-      text-transform: none;
-    }
-  }
+.product-name {
+  @extend %h3;
+  margin: rem(0 0 2);
+}
 
-  // .product__brand
-  &__brand {
-    &--font-primary {
-      font-family: $font-primary !important;
-      font-weight: normal;
-      font-size: em(12);
-      letter-spacing: em(0);
-      text-transform: none;
-      color: $color__grey;
-    }
-    a {
-      color: $color__black;
-    }
+.product-brand {
+  margin-bottom: rem(2);
+  font-size: rem(14);
+  // .product-brand__link
+  &__link {
+    color: $color__black;
   }
+  &--font-primary {
+    color: $color__grey;
+  }
+}
 
-  &__name,
-  &__brand {
-    // .product__name--sm
-    // .product__brand--sm
-    &--sm {
-      font-size: em(12);
-      line-height: em(16);
-    }
-    &--long {
-      text-overflow: initial !important;
-      white-space: normal !important;
-      overflow: auto !important
-    }
+.product-name,
+.product-brand {
+  // .product-name--sm
+  // .product-brand--sm
+  &--sm {
+    font-size: em(12);
+    line-height: em(16);
+    margin-bottom: 4px;
+  }
+  &--long {
+    text-overflow: initial !important;
+    white-space: normal !important;
+    overflow: auto !important
+  }
+  &--font-primary {
+    font-family: $font-primary;
+    font-weight: normal;
+    font-size: em(12);
+    letter-spacing: em(0);
+    text-transform: none;
   }
 }
