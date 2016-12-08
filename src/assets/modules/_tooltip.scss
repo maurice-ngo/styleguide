@@ -25,6 +25,10 @@
 		background: $color__white;
 		text-align: center;
 		display: none;
+		&--full {
+			left: 5%;
+			width: 90%;
+		}
 	}
 }
 .tooltip__label {

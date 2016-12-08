@@ -502,9 +502,16 @@
 --------------------------------------------------------
 */
 
+
+
 // line-height
 .u-line-height {
   line-height: normal !important;
+}
+
+// line-height small
+.u-line-height--xs {
+  line-height: em(16, 12) !important;
 }
 
 // line-height small

@@ -175,6 +175,8 @@ $refer-friend__border-color: #f6f2db;
 // Alipay
 $alipay-color: #f87e13;
 
+//Grlfrnd
+$color--denim: #193d5a;
 
 /* @breakpoints
 ---------------------------------------------------------
@@ -198,7 +200,7 @@ $breakpoints: (
 
 // Define individual variables
 //
-// Base
+// Base 
 $base: map-get($breakpoints, n);
 
 // Extra Small: Small mobile
