@@ -1,0 +1,6 @@
+{
+  "categories": "./categories.html",
+  "designers": "./designers.html",
+  "new-items": "./search.html?filter=new",
+  "sale": "./search.html?filter=sale",
+}
