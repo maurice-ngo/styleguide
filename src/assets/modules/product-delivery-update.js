@@ -13,23 +13,23 @@ export const INFO_EL = 'span';
  * @param {HTMLElement} wrap - The closest '.product' wrap from the select
  * @param {Object} chosen - Information on the selected size
  */
-export default function updateDelivery({ wrap, chosen = {}, allOnSale }) {
+export default function updateDelivery({ wrap, chosen = {} }) {
   // get the delivery text
   const delivery = $(wrap).find(DELIVERY_CLASS);
   // estimated delivery text
   const dateSpan = delivery.children(INFO_EL);
   // cache the default dext
   const defaultText = dateSpan.text();
-  // check for oos
-  const isOOS = chosen.oos;
 
-  // remove for oos products
-  delivery.toggleClass('u-hide', isOOS);
+  const { oos, preorder, 'delivery-date': deliveryDate } = chosen;
 
-  if (!isOOS) {
+  // toggle hide for oos products
+  delivery.toggleClass('u-hide', oos);
+
+  if (!oos) {
     // update date span
-    dateSpan.text(chosen['delivery-date'] || defaultText);
-    // make preorder delivery-date red
-    delivery.toggleClass('u-error', chosen.preorder === 'true');
+    dateSpan.text(deliveryDate || defaultText);
+    // toggle style for preorder
+    delivery.toggleClass('u-error', preorder);
   }
 };

@@ -68,7 +68,7 @@ export const displayConfirmation = (modal, chosen, sizeEl) => {
   updatePrice(data, 'small');
 
   reveal(modal);
-  $modal.find('.modal__continue').trigger('focus');
+  $modal.find(`.${MODAL_CONTINUE_CLASS}`).trigger('focus');
 };
 
 /**

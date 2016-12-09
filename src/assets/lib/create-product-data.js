@@ -6,8 +6,6 @@
 
 import $ from 'jquery';
 
-import { SIZE_ELEMENT_CLASS } from '../modules/product-size-change';
-
 const PRICE_ATTR = 'data-price';
 const REGULAR_PRICE_ATTR = 'data-regular-price';
 const DEFAULT_OPTIONS = {

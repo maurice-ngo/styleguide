@@ -39,37 +39,23 @@ export default function addToBag(el) {
  */
 const attachSubmitHandler = (btn, confirmation) => {
   const form = $(btn).closest('form');
-  const sizeEl = form.find(`.${SIZE_ELEMENT_CLASS}`)[0];
+  // TODO: pdp constants
+  const sizeEl = form.find(`.${SIZE_ELEMENT_CLASS}, .product-size__one`)[0];
 
   // when the form submits, show the modal
   form.submit(e => {
     e.preventDefault();
 
-    // check that size is chosen
-    const chosen = check(sizeEl);
+    const { options, selectedIndex } = sizeEl;
+    const chosen = options ? options[selectedIndex] : sizeEl;
 
-    if (chosen) // display the confirmation modal
-      displayConfirmation(confirmation, chosen, sizeEl);
+    // if default option is still chosen
+    if (sizeEl.value === 'default') {
+      $(sizeEl).focus();
+      return;
+    }
+
+    // display the confirmation modal
+    displayConfirmation(confirmation, chosen, sizeEl);
   });
-};
-
-/**
- * Checks that size is chosen.
- * @param {jQueryElement} el - The size select/input
- * @return {HTMLElement} Element that's been chosen
- */
-const check = el => {
-  if (!el) // did not find SIZE_ELEMENT_CLASS within the form
-    return;
-
-  const tagName = el.tagName;
-
-  if (tagName === 'INPUT') // el is INPUT whenever there is only 1 size
-    return el;
-
-  if (tagName === 'SELECT' && el.selectedIndex) // el is chosen from SELECT
-    return el.options[el.selectedIndex];
-
-  $(el).focus(); // this is not working on desktop (crossing fingers for mobile)
-  return; // SELECT is still on default option
 };
