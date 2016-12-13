@@ -7,6 +7,7 @@
     "start": "webpack-dev-server --config tools/webpack.development.config.js",
     "test": "npm run karma:single -- --reporters mocha,junit,coverage",
     "build": "cross-env NODE_ENV=production webpack -p --config tools/webpack.build.config.js",
+    "build:externals": "cross-env NODE_ENV=production webpack -p --config tools/webpack.externals.config.js",
     "watch": "webpack -w --config tools/webpack.build.config.js",
     "watch:test": "npm run karma",
     "karma": "cross-env NODE_ENV=test karma start tools/karma.conf.js",
