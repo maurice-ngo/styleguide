@@ -12,17 +12,20 @@
 
 ------------------------------------------------------ */
 
-.product__option {
+%option {
+  @extend %h4;
+  display: block;
+  padding: rem(30 24 15 16);
+}
+
+.product-color,
+.product-size {
   position: relative;
   float: left;
   width: 50%;
   margin-bottom: rem(8);
   background-color: $color__offwhite;
   z-index: 1; // need this for the label overlap trickery
-
-  @include bp-until($small-mobile) {
-    width: 100%;
-  }
 
   &:active {
     background-color: $color__black;
@@ -31,50 +34,30 @@
     }
   }
 
-  // .product__option--size
-  &--size {
-    @include bp-at-least($small-mobile) {
-      border-right: rem(4) solid $color__white;
-    }
-  }
-  // .product__option--color
-  &--color {
-    @include bp-at-least($small-mobile) {
-      border-left: rem(4) solid $color__white;
-    }
-  }
-  // .product__option--oos
-  &--oos {
-    background-color: $color__pink--light;
-    .product__option-select {
-      padding: rem(23 14 21);
-      line-height: rem(16);
-      text-align: center;
-      color: $color__error;
-    }
-  }
-
-  // .product__option-label, .product__option-select
-  &-label,
-  &-select {
+  // .product-color__one, .product-size__one,
+  // .product-color__label, .product-size__label
+  // .product-color__select, .product-size__select,
+  &__one,
+  &__label,
+  &__select {
     background-color: transparent;
+    margin-bottom: 0;
+    text-align: left;
   }
-  // .product__option-label
-  &-label {
+  // .product-color__label, .product-size__label
+  &__label {
     position: absolute;
     top: rem(12);
     left: rem(16);
     z-index: -1; // to stay behind the select it overlaps
     font-size: em(10);
-    text-align: left;
-    // override default form styles
-    margin-bottom: 0;
   }
-  // .product__option-select
-  &-select {
-    @extend %h4;
-    display: block;
-    padding: rem(30 24 15 16);
+
+  // .product-color__one, .product-size__one,
+  // .product-color__select, .product-size__select
+  &__one,
+  &__select {
+    @extend %option;
     z-index: 2; // to stay behind the select it overlaps
     background-size: rem(16 16);
     // override default form styles
@@ -85,20 +68,49 @@
     }
     border-right-width: rem(16);
     box-shadow: none;
-    // .product__option-select.default
-    &.default {
-      color: $color__grey--light;
+    &:disabled {
+      -webkit-text-fill-color: $color__black;
+      color: $color__black;
+      opacity: 1;
     }
-    // .product__option-select--one
-    &--one {
-      margin-bottom: 0;
-      line-height: rem(15);
-      text-align: left;
-      &:disabled {
-        -webkit-text-fill-color: $color__black;
-        color: $color__black;
-        opacity: 1;
-      }
+  }
+  // .product__options .product-color,
+  // .product__options .product-size
+  .product__options & {
+    @include bp-until($small-mobile) {
+      width: 100%;
+    }
+  }
+}
+
+.product-size {
+  // .product-size__oos
+  &__oos {
+    @extend %option;
+    background-color: $color__pink--light;
+    padding: rem(23 14 21);
+    line-height: rem(16);
+    text-align: center;
+    color: $color__error;
+  }
+  // TODO remove for QA feedback
+  // .product-size__select.default
+  &__select.default {
+    color: $color__grey--light;
+  }
+}
+
+.product__options {
+  // .product__options .product-size
+  .product-size {
+    @include bp-at-least($small-mobile) {
+      border-right: rem(4) solid $color__white;
+    }
+  }
+  // .product__options .product-color
+  .product-color {
+    @include bp-at-least($small-mobile) {
+      border-left: rem(4) solid $color__white;
     }
   }
 }

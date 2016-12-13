@@ -1,10 +1,10 @@
 ---
-notes: JavaScript forwards a user when `color` dropdown is changed. This is based on the `data-href` attribute of the `option`. This makes `value` an arbitrary irrelevant value.
+notes: JavaScript forwards a user when `color` dropdown is changed. This is based on the `data-href` attribute of the `option`.
 ---
 
-<div class="product__option product__option--color">
-  <label for="color" class="product__option-label">Color</label>
-  <select id="color" class="product__option-select">
+<div class="product-color">
+  <label for="color" class="product-color__label">Color</label>
+  <select id="color" class="product-color__select">
   {{#each pdp.colors}}
     <option data-href="{{this.href}}">{{this.label}}</option>
   {{/each}}

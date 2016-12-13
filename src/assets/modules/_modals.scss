@@ -136,20 +136,37 @@ $modal__scroll-bgcolor: rgba(0, 0, 0, .5);
   &__image {
     min-width: rem(300);
   }
-  &--added-confirmation {
-    margin: rem(0 32);
-    padding: rem(16);
-    text-align: center;
-    background-color: $color__white;
-    &__image {
-      width: 30%;
-    }
-    transition: all .3s;
-    .u-conceal & {
-      transform: translateY(-100%);
-    }
+}
+
+.added-confirmation {
+  margin: rem(0 32);
+  padding: rem(16);
+  text-align: center;
+  background-color: $color__white;
+  transition: all .3s;
+  .u-conceal & {
+    transform: translateY(-100%);
+  }
+  &__head {
+    margin-top: rem(16);
+  }
+  &__image {
+    width: 30%;
+  }
+  &__title {
+    margin-top: rem(16);
+  }
+  &__price {
+    margin-bottom: rem(16);
+  }
+  &__continue {
+    display: inline-block;
+    margin: rem(24 0 12);
+    padding: rem(4);
+    font-size: rem(14);
   }
 }
+
 .popup-container {
   position: relative;
   background: $color__offwhite;

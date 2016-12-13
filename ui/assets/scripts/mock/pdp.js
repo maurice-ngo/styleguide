@@ -115,7 +115,7 @@ function updateToOnSale( opt ) {
  * Helper function to update size & color product options
  */
 function updateProductOption( element, template ) {
-  var option = document.getElementsByClassName('product__option--' + element)[0];
+  var option = document.getElementsByClassName('product-' + element)[0];
 
   // replace the existing product option
   option.outerHTML = template;

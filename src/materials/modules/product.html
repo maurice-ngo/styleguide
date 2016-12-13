@@ -5,23 +5,29 @@ notes: A single product
 <div class="product">
 
   <!-- Image Carousel -->
-  {{> product-image-carousel }}
+  <div class="product__image">
+    {{> image-carousel images=pdp.carousel alt=pdp.alt }}
+  </div>
 
   <!-- Product Title -->
-  {{> product-title- }}
+  <div class="product__title">
+    {{> product-title- }}
+  </div>
 
-  <!-- Price -->
-  <div class="product__price u-margin-b--xl">
+  <!-- Product Price -->
+  <div class="product__price">
     {{> price.regular }}
   </div>
 
   <!-- Add To Cart Form -->
   <form method="GET" action="./shopping-bag.html">
-    {{> product-options.size }}
-    {{> product-options.color }}
+    <div class="product__options">
+      {{> product-options.size }}
+      {{> product-options.color }}
+    </div>
     <div class="product__notification u-clear-both u-clearfix"></div>
     <div class="product__cta">{{> cta-buttons.add-to-bag }}</div>
-    {{> product-estimated-delivery }}
+    <div class="product__delivery u-margin-a--xl">{{> product-estimated-delivery }}</div>
   </form>
 
   <!-- Favorite button -->

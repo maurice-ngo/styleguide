@@ -6,17 +6,18 @@
 import $ from 'jquery';
 
 import updatePrice from './product-price-update';
-import infoTemplate from '../../materials/modules/product-title-small.html'
+import createProductData from '../lib/create-product-data';
+import titleTemplate from '../../materials/modules/product-title-small.html'
 
 export const TEMPLATE_ID = 'product-added-confirmation';
 export const CONCEAL_CLASS = 'u-conceal';
 export const MODAL_CLASS = 'modal';
-export const MODAL_CONTINUE_CLASS = 'modal__continue';
-export const MODAL_BLOCK_CLASS = 'modal--added-confirmation';
+export const MODAL_BLOCK_CLASS = 'added-confirmation';
+export const MODAL_CONTINUE_CLASS = `${MODAL_BLOCK_CLASS}__continue`;
 export const PRODUCT_BLOCK_CLASS = 'product';
-export const PRODUCT_IMG_CLASS = `${PRODUCT_BLOCK_CLASS}__image--carousel__image`;
-export const PRODUCT_NAME_CLASS = `${PRODUCT_BLOCK_CLASS}__name`;
-export const PRODUCT_BRAND_CLASS = `${PRODUCT_BLOCK_CLASS}__brand`;
+export const PRODUCT_IMG_CLASS = 'image-carousel__image';
+export const PRODUCT_NAME_CLASS = 'product-name';
+export const PRODUCT_BRAND_CLASS = 'product-brand';
 
 const DEFAULT_OPTIONS = {
   container: document.body,
@@ -53,17 +54,22 @@ export default function addedConfirmation(options = {}) {
  */
 export const displayConfirmation = (modal, chosen, sizeEl) => {
   const $modal = $(modal);
-  const $product = $(`.${PRODUCT_BLOCK_CLASS}`);
+  const data = createProductData(sizeEl);
+  const $product = $(data.wrap);
 
   // update image
   updateImage($product, $modal);
   // update title
   updateInfo($product, $modal);
+
   // update price
-  updatePrice($modal, MODAL_BLOCK_CLASS, chosen, sizeEl, 'small');
+  data.wrap = modal;
+  data.wrapBlockClass = MODAL_BLOCK_CLASS;
+  updatePrice(data, 'small');
 
   reveal(modal);
-}
+  $modal.find(`.${MODAL_CONTINUE_CLASS}`).trigger('focus');
+};
 
 /**
  * Updates image within modal
@@ -71,12 +77,11 @@ export const displayConfirmation = (modal, chosen, sizeEl) => {
  @param {jQueryElement} modal - Modal whose content we are updating
  */
 const updateImage = (product, modal) => {
-  const productImage = product.find(`.${PRODUCT_IMG_CLASS}`)[1];
-  // slick pushes the last img to first, so use index 1
+  const productImage = product.find(`.${PRODUCT_IMG_CLASS}`)[0];
   const img = modal.find(`.${MODAL_BLOCK_CLASS}__image`)[0];
 
-  img.alt = productImage.alt;
-  img.src = productImage.src;
+  img.setAttribute('alt', productImage.alt);
+  img.setAttribute('src', productImage.src);
 };
 
 /**
@@ -94,9 +99,9 @@ const updateInfo = (product, modal) => {
       brandLink: brand.attr('href'),
     }
   }
-  const $info = modal.find(`.${MODAL_BLOCK_CLASS}__info`);
+  const $title = modal.find(`.${MODAL_BLOCK_CLASS}__title`);
 
-  $info.html(infoTemplate(data));
+  $title.html(titleTemplate(data));
 };
 
 /**

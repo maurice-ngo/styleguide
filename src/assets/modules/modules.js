@@ -13,16 +13,16 @@ $(document).ready(() => {
 
   const $product = $('.product');
 
-  $product.find('.product__image--carousel').slick({
+  $product.find('.image-carousel').slick({
     lazyLoad: 'progressive',
     dots: true,
-    dotsClass: 'product__image--carousel__dots',
+    dotsClass: 'image-carousel__dots',
     appendDots: '.product__image',
     arrows: false,
     infinite: false,
   });
-  $product.find('.product__option--size .product__option-select').sizeChange().trigger('change');
-  $product.find('.product__option--color .product__option-select').colorChange();
+  $product.find('.product-size__select, .product-size__one').sizeChange().trigger('change');
+  $product.find('.product-color__select').colorChange();
   $product.find('.product__cta button[type="submit"]').addToBag();
-  $product.find('.product-option--oos').oosProduct({ $wrap: $product });
+  $product.find('.product-size__oos').oosProduct({ $wrap: this });
 });
