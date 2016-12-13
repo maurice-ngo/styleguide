@@ -23,6 +23,12 @@ describe('product price update', () => {
   const PRICE_SELECTOR_NAME = `${WRAP_BLOCK_CLASS}__price`;
   const REGULAR_PRICE = '20';
   const PRICE = '10';
+  const priceEl = (pdp, style) => {
+    data.chosen.price = pdp.price;
+    data.chosen.isOnSale = data.chosen.price < pdp['regular-price'];
+    updatePrice(data, style);
+    return $wrap.find(`.${PRICE_SELECTOR_NAME}`)
+  };
 
   beforeEach(() => {
     fixture.set(`
@@ -52,22 +58,14 @@ describe('product price update', () => {
     const template = saleTemplate;
     const style = 'medium';
 
-    data.chosen.price = pdp.price;
-    data.chosen.isOnSale = data.chosen.price < pdp['regular-price'];
-    updatePrice(data, style);
-
-    expect($wrap.find(`.${PRICE_SELECTOR_NAME}`)).to.have.html(template({ pdp }));
+    expect(priceEl(pdp, style)).to.have.html(template({ pdp }));
   });
 
   it('should show an item on sale with a small template style', () => {
     const template = smallSaleTemplate;
     const style = 'small';
 
-    data.chosen.price = pdp.price;
-    data.chosen.isOnSale = data.chosen.price < pdp['regular-price'];
-    updatePrice(data, style);
-
-    expect($wrap.find(`.${PRICE_SELECTOR_NAME}`)).to.have.html(template({ pdp }));
+    expect(priceEl(pdp, style)).to.have.html(template({ pdp }));
   });
 
   it('should show an item not on sale with a small template', () => {
@@ -75,11 +73,7 @@ describe('product price update', () => {
     const style = 'small';
     pdp.price = pdp['regular-price'];
 
-    data.chosen.price = pdp.price;
-    data.chosen.isOnSale = data.chosen.price < pdp['regular-price'];
-    updatePrice(data, style);
-
-    expect($wrap.find(`.${PRICE_SELECTOR_NAME}`)).to.have.html(template({ pdp }));
+    expect(priceEl(pdp, style)).to.have.html(template({ pdp }));
   });
 
   it('should show an item not on sale with a medium template', () => {
@@ -87,10 +81,6 @@ describe('product price update', () => {
     const style = 'medium';
     pdp.price = pdp['regular-price'];
 
-    data.chosen.price = pdp.price;
-    data.chosen.isOnSale = data.chosen.price < pdp['regular-price'];
-    updatePrice(data, style);
-
-    expect($wrap.find(`.${PRICE_SELECTOR_NAME}`)).to.have.html(template({ pdp }));
+    expect(priceEl(pdp, style)).to.have.html(template({ pdp }));
   });
 });

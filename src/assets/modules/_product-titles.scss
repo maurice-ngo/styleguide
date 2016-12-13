@@ -28,22 +28,19 @@
 
 .product-name,
 .product-brand {
-  // .product-name--sm
+  // .product-name--sm,
   // .product-brand--sm
   &--sm {
     font-size: em(12);
     line-height: em(16);
     margin-bottom: 4px;
   }
-  &--long {
-    text-overflow: initial !important;
-    white-space: normal !important;
-    overflow: auto !important
-  }
   &--font-primary {
-    font-family: $font-primary;
-    font-weight: normal;
-    font-size: em(12);
+    font: {
+      family: $font-primary;
+      weight: normal;
+      size: em(12);
+    }
     letter-spacing: em(0);
     text-transform: none;
   }

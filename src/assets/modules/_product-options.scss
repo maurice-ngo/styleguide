@@ -34,9 +34,9 @@
     }
   }
 
-  // .product-color__one, .product-color__one,
-  // .product-size__label, .product-size__select
-  // .product-color__label, .product-color__select,
+  // .product-color__one, .product-size__one,
+  // .product-color__label, .product-size__label
+  // .product-color__select, .product-size__select,
   &__one,
   &__label,
   &__select {
@@ -44,8 +44,7 @@
     margin-bottom: 0;
     text-align: left;
   }
-  // .product-color__label,
-  // .product-size__label
+  // .product-color__label, .product-size__label
   &__label {
     position: absolute;
     top: rem(12);
@@ -54,10 +53,8 @@
     font-size: em(10);
   }
 
-  // .product-color__one,
-  // .product-size__one,
-  // .product-color__select,
-  // .product-size__select
+  // .product-color__one, .product-size__one,
+  // .product-color__select, .product-size__select
   &__one,
   &__select {
     @extend %option;
@@ -77,8 +74,7 @@
       opacity: 1;
     }
   }
-  // .product-color__select,
-  // .product-size__select
+  // .product-color__select, .product-size__select
   &__select {
   }
   // .product__options .product-color,
@@ -89,6 +85,7 @@
     }
   }
 }
+
 .product-size {
   // .product-size__oos
   &__oos {
@@ -99,6 +96,7 @@
     text-align: center;
     color: $color__error;
   }
+  // TODO remove for QA feedback
   // .product-size__select.default
   &__select.default {
     color: $color__grey--light;

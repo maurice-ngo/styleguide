@@ -84,7 +84,7 @@ describe('product added confirmation', () => {
     it('should populate product info', () => {
       const $sizeEl = $fixture.find('#size');
       const chosen = $sizeEl.find('option:selected')[0];
-      $modal;
+
       displayConfirmation($modal[0], chosen, $sizeEl[0]);
       expect($modal.find('.product-name')).to.have.text(productInfo.name);
       expect($modal.find('.product-brand a'))
