@@ -5,11 +5,15 @@ fabricator: false
 layout: mock-page
 ---
 
-<section class="u-margin-l--xl u-margin-r--xl">
+<header class="page__header">
+  {{> page-header.nav }}
+</header>
+
+<section class="page__main u-margin-l--xl u-margin-r--xl">
   {{> product }}
 </section>
 
-<section>
+<section class="page__secondary">
   <!-- Product Recs -->
   {{> product-recs hed="You May Also Like" }}
   {{> product-recs hed="Recently Viewed" }}
@@ -19,7 +23,9 @@ layout: mock-page
   {{> revolve-me }}
 </section>
 
-<!-- Modal: Product Added to Bag -->
-<script id="product-added-confirmation" type="text/x-handlebars-template">
-  {{> modals.product-added-confirmation }}
-</script>
+<footer class="page__footer">
+  <!-- Modal: Product Added to Bag -->
+  <script id="product-added-confirmation" type="text/x-handlebars-template">
+    {{> modals.product-added-confirmation }}
+  </script>
+</footer>
