@@ -19,9 +19,6 @@ export const EL_CLASS = 'delivery-date';
  */
 export default function updateDeliveryDate({ wrap, wrapBlockClass, chosen = {} }) {
   const { oos, preorder, 'delivery-date': deliveryDate } = chosen;
-  if (!deliveryDate) {
-    throw new Error('Chosen does not include deliveryDate');
-  }
 
   const $el = $(wrap).find(`.${wrapBlockClass}__${EL_CLASS}`);
   if (!$el.length) {
@@ -33,6 +30,9 @@ export default function updateDeliveryDate({ wrap, wrapBlockClass, chosen = {} }
     $el.empty();
   }
   else {
+    if (!deliveryDate) {
+      throw new Error('Chosen does not include deliveryDate');
+    }
     $el.html(template(chosen));
   }
 

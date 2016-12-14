@@ -14,14 +14,17 @@ import { PRICE_ATTR, REGULAR_PRICE_ATTR } from '../modules/product-price-update'
 export const PLUGIN_NAME = 'oosProduct';
 registerJQueryPlugin(PLUGIN_NAME, oosProduct);
 
+const WRAP_CLASS = 'product';
+
 /**
  * Initializes changes for oos product.
  * @param {HTMLElement} el - The select dropdown we're attaching to
  */
 export default function oosProduct(el, options = {}) {
-  const $wrap = options.$wrap || $(el).closest('.product');
+  const $wrap = options.$wrap || $(el).closest(`.${WRAP_CLASS}`);
   const data = {
     wrap: $wrap[0],
+    wrapBlockClass: WRAP_CLASS,
     chosen: {
       oos: true,
     },
