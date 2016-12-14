@@ -6,11 +6,10 @@
 
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
-import sizeStyle from './product-size-style';
 import updatePrice from './product-price-update';
 import showNotification from './product-notification-show';
 import updateCTA from './product-cta-update';
-import updateDelivery from './product-delivery-update';
+import updateDeliveryDate from './delivery-date-update';
 import redirectHref from '../lib/redirect-href';
 import updateUnavailable from './product-unavailable-update';
 import createProductData, { updateChosenData } from '../lib/create-product-data';
@@ -66,11 +65,6 @@ function runUpdates( data ) {
   updatePrice(data);
   showNotification(data);
   updateCTA(data);
-  updateDelivery(data);
+  updateDeliveryDate(data);
   updateUnavailable(data);
-
-  // only for select dropdown
-  if (options) {
-    sizeStyle(data);
-  }
 };

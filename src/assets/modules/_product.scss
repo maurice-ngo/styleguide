@@ -27,4 +27,9 @@
   &__price {
     margin-bottom: rem(16);
   }
+
+  // .product__notification .delivery-date
+  &__notification .delivery-date {
+    font-size: rem(12);
+  }
 }

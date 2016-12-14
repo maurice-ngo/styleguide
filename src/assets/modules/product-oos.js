@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 import updateCTA from './product-cta-update';
-import updateDelivery from './product-delivery-update';
+import updateDeliveryDate from './delivery-date-update';
 import { PRICE_ATTR, REGULAR_PRICE_ATTR } from '../modules/product-price-update';
 
 // Expose the function as a jQuery plugin for ease of use
@@ -28,7 +28,7 @@ export default function oosProduct(el, options = {}) {
     allOnSale: isOnSale(el),
   };
 
-  updateDelivery(data);
+  updateDeliveryDate(data);
   updateCTA(data);
 };
 

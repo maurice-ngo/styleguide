@@ -83,21 +83,14 @@
   }
 }
 
-.product-size {
-  // .product-size__oos
-  &__oos {
-    @extend %option;
-    background-color: $color__pink--light;
-    padding: rem(23 14 21);
-    line-height: rem(16);
-    text-align: center;
-    color: $color__error;
-  }
-  // TODO remove for QA feedback
-  // .product-size__select.default
-  &__select.default {
-    color: $color__grey--light;
-  }
+// .product-size__oos
+.product-size__oos {
+  @extend %option;
+  background-color: $color__pink--light;
+  padding: rem(23 14 21);
+  line-height: rem(16);
+  text-align: center;
+  color: $color__error;
 }
 
 .product__options {

@@ -2,5 +2,8 @@
 notes:
 ---
 
-<h3 class="u-error u-margin-t--md u-margin-b--none">Preorder</h3>
-<p class="u-error u-margin-b--xl u-line-height">You will not be charged until your item is shipped</p>
+<div class="notification">
+  <h3 class="notification__head">Preorder</h3>
+  <p class="notification__description">You will not be charged until your item is shipped</p>
+  <p class="delivery-date">Estimated Delivery: {{#if delivery-date}}{{delivery-date}}{{else}}You will not be charged until your order is shipped{{/if}}</p>
+</div>
