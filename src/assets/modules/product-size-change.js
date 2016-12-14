@@ -6,7 +6,6 @@
 
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
-import sizeStyle from './product-size-style';
 import updatePrice from './product-price-update';
 import showNotification from './product-notification-show';
 import updateCTA from './product-cta-update';
@@ -68,9 +67,4 @@ function runUpdates( data ) {
   updateCTA(data);
   updateDeliveryDate(data);
   updateUnavailable(data);
-
-  // only for select dropdown
-  if (options) {
-    sizeStyle(data);
-  }
 };
