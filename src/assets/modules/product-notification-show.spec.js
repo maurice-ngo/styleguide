@@ -56,7 +56,7 @@ describe('product notification show', () => {
     expect($(`.${WRAP_CLASS}__${EL_CLASS}`)).to.have.length.above(0);
   });
 
-  it.only('should remove any existing elements from the wrap', () => {
+  it('should remove any existing elements from the wrap', () => {
     data.chosen['one-left'] = true;
     showNotification(data);
     data.chosen['one-left'] = false;

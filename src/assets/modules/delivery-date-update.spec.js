@@ -39,13 +39,13 @@ describe('product delivery update', () => {
 
   it('should use the default delivery date', () => {
     const $delivery = updateDeliveryDate(data);
-    expect($delivery).to.have.html(template(data));
+    expect($delivery).to.have.html(template(data.chosen));
   });
 
   it('should use a selected delivery date', () => {
     data.chosen['delivery-date'] = NEW_DATE;
     const $delivery = updateDeliveryDate(data);
-    expect($delivery).to.have.html(template(data));
+    expect($delivery).to.have.html(template(data.chosen));
   });
 
   it('should empty delivery date for "out of stock"', () => {
