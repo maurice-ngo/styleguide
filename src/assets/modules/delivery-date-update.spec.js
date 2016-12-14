@@ -49,13 +49,13 @@ describe('product delivery update', () => {
   });
 
   it('should empty delivery date for "out of stock"', () => {
-    data.chosen['oos'] = true;
+    data.chosen.oos = true;
     const $delivery = updateDeliveryDate(data);
     expect($delivery.text()).to.be.empty;
   });
 
   it('should empty delivery date for "preorder"', () => {
-    data.chosen['preorder'] = true;
+    data.chosen.preorder = true;
     const $delivery = updateDeliveryDate(data);
     expect($delivery.text()).to.be.empty;
   });

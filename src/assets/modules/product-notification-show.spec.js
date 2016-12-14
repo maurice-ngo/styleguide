@@ -40,7 +40,6 @@ describe('product notification show', () => {
     `));
 
     data = {
-      wrap: fixture.el,
       wrap: $product[0],
       wrapBlockClass: WRAP_CLASS,
       chosen: {
