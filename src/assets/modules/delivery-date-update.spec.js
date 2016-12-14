@@ -1,3 +1,4 @@
+
 import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
@@ -37,6 +38,25 @@ describe('product delivery update', () => {
     fixture.cleanup();
   });
 
+  it(`should not throw an error when "data.chosen['delivery-date']" is set`, () => {
+    data.chosen['delivery-date'] = ORIGINAL_DATE;
+    expect(() => updateDeliveryDate(data)).to.not.throw(Error);
+  });
+
+  it(`should throw error when "data.chosen['delivery-date']" is not set`, () => {
+    data.chosen['delivery-date'] = false;
+    expect(() => updateDeliveryDate(data)).to.throw(Error);
+  });
+
+  it(`should not throw an error when the element is found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
+    expect(() => updateDeliveryDate(data)).to.not.throw(Error);
+  });
+
+  it(`should throw error when the element is not found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
+    $product.empty();
+    expect(() => updateDeliveryDate(data)).to.throw(Error);
+  });
+
   it('should use the default delivery date', () => {
     const $delivery = updateDeliveryDate(data);
     expect($delivery).to.have.html(template(data.chosen));
@@ -49,13 +69,13 @@ describe('product delivery update', () => {
   });
 
   it('should empty delivery date for "out of stock"', () => {
-    data.chosen['oos'] = true;
+    data.chosen.oos = true;
     const $delivery = updateDeliveryDate(data);
     expect($delivery.text()).to.be.empty;
   });
 
   it('should empty delivery date for "preorder"', () => {
-    data.chosen['preorder'] = true;
+    data.chosen.preorder = true;
     const $delivery = updateDeliveryDate(data);
     expect($delivery.text()).to.be.empty;
   });

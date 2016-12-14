@@ -40,7 +40,6 @@ describe('product notification show', () => {
     `));
 
     data = {
-      wrap: fixture.el,
       wrap: $product[0],
       wrapBlockClass: WRAP_CLASS,
       chosen: {
@@ -51,9 +50,13 @@ describe('product notification show', () => {
 
   afterEach(() => fixture.cleanup());
 
-  it('should confirm the notification wrap is there', () => {
-    const $notification = showNotification(data);
-    expect($(`.${WRAP_CLASS}__${EL_CLASS}`)).to.have.length.above(0);
+  it(`should not throw an error when the element is found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
+    expect(() => showNotification(data)).to.not.throw(Error);
+  });
+
+  it(`should throw error when the element is not found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
+    $product.empty();
+    expect(() => showNotification(data)).to.throw(Error);
   });
 
   it('should remove any existing elements from the wrap', () => {
