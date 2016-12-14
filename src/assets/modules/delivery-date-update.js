@@ -26,13 +26,14 @@ export default function updateDeliveryDate({ wrap, wrapBlockClass, chosen = {} }
   }
 
   // remove shown delivery-date text
-  if ( oos || preorder || !deliveryDate ) {
+  if ( oos || preorder ) {
+    $el.empty();
+  }
+  else if ( !deliveryDate ) {
+    throw new Error('Chosen does not include deliveryDate');
     $el.empty();
   }
   else {
-    if (!deliveryDate) {
-      throw new Error('Chosen does not include deliveryDate');
-    }
     $el.html(template(chosen));
   }
 

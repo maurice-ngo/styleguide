@@ -48,6 +48,12 @@ describe('product delivery update', () => {
     expect(() => updateDeliveryDate(data)).to.throw(Error);
   });
 
+  it(`should not throw error when "data.chosen['delivery-date']" is not set, but the delivery date is hidden`, () => {
+    data.chosen['delivery-date'] = false;
+    data.chosen.oos = true;
+    expect(() => updateDeliveryDate(data)).to.not.throw(Error);
+  });
+
   it(`should not throw an error when the element is found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
     expect(() => updateDeliveryDate(data)).to.not.throw(Error);
   });
