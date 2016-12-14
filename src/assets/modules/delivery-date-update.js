@@ -5,36 +5,35 @@
 
 import $ from 'jquery';
 
-export const DELIVERY_DATE_CLASS = 'delivery-date';
-export const LABEL = 'Estimated Delivery: ';
+import template from '../../materials/modules/delivery-date.html';
+
+export { template };
+export const EL_CLASS = 'delivery-date';
 
 /**
  * Initializes 'estimated delivery' text changes.
  * @param {HTMLElement} wrap - The closest wrap from the select
+ * @param {String} wrapBlockClass - The BEM block class of the wrap
  * @param {Object} chosen - Information on the selected size
  * @return {jQueryElement} delivery-date element
  */
-export default function updateDeliveryDate({ wrap, chosen = {} }) {
+export default function updateDeliveryDate({ wrap, wrapBlockClass, chosen = {} }) {
   const { oos, preorder, 'delivery-date': deliveryDate } = chosen;
-  const hide = oos || preorder || !deliveryDate;
   if (!deliveryDate) {
-    throw new Error('Chosen does not include deliveryDate')
+    throw new Error('Chosen does not include deliveryDate');
   }
 
-  const $el = $(wrap).find(`.${DELIVERY_DATE_CLASS}`);
+  const $el = $(wrap).find(`.${wrapBlockClass}__${EL_CLASS}`);
   if (!$el.length) {
-    throw new Error(`Did not find $el: ".${DELIVERY_DATE_CLASS}"`)
+    throw new Error(`Did not find $el: ".${wrapBlockClass}__${EL_CLASS}"`);
   }
 
   // remove shown delivery-date text
-  $el.empty();
-
-  // hide for oos & preorder
-  $el.toggleClass('u-hide', hide);
-
-  // update text
-  if (!hide) {
-    $el.text(LABEL + deliveryDate);
+  if ( oos || preorder || !deliveryDate ) {
+    $el.empty();
+  }
+  else {
+    $el.html(template(chosen));
   }
 
   return $el;

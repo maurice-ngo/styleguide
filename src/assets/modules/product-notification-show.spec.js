@@ -2,72 +2,73 @@ import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
-import showNotification, { NOTIFICATION_CLASS } from './product-notification-show';
-import { updateChosenData } from '../lib/create-product-data';
-
-import productTemplate from '../../materials/modules/product.html';
-import finalSale from '../../materials/modules/product-notifications/final-sale.html';
-import sampleDefect from '../../materials/modules/product-notifications/final-sale-sample-defect.html';
-import oneLeft from '../../materials/modules/product-notifications/one-left.html';
-import preorder from '../../materials/modules/product-notifications/preorder.html';
+import showNotification, {
+  EL_CLASS,
+  finalSale,
+  sampleDefect,
+  oneLeft,
+  preorder,
+} from './product-notification-show';
 
 chai.use(chaiJquery);
 
 describe('product notification show', () => {
-  let product;
+  let $product;
+  let data;
+  const WRAP_CLASS = 'product';
+  const notifications = [
+    {
+      attr: 'sample-defect',
+      template: sampleDefect,
+    }, {
+      attr: 'final-sale',
+      template: finalSale,
+    }, {
+      attr: 'one-left',
+      template: oneLeft,
+    }, {
+      attr: 'preorder',
+      template: preorder,
+    }
+  ];
 
   beforeEach(() => {
-    product = {
+    $product = $(fixture.set(`
+      <div class="${WRAP_CLASS}">
+        <p class="${WRAP_CLASS}__${EL_CLASS}"></p>
+      </div>
+    `));
+
+    data = {
       wrap: fixture.el,
-      chosen: {},
+      wrap: $product[0],
+      wrapBlockClass: WRAP_CLASS,
+      chosen: {
+        'delivery-date': 'my bday',
+      },
     }
   });
 
   afterEach(() => fixture.cleanup());
 
   it('should confirm the notification wrap is there', () => {
-    fixture.set(productTemplate({}));
-    expect($(`.${NOTIFICATION_CLASS}`)).to.have.length.above(0);
+    const $notification = showNotification(data);
+    expect($(`.${WRAP_CLASS}__${EL_CLASS}`)).to.have.length.above(0);
   });
 
-  it('should remove any existing elements from the wrap', () => {
-    fixture.set(productTemplate({}));
-    showNotification(product);
-    expect($(`.${NOTIFICATION_CLASS}`).html()).to.be.empty;
+  it.only('should remove any existing elements from the wrap', () => {
+    data.chosen['one-left'] = true;
+    showNotification(data);
+    data.chosen['one-left'] = false;
+
+    const $notification = showNotification(data);
+    expect($(`.${WRAP_CLASS}__${EL_CLASS}`).html()).to.be.empty;
   });
 
-  it('should render the various option values', () => {
-    const table = [
-      {
-        input: 'sample-defect',
-        expected: sampleDefect,
-      },
-      {
-        input: 'final-sale',
-        expected: finalSale,
-      },
-      {
-        input: 'one-left',
-        expected: oneLeft,
-      },
-      {
-        input: 'preorder',
-        expected: preorder,
-      }
-    ];
-
-    table.forEach(tt => {
-      const value = 'some-value';
-      const pdp = {
-        sizes: [{
-          value,
-          [tt.input]: true,
-        }]
-      };
-      fixture.set(productTemplate({ pdp }));
-      updateChosenData(product, $(fixture.el).find(`option[value="${value}"]`)[0])
-      showNotification(product);
-      expect($(`.${NOTIFICATION_CLASS}`)).to.have.html(tt.expected());
+  notifications.forEach(notification => {
+    it(`should render ${notification.attr} notification with the correct template`, () => {
+      data.chosen[notification.attr] = true;
+      expect(showNotification(data)).to.have.html(notification.template(data.chosen));
     });
   });
 });

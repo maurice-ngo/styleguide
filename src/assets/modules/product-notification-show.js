@@ -1,8 +1,3 @@
-/**
- * Updates price displayed when stock id changes
- * @module showNotification
- */
-
 import $ from 'jquery';
 
 import finalSale from '../../materials/modules/product-notifications/final-sale.html';
@@ -10,20 +5,32 @@ import sampleDefect from '../../materials/modules/product-notifications/final-sa
 import oneLeft from '../../materials/modules/product-notifications/one-left.html';
 import preorder from '../../materials/modules/product-notifications/preorder.html';
 
-export const NOTIFICATION_CLASS = 'product__notification';
+export { finalSale, sampleDefect, oneLeft, preorder };
+export const EL_CLASS = 'notification';
 
 /**
- * Update price based on selected value.
- * @param {Object} product - The product's data object
+ * Show notification based on chosen option.
+ * @param {HTMLElement} wrap - The closest wrap from the select
+ * @param {String} wrapBlockClass - The BEM block class of the wrap
+ * @param {Object} chosen - Information on the selected size
+ * @return {jQueryElement} product__notification element
  */
-export default function showNotification({ wrap, chosen }) {
-  const $el = $(wrap).find(`.${NOTIFICATION_CLASS}`);
+export default function showNotification({ wrap, wrapBlockClass, chosen }) {
+  const $el = $(wrap).find(`.${wrapBlockClass}__${EL_CLASS}`);
+  if (!$el.length) {
+    throw new Error(`Did not find $el: ".${wrapBlockClass}__${EL_CLASS}"`);
+  }
 
-  // clean up existing notification
   $el.empty();
 
+  const notification = notify(chosen);
+
   // show template
-  $el.html(notify(chosen));
+  if (notification) {
+    $el.html(notification);
+  }
+
+  return $el;
 }
 
 /**
@@ -34,11 +41,11 @@ export default function showNotification({ wrap, chosen }) {
 const notify = (option) => {
   // if data-attr, show notification
   if (option['sample-defect'])
-    return sampleDefect;
+    return sampleDefect();
   else if (option['final-sale'])
-    return finalSale;
+    return finalSale();
   else if (option['one-left'])
-    return oneLeft;
+    return oneLeft();
   else if (option.preorder)
-    return preorder;
+    return preorder({'delivery-date': option['delivery-date']});
 };

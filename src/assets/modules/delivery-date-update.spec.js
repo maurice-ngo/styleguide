@@ -4,7 +4,8 @@ import chaiJquery from 'chai-jquery';
 
 import updateDeliveryDate, {
   LABEL,
-  DELIVERY_DATE_CLASS,
+  EL_CLASS,
+  template,
 } from './delivery-date-update';
 
 chai.use(chaiJquery);
@@ -12,18 +13,20 @@ chai.use(chaiJquery);
 describe('product delivery update', () => {
   let $product;
   let data;
+  const WRAP_CLASS = 'product';
   const ORIGINAL_DATE = 'cool';
   const NEW_DATE = 'beans';
 
   beforeEach(() => {
     $product = $(fixture.set(`
-      <div class="product">
-        <p class="${DELIVERY_DATE_CLASS}"></p>
+      <div class="${WRAP_CLASS}">
+        <p class="${WRAP_CLASS}__${EL_CLASS}"></p>
       </div>
     `));
 
     data = {
       wrap: $product[0],
+      wrapBlockClass: WRAP_CLASS,
       chosen: {
         'delivery-date': ORIGINAL_DATE,
       },
@@ -36,13 +39,13 @@ describe('product delivery update', () => {
 
   it('should use the default delivery date', () => {
     const $delivery = updateDeliveryDate(data);
-    expect($delivery).to.have.text(LABEL + ORIGINAL_DATE);
+    expect($delivery).to.have.html(template(data));
   });
 
   it('should use a selected delivery date', () => {
     data.chosen['delivery-date'] = NEW_DATE;
     const $delivery = updateDeliveryDate(data);
-    expect($delivery).to.have.text(LABEL + NEW_DATE);
+    expect($delivery).to.have.html(template(data));
   });
 
   it('should empty delivery date for "out of stock"', () => {
@@ -52,7 +55,7 @@ describe('product delivery update', () => {
   });
 
   it('should empty delivery date for "preorder"', () => {
-    data.chosen['oos'] = true;
+    data.chosen['preorder'] = true;
     const $delivery = updateDeliveryDate(data);
     expect($delivery.text()).to.be.empty;
   });
