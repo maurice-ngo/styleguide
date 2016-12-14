@@ -1,3 +1,4 @@
+
 import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
@@ -35,6 +36,25 @@ describe('product delivery update', () => {
 
   afterEach(() => {
     fixture.cleanup();
+  });
+
+  it(`should not throw an error when "data.chosen['delivery-date']" is set`, () => {
+    data.chosen['delivery-date'] = ORIGINAL_DATE;
+    expect(() => updateDeliveryDate(data)).to.not.throw(Error);
+  });
+
+  it(`should throw error when "data.chosen['delivery-date']" is not set`, () => {
+    data.chosen['delivery-date'] = false;
+    expect(() => updateDeliveryDate(data)).to.throw(Error);
+  });
+
+  it(`should not throw an error when the element is found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
+    expect(() => updateDeliveryDate(data)).to.not.throw(Error);
+  });
+
+  it(`should throw error when the element is not found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
+    $product.empty();
+    expect(() => updateDeliveryDate(data)).to.throw(Error);
   });
 
   it('should use the default delivery date', () => {
