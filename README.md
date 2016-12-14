@@ -56,11 +56,3 @@ parts. The intention is to have an obvious convention when it comes to adding
 or updates part of the style guide. This imposed structure also lends well if
 components come from a separate project, as assets could either consume or
 render independently.
-
-## Future
-
-Things that need to be completed/figured out:
-
-- Get file watching working for templates
-- See if the atomic design make sense within the context of the team
-- Update layout with revolve favicon
