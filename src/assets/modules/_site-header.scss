@@ -1,14 +1,15 @@
-/**
+/*
 
   @site-header
---------------------------------------------------------
-  modules/_site-header.scss
---------------------------------------------------------
 
-  Site Header Section
-
------------------------------------------------------- */
+*/
 
 .site-header {
-  border-bottom: rem(1) solid $color__border;
+  padding: rem( 6 20 );
+
+  .icon--revolve-logo {
+    width: rem( 70 );
+    height: rem( 18 );
+    color: $color__black;
+  }
 }
