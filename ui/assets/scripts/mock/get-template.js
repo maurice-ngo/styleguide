@@ -9,5 +9,10 @@
  * @return {HTML} innerHTML of template
  */
 export default function getTemplate(id) {
-  return document.getElementById(id).innerHTML;
+  const el = document.getElementById(id);
+
+  if (el)
+    return el.innerHTML;
+  else
+    return null;
 }

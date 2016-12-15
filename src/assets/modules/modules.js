@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import 'slick-carousel';
 
 import './modules.scss';
 import './accordion';
@@ -9,6 +10,13 @@ import './product-color-change';
 import './product-oos';
 
 $(document).ready(() => {
+  $('.product__image--carousel').slick({
+    lazyLoad: 'progressive',
+    dots: true,
+    dotsClass: 'product__image--carousel__dots',
+    appendDots: '.product__image',
+    arrows: false
+  });
   $('.js-accordion').accordion();
   $('.js-toggle-display').toggleDisplay();
   $('.product-option--size .product-option__select').sizeChange();

@@ -1,45 +1,68 @@
-import $ from'jquery';
+import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
-import showNotification from './product-notification-show';
+import showNotification, {
+  WRAP_ID,
+} from './product-notification-show';
+import sizeTemplate from '../../materials/modules/product-options/size.html';
+
+import finalSale from '../../materials/modules/product-notifications/final-sale.html';
+import sampleDefect from '../../materials/modules/product-notifications/final-sale-sample-defect.html';
+import oneLeft from '../../materials/modules/product-notifications/one-left.html';
+import preorder from '../../materials/modules/product-notifications/preorder.html';
 
 chai.use(chaiJquery);
 
 describe('product notification show', () => {
-  let $dropdown;
-  const options = {
-    'default': `default`,
-    'no-money': 'There never was any money',
-    'park-ranger': 'What are you, a fucking park ranger now?',
-    'great-plan': `That's a great plan, Walter`,
-  };
-  let runUpdates;
-
-  beforeEach(() => {
+  const renderSizeTemplate = (data = {}) => {
     fixture.set(`
-      <select id="dropdown">
-        ${Object.keys(options)
-          .map(name => `<option value="${name}">${options[name]}</option>`)
-          .join('')}
-      </select>
+      <div id="${WRAP_ID}"></div>
+      ${sizeTemplate(data)}
     `);
-    $dropdown = $(fixture.el).find('#dropdown');
-    runUpdates = sinon.spy();
 
-    sizeChange($dropdown);
+    return $(fixture.el).find('.product-option');
+  };
+
+  afterEach(() => fixture.cleanup());
+
+  it('should remove any existing elements from the wrap', () => {
+    fixture.set(`<div id="${WRAP_ID}">things</div>`);
+    showNotification($('<option/>')[0]);
+    expect($(`#${WRAP_ID}`).html()).to.be.empty;
   });
 
-  afterEach(() => {
-    runUpdates.reset();
-    fixture.cleanup();
+  it('should render the various option values', () => {
+    const table = [
+      {
+        input: 'sample-defect',
+        expected: sampleDefect,
+      },
+      {
+        input: 'final-sale',
+        expected: finalSale,
+      },
+      {
+        input: 'one-left',
+        expected: oneLeft,
+      },
+      {
+        input: 'preorder',
+        expected: preorder,
+      }
+    ];
+
+    table.forEach(tt => {
+      const value = 'some-value';
+      const pdp = {
+        sizes: [{
+          value,
+          [tt.input]: true,
+        }]
+      };
+      const $productOption = renderSizeTemplate({ pdp });
+      showNotification($productOption.find(`option[value="${value}"]`)[0]);
+      expect($(`#${WRAP_ID}`)).to.have.html(tt.expected());
+    });
   });
-
-  it('should run updates upon selecting from the dropdown', () => {
-    const dropdown = $dropdown[0];
-    $dropdown.trigger('change');
-
-    expect(runUpdates).to.have.been.calledWith(dropdown, dropdown.options, dropdown.selectedIndex);
-  });
-
 });

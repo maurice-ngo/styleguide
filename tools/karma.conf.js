@@ -1,4 +1,5 @@
 var resolve = require('path').resolve;
+var join = require('path').join;
 var webpackConfig = require('./webpack.test.config');
 
 module.exports = function(config) {
@@ -9,6 +10,8 @@ module.exports = function(config) {
 
     files: [
       'src/assets/test-index.js',
+      'src/materials/elements/favorite-buttons/*.html',
+      'src/materials/modules/modals/**/*.html',
       'src/materials/modules/*.html'
     ],
 
@@ -18,13 +21,15 @@ module.exports = function(config) {
 
     preprocessors: {
       'src/assets/test-index.js': ['webpack', 'sourcemap'],
+      'src/materials/elements/favorite-buttons/*.html': ['html2js'],
+      'src/materials/modules/modals/*.html': ['html2js'],
       'src/materials/modules/*.html': ['html2js']
     },
 
     reporters: ['mocha', 'coverage'],
 
     coverageReporter: {
-      dir: 'coverage',
+      dir: process.env.CIRCLE_ARTIFACTS || 'coverage',
       reporters: [
         { type: 'html', subdir: 'report-html' },
         { type: 'lcov', subdir: 'report-lcov' }
@@ -49,6 +54,12 @@ module.exports = function(config) {
 
     webpackMiddleware: {
       stats: 'errors-only'
+    },
+
+    junitReporter: {
+      outputDir: join(process.env.CIRCLE_TEST_REPORTS || '', 'junit'),
+      outputFile: 'test-results.xml',
+      useBrowserName: false
     }
   })
 }

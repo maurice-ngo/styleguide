@@ -1,45 +1,30 @@
-import $ from'jquery';
+import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
-import sizeChange from './product-size-change';
+import sizeChange, { PRODUCT_BLOCK_CLASS } from './product-size-change';
 
 chai.use(chaiJquery);
 
 describe('product size change', () => {
-  let $dropdown;
-  const options = {
-    'default': `default`,
-    'no-money': 'There never was any money',
-    'park-ranger': 'What are you, a fucking park ranger now?',
-    'great-plan': `That's a great plan, Walter`,
-  };
-  let runUpdates;
+  let $fixture;
 
   beforeEach(() => {
-    fixture.set(`
-      <select id="dropdown">
-        ${Object.keys(options)
-          .map(name => `<option value="${name}">${options[name]}</option>`)
-          .join('')}
-      </select>
-    `);
-    $dropdown = $(fixture.el).find('#dropdown');
-    runUpdates = sinon.spy();
-
-    sizeChange($dropdown);
+    $fixture = $(fixture.set(`
+      <div class="${PRODUCT_BLOCK_CLASS}">
+        <select id="size">
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+    `));
   });
 
-  afterEach(() => {
-    runUpdates.reset();
-    fixture.cleanup();
+  afterEach(() => fixture.cleanup());
+
+  it('should fire off a change event with the proper DOM structure', () => {
+    const $size = $fixture.find('#size');
+    sizeChange($size);
+    $size.find('option[value="1"]').trigger('change');
   });
-
-  it('should run updates upon selecting from the dropdown', () => {
-    const dropdown = $dropdown[0];
-    $dropdown.trigger('change');
-
-    expect(runUpdates).to.have.been.calledWith(dropdown, dropdown.options, dropdown.selectedIndex);
-  });
-
 });

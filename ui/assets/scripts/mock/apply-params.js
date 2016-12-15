@@ -3,17 +3,23 @@
  * @module applyParams
  */
 
+import getTemplate from './get-template'
+
 /**
  * Parse URL parameters, then apply chosen option(s)
- * @param {Object} option - Object containing information on the option,
- *     including title, template id, template html, and callback
+ * @param {String} id - id of the handlebars partial
+ * @param {Function} callback - function to run when applying params
  */
-export default function applyParams( option ) {
-  const { id, callback } = option;
+export default function applyParams( id, callback ) {
   const params = splitParams(document.location.search);
 
-  if (params[id] && typeof callback === 'function')
-    callback(option);
+  if (params[id] && typeof callback === 'function') {
+    callback({
+      id: id,
+      html: getTemplate(id),
+      value: params[id],
+    });
+  }
 }
 
 /**

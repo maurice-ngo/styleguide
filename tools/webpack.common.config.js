@@ -2,6 +2,8 @@ const resolve = require('./path-helpers').resolve;
 const FabricatorPlugin = require('./fabricator-webpack-plugin');
 const join = require('path').join;
 
+const handlebarsLoaderConfig = require('./handlebars-loader-config');
+
 module.exports = {
   entry: {
     'site/fabricator': resolve('ui', 'assets', 'fabricator.js'),
@@ -26,6 +28,14 @@ module.exports = {
 
   devtool: 'source-map',
 
+  handlebarsLoader: handlebarsLoaderConfig({
+    extension: '.html',
+    dirs: [
+      resolve('src', 'materials', 'modules'),
+      resolve('src', 'materials', 'elements'),
+    ]
+  }),
+
   module: {
     loaders: [
       {
@@ -39,7 +49,7 @@ module.exports = {
       }, {
         test: /\.html$/,
         loaders: [
-          'handlebars-loader?' + JSON.stringify({ partialDirs: [ resolve('src', 'materials') ] }),
+          'handlebars-loader',
           'strip-gray-matter'
         ]
       }

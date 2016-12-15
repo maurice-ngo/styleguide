@@ -5,13 +5,13 @@
   "price": 99,
   "brandLink": "?brand-page",
   "delivery-date": "Jan 1 - Jan 3",
-  "image": "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=960:*",
+  "image": "//is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=960:*",
   "carousel": [
-    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=960:*",
-    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V2.jpg?resize=960:*",
-    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V3.jpg?resize=960:*",
-    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V4.jpg?resize=960:*",
-    "https://is4.revolveassets.com/images/p4/n/z/TULA-WD273_V5.jpg?resize=960:*"
+    "//is4.revolveassets.com/images/p4/n/z/TULA-WD273_V1.jpg?resize=960:*",
+    "//is4.revolveassets.com/images/p4/n/z/TULA-WD273_V2.jpg?resize=960:*",
+    "//is4.revolveassets.com/images/p4/n/z/TULA-WD273_V3.jpg?resize=960:*",
+    "//is4.revolveassets.com/images/p4/n/z/TULA-WD273_V4.jpg?resize=960:*",
+    "//is4.revolveassets.com/images/p4/n/z/TULA-WD273_V5.jpg?resize=960:*"
   ],
   "sizes": [
     {
@@ -55,11 +55,19 @@
   "colors": [
     {
       "label": "Off White",
-      "value": "/mobile/toesox-bella-half-toe-sock-in-heather-grey-lime/dp/TOER-WT1/?d=Womens"
+      "href": "/mobile/toesox-bella-half-toe-sock-in-heather-grey-lime/dp/TOER-WT1/?d=Womens"
     }, {
       "label": "Black",
-      "value": "/mobile/toesox-bella-half-toe-sock-in-heather-grey-lime/dp/TOER-WT11/?d=Womens"
+      "href": "/mobile/toesox-bella-half-toe-sock-in-heather-grey-lime/dp/TOER-WT11/?d=Womens"
     }
+  ],
+  "revolve-me": [
+    "//d1k5ox7rxhgie3.cloudfront.net/feed/oa3pjp8f4_m.jpg",
+    "//d1k5ox7rxhgie3.cloudfront.net/feed/kk1a7rb5_m.jpg",
+    "//d1k5ox7rxhgie3.cloudfront.net/feed/gn0ftnr_m.jpg",
+    "//d1k5ox7rxhgie3.cloudfront.net/feed/rjg00gm81_m.jpg",
+    "//d1k5ox7rxhgie3.cloudfront.net/feed/tpah0l34_m.jpg",
+    "//d1k5ox7rxhgie3.cloudfront.net/feed/76l5n1833_m.jpg"
   ],
   "templates": [
     "badges.product",
