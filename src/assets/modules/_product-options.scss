@@ -109,9 +109,9 @@
     // .product__options .product-size
     .product-size {
       border-right: rem(4) solid $color__white;
-    }
-    .product-size__oos {
-      padding: rem(23 14 21);
+      &__oos {
+        padding: rem(23 14 21);
+      }
     }
   }
 }
