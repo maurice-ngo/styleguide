@@ -129,10 +129,12 @@ select {
   border-right: rem(10) solid $color__offwhite;
   border-bottom: 0;
   border-left: 0;
-  background-color: $color__offwhite;
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: rem( 15 10 );
+  background: {
+    color: $color__offwhite;
+    repeat: no-repeat;
+    position: right center;
+    size: rem( 15 10 );
+  }
   color: $color__grey--light;
   letter-spacing: normal;
   text-transform: none;
