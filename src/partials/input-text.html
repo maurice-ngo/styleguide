@@ -1,0 +1,12 @@
+{{!--
+    Used for text inputs throughout the site
+    @param {string} id - input element's id, label's for attribute, and input's name (unless otherwise passed in)
+    @param {string} label - label's text, input's placeholder (unless otherwise passed in)
+    @param {string} [name] - input element's name (defaults to id)
+    @param {string} [placeholder] - input's placeholder (defaults to label)
+--}}
+
+<div class="field field--text">
+  <label class="field__label" for="{{id}}">{{label}}</label>
+  <input class="field__input" type="{{#if type}}{{type}}{{else}}text{{/if}}" id="{{id}}" name="{{#if name}}{{name}}{{else}}{{id}}{{/if}}" placeholder="{{#if placeholder}}{{placeholder}}{{else}}{{label}}{{/if}}" />
+</div>
