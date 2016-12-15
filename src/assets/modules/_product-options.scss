@@ -15,16 +15,16 @@
 %option {
   @extend %h4;
   display: block;
-  padding: rem(30 24 15 16);
+  padding: rem( 14 24 12 );
 }
 
 .product-color,
 .product-size {
   position: relative;
-  float: left;
-  width: 50%;
+  width: 100%;
   margin-bottom: rem(8);
   background-color: $color__offwhite;
+  text-align: left;
   z-index: 1; // need this for the label overlap trickery
 
   &:active {
@@ -40,6 +40,7 @@
   &__one,
   &__label,
   &__select {
+    display: inline-block;
     background-color: transparent;
     margin-bottom: 0;
     text-align: left;
@@ -58,6 +59,7 @@
   &__one,
   &__select {
     @extend %option;
+    padding-left: rem( 54 );
     z-index: 2; // to stay behind the select it overlaps
     background-size: rem(16 16);
     // override default form styles
@@ -74,36 +76,42 @@
       opacity: 1;
     }
   }
-  // .product__options .product-color,
-  // .product__options .product-size
-  .product__options & {
-    @include bp-until($small-mobile) {
-      width: 100%;
-    }
-  }
 }
 
 // .product-size__oos
 .product-size__oos {
   @extend %option;
   background-color: $color__pink--light;
-  padding: rem(23 14 21);
   line-height: rem(16);
   text-align: center;
   color: $color__error;
 }
 
-.product__options {
-  // .product__options .product-size
-  .product-size {
-    @include bp-at-least($small-mobile) {
+// for larger than "small mobile" screens
+@include bp-at-least($small-mobile) {
+  // for "product" section
+  .product__options {
+    // .product__options .product-color,
+    // .product__options .product-size
+    .product-color,
+    .product-size {
+      float: left;
+      width: 50%;
+      &__one,
+      &__select {
+        padding: rem(30 24 15 16);
+      }
+    }
+    // .product__options .product-color
+    .product-color {
+      border-left: rem(4) solid $color__white;
+    }
+    // .product__options .product-size
+    .product-size {
       border-right: rem(4) solid $color__white;
     }
-  }
-  // .product__options .product-color
-  .product-color {
-    @include bp-at-least($small-mobile) {
-      border-left: rem(4) solid $color__white;
+    .product-size__oos {
+      padding: rem(23 14 21);
     }
   }
 }

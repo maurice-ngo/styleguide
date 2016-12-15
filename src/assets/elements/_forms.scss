@@ -48,10 +48,8 @@
 input,
 select {
   @extend %font-primary;
-  padding: rem(10);
-  border: rem(1) solid $color__grey--lighter;
+  padding: rem( 16 );
   border-radius: 0;
-  background-color: $color__offwhite;
   color: $color__black;
   font-size: em(14, 14);
   text-rendering: optimizeLegibility;
@@ -131,6 +129,7 @@ select {
   border-right: rem(10) solid $color__offwhite;
   border-bottom: 0;
   border-left: 0;
+  background-color: $color__offwhite;
   background-repeat: no-repeat;
   background-position: right center;
   background-size: rem( 15 10 );
@@ -513,6 +512,30 @@ fieldset {
 .field {
   position: relative;
   margin-bottom: rem($base-margin);
+  &:focus .field__label {
+    display: block;
+  }
+
+  // .field__input
+  &__input {
+    border: rem(1) solid $color__grey--lighter;
+    width: 100%;
+    padding: rem( 13 16 );
+    &:focus {
+        padding-top: rem( 20 );
+        padding-bottom: rem( 6 );
+    }
+  }
+
+  // .field__label
+  &__label {
+    position: absolute;
+    top: rem( 6 );
+    left: rem( 16 );
+    z-index: -1; // to stay behind the select it overlaps
+    font-size: em(10);
+  }
+
   // field error states
   &.is-error {
     color: $color__error;

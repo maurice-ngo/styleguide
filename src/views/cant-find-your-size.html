@@ -1,10 +1,27 @@
 ---
-title: can't find your size
+title: Notify Me
+page-name: notify_me
 fabricator: false
 layout: mock-page
 ---
 
-<div class="u-margin-a--lg">
-  <h2>this page is not ready yet</h2>
-  <p><a onclick="history.back(-1)">go back</a></p>
-</div>
+<header class="page__header">
+  {{> page-header.title text=notify_me.cant-find-your-size.title }}
+</header>
+
+<section class="page__main">
+  <div class="tabs">
+  </div>
+
+  <div class="section">
+    <p class="u-center u-margin-a--xl">{{notify_me.back-in-stock.intro}}</p>
+
+    {{> notify-me details-title=notify_me.back-in-stock.title }}
+  </div>
+
+  <div class="section">
+    <p class="u-center u-margin-a--xl">{{notify_me.special-order.intro}}</p>
+
+    {{> notify-me details-title=notify_me.special-order.title }}
+  </div>
+</section>

@@ -1,6 +1,13 @@
 {
+  "back-in-stock": "./back-in-stock.html",
+  "cant-find-your-size": "./cant-find-your-size.html",
   "categories": "./categories.html",
   "designers": "./designers.html",
+  "homepage": "./",
   "new-items": "./search.html?filter=new",
+  "preorder-notify": "./preorder-notify.html",
   "sale": "./search.html?filter=sale",
+  "special-order": "./special-order.html",
+  "thank-you-email": "./thank-you-email.html",
+  "thank-you-submitted": "./thank-you-submitted.html"
 }

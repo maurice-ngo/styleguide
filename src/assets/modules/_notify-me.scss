@@ -1,0 +1,19 @@
+/**
+
+  @notify-me
+
+**/
+
+.notify-me {
+  padding-left: rem( 16 );
+  padding-right: rem( 16 );
+  text-align: center;
+
+  &__form {
+    margin-top: rem( 16 );
+    text-align: left;
+  }
+  &__details {
+    color: $color__grey--light;
+  }
+}

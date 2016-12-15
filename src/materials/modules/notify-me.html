@@ -1,0 +1,23 @@
+---
+notes:
+---
+
+<div class="notify-me">
+  {{> product-title- }}
+
+  <form class="notify-me__form" action="?thank-you">
+    {{> product-options.size enableOOS=true }}
+    {{> input-text id="email" label="Enter your Email Address" }}
+
+    {{!-- TODO what about auto order??? --}}
+
+    <div class="notify-me__notification"></div>
+    <div class="notify-me__cta">{{> buttons.full- text="Notify Me When Available" }}</div>
+  </form>
+
+  <h4 class="notify-me__details">How does {{details-title}} work?</h4>
+  <ul class="notify-me__details ui-list">
+    <li class="ui-list__item">Back In Stock requests are not guaranteed.
+    <li class="ui-list__item">Unfulfilled requests will be canceled after 6 weeks.
+  </ul>
+</div>
