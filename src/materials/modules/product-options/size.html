@@ -10,12 +10,13 @@ notes:
     <!-- attach size-specific data to each option, including price -->
   {{#each pdp.sizes}}
     <option data-delivery-date="{{delivery-date}}" value="{{value}}" data-price="{{price}}"
-      {{#if oos}}data-oos="true" disabled{{/if}}
+      {{#unless ../enableOOS}}{{#if oos}}disabled{{/if}}{{/unless}}
+      {{#if oos}}data-oos="true"{{/if}}
       {{#if preorder}}data-preorder="true"{{/if}}
       {{#if one-left}}data-one-left="true"{{/if}}
       {{#if final-sale}}data-final-sale="true"{{/if}}
       {{#if sample-defect}}data-sample-defect="true"{{/if}}
-    >{{label}}{{#if oos}} (Out of Stock){{/if}}</option>
+    >{{label}}{{#unless ../enableOOS}}{{#if oos}} (Out of Stock){{/if}}{{/unless}}</option>
   {{/each}}
     {{> product-options.unavailable href="./cant-find-your-size.html" }}
   </select>
