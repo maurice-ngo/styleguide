@@ -10,10 +10,12 @@
 ------------------------------------------------------ */
 
 .dd-refine {
+  @extend %h3;
   width: 100%;
   height: 45px;
-  margin-bottom: 4px;
-  box-shadow: 0 0 0 1px #e1e1e1;
+  margin-top:0;
+  margin-bottom: 1px;
+  box-shadow: 0 0 0 0;
   background-color: $input-border-color;
   border-right-color: transparent;
   &__delimeter:after {

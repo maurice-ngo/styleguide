@@ -24,6 +24,11 @@
       letter-spacing: em(0);
       text-transform: none;
     }
+    // .product__name--sm
+    // Product title small modifier
+    &--sm {
+      font-size: em(12);
+    }
   }
 
   // .product__brand
@@ -39,14 +44,12 @@
       font-size: em(12);
       letter-spacing: em(0);
       text-transform: none;
-      color: $color__grey;
+    }
+    &--sm {
+      font-size: em(12);
     }
   }
-  // .product--sm
-  // Product title small modifier
-  &--sm {
-    font-size: em(12);
-  }
+  
     // .product--long
   &--long {
     text-overflow: initial !important;

@@ -37,6 +37,7 @@
   padding: 0;
   border: 0;
   opacity: 0;
+  right: initial;
 }
 
 // hide with opacity
@@ -260,7 +261,7 @@
   &--pink-dark     { color: $color__pink--dark; }
   &--error         { color: $color__error; }
   &--red         { color: $color__red; }
-  
+
   // remove this after testing u-error class
   // &--error         {
   //   border-color: $color__error;
@@ -467,6 +468,14 @@
 
 .u-width-auto {
   width: auto !important;
+}
+
+/* @width-auto
+--------------------------------------------------------
+*/
+
+.u-height-auto {
+  height: auto !important;
 }
 
 

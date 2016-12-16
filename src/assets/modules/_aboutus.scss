@@ -48,6 +48,9 @@
     height: rem(157);
     margin-left: rem(7);
     z-index: 2;
+    &--big {
+      height: rem(275);
+    }
   }
   &__double-border-content--careers {
     position: relative;

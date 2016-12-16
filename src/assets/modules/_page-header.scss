@@ -10,7 +10,6 @@
 ------------------------------------------------------ */
 .page-header {
   &__title {
-    @extend %font-primary;
     height: rem(60);
     margin: 0;
     border-bottom: rem(1) solid $color__border;
@@ -18,11 +17,10 @@
     font-size: em(14);
     letter-spacing: normal;
     line-height: rem(60);
-    text-align: center;
-    text-transform: capitalize;
     vertical-align: middle;
     background: $color__white;
     position: relative;
+    text-align: center;
     z-index: 2;
     &--dark {
       &.page-header__title {
@@ -34,6 +32,12 @@
       }
     }
   }
+  &__filter {
+    @extend %font-primary;
+    font-size: 12px;
+    text-transform: capitalize;
+    padding-left: 6px;
+  }
   &__title--dropdown {
     &:after {
       display: inline-block;
@@ -41,7 +45,7 @@
       width: rem(10);
       height: rem(10);
       margin-top: rem(-3);
-      margin-left: rem(15);
+      margin-left: rem(10);
       transform: translate(0, rem(-2)) rotate(-45deg);
       transition: transform .2s linear;
       border-bottom: rem(2) solid $color__black;
@@ -89,13 +93,21 @@
     letter-spacing: normal;
     line-height: rem(60);
     vertical-align: middle;
-    background: $color__white;
+    background-color: $color__white;
     display: block;
     width: 100%;
-    padding-left: rem(19);
+    padding-left: rem(16);
     border-bottom: rem(1) solid $color__border;
     text-decoration: none;
     &:hover {
+      background-color: $color__white;
+      color: $color__black;
+      text-decoration: none;
+    }
+    &:active {
+      text-decoration: none;
+      background-color: $color__black;
+      color: $color__white;
       text-decoration: none;
     }
   }
