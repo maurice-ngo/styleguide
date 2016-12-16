@@ -11,7 +11,7 @@ export const TAB_CLASS = 'tab';
 export const LINK_CLASS = 'link';
 export const CONTENT_CLASS = 'content';
 export const ACTIVE_CLASS = 'active';
-const DEFAULT_OPTIONS = {
+export const DEFAULT_OPTIONS = {
   wrapClass: 'ui-tabs',
   updateFunc: updateTabs,
 };
@@ -22,7 +22,6 @@ const DEFAULT_OPTIONS = {
  * @param {Object} [options] - Object containing override options
  */
 export default function uiTabs(wrap, options = {}) {
-  console.log('@ wrap', '{'+typeof wrap+'}', wrap);
   const $wrap = $(wrap);
   const { wrapClass, updateFunc } = Object.assign({}, DEFAULT_OPTIONS, options);
   const $nav = $wrap.find(`.${wrapClass}__${NAV_CLASS}`);
