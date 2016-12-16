@@ -27,4 +27,5 @@ $(document).ready(() => {
   $product.find('.product__cta button[type="submit"]').addToBag();
   $product.find('.product-size__oos').oosProduct({ $wrap: this });
 
+  $('.ui-tabs').tabs();
 });
