@@ -13,7 +13,7 @@ import uiTabs, {
 
 chai.use(chaiJquery);
 
-describe.only('ui tabs', () => {
+describe('ui tabs', () => {
   const { wrapClass } = DEFAULT_OPTIONS;
   const activeTabClass = `${wrapClass}__${TAB_CLASS}--${ACTIVE_CLASS}`;
   const activeContentClass = `${wrapClass}__${CONTENT_CLASS}--${ACTIVE_CLASS}`;
