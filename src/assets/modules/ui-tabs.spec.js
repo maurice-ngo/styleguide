@@ -50,7 +50,7 @@ describe('ui tabs', () => {
       </div>
     `);
     $tabs = $(fixture.el).find(`.${wrapClass}`);
-    $tabs.tabs();
+    uiTabs($tabs);
   });
 
   afterEach(() => fixture.cleanup());
