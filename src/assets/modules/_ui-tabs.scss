@@ -23,6 +23,11 @@
       style: solid;
     }
     text-align: center;
+
+    // .ui-tabs__tab--active
+    &--active {
+      border-color: $color__black;
+    }
   }
 
   // .ui-tabs__link
@@ -39,10 +44,6 @@
     }
   }
 
-  // .ui-tabs__tab--active
-  &__tab--active {
-    border-color: $color__black;
-  }
   // .ui-tabs__tab--active .ui-tabs__link
   &__tab--active &__link {
     text-decoration: none;
