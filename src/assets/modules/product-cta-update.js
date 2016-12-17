@@ -11,7 +11,7 @@ import ctaNotifyMeSpecial from '../../materials/modules/cta-buttons/notify-me-sp
 import ctaNotifyMe from '../../materials/modules/cta-buttons/notify-me.html'
 
 export { ctaAddToBag, ctaPreorder, ctaNotifyMeSpecial, ctaNotifyMe, };
-export const CTA_WRAP_CLASS = 'product__cta';
+export const CTA_CLASS = 'cta';
 const DEFAULT_OPTIONS = {
   chooseCTA,
 };
@@ -19,18 +19,19 @@ const DEFAULT_OPTIONS = {
 /**
  * Update CTA based on selected value.
  * @param {HTMLElement} wrap - The .product wrap
+ * @param {String} wrapBlockClass - Class of wrap HTML Element
  * @param {Object} chosen - Selected product size, including relevant data
  * @param {Boolean} oos - Whether the chosen size is out of stock
  * @param {Boolean} preorder - Whether the chosen size is preorder only
  * @param {Boolean} allOnSale - Whether all sizes are on sale
  */
-export default function updateCTA({ wrap, chosen = {}, allOnSale }, options = {}) {
+export default function updateCTA({ wrap, wrapBlockClass, chosen = {}, allOnSale }, options = {}) {
   const { oos, preorder } = chosen;
   const { chooseCTA } = Object.assign({}, DEFAULT_OPTIONS, options);
 
-  const $cta = $(wrap).find(`.${CTA_WRAP_CLASS}`);
+  const $cta = $(wrap).find(`.${wrapBlockClass}__${CTA_CLASS}`);
   if (!$cta.length) {
-    throw new Error(`No .${CTA_WRAP_CLASS} was found`);
+    throw new Error(`No .${wrapBlockClass}__${CTA_CLASS} was found`);
   }
 
   $cta.html(chooseCTA(oos, allOnSale, preorder));

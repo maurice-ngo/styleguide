@@ -15,6 +15,7 @@ const DEFAULT_OPTIONS = {
 /**
  * Creates a javascript object containing product data
  * @param {jQueryElement} sizeEl - The size element (select, input, etc)
+ * @param {String} options.wrapBlockClass - Class of wrap HTML Element
  # @return {Object} Contains relevant data to a product
  */
 export default function createProductData(sizeEl, opts = {}) {

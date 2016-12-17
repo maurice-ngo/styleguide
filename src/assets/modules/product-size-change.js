@@ -31,8 +31,8 @@ const DEFAULT_OPTIONS = {
  * @param {Object} options.update - Function fired to update page on size change
  */
 export default function sizeChange(el, options = {}) {
-  const { update } = Object.assign({}, DEFAULT_OPTIONS, options);
-  const data = createProductData(el);
+  const { update, wrapBlockClass } = Object.assign({}, DEFAULT_OPTIONS, options);
+  const data = createProductData(el, options);
 
   attachChangeListener(data, update);
 };
@@ -43,11 +43,11 @@ export default function sizeChange(el, options = {}) {
  * @param {Function} update - Function to update the page
  */
 const attachChangeListener = (data, update) => $(data.sizeEl).change( evt => {
-  update(data)
+  update(data);
 });
 
 /**
- * Attaches change event to select dropdown.
+ * Callback function to update the page.
  * @param {Object} data - Object containing relevant data about the product
  */
 function runUpdates( data ) {

@@ -4,7 +4,7 @@ import chaiJquery from 'chai-jquery';
 
 import { PRODUCT_BLOCK_CLASS } from './product-size-change';
 import updateCTA, {
-  CTA_WRAP_CLASS,
+  CTA_CLASS,
   ctaAddToBag,
   ctaPreorder,
   ctaNotifyMeSpecial,
@@ -21,13 +21,14 @@ describe('product cta update', () => {
   beforeEach(() => {
     fixture.set(`
       <div class="${PRODUCT_BLOCK_CLASS}">
-        <div class="${CTA_WRAP_CLASS}"></div>
+        <div class="${PRODUCT_BLOCK_CLASS}__${CTA_CLASS}"></div>
       </div>
     `);
     $fixture = $(fixture.el);
-    $ctaWrap = $fixture.find(`.${CTA_WRAP_CLASS}`);
+    $ctaWrap = $fixture.find(`.${PRODUCT_BLOCK_CLASS}__${CTA_CLASS}`);
     data = {
       wrap: $fixture.find(`.${PRODUCT_BLOCK_CLASS}`)[0],
+      wrapBlockClass: PRODUCT_BLOCK_CLASS,
       chosen: {},
     };
   });
