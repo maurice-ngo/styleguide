@@ -27,11 +27,11 @@
 
   // .ui-tabs__link
   &__link {
+    @extend %h4;
     display: flex;
     justify-content: center;
     flex-direction: column;
     height: 100%;
-    @extend %h4;
     padding: rem( 0 8 );
     color: $color__grey--light;
     &:hover {
