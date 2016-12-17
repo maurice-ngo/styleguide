@@ -2,6 +2,7 @@ import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
+import template from '../../materials/modules/ui-tabs.html'
 import uiTabs, {
   NAV_CLASS,
   TAB_CLASS,
@@ -13,14 +14,11 @@ import uiTabs, {
 
 chai.use(chaiJquery);
 
-describe('ui tabs', () => {
+describe.only('ui tabs', () => {
   const { wrapClass } = DEFAULT_OPTIONS;
   const activeTabClass = `${wrapClass}__${TAB_CLASS}--${ACTIVE_CLASS}`;
   const activeContentClass = `${wrapClass}__${CONTENT_CLASS}--${ACTIVE_CLASS}`;
-  const tabIds = [
-    'tab-1',
-    'tab-2',
-  ];
+
   const clickTab = index => {
     const tab = $tabs.find(`.${wrapClass}__${TAB_CLASS}`)[index];
     $(tab).find(`.${wrapClass}__${LINK_CLASS}`).click();
@@ -28,27 +26,12 @@ describe('ui tabs', () => {
   };
   const getEl = ( elClass, index ) => {
     return $tabs.find(`.${wrapClass}__${elClass}`)[index];
-  }
+  };
 
   let $tabs;
 
   beforeEach(() => {
-    fixture.set(`
-      <div class="${wrapClass}">
-        <ul class="${wrapClass}__${NAV_CLASS}">
-          <li class="${wrapClass}__${TAB_CLASS}"><a class="${wrapClass}__${LINK_CLASS}" href="#${tabIds[0]}">Tab 1</a></li>
-          <li class="${wrapClass}__${TAB_CLASS}"><a class="${wrapClass}__${LINK_CLASS}" href="#${tabIds[1]}">Tab 2</a></li>
-        </ul>
-
-        <div id="${tabIds[0]}" class="${wrapClass}__${CONTENT_CLASS}">
-          Tab 1 Content
-        </div>
-
-        <div id="${tabIds[1]}" class="${wrapClass}__${CONTENT_CLASS}">
-          Tab 2 Content
-        </div>
-      </div>
-    `);
+    fixture.set(template());
     $tabs = $(fixture.el).find(`.${wrapClass}`);
     uiTabs($tabs);
   });

@@ -4,19 +4,15 @@ notes:
 
 <div class="ui-tabs">
   <ul class="ui-tabs__nav">
-    <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#back-in-stock">{{notify_me.back-in-stock.title}}</a></li>
-    <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#special-order">{{notify_me.special-order.title}}</a></li>
+    <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#hand">Hand</a></li>
+    <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#foot">Foot</a></li>
   </ul>
 
-  <div id="back-in-stock" class="ui-tabs__content">
-    <p class="u-center u-margin-a--xl">{{notify_me.back-in-stock.intro}}</p>
-
-    {{> notify-me details-title=notify_me.back-in-stock.title }}
+  <div id="hand" class="ui-tabs__content">
+    <p>Hi-5!</p>
   </div>
 
-  <div id="special-order" class="ui-tabs__content">
-    <p class="u-center u-margin-a--xl">{{notify_me.special-order.intro}}</p>
-
-    {{> notify-me details-title=notify_me.special-order.title }}
+  <div id="foot" class="ui-tabs__content">
+    <p>Round-house kick!</p>
   </div>
 </div>
