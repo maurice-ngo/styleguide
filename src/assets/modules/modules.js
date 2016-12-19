@@ -7,6 +7,7 @@ import './product-size-change';
 import './product-add-to-bag';
 import './product-color-change';
 import './product-oos';
+import './ui-tabs';
 
 $(document).ready(() => {
   $('.js-accordion').accordion();
@@ -25,4 +26,6 @@ $(document).ready(() => {
   $product.find('.product-color__select').colorChange();
   $product.find('.product__cta button[type="submit"]').addToBag();
   $product.find('.product-size__oos').oosProduct({ $wrap: this });
+
+  $('.ui-tabs').tabs();
 });
