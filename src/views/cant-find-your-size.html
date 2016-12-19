@@ -10,18 +10,22 @@ layout: mock-page
 </header>
 
 <section class="page__main">
-  <div class="tabs">
-  </div>
+  <div class="ui-tabs u-margin-l--xl u-margin-r--xl">
+    <ul class="ui-tabs__nav">
+      <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#back-in-stock">{{notify_me.back-in-stock.title}}</a></li>
+      <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#special-order">{{notify_me.special-order.title}}</a></li>
+    </ul>
 
-  <div class="section">
-    <p class="u-center u-margin-a--xl">{{notify_me.back-in-stock.intro}}</p>
+    <div id="back-in-stock" class="ui-tabs__content">
+      <p class="u-center u-margin-a--xl">{{notify_me.back-in-stock.intro}}</p>
 
-    {{> notify-me details-title=notify_me.back-in-stock.title }}
-  </div>
+      {{> notify-me details-title=notify_me.back-in-stock.title }}
+    </div>
 
-  <div class="section">
-    <p class="u-center u-margin-a--xl">{{notify_me.special-order.intro}}</p>
+    <div id="special-order" class="ui-tabs__content">
+      <p class="u-center u-margin-a--xl">{{notify_me.special-order.intro}}</p>
 
-    {{> notify-me details-title=notify_me.special-order.title }}
+      {{> notify-me details-title=notify_me.special-order.title }}
+    </div>
   </div>
 </section>
