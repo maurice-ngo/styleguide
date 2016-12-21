@@ -7,6 +7,9 @@ import preorder from '../../materials/modules/product-notifications/preorder.htm
 
 export { finalSale, sampleDefect, oneLeft, preorder };
 export const EL_CLASS = 'notification';
+const DEFAULT_OPTIONS = {
+  notify,
+};
 
 /**
  * Show notification based on chosen option.
@@ -15,7 +18,9 @@ export const EL_CLASS = 'notification';
  * @param {Object} chosen - Information on the selected size
  * @return {jQueryElement} product__notification element
  */
-export default function showNotification({ wrap, wrapBlockClass, chosen }) {
+export default function showNotification(data, options = {}) {
+  const { wrap, wrapBlockClass, chosen } = data;
+  const { notify } = Object.assign({}, DEFAULT_OPTIONS, options);
   const $el = $(wrap).find(`.${wrapBlockClass}__${EL_CLASS}`);
   if (!$el.length) {
     throw new Error(`Did not find $el: ".${wrapBlockClass}__${EL_CLASS}"`);
@@ -23,7 +28,7 @@ export default function showNotification({ wrap, wrapBlockClass, chosen }) {
 
   $el.empty();
 
-  const notification = notify(chosen);
+  const notification = notify(data);
 
   // show template
   if (notification) {
@@ -35,17 +40,17 @@ export default function showNotification({ wrap, wrapBlockClass, chosen }) {
 
 /**
  * Choose template for notification.
- * @param {Object} option - Selected option of select dropdown
+ * @param {Object} chosen - Selected option of select dropdown
  * @return {String} Handlebars template from import above
  */
-const notify = (option) => {
+function notify({ chosen }) {
   // if data-attr, show notification
-  if (option['sample-defect'])
+  if (chosen['sample-defect'])
     return sampleDefect();
-  else if (option['final-sale'])
+  else if (chosen['final-sale'])
     return finalSale();
-  else if (option['one-left'])
+  else if (chosen['one-left'])
     return oneLeft();
-  else if (option.preorder)
-    return preorder({'delivery-date': option['delivery-date']});
-};
+  else if (chosen.preorder)
+    return preorder({'delivery-date': chosen['delivery-date']});
+}

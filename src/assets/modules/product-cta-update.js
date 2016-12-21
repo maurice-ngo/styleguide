@@ -6,7 +6,7 @@
 import $ from 'jquery';
 
 import ctaAddToBag from '../../materials/modules/cta-buttons/add-to-bag.html'
-import ctaPreorder from '../../materials/modules/cta-buttons/preorder.html'
+import ctaPreorder from '../../materials/modules/cta-buttons/preorder-cart.html'
 import ctaNotifyMeSpecial from '../../materials/modules/cta-buttons/notify-me-special.html'
 import ctaNotifyMe from '../../materials/modules/cta-buttons/notify-me.html'
 
@@ -20,13 +20,12 @@ const DEFAULT_OPTIONS = {
  * Update CTA based on selected value.
  * @param {HTMLElement} wrap - The .product wrap
  * @param {String} wrapBlockClass - Class of wrap HTML Element
- * @param {Object} chosen - Selected product size, including relevant data
- * @param {Boolean} oos - Whether the chosen size is out of stock
- * @param {Boolean} preorder - Whether the chosen size is preorder only
  * @param {Boolean} allOnSale - Whether all sizes are on sale
+ * @param {Object} chosen - Selected product size, including relevant data
+ * @param {Function} options.chooseCTA - Function used to choose the CTA
  */
-export default function updateCTA({ wrap, wrapBlockClass, chosen = {}, allOnSale }, options = {}) {
-  const { oos, preorder } = chosen;
+export default function updateCTA(data , options = {}) {
+  const { wrap, wrapBlockClass, allOnSale, chosen = {} } = data;
   const { chooseCTA } = Object.assign({}, DEFAULT_OPTIONS, options);
 
   const $cta = $(wrap).find(`.${wrapBlockClass}__${CTA_CLASS}`);
@@ -34,7 +33,7 @@ export default function updateCTA({ wrap, wrapBlockClass, chosen = {}, allOnSale
     throw new Error(`No .${wrapBlockClass}__${CTA_CLASS} was found`);
   }
 
-  $cta.html(chooseCTA(oos, allOnSale, preorder));
+  $cta.html(chooseCTA(data));
 };
 
 /**
@@ -43,7 +42,8 @@ export default function updateCTA({ wrap, wrapBlockClass, chosen = {}, allOnSale
  * @param {Boolean} preorder - Whether the chosen size is preorder only
  * @param {Boolean} allOnSale - Whether all sizes are on sale
  */
-function chooseCTA(oos, allOnSale, preorder) {
+function chooseCTA({ chosen = {}, allOnSale }) {
+  const { oos, preorder } = chosen;
   if (oos) {
     return allOnSale ? ctaNotifyMe : ctaNotifyMeSpecial;
   }

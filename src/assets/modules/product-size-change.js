@@ -22,13 +22,14 @@ export const PRODUCT_BLOCK_CLASS = 'product';
 export const SIZE_ELEMENT_CLASS = 'product-size__select';
 
 const DEFAULT_OPTIONS = {
-  update: runUpdates,
+  update,
 };
 
 /**
  * Initializes size changes.
  * @param {HTMLElement} el - The select dropdown we're attaching to
  * @param {Object} options.update - Function fired to update page on size change
+ * @param {String} options.wrapBlockClass - Class of the wrap block, used for element selectors
  */
 export default function sizeChange(el, options = {}) {
   const { update, wrapBlockClass } = Object.assign({}, DEFAULT_OPTIONS, options);
@@ -50,14 +51,8 @@ const attachChangeListener = (data, update) => $(data.sizeEl).change( evt => {
  * Callback function to update the page.
  * @param {Object} data - Object containing relevant data about the product
  */
-function runUpdates( data ) {
-  const { wrap, sizeEl } = data;
-  const $wrap = $(wrap);
-
-  // whether input or select, find the chosen element
-  const { options, selectedIndex } = sizeEl;
-  const chosen = options ? options[selectedIndex] : sizeEl;
-
+function update( data ) {
+  const chosen = getChosen(data.sizeEl);
   updateChosenData(data, chosen);
 
   // run updates
@@ -67,4 +62,16 @@ function runUpdates( data ) {
   updateCTA(data);
   updateDeliveryDate(data);
   updateUnavailable(data);
+};
+
+/**
+ * Helper to get chosen size
+ * @param {HTMLElement} sizeEl - Size Element
+ * @return {Object} Chosen size data
+ */
+export const getChosen = sizeEl => {
+  // whether input or select, find the chosen element
+  const { options, selectedIndex } = sizeEl;
+
+  return options ? options[selectedIndex] : sizeEl
 };
