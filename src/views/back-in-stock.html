@@ -1,16 +1,14 @@
 ---
 title: Notify Me
-page-name: notify_me
+page-name: notifyMe
 fabricator: false
 layout: mock-page
 ---
 
 <header class="page__header">
-  {{> page-header.title text=notify_me.back-in-stock.title }}
+  {{> page-header.title text=notifyMe.back-in-stock.title }}
 </header>
 
 <section class="page__main">
-  <p class="u-center u-margin-a--xl">{{notify_me.back-in-stock.intro}}</p>
-
-  {{> notify-me details-title=notify_me.back-in-stock.title }}
+  {{> notify-me notifyMe.back-in-stock pdp=pdp }}
 </section>
