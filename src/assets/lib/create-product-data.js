@@ -65,6 +65,7 @@ export const updateChosenData = (product, chosen) => {
     'one-left': getAttr(chosen, 'one-left'),
     preorder: getAttr(chosen, 'preorder'),
     oos: getAttr(chosen, 'oos'),
+    unavailable: getAttr(chosen, 'unavailable'),
     price,
     isOnSale: parseFloat(price) < parseFloat(regularPrice),
     value: chosen.value || '',

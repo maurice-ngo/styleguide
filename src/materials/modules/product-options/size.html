@@ -16,7 +16,7 @@ notes:
       {{#if one-left}}data-one-left="true"{{/if}}
       {{#if final-sale}}data-final-sale="true"{{/if}}
       {{#if sample-defect}}data-sample-defect="true"{{/if}}
-    >{{label}}{{#unless ../enableOOS}}{{#if oos}} (Out of Stock){{/if}}{{/unless}}</option>
+    >{{label}}{{#if oos}} (Out of Stock){{/if}}</option>
   {{/each}}
     {{> product-options.unavailable href="./cant-find-your-size.html" }}
   </select>

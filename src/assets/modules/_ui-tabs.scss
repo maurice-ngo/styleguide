@@ -7,7 +7,7 @@
 .ui-tabs {
   // .ui-tabs__nav
   &__nav {
-    margin: 0;
+    margin: rem( 0 16 );
     list-style: none;
     overflow: hidden;
   }
