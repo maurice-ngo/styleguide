@@ -8,6 +8,11 @@ import $ from 'jquery';
 
 const PRICE_ATTR = 'data-price';
 const REGULAR_PRICE_ATTR = 'data-regular-price';
+
+/**
+ * @namespace
+ * @property {String} wrapBlockClass - Class of wrap HTML Element
+ */
 const DEFAULT_OPTIONS = {
   wrapBlockClass: 'product',
 };
@@ -15,7 +20,7 @@ const DEFAULT_OPTIONS = {
 /**
  * Creates a javascript object containing product data
  * @param {jQueryElement} sizeEl - The size element (select, input, etc)
- * @param {String} options.wrapBlockClass - Class of wrap HTML Element
+ * @see DEFAULT_OPTIONS
  # @return {Object} Contains relevant data to a product
  */
 export default function createProductData(sizeEl, opts = {}) {
