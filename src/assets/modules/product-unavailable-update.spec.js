@@ -8,13 +8,12 @@ describe('product unavailable link', () => {
   let $sizeEl;
   let data;
   const ATTR = 'data-href';
-  const ORIGINAL = 'carla';
+  const ORIGINAL = 'turk';
 
   beforeEach(() => {
     fixture.set(`
       <select id="scrubs">
         <option value="default">JD</option>
-        <option value="${VALUE}" data-href="${ORIGINAL}">Turk</option>
       </select>
     `);
     $fixture = $(fixture.el);

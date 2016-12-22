@@ -5,9 +5,10 @@
 
 import $ from 'jquery';
 
-import template from '../../materials/modules/product-options/unavailable.html'
-
 export const VALUE = 'unavailable';
+export const template = href => {
+  return `<option value="${VALUE}" data-href="${href}">Can't find your size?</option>`;
+};
 
 /**
  * Updates unavailable option
@@ -28,7 +29,7 @@ export default function updateUnavailable( data ) {
   const href = getHref(data);
 
   if (href) {
-    sizeEl.insertAdjacentHTML('beforeend', template({ href: href }));
+    sizeEl.insertAdjacentHTML('beforeend', template(href));
   }
 }
 
@@ -43,9 +44,9 @@ const getHref = data => {
 
   // when all sizes are in stock
   if (allInStock) {
-    return isOnSale ? '' : '{{url.special-order}}';
+    return isOnSale ? '' : './special-order.html';
   }
 
   // default href based on whether all sizes are on sale
-  return isOnSale ? '{{url.back-in-stock}}' : '{{url.cant-find-your-size}}';
+  return isOnSale ? './back-in-stock.html' : './cant-find-your-size.html';
 };
