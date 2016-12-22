@@ -16,6 +16,7 @@ import notificationUnavailable from '../../materials/modules/product-notificatio
 
 export { ctaAddToBag, ctaPreorder, ctaNotifyMe, ctaSpecialOrder, notificationInStock, notificationPreorderEmail, notificationPreorderAvailable, notificationUnavailable };
 
+
 /**
  * Callback function to update the Notify Me section.
  * @param {Object} data - Object containing relevant data about the product
@@ -26,11 +27,20 @@ export default function updateNotifyMe( data ) {
 
   showNotification(data, { notify });
   updateCTA(data, { chooseCTA });
+  toggleEmailDisplay(data);
 }
+
+/**
+ * Helper function to check if wrap has id of "special-order"
+ * @param {HTMLElement} wrap - The closest wrap from the select
+ */
+const isSpecialOrder = wrap => wrap.id === 'special-order';
 
 /**
  * Choose the CTA based on attributes.
  * @param {HTMLElement} wrap - The closest wrap from the select
+ * @param {Object} chosen - Selected option of select dropdown
+ * @return {String} Handlebars template from import above
  */
 export const chooseCTA = ({ wrap, chosen = {} }) => {
   const { oos, preorder } = chosen;
@@ -44,7 +54,7 @@ export const chooseCTA = ({ wrap, chosen = {} }) => {
     return ctaAddToBag();
   }
   // default for special order page
-  if (wrap.id === 'special-order') {
+  if (isSpecialOrder(wrap)) {
     return ctaSpecialOrder();
   }
   // default for all other pages
@@ -53,6 +63,7 @@ export const chooseCTA = ({ wrap, chosen = {} }) => {
 
 /**
  * Choose template for notification.
+ * @param {HTMLElement} wrap - The closest wrap from the select
  * @param {Object} chosen - Selected option of select dropdown
  * @return {String} Handlebars template from import above
  */
@@ -60,7 +71,7 @@ export const notify = ({ wrap, chosen }) => {
   const { oos, preorder, 'delivery-date': deliveryDate, unavailable } = chosen;
 
   // if data-attr, show notification
-  if (wrap.id === 'special-order') {
+  if (isSpecialOrder(wrap)) {
     if (preorder) {
       return notificationPreorderAvailable({'delivery-date': deliveryDate});
     }
@@ -76,4 +87,19 @@ export const notify = ({ wrap, chosen }) => {
   }
 
   return;
+};
+
+/**
+ * Toggle Display of Email Field based on chosen size
+ * @param {HTMLElement} wrap - Notify Me block wrap
+ * @param {String} wrapBlockClass - Class of wrap HTML Element
+ * @param {Object} chosen - Selected option of select dropdown
+ * @return {String} Handlebars template from import above
+ */
+export const toggleEmailDisplay = ({ wrap, wrapBlockClass, chosen = {} }) => {
+  const { oos, preorder } = chosen;
+  const $field = $(wrap).find(`#email`).closest('.field');
+  const hide = !oos || ( isSpecialOrder(wrap) && !!preorder );
+
+  return $field.toggleClass('u-hide', hide);
 };

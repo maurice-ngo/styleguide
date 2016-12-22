@@ -49,7 +49,7 @@ const setupSizes = () => {
 /**
  * Helper function to get the page we're on
  */
-const getPage = () => document.location.pathname.replace('/site/','');
+const getPage = () => document.location.pathname.replace(/\/.+site\//,'');
 
 /**
  * Callback to upate size dropdown, based on selected option

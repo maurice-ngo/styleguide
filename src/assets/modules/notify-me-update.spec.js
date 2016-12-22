@@ -2,9 +2,11 @@ import $ from 'jquery';
 import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
+import input from '../../partials/input-text.html';
 import updateNotifyMe, {
   chooseCTA,
   notify,
+  toggleEmailDisplay,
   ctaAddToBag,
   ctaPreorder,
   ctaNotifyMe,
@@ -25,7 +27,11 @@ describe('notify me update', () => {
   let data;
 
   beforeEach( () => {
-    fixture.set(`<div class="${WRAP_CLASS}"></div>`);
+    fixture.set(`
+      <div class="${WRAP_CLASS}">
+        ${input({ id: "email", label: "email" })}
+      </div>
+    `);
     $fixture = $(fixture.el);
     data = {
       wrap: $fixture.find(`.${WRAP_CLASS}`)[0],
@@ -46,6 +52,12 @@ describe('notify me update', () => {
 
     it('should not show any Notification', () => {
       expect(notify(data)).to.be.empty;
+    });
+
+    it('should not hide email', () => {
+      const expected = 'u-hide';
+
+      expect(toggleEmailDisplay(data)).to.not.have.class(expected);
     });
   });
 
@@ -79,14 +91,27 @@ describe('notify me update', () => {
 
       expect(notify(updateChosen(data, chosen))).to.equal(expected);
     });
+
+    it('should hide email when chosen size is preorder', () => {
+      const chosen = {
+        preorder: true,
+      };
+      const expected = 'u-hide';
+      setSpecialOrder($fixture);
+
+      expect(toggleEmailDisplay(updateChosen(data, chosen))).to.have.class(expected);
+    });
+
+    it('should not hide email when chosen size is not preorder or in stock', () => {
+      const expected = 'u-hide';
+      setSpecialOrder($fixture);
+
+      expect(toggleEmailDisplay(data)).to.not.have.class(expected);
+    });
   });
 
   describe('chosen size is preorder', () => {
     const chosen = { preorder: true };
-    const expected = {
-      cta: ctaPreorder(),
-      notification: notificationPreorderEmail(),
-    };
 
     it('should show the "Preorder" CTA', () => {
       const expected = ctaPreorder();
@@ -114,6 +139,12 @@ describe('notify me update', () => {
       const expected = notificationInStock();
 
       expect(notify(updateChosen(data, chosen))).to.equal(expected);
+    });
+
+    it('should hide email field', () => {
+      const expected = 'u-hide';
+
+      expect(toggleEmailDisplay(updateChosen(data, chosen))).to.have.class(expected);
     });
   });
 });
