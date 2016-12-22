@@ -564,7 +564,58 @@ fieldset {
   }
 }
 
+ //TODO: Create a placeholder selector out of field, field__input, and
+ //field__label, so that this can be broken down into logical chunks.
+.inline-field {
+  @extend .field;
 
+  &__input {
+    @extend .field__input;
+    font-size: em(16);
+
+    &:not(:focus) {
+      &:invalid {
+        border-color: $color__error;
+        color: $color__error;
+        background-color: transparent;
+      }
+    }
+
+    &:focus {
+      @include placeholder {
+        opacity: 0;
+      }
+    }
+
+    &--selected {
+      padding: {
+        top: 22px;
+        bottom: 4px;
+      }
+    }
+
+    &--filled {
+      padding: {
+        top: 20px;
+        bottom: 6px;
+      }
+    }
+  }
+
+  &__label {
+    @extend .field__label;
+
+    &--invalid {
+      color: $color__error;
+    }
+
+    &--selected,
+    &--filled {
+      top: rem(4);
+      z-index: 1;
+    }
+  }
+}
 
 // Underline Style for Input and Select fields
 // ===========================================
