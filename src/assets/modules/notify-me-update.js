@@ -37,18 +37,18 @@ export const chooseCTA = ({ wrap, chosen = {} }) => {
 
   // if preorder available
   if (preorder) {
-    return ctaPreorder;
+    return ctaPreorder();
   }
   // item is in stock now, show "add to bag"
   if (!oos) {
-    return ctaAddToBag;
+    return ctaAddToBag();
   }
   // default for special order page
   if (wrap.id === 'special-order') {
-    return ctaSpecialOrder;
+    return ctaSpecialOrder();
   }
   // default for all other pages
-  return ctaNotifyMe;
+  return ctaNotifyMe();
 };
 
 /**

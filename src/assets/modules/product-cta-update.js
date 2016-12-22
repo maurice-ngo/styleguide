@@ -45,10 +45,10 @@ export default function updateCTA(data , options = {}) {
 function chooseCTA({ chosen = {}, allOnSale }) {
   const { oos, preorder } = chosen;
   if (oos) {
-    return allOnSale ? ctaNotifyMe : ctaNotifyMeSpecial;
+    return allOnSale ? ctaNotifyMe() : ctaNotifyMeSpecial();
   }
   if (preorder) {
-    return ctaPreorder;
+    return ctaPreorder();
   }
-  return ctaAddToBag;
+  return ctaAddToBag();
 }
