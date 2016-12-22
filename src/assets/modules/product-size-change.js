@@ -21,6 +21,10 @@ registerJQueryPlugin(PLUGIN_NAME, sizeChange);
 export const PRODUCT_BLOCK_CLASS = 'product';
 export const SIZE_ELEMENT_CLASS = 'product-size__select';
 
+/**
+ * @namespace
+ * @param {Function} update - Function fired to update page on size change
+ */
 const DEFAULT_OPTIONS = {
   update,
 };
@@ -28,12 +32,12 @@ const DEFAULT_OPTIONS = {
 /**
  * Initializes size changes.
  * @param {HTMLElement} el - The select dropdown we're attaching to
- * @param {Object} options.update - Function fired to update page on size change
- * @param {String} options.wrapBlockClass - Class of the wrap block, used for element selectors
+ * @see DEFAULT_OPTIONS
  */
 export default function sizeChange(el, options = {}) {
-  const { update, wrapBlockClass } = Object.assign({}, DEFAULT_OPTIONS, options);
-  const data = createProductData(el, options);
+  const combinedOptions = Object.assign({}, DEFAULT_OPTIONS, options);
+  const { update } = combinedOptions;
+  const data = createProductData(el, combinedOptions);
 
   attachChangeListener(data, update);
 };
