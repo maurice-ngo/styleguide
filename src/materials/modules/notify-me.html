@@ -7,9 +7,12 @@ notes:
 
   {{> product-title- }}
 
-  <form class="notify-me__form" action="?thank-you">
+  <form class="notify-me__form " action="?thank-you">
     {{> product-options.size enableOOS=true pdp=pdp }}
-    {{> input-text id="email" label="Enter your Email Address" }}
+    {{> input-text id="email" type="email" label="Enter your Email Address"
+      fieldClassName="inline-field"
+      labelClassName="inline-field__label"
+      inputClassName="inline-field__input"}}
 
     <div class="notify-me__auto-order"></div>
     <div class="notify-me__notification"></div>
