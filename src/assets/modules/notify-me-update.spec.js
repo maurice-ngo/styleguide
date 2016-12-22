@@ -17,7 +17,7 @@ import updateNotifyMe, {
   notificationUnavailable,
 } from './notify-me-update';
 
-describe.only('notify me update', () => {
+describe('notify me update', () => {
   const WRAP_CLASS = 'notify-me';
   const updateChosen = (data, chosenUpdates) => {
     const chosen = Object.assign({}, data.chosen, chosenUpdates);

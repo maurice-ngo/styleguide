@@ -7,7 +7,7 @@ import inputText from '../../../partials/input-text.html';
 
 chai.use(chaiJquery);
 
-describe.only('Nested Field', () => {
+describe('Nested Field', () => {
   const create = (options={}) => {
     const fieldClassName = 'lebowski';
     const labelClassName = 'lebowski__label';
