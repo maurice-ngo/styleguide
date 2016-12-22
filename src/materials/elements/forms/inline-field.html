@@ -1,0 +1,19 @@
+---
+notes: |
+  Form field that shows the placeholder until interacted with where the hidden
+  label is shown within the input. Validation is handled based on the pattern
+  or type attribute of the field.
+---
+
+<form class="form" action="">
+  {{> input-text id="email" type="email" label="Enter your Email Address"
+      fieldClassName="inline-field"
+      labelClassName="inline-field__label"
+      inputClassName="inline-field__input"}}
+
+  {{> input-text id="url" label="Enter a URL"
+      fieldClassName="inline-field"
+      labelClassName="inline-field__label"
+      inputClassName="inline-field__input"
+      pattern="https?://.+"}}
+</form>
