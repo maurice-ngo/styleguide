@@ -9,8 +9,6 @@ layout: mock-page
   {{> page-header.title text=title }}
 </header>
 
-<section class="page__main u-center u-margin-a--xl">
-  <p class="u-margin-b--xl">{{{notifyMe.thank-you-email.intro}}}</p>
-
-  {{> buttons.full- href=url.homepage text="Continue Shopping"}}
+<section class="page__main">
+  {{> notify-me-thank-you notifyMe.thank-you-email }}
 </section>
