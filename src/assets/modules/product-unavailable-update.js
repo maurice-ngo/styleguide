@@ -41,13 +41,11 @@ const getHref = data => {
   const { chosen, allInStock } = data;
   const { isOnSale } = chosen;
 
-  // determine href based on whether all sizes are on sale
-  let href = isOnSale ? './back-in-stock.html' : './cant-find-your-size.html';
-
-  // override href whenever all sizes are in stock
+  // when all sizes are in stock
   if (allInStock) {
-    href = isOnSale ? '' : './special-order.html';
+    return isOnSale ? '' : '{{url.special-order}}';
   }
 
-  return href;
+  // default href based on whether all sizes are on sale
+  return isOnSale ? '{{url.back-in-stock}}' : '{{url.cant-find-your-size}}';
 };

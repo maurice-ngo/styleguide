@@ -1,16 +1,14 @@
 ---
 title: Notify Me
-page-name: notify_me
+page-name: notifyMe
 fabricator: false
 layout: mock-page
 ---
 
 <header class="page__header">
-  {{> page-header.title text=notify_me.special-order.title }}
+  {{> page-header.title text=notifyMe.special-order.title }}
 </header>
 
 <section class="page__main">
-  <p class="u-center u-margin-a--xl">{{notify_me.special-order.intro}}</p>
-
-  {{> notify-me details-title=notify_me.special-order.title }}
+  {{> notify-me notifyMe.special-order pdp=pdp }}
 </section>

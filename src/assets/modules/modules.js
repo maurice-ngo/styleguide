@@ -8,9 +8,11 @@ import './product-add-to-bag';
 import './product-color-change';
 import './product-oos';
 import './ui-tabs';
+import updateNotifyMe from './notify-me-update';
 
 $(document).ready(() => {
   $('.js-accordion').accordion();
+  $('.ui-tabs').tabs();
 
   const $product = $('.product');
 
@@ -27,5 +29,10 @@ $(document).ready(() => {
   $product.find('.product__cta button[type="submit"]').addToBag();
   $product.find('.product-size__oos').oosProduct({ $wrap: this });
 
-  $('.ui-tabs').tabs();
+
+  const notifyMeClass = 'notify-me';
+
+  $(`.${notifyMeClass}`).find('.product-size__select, .product-size__one')
+    .sizeChange({ wrapBlockClass: notifyMeClass, update: updateNotifyMe })
+    .trigger('change');
 });

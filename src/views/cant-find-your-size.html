@@ -1,31 +1,23 @@
 ---
 title: Notify Me
-page-name: notify_me
+page-name: notifyMe
 fabricator: false
 layout: mock-page
 ---
 
 <header class="page__header">
-  {{> page-header.title text=notify_me.cant-find-your-size.title }}
+  {{> page-header.title text=notifyMe.cant-find-your-size.title }}
 </header>
 
 <section class="page__main">
-  <div class="ui-tabs u-margin-l--xl u-margin-r--xl">
+  <div class="ui-tabs">
     <ul class="ui-tabs__nav">
-      <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#back-in-stock">{{notify_me.back-in-stock.title}}</a></li>
-      <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#special-order">{{notify_me.special-order.title}}</a></li>
+      <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#back-in-stock">{{notifyMe.back-in-stock.title}}</a></li>
+      <li class="ui-tabs__tab"><a class="ui-tabs__link" href="#special-order">{{notifyMe.special-order.title}}</a></li>
     </ul>
 
-    <div id="back-in-stock" class="ui-tabs__content">
-      <p class="u-center u-margin-a--xl">{{notify_me.back-in-stock.intro}}</p>
+    {{> notify-me notifyMe.back-in-stock tabs=true pdp=pdp }}
 
-      {{> notify-me details-title=notify_me.back-in-stock.title }}
-    </div>
-
-    <div id="special-order" class="ui-tabs__content">
-      <p class="u-center u-margin-a--xl">{{notify_me.special-order.intro}}</p>
-
-      {{> notify-me details-title=notify_me.special-order.title }}
-    </div>
+    {{> notify-me notifyMe.special-order tabs=true pdp=pdp }}
   </div>
 </section>
