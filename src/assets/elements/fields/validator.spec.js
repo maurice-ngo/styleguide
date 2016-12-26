@@ -1,10 +1,10 @@
 import $ from 'jquery';
 import chai, { expect } from 'chai';
-import chaiJquery from 'chai-jquery';
+import sinonChai from 'sinon-chai';
 
 import validator, { VALIDATE_TRIGGER } from './validator';
 
-chai.use(chaiJquery);
+chai.use(sinonChai);
 
 describe('Validator', () => {
   let sandbox;
