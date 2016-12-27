@@ -100,6 +100,37 @@ describe('Validator', () => {
     });
   });
 
+  describe('when doing a blur on a form element', () => {
+    it('should be valid when a required element has been filled in', () => {
+      const { $required  } = setupSimpleForm();
+
+      $required
+        .val('Donny')
+        .trigger('focus')
+        .trigger('blur');
+
+      expect($required.is(':invalid')).to.be.false;
+    });
+
+    it('should be invalid when a required element has been filled in and then cleared', () => {
+      const { $required, $clickTrigger  } = setupSimpleForm();
+
+      $required
+        .trigger('focus')
+        .trigger('blur');
+
+      expect($required.is(':invalid')).to.be.true;
+      $clickTrigger.trigger('click');
+
+      $required
+        .val(`he peed on the dude's rug`)
+        .trigger('focus')
+        .trigger('blur');
+
+      expect($required.is(':invalid')).to.be.false;
+    });
+  });
+
   describe('when validating a not empty validator', () => {
     const setupNotEmpty = () => {
       const $form = $(fixture.set(`
