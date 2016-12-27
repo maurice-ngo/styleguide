@@ -71,7 +71,11 @@ export default function validator(el, options = {}) {
     $triggers.on('click', evt => submitHandler(evt, $el, successCallback, errorCallback));
   }
 
-  $(el).on('submit', evt => submitHandler(evt, $el, successCallback, errorCallback));
+  $el.on('submit', evt => submitHandler(evt, $el, successCallback, errorCallback));
+
+  forEachFormField($el, formField => {
+    formField.addEventListener('blur', () => validateField(formField));
+  });
 }
 
 /**
@@ -85,17 +89,12 @@ const submitHandler = (evt, $wrapper, successCallback, errorCallback) => {
   let invalidElements = $wrapper.find(':invalid').toArray();
   let validElements = [];
 
-  const dataSelector = Object
-    .keys(validators)
-    .map(name => `[data-${kebabCase(name)}]`)
-    .join(',');
-
-  $wrapper.find(dataSelector).each(function() {
-    const isInvalid = validateField(this);
+  forEachFormField($wrapper, formField => {
+    const isInvalid = validateField(formField);
     if (isInvalid) {
-      invalidElements = [...invalidElements, this];
+      invalidElements = [...invalidElements, formField];
     } else {
-      validElements = [...validElements, this];
+      validElements = [...validElements, formField];
     }
   });
 
@@ -149,6 +148,23 @@ const removeExistingInvalidates = elements => {
   const elementsToRemove = elements.filter(element => element.checkValidity());
   const diff = difference(elements, elementsToRemove);
   return uniq(diff);
+};
+
+/**
+ * Helper that determines all the elements that contain data validator
+ * attributes and applies a function to interact with each element.
+ * @param {jQuery} $wrapper - Container for the form elements
+ * @param {Function} fn - Called and passed along a form element
+ */
+const forEachFormField = ($wrapper, fn) => {
+  const dataSelector = Object
+    .keys(validators)
+    .map(name => `[data-${kebabCase(name)}]`)
+    .join(',');
+
+  $wrapper.find(dataSelector).each(function() {
+    fn(this);
+  });
 };
 
 /**
