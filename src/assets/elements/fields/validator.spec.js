@@ -101,33 +101,42 @@ describe('Validator', () => {
   });
 
   describe('when doing a blur on a form element', () => {
-    it('should be valid when a required element has been filled in', () => {
-      const { $required  } = setupSimpleForm();
+    it('should be valid when a not-empty element has been filled in', () => {
+      const { $required, $notEmpty  } = setupSimpleForm();
 
-      $required
+      $required.val('The Dude');
+      $notEmpty
         .val('Donny')
         .trigger('focus')
         .trigger('blur');
 
-      expect($required.is(':invalid')).to.be.false;
+      expect($notEmpty.is(':invalid')).to.be.false;
     });
 
-    it('should be invalid when a required element has been filled in and then cleared', () => {
-      const { $required, $clickTrigger  } = setupSimpleForm();
+    it('should be invalid when a not-empty element has been filled in and then cleared', () => {
+      const { $required, $notEmpty, $clickTrigger  } = setupSimpleForm();
 
-      $required
+      $required.val('The Dude');
+      $notEmpty
         .trigger('focus')
         .trigger('blur');
 
-      expect($required.is(':invalid')).to.be.true;
+      expect($notEmpty.is(':invalid')).to.be.true;
       $clickTrigger.trigger('click');
 
-      $required
+      $notEmpty
         .val(`he peed on the dude's rug`)
         .trigger('focus')
         .trigger('blur');
 
       expect($required.is(':invalid')).to.be.false;
+
+      $notEmpty
+        .val('')
+        .trigger('focus')
+        .trigger('blur');
+
+      expect($notEmpty.is(':invalid')).to.be.true;
     });
   });
 
