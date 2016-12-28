@@ -7,16 +7,17 @@ notes:
 
   {{> product-title- }}
 
-  <form class="notify-me__form " action="?thank-you">
-    {{> product-options.size enableOOS=true pdp=pdp }}
+  <form class="notify-me__form " data-validate="true" action="?thank-you">
+    {{> product-options.size enableOOS=true pdp=pdp select-size-attrs='data-validate-not="default"'}}
     {{> input-text id="email" type="email" label="Enter your Email Address"
       fieldClassName="inline-field"
       labelClassName="inline-field__label"
-      inputClassName="inline-field__input"}}
+      inputClassName="inline-field__input"
+      attrs='data-validate-not-empty="true"'}}
 
     <div class="notify-me__auto-order"></div>
     <div class="notify-me__notification"></div>
-    <div class="notify-me__cta">{{> cta-buttons.notify-me }}</div>
+    <div class="notify-me__cta" data-validate-trigger="true">{{> cta-buttons.notify-me }}</div>
   </form>
 
   <h4 class="notify-me__details">How does {{title}} work?</h4>

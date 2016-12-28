@@ -8,6 +8,8 @@
     @param {string} [labelClassName] - optional className applied to the label
     @param {string} [inputClassName] - optional className applied to the input
     @param {string} [pattern] - An optional pattern to be applied to an input
+    @param {boolean} [required] - Whether a field should be required
+    @param {string} [attrs] - Any additional attributes
 --}}
 
 <div class="field field--text {{fieldClassName}}">
@@ -18,5 +20,7 @@
     id="{{id}}"
     name="{{#if name}}{{name}}{{else}}{{id}}{{/if}}"
     placeholder="{{#if placeholder}}{{placeholder}}{{else}}{{label}}{{/if}}"
-    {{#pattern}}pattern="{{.}}"{{/pattern}}>
+    {{#pattern}}pattern="{{.}}"{{/pattern}}
+    {{#required}}required{{/required}}
+    {{{attrs}}}>
 </div>
