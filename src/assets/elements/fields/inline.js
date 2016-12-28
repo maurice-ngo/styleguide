@@ -74,8 +74,9 @@ export default function inlineField(el, options={}) {
   ];
 
   inputNode.addEventListener('focus', () => {
-    addClassNames(block, els, [selectedModifier]);
-    removeClassNames(block, els, filledModifier, invalidModifier)
+    addClassNames(block, els, selectedModifier);
+    removeClassNames(block, els, filledModifier, invalidModifier);
+    inputNode.setCustomValidity('');
   });
 
   inputNode.addEventListener('blur', e => {
@@ -98,7 +99,7 @@ export default function inlineField(el, options={}) {
  * @param {...string} modifiers - Modifier names
  */
 const addClassNames = (block, nodes, ...modifiers) => {
-  updateClassNames('add', block, nodes, modifiers);
+  updateClassNames('add', block, nodes, ...modifiers);
 };
 
 /**
