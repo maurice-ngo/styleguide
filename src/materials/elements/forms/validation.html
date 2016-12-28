@@ -12,7 +12,8 @@ notes: |
   ```
 
   Although by default, the validation is triggered by form submit, it can also
-  occur by applied a `data-validate-trigger` trigger like so:
+  occur by applying a `data-validate-trigger` attribute that will trigger a
+  validation like so:
 
   ```html
   <form data-validate="true">
@@ -20,6 +21,8 @@ notes: |
     <a data-validate-trigger="true" href="/go-to-some-place">Go To Some Place</a>
   </form>
   ```
+
+  This can be applied to any element that should trigger a validation.
 
   For both `data-validate` and `data-validate-trigger`, to follow how HTML
   attributes work, neither attributes need a value, but they have been provided
@@ -49,6 +52,9 @@ notes: |
     <button type="submit">Submit</button>
   </form>
   ```
+
+  The idea is that new data-validate attributes can be added later on and
+  reused.
 ---
 
 <form class="form" onsubmit="return false;" data-validate="true">
