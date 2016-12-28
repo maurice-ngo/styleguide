@@ -571,10 +571,15 @@ fieldset {
 
   &__input {
     @extend .field__input;
+    $selector: &;
     font-size: em(16);
 
     &:not(:focus) {
       &:invalid {
+        &:not(#{$selector}--filled) {
+          background: white;
+        }
+
         border-color: $color__error;
         color: $color__error;
         background-color: transparent;
@@ -653,6 +658,11 @@ fieldset {
   font-size: smaller;
   font-style: italic;
   line-height: 1;
+
+  &--outside {
+    display: block;
+    margin-top: -10px;
+  }
 }
 
 // Field feedback
