@@ -50,7 +50,9 @@
     position: absolute;
     top: rem(12);
     left: rem(16);
-    z-index: 2;
+    // TODO: Put this back to -1 once the more generic inline work has been
+    // completed.
+    z-index: -1;
     font-size: em(10);
   }
 
