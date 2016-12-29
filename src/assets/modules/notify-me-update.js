@@ -113,8 +113,8 @@ export const toggleEmailDisplay = ({ wrap, wrapBlockClass, chosen = {} }) => {
     if ( preorder ) {
       return isSpecialOrder(wrap);
     }
-    else {
-      return !oos;
-    }
+
+    // if no conditions above are met, simply check if in stock
+    return !oos;
   }
 };
