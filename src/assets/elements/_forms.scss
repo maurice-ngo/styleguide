@@ -292,8 +292,7 @@ textarea {
 // Label Placeholders For Radio and Checkbox
 
 %radio-checkbox-label {
-  font-size: em( 12 );
-  font-weight: normal;
+  @extend %h4;
   line-height: 2;
 }
 
@@ -388,7 +387,6 @@ textarea {
 
 label {
   display: block;
-  margin-bottom: rem( 7 );
   font-size: em( 12 );
 }
 

@@ -16,7 +16,7 @@ notes:
       {{#if one-left}}data-one-left="true"{{/if}}
       {{#if final-sale}}data-final-sale="true"{{/if}}
       {{#if sample-defect}}data-sample-defect="true"{{/if}}
-    >{{label}}{{#if oos}} (Out of Stock){{/if}}</option>
+    >{{label}}{{#unless ../enableOOS}}{{#if oos}} (Out of Stock){{/if}}{{/unless}}</option>
   {{/each}}
   </select>
 </div>

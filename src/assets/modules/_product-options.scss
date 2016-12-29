@@ -22,7 +22,7 @@
 .product-size {
   position: relative;
   width: 100%;
-  margin-bottom: rem(8);
+  margin-bottom: rem( 16 );
   background-color: $color__offwhite;
   text-align: left;
   z-index: 1; // need this for the label overlap trickery
@@ -99,6 +99,7 @@
     .product-size {
       float: left;
       width: 50%;
+      margin-bottom: rem( 8 );
       &__one,
       &__select {
         padding: rem(30 24 15 16);

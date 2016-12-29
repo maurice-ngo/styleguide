@@ -63,7 +63,7 @@ describe('notify me update', () => {
 
   describe('special order page', () => {
     const setSpecialOrder = $fixture => {
-      $fixture.find(`.${WRAP_CLASS}`).attr('id', 'special-order');
+      return $fixture.find(`.${WRAP_CLASS}`).attr('id', 'special-order');
     };
 
     it('should show the "Special Order" CTA', () => {
@@ -108,6 +108,14 @@ describe('notify me update', () => {
 
       expect(toggleEmailDisplay(data)).to.not.have.class(expected);
     });
+
+    it('should hide email when #auto-order is present', () => {
+      const expected = 'u-hide';
+      const $wrap = setSpecialOrder($fixture);
+
+      $wrap.append(`${input({ id: "auto-order", label: "auto order" })}`);
+      expect(toggleEmailDisplay(data)).to.have.class(expected);
+    });
   });
 
   describe('chosen size is preorder', () => {
@@ -123,6 +131,12 @@ describe('notify me update', () => {
       const expected = notificationPreorderEmail();
 
       expect(notify(updateChosen(data, chosen))).to.equal(expected);
+    });
+
+    it('should show email field', () => {
+      const expected = 'u-hide';
+
+      expect(toggleEmailDisplay(updateChosen(data, chosen))).to.not.have.class(expected);
     });
   });
 
