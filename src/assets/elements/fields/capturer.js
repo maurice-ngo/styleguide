@@ -6,14 +6,14 @@ import registerJQueryPlugin from '../../lib/register-jquery-plugin';
  */
 const DEFAULT_OPTIONS = {
   block: 'inline-field',
-  inputElement: 'input',
+  fieldElement: 'input',
   labelElement: 'label',
   filledModifier: 'filled',
   invalidModifier: 'invalid',
   selectedModifier: 'selected',
 };
 
-const PLUGIN_NAME = 'inlineField';
+const PLUGIN_NAME = 'capturer';
 
 registerJQueryPlugin(PLUGIN_NAME, inlineField);
 
@@ -51,21 +51,21 @@ registerJQueryPlugin(PLUGIN_NAME, inlineField);
 export default function inlineField(el, options={}) {
   const {
     block,
-    inputElement,
+    fieldElement,
     labelElement,
     filledModifier,
     invalidModifier,
     selectedModifier,
   } = Object.assign({}, DEFAULT_OPTIONS, options);
-  const inputNode = el.querySelector(`.${block}__${inputElement}`);
+  const fieldNode = el.querySelector(`.${block}__${fieldElement}`);
   const labelNode = el.querySelector(`.${block}__${labelElement}`);
   const els = [
     {
       node: el,
     },
     {
-      element: inputElement,
-      node: inputNode,
+      element: fieldElement,
+      node: fieldNode,
     },
     {
       element: labelElement,
@@ -73,22 +73,26 @@ export default function inlineField(el, options={}) {
     }
   ];
 
-  inputNode.addEventListener('focus', () => {
+  fieldNode.addEventListener('focus', () => {
     addClassNames(block, els, selectedModifier);
     removeClassNames(block, els, filledModifier, invalidModifier);
-    inputNode.setCustomValidity('');
+    fieldNode.setCustomValidity('');
   });
 
-  inputNode.addEventListener('blur', e => {
+  fieldNode.addEventListener('blur', e => {
     removeClassNames(block, els, selectedModifier, filledModifier, invalidModifier);
 
-    if (el.querySelector(':invalid') === inputNode) {
+    if (el.querySelector(':invalid') === fieldNode) {
       addClassNames(block, els, invalidModifier);
     }
 
     if (e.target.value) {
       addClassNames(block, els, filledModifier);
     }
+  });
+
+  fieldNode.addEventListener('invalid', e => {
+    addClassNames(block, els, invalidModifier);
   });
 }
 
