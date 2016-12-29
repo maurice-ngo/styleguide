@@ -74,7 +74,7 @@ export default function validator(el, options = {}) {
   $el.on('submit', evt => submitHandler(evt, $el, successCallback, errorCallback));
 
   forEachFormField($el, formField => {
-    formField.addEventListener('blur', () => validateField(formField));
+    formField.addEventListener(resolveRefreshEventType(formField), () => validateField(formField));
   });
 }
 
@@ -165,6 +165,21 @@ const forEachFormField = ($wrapper, fn) => {
   $wrapper.find(dataSelector).each(function() {
     fn(this);
   });
+};
+
+/**
+ * Determines the type of event used for refreshing. In other words, when a
+ * field should be checked for validity.
+ * @param {HTMLInputElement|HTMLSelectElement} el - An element
+ * @returns {string} The type of event used for determining a refresh of a field
+ */
+const resolveRefreshEventType = el => {
+  switch (el.tagName.toLowerCase()) {
+    case 'select':
+      return 'change';
+  }
+
+  return 'blur';
 };
 
 /**
