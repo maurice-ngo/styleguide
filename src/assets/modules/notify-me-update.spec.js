@@ -124,6 +124,12 @@ describe('notify me update', () => {
 
       expect(notify(updateChosen(data, chosen))).to.equal(expected);
     });
+
+    it('should show email field', () => {
+      const expected = 'u-hide';
+
+      expect(toggleEmailDisplay(updateChosen(data, chosen))).to.not.have.class(expected);
+    });
   });
 
   describe('chosen size is in stock', () => {

@@ -99,7 +99,22 @@ export const notify = ({ wrap, chosen }) => {
 export const toggleEmailDisplay = ({ wrap, wrapBlockClass, chosen = {} }) => {
   const { oos, preorder } = chosen;
   const $field = $(wrap).find(`#email`).closest('.field');
-  const hide = !oos || ( isSpecialOrder(wrap) && !!preorder );
+  const hide = hideEmail();
 
   return $field.toggleClass('u-hide', hide);
+
+  function hideEmail() {
+    // hide whenever "auto order" is available
+    if ( $('#auto-order').length ) {
+      return true;
+    }
+
+    // hide for preorder, only if "special order"
+    if ( preorder ) {
+      return isSpecialOrder(wrap);
+    }
+    else {
+      return !oos;
+    }
+  }
 };
