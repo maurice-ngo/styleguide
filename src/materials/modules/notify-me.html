@@ -8,7 +8,13 @@ notes:
   {{> product-title- }}
 
   <form class="notify-me__form " data-validate="true" action="?thank-you">
-    {{> product-options.size enableOOS=true pdp=pdp select-size-attrs='data-validate-not="default"'}}
+    {{> product-options.size
+        enableOOS=true
+        fieldClassName="choice-field"
+        fieldLabelClassName="choice-field__label"
+        fieldSelectClassName="choice-field__select"
+        pdp=pdp select-size-attrs='data-validate-not="default"'}}
+
     {{> input-text id="email" type="email" label="Enter your Email Address"
       fieldClassName="inline-field"
       labelClassName="inline-field__label"
