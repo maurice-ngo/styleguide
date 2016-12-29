@@ -31,31 +31,31 @@
   }
 
   &__popup {
-   display: none;
+   display: none; 
   }
   &__close {
     position: absolute;
     top: rem(10);
     right: rem(10);
-  }
+  } 
   &__caption {
-    margin-top: rem(16);
+    margin-top: rem(16);                              
   }
   &__caption-profile {
     display: inline-block;
     width: rem(45);
     border-radius: 50%;
-    vertical-align: bottom;
+    vertical-align: bottom;                              
   }
   &__caption-ig {
     display: inline-block;
     width: rem(23);
     margin-left: rem(6);
-    vertical-align: bottom;
+    vertical-align: bottom;                              
   }
   &__caption-text {
     display: inline-block;
     margin-left: rem(10);
-    vertical-align: bottom;
-  }
+    vertical-align: bottom;                              
+  }                              
 }

@@ -27,6 +27,9 @@
             vertical-align: top;
         }
     }
+    &.js-lazyload-slick {
+        height: 130px;
+    }
 }
 
 .slick-dots {
@@ -59,6 +62,7 @@
         }
     }
 }
+
 
 .cycle {
   &-slide {

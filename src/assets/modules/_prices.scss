@@ -11,7 +11,7 @@
 .price {
   //prices__retail
   @extend %h3;
-
+  @extend %u-ellipsis;
   &__retail {
     &--strikethrough {
       color: $color__grey;
@@ -21,6 +21,7 @@
   //prices__markdown
   &__markdown {
     color: $color__error;
+    font-weight: bold;
   }
   // This is for price options on the PDP page.
   // Toggle between prices using radio buttons.
@@ -43,6 +44,9 @@
     overflow: hidden;
     margin-bottom: 0;
   }
+    &--sm {
+    margin-top: 4px;
+  }
   &--lg {
     font-size: em( 20 );
   }
@@ -51,8 +55,10 @@
     line-height: em(14,14);
   }
   &--sm {
-    font-size: em( 12 );
-    line-height: em( 15, 12 );
+    font-family: $font-primary;
+    font-size: em(12);
+    line-height: em(15, 12);
+    margin-top: 4px;
   }
   &--font-secondary {
     @extend %font-secondary--bold;

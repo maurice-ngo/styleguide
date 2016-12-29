@@ -12,12 +12,12 @@
 
 .fixed-corner {
   position: fixed;
-  right: rem(10);
+  right: rem(16);
   bottom: rem(30);
   z-index: 9999;
   &--off {
     position: absolute;
-    top: rem(-100);
+    top: rem(-80);
     bottom: auto;
     transform: translateY(-100%);
   }

@@ -39,6 +39,7 @@ $loyaltyGold: #a7924d;
       background: $color__black;
       color: $color__white;
       font-size: em(12);
+      font-weight: normal;
       line-height: rem(20);
       text-align: center;
       content: 'R';
@@ -81,6 +82,13 @@ $loyaltyGold: #a7924d;
       background-size: rem(45 1);
       line-height: rem(27);
     }
+    &--xl:before {
+      width: rem(75);
+      height: rem(44);
+      background-size: rem(75 1);
+      line-height: rem(44);
+      font-size: em(14);
+    }
   }
   &__card-copy {
     display: inline-block;
@@ -89,7 +97,6 @@ $loyaltyGold: #a7924d;
     font-size: em(16);
     line-height: rem(49);
     vertical-align: middle;
-
     @extend %headings;
   }
   &__nav-item {
@@ -166,6 +173,13 @@ $loyaltyGold: #a7924d;
       content: 'B';
       vertical-align: middle;
       @extend %font-secondary--bold;
+    }
+  }
+  &__reward-bonus--inline {
+    margin-right: 0;
+    &:after {
+      position: static;
+      display: inline-block;
     }
   }
   &__toggle-rewards-history {
