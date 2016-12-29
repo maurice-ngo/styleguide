@@ -63,7 +63,7 @@ describe('notify me update', () => {
 
   describe('special order page', () => {
     const setSpecialOrder = $fixture => {
-      $fixture.find(`.${WRAP_CLASS}`).attr('id', 'special-order');
+      return $fixture.find(`.${WRAP_CLASS}`).attr('id', 'special-order');
     };
 
     it('should show the "Special Order" CTA', () => {
@@ -107,6 +107,14 @@ describe('notify me update', () => {
       setSpecialOrder($fixture);
 
       expect(toggleEmailDisplay(data)).to.not.have.class(expected);
+    });
+
+    it('should hide email when #auto-order is present', () => {
+      const expected = 'u-hide';
+      const $wrap = setSpecialOrder($fixture);
+
+      $wrap.append(`${input({ id: "auto-order", label: "auto order" })}`);
+      expect(toggleEmailDisplay(data)).to.have.class(expected);
     });
   });
 
