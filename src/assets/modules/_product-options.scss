@@ -50,7 +50,7 @@
     position: absolute;
     top: rem(12);
     left: rem(16);
-    z-index: 2;
+    z-index: -1; // to stay behind the select it overlaps
     font-size: em(10);
   }
 
