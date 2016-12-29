@@ -6,23 +6,25 @@ import registerJQueryPlugin from '../../lib/register-jquery-plugin';
  */
 const DEFAULT_OPTIONS = {
   block: 'inline-field',
-  inputElement: 'input',
+  fieldElement: 'input',
   labelElement: 'label',
   filledModifier: 'filled',
   invalidModifier: 'invalid',
   selectedModifier: 'selected',
 };
 
-const PLUGIN_NAME = 'inlineField';
+const PLUGIN_NAME = 'capturer';
 
 registerJQueryPlugin(PLUGIN_NAME, inlineField);
 
 /**
- * Responsible for taking in a field and applying classNames so that the
- * corresponding CSS is able to style it based on the state. The styling
- * corresponds to having an input appear as having inline properties or in
- * other words, have the label inside the input. Take the following HTML
- * structure:
+ * Responsible for capturing field events and applying classNames so that the
+ * corresponding CSS is able to style it based on the state. In other words,
+ * based on how this has been wired up, there will be styles that are
+ * associated to a form field set, which includes a field wrapper, label, and
+ * a form element (i.e. input, select, and so forth). The classNames follow a
+ * strict BEM convention. Here's an example of this structure based on the
+ * default options:
  *
  * @example
  * <div class="inline-field">
@@ -43,7 +45,7 @@ registerJQueryPlugin(PLUGIN_NAME, inlineField);
  * from the browser. The same goes for when a pattern has been provided.
  *
  * The motivation for this code comes from the limitation of CSS and not being
- * able to traverse up the DOM and an input not allowing a before or after
+ * able to traverse up the DOM and for field not allowing a before or after
  * pseudo class. Otherwise, this would be a pure CSS solution.
  * @param {HTMLElement} el - An element receiving inline treatment
  * @param {Object} [options={}] - Configurable options
@@ -51,21 +53,21 @@ registerJQueryPlugin(PLUGIN_NAME, inlineField);
 export default function inlineField(el, options={}) {
   const {
     block,
-    inputElement,
+    fieldElement,
     labelElement,
     filledModifier,
     invalidModifier,
     selectedModifier,
   } = Object.assign({}, DEFAULT_OPTIONS, options);
-  const inputNode = el.querySelector(`.${block}__${inputElement}`);
+  const fieldNode = el.querySelector(`.${block}__${fieldElement}`);
   const labelNode = el.querySelector(`.${block}__${labelElement}`);
   const els = [
     {
       node: el,
     },
     {
-      element: inputElement,
-      node: inputNode,
+      element: fieldElement,
+      node: fieldNode,
     },
     {
       element: labelElement,
@@ -73,22 +75,26 @@ export default function inlineField(el, options={}) {
     }
   ];
 
-  inputNode.addEventListener('focus', () => {
+  fieldNode.addEventListener('focus', () => {
     addClassNames(block, els, selectedModifier);
     removeClassNames(block, els, filledModifier, invalidModifier);
-    inputNode.setCustomValidity('');
+    fieldNode.setCustomValidity('');
   });
 
-  inputNode.addEventListener('blur', e => {
+  fieldNode.addEventListener('blur', e => {
     removeClassNames(block, els, selectedModifier, filledModifier, invalidModifier);
 
-    if (el.querySelector(':invalid') === inputNode) {
+    if (el.querySelector(':invalid') === fieldNode) {
       addClassNames(block, els, invalidModifier);
     }
 
     if (e.target.value) {
       addClassNames(block, els, filledModifier);
     }
+  });
+
+  fieldNode.addEventListener('invalid', e => {
+    addClassNames(block, els, invalidModifier);
   });
 }
 

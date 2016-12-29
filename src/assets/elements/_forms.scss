@@ -620,6 +620,33 @@ fieldset {
   }
 }
 
+div.choice-field,
+.choice-field {
+  @extend .field;
+
+  &--invalid {
+    background-color: $color__pink--light;
+  }
+
+  &__label {
+    @extend .field__label;
+
+    &--invalid {
+      color: $color__error;
+    }
+  }
+
+  &__select {
+    @extend select;
+
+    &:not(:focus) {
+      &:invalid {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
 // Underline Style for Input and Select fields
 // ===========================================
 

@@ -200,4 +200,53 @@ describe('Validator', () => {
       expect($dude.is(':invalid')).to.be.false;
     });
   });
+
+  describe('when validating against a select', () => {
+    const setupSelect = () => {
+      const notValue = 'donny';
+      const $form = $(fixture.set(`
+        <div>
+          <label for="donny">Donny says:</label>
+          <select id="donny" data-validate-not="${notValue}">
+            <option value="${notValue}">${notValue}</option>
+            <option value="1">I am the walrus</option>
+            <option value="2">Are these the Nazis, Walter?</option>
+          </select>
+          <span ${VALIDATE_TRIGGER}="true" id="click-trigger">Click Trigger</span>
+        </div>
+      `));
+
+      const $donny = $form.find('#donny');
+      validator($form[0]);
+      return { $donny, notValue };
+    };
+
+    // This is in place because jQuery sucks
+    const triggerChange = ($el, val) => {
+      $el.val(val);
+      const evt = new Event('change');
+      $el[0].dispatchEvent(evt);
+    };
+
+    it('should be an invalid select', () => {
+      const { $donny, notValue } = setupSelect();
+      triggerChange($donny, notValue);
+      expect($donny.is(':invalid')).to.be.true;
+    });
+
+    it('should be a valid select', () => {
+      const { $donny } = setupSelect();
+      triggerChange($donny, 1);
+      expect($donny.is(':invalid')).to.be.false;
+    });
+
+    it('should be invalid and then valid', () => {
+      const { $donny, notValue } = setupSelect();
+      triggerChange($donny, notValue);
+      expect($donny.is(':invalid')).to.be.true;
+
+      triggerChange($donny, 2);
+      expect($donny.is(':invalid')).to.be.false;
+    });
+  });
 });

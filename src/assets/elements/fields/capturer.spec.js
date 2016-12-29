@@ -2,7 +2,7 @@ import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 import $ from 'jquery';
 
-import inlineField from './inline';
+import inlineField from './capturer';
 import inputText from '../../../partials/input-text.html';
 
 chai.use(chaiJquery);
