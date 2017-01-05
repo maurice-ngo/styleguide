@@ -3,6 +3,7 @@ import 'slick-carousel';
 
 import './modules.scss';
 import './accordion';
+import './toggle-display';
 import './product-size-change';
 import './product-add-to-bag';
 import './product-color-change';
@@ -13,6 +14,7 @@ import updateNotifyMe from './notify-me-update';
 $(document).ready(() => {
   $('.js-accordion').accordion();
   $('.ui-tabs').tabs();
+  $('.js-toggle-display').toggleDisplay();
 
   const $product = $('.product');
 

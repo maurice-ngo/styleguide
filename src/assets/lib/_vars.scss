@@ -67,10 +67,6 @@ $h6-margin-top: rem(1 * $h6-line);
 $h6-margin-bottom: rem(.75 * $h6-line);
 
 
-
-
-
-
 /* @colors
 --------------------------------------------------------
 
@@ -175,6 +171,8 @@ $refer-friend__border-color: #f6f2db;
 // Alipay
 $alipay-color: #f87e13;
 
+//Grlfrnd
+$color--denim: #193d5a;
 
 /* @breakpoints
 ---------------------------------------------------------
@@ -261,6 +259,6 @@ $breakpointsViews: (
 
 --------------------------------------------------------- */
 
-$base-unit:   6 !global; // used in rem function
+$base-unit:   8 !global; // used in rem function
 $base-margin: 16 !global; // used in rem function
 $base-pad:    20 !global; // used in rem function
