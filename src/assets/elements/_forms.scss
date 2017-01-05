@@ -124,7 +124,7 @@ select {
   @include background-image('arrow-down--thin');
   width: auto;
   height: auto;
-  padding-right: rem( 18 );
+  padding-right: rem( 30 );
   border-top: 0;
   border-right: rem(10) solid $color__offwhite;
   border-bottom: 0;
@@ -140,6 +140,9 @@ select {
   text-transform: none;
   box-shadow: 0 0 0 1px $color__grey--lighter;
   cursor: pointer;
+  &.alt {
+    box-shadow: none;
+  }
   &.is-error {
     color: $color__error;
     &:not(.field__select--underline) {
@@ -217,10 +220,12 @@ textarea {
   position: absolute;
   z-index: -1;
   clip: rect(0 0 0 0);
-  + label {
+  + label,
+  + .label {
     display: inline-block;
     cursor: pointer;
-    &:before {
+    line-height: rem( 25 );
+    &::before {
       display: inline-block;
       width: rem(23);
       height: rem(23);
@@ -239,32 +244,42 @@ textarea {
       fill: $color__white;
     }
   }
-  &:checked + label:before {
+  &:checked + label::before,
+  &:checked + .label::before, {
     border-color: $color__black;
     background-color: $color__black;
   }
-  &:hover + label:before,
-  &:active + label:before,
-  &:checked + label:before {
+  &:hover + label::before,
+  &:active + label::before,
+  &:checked + label::before,
+  &:hover + .label::before,
+  &:active + .label::before,
+  &:checked + .label::before {
     border-width: rem(2);
     border-color: $color__black;
   }
-  &:disabled + label:before {
-    &:hover + label:before,
-    &:active + label:before,
-    &:checked + label:before {
+  &:disabled + label::before,
+  &:disabled + .label::before {
+    &:hover + label::before,
+    &:active + label::before,
+    &:checked + label::before,
+    &:hover + .label::before,
+    &:active + .label::before,
+    &:checked + .label::before {
       border-color: inherit;
     }
   }
   // is-error JS state
-  &.is-error + label {
+  &.is-error + label,
+  &.is-error + .label {
     color: $color__error;
-    &:before {
+    &::before {
       border-color: $input-error-border-color;
     }
   }
-  &.is-v-middle + label:before {
-      vertical-align: middle;
+  &.is-v-middle + label::before,
+  &.is-v-middle + .label::before {
+    vertical-align: middle;
   }
 }
 
@@ -301,22 +316,24 @@ textarea {
 
 .form__radio {
   @extend %radio-checkbox-base;
-  + label:before {
+  + label::before,
+  + .label::before {
     font-size: em( 40 , 12 );
     text-align: center;
   }
-  + .label--middle:before {
+  + .label--middle::before {
     transform: translateY(-50%);
   }
   + .label--blank {
     margin-bottom: 0;
-    &:before {
+    &::before {
       margin-right: 0;
     }
   }
-  &:checked + label:before {
+  &:checked + label::before,
+  &:checked + .label::before {
     color: $color__black;
-    box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 1);
+    box-shadow: inset 0 0 0 5px $color__white;
   }
 }
 
@@ -324,7 +341,8 @@ textarea {
 
 .form__checkbox {
   @extend %radio-checkbox-base;
-  + label:before {
+  + label::before,
+  + .label::before {
     padding-left: rem( 6 );
     transform: rotate(-138deg);
     font-size: em( 13, 11 );
@@ -333,16 +351,17 @@ textarea {
     content: '\0393';
     vertical-align: top;
   }
-  + .label--middle:before {
+  + .label--middle::before {
     transform: translateY(-50%) rotate(-138deg);
   }
   + .label--blank {
     margin-bottom: 0;
-    &:before {
+    &::before {
       margin-right: 0;
     }
   }
 }
+
 .form__radio + label,
 .form__checkbox + label {
   @extend %radio-checkbox-label;

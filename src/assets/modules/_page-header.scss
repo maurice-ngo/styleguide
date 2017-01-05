@@ -8,18 +8,37 @@
   Page Header Styles : Mainly for PDP + PLP
 
 ------------------------------------------------------ */
-.page__header {
-  background-color: $color__black;
 
-  .title {
-    @extend %font-secondary;
+.page-header {
+  &__title {
+    height: rem(60);
     margin: 0;
-    padding: 6px;
-    font-size: em(16);
-    letter-spacing: 2px;
+    border-bottom: rem(1) solid $color__border;
+    color: $color__black;
+    font-size: em(14);
+    letter-spacing: normal;
+    line-height: rem(60);
+    vertical-align: middle;
+    background: $color__white;
+    position: relative;
     text-align: center;
-    text-transform: uppercase;;
-    color: $color__white;
+    z-index: 2;
+    &--dark {
+      &.page-header__title {
+        @extend %font-secondary--bold;
+        background-color: $color__black;
+        color: $color__white;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+    }
+  }
+  &__filter {
+    @extend %font-primary;
+    font-size: 12px;
+    text-transform: capitalize;
+    padding-left: 6px;
+>>>>>>> origin/master
   }
   &__title--dropdown {
     &:after {
@@ -28,7 +47,7 @@
       width: rem(10);
       height: rem(10);
       margin-top: rem(-3);
-      margin-left: rem(15);
+      margin-left: rem(10);
       transform: translate(0, rem(-2)) rotate(-45deg);
       transition: transform .2s linear;
       border-bottom: rem(2) solid $color__black;
@@ -59,14 +78,14 @@
     display:block;
     opacity: 0;
     transition: opacity .5s linear;
-    z-index:1;
+    z-index: 8;
   }
   &__nav-list {
     position: absolute;
     width: 100%;
     max-height: rem(272);
     overflow-y: scroll;
-    z-index: 2;
+    z-index: 9;
   }
   &__link {
     @extend %font-primary;
@@ -76,13 +95,21 @@
     letter-spacing: normal;
     line-height: rem(60);
     vertical-align: middle;
-    background: $color__white;
+    background-color: $color__white;
     display: block;
     width: 100%;
-    padding-left: rem(19);
+    padding-left: rem(16);
     border-bottom: rem(1) solid $color__border;
     text-decoration: none;
     &:hover {
+      background-color: $color__white;
+      color: $color__black;
+      text-decoration: none;
+    }
+    &:active {
+      text-decoration: none;
+      background-color: $color__black;
+      color: $color__white;
       text-decoration: none;
     }
   }
@@ -102,5 +129,27 @@
     &:hover {
       text-decoration: none;
     }
+  }
+  &__country {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: rem(12);
+    z-index: 2;
+  }
+}
+
+.page__header {
+  background-color: $color__black;
+
+  .title {
+    @extend %font-secondary;
+    margin: 0;
+    padding: 6px;
+    font-size: em(16);
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;;
+    color: $color__white;
   }
 }

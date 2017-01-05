@@ -37,7 +37,20 @@
   padding: 0;
   border: 0;
   opacity: 0;
+  right: initial;
 }
+
+// hide with opacity
+.u-hide-opacity {
+  opacity: 0;
+}
+
+.u-before--none {
+  &:before {
+    display:none;
+  }
+}
+
 
 // Responsive hiders
 // Min Width @ $small-mobile
@@ -193,6 +206,8 @@
   // Palettes
   &--color-xdark      { border-color: $color__black; }
   &--color-dark       { border-color: $color__grey; }
+  &--color-red { border-color: $color__red; }
+  &--color-grey-md { border-color: $color__grey--md; }
   &--color-medium     { border-color: $color__grey--light; }
   &--color-light      { border-color: $color__grey--lighter; }
   &--color-lightest   { border-color: $color__grey--lightest; }
@@ -209,6 +224,7 @@
 .u-bg-color {
   &--black         { background-color: $color__black; }
   &--grey          { background-color: $color__grey; }
+  &--grey-md    { background-color: $color__grey--md; }
   &--grey-light    { background-color: $color__grey--light; }
   &--grey-lighter  { background-color: $color__grey--lighter; }
   &--grey-lightest { background-color: $color__grey--lightest; }
@@ -244,6 +260,7 @@
   &--pink-light    { color: $color__pink--light; }
   &--pink-dark     { color: $color__pink--dark; }
   &--error         { color: $color__error; }
+  &--red         { color: $color__red; }
 
   // remove this after testing u-error class
   // &--error         {
@@ -423,8 +440,9 @@
 --------------------------------------------------------
 */
 
-.u-clearfix {
-  @extend %u-clearfix;
+.u-clearfix,
+%u-clearfix {
+  @include clearfix();
 }
 
 /* @clearfix
@@ -452,6 +470,14 @@
   width: auto !important;
 }
 
+/* @width-auto
+--------------------------------------------------------
+*/
+
+.u-height-auto {
+  height: auto !important;
+}
+
 
 /* @letter-spacing
 --------------------------------------------------------
@@ -477,9 +503,16 @@
 --------------------------------------------------------
 */
 
+
+
 // line-height
 .u-line-height {
   line-height: normal !important;
+}
+
+// line-height small
+.u-line-height--xs {
+  line-height: em(16, 12) !important;
 }
 
 // line-height small
@@ -507,8 +540,11 @@
 */
 
 // Ellipsis overflow
-.u-ellipsis {
-  @extend %u-ellipsis;
+.u-ellipsis,
+%u-ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* @u-no-wrap - @todo: move over mobile styles

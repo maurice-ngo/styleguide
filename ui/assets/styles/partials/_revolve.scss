@@ -59,6 +59,14 @@ pre[class*='language-'] {
   font-size: inherit;
 }
 
+/* add background color and styling to icons */
+.f-graphic-bg {
+    padding: 10px;
+    background-color: rgba(224, 224, 224, 0.4);
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
 /**
  * CSS to help modules live without wrappers
  */

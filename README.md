@@ -49,10 +49,10 @@ used for the style guide) and the ui (the part responsible for rendering the
 style guide) to be separated so there is no confusion upon editing. This also
 allows for introducing new themes or UI elements independent of the style guide.
 The source (or src) contains the living/breathing style guide independent of the
-UI. The reason these inner directories are containing within src is to contain
+UI. The reason these inner directories are contained within src is to maintain
 consistency across the different parts of the style guide. When opening up
 assets, materials, and views, there should be a direct mapping across the inner
 parts. The intention is to have an obvious convention when it comes to adding
-or updates part of the style guide. This imposed structure also lends well if
+or updating parts of the style guide. This imposed structure also lends itself well if
 components come from a separate project, as assets could either consume or
 render independently.
