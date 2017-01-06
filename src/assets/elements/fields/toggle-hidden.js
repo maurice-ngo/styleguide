@@ -17,9 +17,7 @@ export const DEFAULT_OPTIONS = {
 export default function toggleHidden(element, shouldHide, options = {}) {
   const { fieldClassName, hiddenModifier } = Object.assign({}, DEFAULT_OPTIONS, options);
   const $element = $(element);
-  //console.log(`@ $element`, '{'+typeof $element+'}', $element);
   const $field = $element.closest(`.${fieldClassName}`);
-  //console.log(`@ $field`, '{'+typeof $field+'}', $field);
 
   if (!$field.length) {
     throw new Error('Field not found by toggleHidden()');
