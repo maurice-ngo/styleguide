@@ -19,7 +19,7 @@ const DEFAULT_OPTIONS = {
 
 /**
  * Creates a javascript object containing product data
- * @param {jQueryElement} sizeEl - The size element (select, input, etc)
+ * @param {jQuery|Element} sizeEl - The size element (select, input, etc)
  * @see DEFAULT_OPTIONS
  # @return {Object} Contains relevant data to a product
  */
