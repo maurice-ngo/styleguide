@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 import { updateChosenData } from '../lib/create-product-data';
+import toggleHidden from '../elements/fields/toggle-hidden';
 import showNotification from './product-notification-show';
 import updateCTA from './product-cta-update';
 import { getChosen } from './product-size-change';
@@ -16,18 +17,18 @@ import notificationUnavailable from '../../materials/modules/product-notificatio
 
 export { ctaAddToBag, ctaPreorder, ctaNotifyMe, ctaSpecialOrder, notificationInStock, notificationPreorderEmail, notificationPreorderAvailable, notificationUnavailable };
 
-
 /**
  * Callback function to update the Notify Me section.
  * @param {Object} data - Object containing relevant data about the product
  */
 export default function updateNotifyMe( data ) {
-  const chosen = getChosen(data.sizeEl);
+  const { wrap, sizeEl } = data;
+  const chosen = getChosen(sizeEl);
   updateChosenData(data, chosen);
 
   showNotification(data, { notify });
   updateCTA(data, { chooseCTA });
-  toggleEmailDisplay(data);
+  toggleHidden(wrap.querySelector('#email'), hideEmail(data));
 }
 
 /**
@@ -90,31 +91,23 @@ export const notify = ({ wrap, chosen }) => {
 };
 
 /**
- * Toggle Display of Email Field based on chosen size
+ * Determine whether Email Field should be hidden
  * @param {HTMLElement} wrap - Notify Me block wrap
- * @param {String} wrapBlockClass - Class of wrap HTML Element
  * @param {Object} chosen - Selected option of select dropdown
- * @return {String} Handlebars template from import above
+ * @return {boolean} Whether the email field should be hidden
  */
-export const toggleEmailDisplay = ({ wrap, wrapBlockClass, chosen = {} }) => {
+export const hideEmail = ({ wrap, chosen = {} }) => {
   const { oos, preorder } = chosen;
-  const $field = $(wrap).find(`#email`).closest('.field');
-  const hide = hideEmail();
-
-  return $field.toggleClass('u-hide', hide);
-
-  function hideEmail() {
-    // hide whenever "auto order" is available
-    if ( $('#auto-order').length ) {
-      return true;
-    }
-
-    // hide for preorder, only if "special order"
-    if ( preorder ) {
-      return isSpecialOrder(wrap);
-    }
-
-    // if no conditions above are met, simply check if in stock
-    return !oos;
+  // hide whenever "auto order" is available
+  if ( wrap.querySelector('#auto-order') ) {
+    return true;
   }
+
+  // hide for preorder, only if "special order"
+  if ( preorder ) {
+    return isSpecialOrder(wrap);
+  }
+
+  // if no conditions above are met, simply check if in stock
+  return !oos;
 };
