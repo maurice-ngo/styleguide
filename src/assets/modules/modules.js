@@ -27,7 +27,7 @@ $(document).ready(() => {
   $product.find('.product-size__select, .product-size__one').sizeChange().trigger('change');
   $product.find('.product-color__select').colorChange();
   $product.find('.product__cta button[type="submit"]').addToBag();
-  $product.find('.product-size__oos').oosProduct({ $wrap: $product });
+  $product.find('.product-size__oos').oosProduct();
 
 
   const notifyMeClass = 'notify-me';
