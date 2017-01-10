@@ -25,7 +25,4 @@ $(document).ready(() => {
   $('.btn--add-to-bag').addToBag();
   $('.product-option--oos').oosProduct();
   $(".js-modal").modal();
-  $(".ajax-modal").modal({
-    url:"http://teal.dressbad.com/ns/r/2016/12_december/mobile-modal/modalContent.html"
-  });
 });

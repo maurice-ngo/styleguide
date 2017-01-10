@@ -5,6 +5,7 @@
 
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
+import trapFocus from './trap-focus';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'modal';
@@ -146,7 +147,7 @@ const adjustToModalType = ($el, options = {}) => {
 const setEventListeners = ($el, $modal, $modalContent, $modalOverlay, modalSettings, options = {}) => {
   // Add listener to button to open modal
   $( $el )
-  .on("click", evt => openModalEventHandler($modal, $modalContent, $modalOverlay, modalSettings, options));
+  .on("click", evt => openModalEventHandler($el, $modal, $modalContent, $modalOverlay, modalSettings, options));
 
   // Add listener modal content for modalCloseClass to close modal
   $modalContent
@@ -186,7 +187,7 @@ const checkTriggerOpen = ($modal, $modalContent, $modalOverlay, modalSettings, o
  * @param  {Object} [modalSettings={}] - Modal Settings define by modal type
  * @param  {Object} [options={}] - Any options provided upon initialization
  */
-const openModalEventHandler = ($modal, $modalContent, $modalOverlay, modalSettings, options = {}) => {
+const openModalEventHandler = ($el, $modal, $modalContent, $modalOverlay, modalSettings, options = {}) => {
   closeAllModals();
 
   // If url is passed then load ajax. Load or reload content only if content doesn't exist
@@ -196,23 +197,24 @@ const openModalEventHandler = ($modal, $modalContent, $modalOverlay, modalSettin
     .done(function( content ) {
         $modalContent.append( content );
         options.onComplete();
-        openModal($modal, $modalContent, $modalOverlay, modalSettings, options);
+        openModal($el, $modal, $modalContent, $modalOverlay, modalSettings, options);
     });
   } else {
-    openModal($modal, $modalContent, $modalOverlay, modalSettings, options);
+    openModal($el, $modal, $modalContent, $modalOverlay, modalSettings, options);
   }
 
 };
 
 /**
  * Open modal
+* @param  {jQuery} $el - button /element that opens modal
  * @param  {jQuery} $modal
  * @param  {jQuery} $modalContent
  * @param  {jQuery} $modalOverlay
  * @param  {Object} [modalSettings={}] - Modal Settings define by modal type
  * @param  {Object} [options={}] - Any options provided upon initialization
  */
-const openModal = ($modal, $modalContent, $modalOverlay, modalSettings, options = {}) => {
+const openModal = ($el, $modal, $modalContent, $modalOverlay, modalSettings, options = {}) => {
   addActiveClass($modal);
 
   $modalContent.scrollTop(0);
@@ -231,7 +233,7 @@ const openModal = ($modal, $modalContent, $modalOverlay, modalSettings, options 
   // Get transition duration of modalcontent animation to focus on it
   var transitionDuration = $modalContent.css('transition-duration').replace("s","") * 1000 ;
   setTimeout(function(){
-    //$modalContent.trapFocus({lastFocus:$modalButton});
+    $modalContent.trapFocus({lastFocus:$el});
   },transitionDuration);
 
 };
@@ -270,6 +272,7 @@ const closeModal = ($modal, $modalContent, $modalOverlay, modalSettings, options
   // Get transition duration of modalcontent animation to focus on it
   var transitionDuration = $modalContent.css('transition-duration').replace("s","") * 1000 ;
   setTimeout(function(){
+    $modalContent.trapFocus("off");
     if(!options.cache) {
         $modalContent.empty();
     }
