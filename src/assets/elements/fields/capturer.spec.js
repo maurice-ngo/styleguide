@@ -4,6 +4,7 @@ import $ from 'jquery';
 
 import inlineField from './capturer';
 import inputText from '../../../partials/input-text.html';
+import { triggerEvent } from '../../test/helpers/events';
 
 chai.use(chaiJquery);
 
@@ -68,13 +69,15 @@ describe('Nested Field', () => {
     });
   };
 
+  afterEach(() => fixture.cleanup());
+
   it('should fire off a focus event', () => {
     const obj = create();
     const { $input, selected, filled, invalid } = obj;
 
     addClassNames(obj, filled, invalid);
 
-    $input.trigger('focus');
+    triggerEvent($input, 'focus');
 
     assertHasClassNames(obj, selected);
     assertNoClassNames(obj, filled, invalid);
@@ -84,10 +87,8 @@ describe('Nested Field', () => {
     const obj = create();
     const { $input, selected, filled, invalid } = obj;
 
-    $input
-      .val('http://lebowski.me')
-      .trigger('focus')
-      .trigger('blur');
+    $input.val('http://lebowski.me');
+    triggerEvent($input, 'focus', 'blur');
 
     assertHasClassNames(obj, filled);
     assertNoClassNames(obj, selected, invalid);
@@ -97,10 +98,8 @@ describe('Nested Field', () => {
     const obj = create();
     const { $input, selected, filled, invalid } = obj;
 
-    $input
-      .val('lebowski.me')
-      .trigger('focus')
-      .trigger('blur');
+    $input.val('lebowski.me');
+    triggerEvent($input, 'focus', 'blur');
 
     assertHasClassNames(obj, invalid, filled);
     assertNoClassNames(obj, selected);
