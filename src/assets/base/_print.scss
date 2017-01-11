@@ -80,4 +80,22 @@
   h3 {
     page-break-after: avoid;
   }
+  .print-label {
+    &__no-print {
+      display: none;
+      &--img{
+        max-width: 55%;
+        transform: rotate(90deg) translateY(-100%) translateX(0);
+        transform-origin: 0% 0%;
+        // position: absolute;
+        // top: 0;
+
+      }
+    }
+  }
+  .print-label--img-usps {
+    max-width: 55%;
+    transform: rotate(270deg) translateY(8%) translateX(-116%);
+    transform-origin: 0% 0%;
+  }
 }

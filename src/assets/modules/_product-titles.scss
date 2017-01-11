@@ -21,20 +21,28 @@
   &__link {
     color: $color__black;
   }
-  &--font-primary {
-    color: $color__grey;
-  }
 }
 
 .product-name,
 .product-brand {
-  // .product-name--sm,
+  // TODO: Walter made these changes to .product__name & .product__brand
+  // Mocks have explicitly stated to not truncate long names/brands.
+  // Need to update this to a modifier for this use case.
+  // .product-name--walter
+  // .product-brand--walter
+  &--walter {
+    @extend %u-ellipsis;
+    line-height: rem( 1.2 );
+  }
+  // .product-name--sm
   // .product-brand--sm
   &--sm {
     font-size: em(12);
     line-height: em(16);
     margin-bottom: 4px;
   }
+  // .product-name--font-primary
+  // .product-brand--font-primary
   &--font-primary {
     font: {
       family: $font-primary;
@@ -43,5 +51,18 @@
     }
     letter-spacing: em(0);
     text-transform: none;
+  }
+
+  // .product-name--long
+  // .product-brand--long
+  &--long {
+    text-overflow: initial !important;
+    white-space: normal !important;
+    overflow: auto !important
+  }
+  // .product-name--grey
+  // .product-brand--grey
+  &--grey {
+    color: $color__grey;
   }
 }

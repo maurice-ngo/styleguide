@@ -145,10 +145,6 @@ $btn-txt-color--light    : $color__white;
   }
 }
 
-
-
-
-
 /* @_btn-sizing
 --------------------------------------------------------
 
@@ -263,6 +259,9 @@ $btn-border-width  : 2;
   }
 }
 
+
+
+
 /* @btn--small
 --------------------------------------------------------
 
@@ -332,6 +331,22 @@ $btn-border-width  : 2;
     $color__white  // hover-text-color
   );
 }
+
+
+
+/* @btn
+--------------------------------------------------------
+
+------------------------------------------------------ */
+
+button {
+  background-color: initial;
+  border: initial;
+  font-family: $font-primary;
+}
+
+
+
 
 
 /* @btn--ghost
@@ -490,5 +505,79 @@ input:checked + .btn--grey-dark {
   }
   &.u-border-a--none {
     border: rem(0);
+  }
+}
+
+.btn--circle-grey {
+  display: inline-block;
+  border-radius: 50%;
+  line-height: 1;
+  padding: 2%;
+  background-color: $color__grey--light;
+  .icon { // Scale down size icon inside button
+    transform: scale(0.7, 0.7);
+    &:hover,
+    &:active,
+    &:focus,
+    &.active {
+      fill: $color__white;
+    }
+  }
+  &:hover,
+  &:active,
+  &:focus,
+  &.active {
+    background-color: $color__grey--light;
+  }
+  &.u-border-a--none {
+    border: rem(0);
+  }
+}
+
+
+
+/* @btn--img
+--------------------------------------------------------
+
+------------------------------------------------------ */
+.btn__img--denim {
+  height: rem(50);
+  background-image: url('//is4.revolveassets.com/r/assets/main/source/button/REVmobile_GFdenim_buttonX2.jpg');
+  background-size: cover;
+  display: block !important;
+  text-align: center;
+  &:hover,
+  &:active,
+  &:focus,
+  &.active {
+    text-decoration: none;
+  }
+  &:hover .btn__img--denim-text,
+  &:active .btn__img--denim-text,
+  &:focus .btn__img--denim-text,
+  &.active .btn__img--denim-text {
+    border-bottom: rem(2) solid $color--denim;
+  }
+  &-text {
+    color: $color--denim;
+    line-height: rem(50);
+    font-family: $font-secondary;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: rem(.5);
+    padding-right: 3%;
+    &:after {
+      content: '';
+      background-image: url('//is4.revolveassets.com/r/assets/main/source/button/GFdenim_arrowX2.jpg');
+      background-size: rem(28);
+      width: rem(28);
+      height: rem(11);
+      position: relative;
+      clear: both;
+      display: inline-block;
+      background-repeat: no-repeat;
+      max-width: 100%;
+      left: 3%;
+    }
   }
 }

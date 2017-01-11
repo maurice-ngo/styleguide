@@ -10,16 +10,15 @@
 ------------------------------------------------------ */
 
 .dd-refine {
+  @extend %h3;
   width: 100%;
-}
-.dd-refine {
   height: 45px;
-  margin-bottom: 4px;
-  box-shadow: 0 0 0 1px #e1e1e1;
+  margin-top:0;
+  margin-bottom: 1px;
+  box-shadow: 0 0 0 0;
   background-color: $input-border-color;
   border-right-color: transparent;
-}
-.dd-refine__delimeter:after {
+  &__delimeter:after {
     content: "";
     width: 2px;
     height: 2px;
@@ -28,4 +27,9 @@
     position: absolute;
     top: 14px;
     right: -17px;
+  }
+  &--more {
+    @include background-image('more');
+    background-size: 26px;
+  }
 }
