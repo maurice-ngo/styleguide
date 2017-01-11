@@ -86,7 +86,7 @@ export default function validator(el, options = {}) {
  * @param {Function} errorCallback - Fired off if submissions was unsuccessful
  */
 const submitHandler = (evt, $wrapper, successCallback, errorCallback) => {
-  let invalidElements = $wrapper.find(':invalid').toArray();
+  let invalidElements = $wrapper.find(':invalid').not(':hidden').toArray();
   let validElements = [];
 
   forEachFormField($wrapper, formField => {
@@ -119,6 +119,9 @@ const submitHandler = (evt, $wrapper, successCallback, errorCallback) => {
  */
 const validateField = el => {
   const $el = $(el);
+
+  if ($el.is(':hidden')) { return false; }
+  
   const dataAttrs = $el.data();
   const validatorList = Object.keys(validators);
 
