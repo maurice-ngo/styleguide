@@ -24,15 +24,14 @@ export { ctaAddToBag, ctaPreorder, ctaNotifyMe, ctaSpecialOrder, notificationInS
 export default function updateNotifyMe( data ) {
   const { wrap, sizeEl } = data;
   const chosen = getChosen(sizeEl);
+  const $emailField = $(wrap).find('#email').closest('.field');
 
   updateChosenData(data, chosen);
 
+  // update the user-facing form elements
+  toggleHidden($emailField, hideEmail(data));
   showNotification(data, { notify });
   updateCTA(data, { chooseCTA });
-
-  const $emailField = $(wrap).find('#email').closest('.field');
-
-  toggleHidden($emailField, hideEmail(data));
 }
 
 /**
