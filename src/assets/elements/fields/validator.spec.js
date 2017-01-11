@@ -3,6 +3,7 @@ import chai, { expect } from 'chai';
 import sinonChai from 'sinon-chai';
 
 import validator, { VALIDATE_TRIGGER } from './validator';
+import { triggerEvent } from '../../test/helpers/events';
 
 chai.use(sinonChai);
 
@@ -117,24 +118,20 @@ describe('Validator', () => {
       const { $required, $notEmpty, $clickTrigger  } = setupSimpleForm();
 
       $required.val('The Dude');
-      $notEmpty
-        .trigger('focus')
-        .trigger('blur');
+      triggerEvent($notEmpty, 'focus', 'blur');
 
       expect($notEmpty.is(':invalid')).to.be.true;
       $clickTrigger.trigger('click');
 
-      $notEmpty
-        .val(`he peed on the dude's rug`)
-        .trigger('focus')
-        .trigger('blur');
+      $notEmpty.val(`he peed on the dude's rug`);
+
+      triggerEvent($notEmpty, 'focus', 'blur');
 
       expect($required.is(':invalid')).to.be.false;
 
-      $notEmpty
-        .val('')
-        .trigger('focus')
-        .trigger('blur');
+      $notEmpty.val('');
+
+      triggerEvent($notEmpty, 'focus', 'blur');
 
       expect($notEmpty.is(':invalid')).to.be.true;
     });
