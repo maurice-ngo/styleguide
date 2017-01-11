@@ -40,6 +40,6 @@ describe('Create jQuery Plugin', () => {
     registerJQueryPlugin('abides', spy);
     $dude.abides(opts);
     $dude.abides(opts);
-    expect(spy).to.have.been.calledOnce;
+    expect(spy).to.have.been.calledTwice;
   });
 });

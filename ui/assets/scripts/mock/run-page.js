@@ -4,10 +4,12 @@
  */
 
 import pdp from './pdp'
+import notifyMe from './notify-me'
 
 // Object to hold all the imported pages (above)
 const page = {
-  pdp: pdp,
+  pdp,
+  notifyMe,
 }
 
 /**

@@ -62,6 +62,8 @@
 @import 'dd-category';
 // @import 'search';
 @import 'prices';
+@import 'notification';
+@import 'delivery-date';
 @import 'product';
 @import 'product-titles';
 @import 'product-sections';
@@ -77,7 +79,7 @@
 // @import 'carousel';
 // @import 'tags';
 @import 'cycle';
-@import 'tabs';
+@import 'ui-tabs';
 // @import 'filters';
 // @import 'slidedown';
 // @import 'revolve-me';
@@ -139,6 +141,7 @@
 @import 'product-badges';
 @import 'mini-popup';
 @import 'fixed-corner';
+@import 'notify-me';
 
 // Feature Specific Modules
 @import 'email-signup';

@@ -48,10 +48,8 @@
 input,
 select {
   @extend %font-primary;
-  padding: rem(10);
-  border: rem(1) solid $color__grey--lighter;
+  padding: rem( 16 );
   border-radius: 0;
-  background-color: $color__offwhite;
   color: $color__black;
   font-size: em(14, 14);
   text-rendering: optimizeLegibility;
@@ -131,9 +129,12 @@ select {
   border-right: rem(10) solid $color__offwhite;
   border-bottom: 0;
   border-left: 0;
-  background-repeat: no-repeat;
-  background-position: right center;
-  background-size: rem( 15 10 );
+  background: {
+    color: $color__offwhite;
+    repeat: no-repeat;
+    position: right center;
+    size: rem( 15 10 );
+  }
   color: $color__grey--light;
   letter-spacing: normal;
   text-transform: none;
@@ -306,8 +307,7 @@ textarea {
 // Label Placeholders For Radio and Checkbox
 
 %radio-checkbox-label {
-  font-size: em( 12 );
-  font-weight: normal;
+  @extend %h4;
   line-height: 2;
 }
 
@@ -406,7 +406,6 @@ textarea {
 
 label {
   display: block;
-  margin-bottom: rem( 7 );
   font-size: em( 12 );
 }
 
@@ -532,6 +531,35 @@ fieldset {
 .field {
   position: relative;
   margin-bottom: rem($base-margin);
+  &:focus .field__label {
+    display: block;
+  }
+
+  // .field--hidden
+  &--hidden {
+    display: none;
+  }
+
+  // .field__input
+  &__input {
+    border: rem(1) solid $color__grey--lighter;
+    width: 100%;
+    padding: rem( 13 16 );
+    &:focus {
+        padding-top: rem( 20 );
+        padding-bottom: rem( 6 );
+    }
+  }
+
+  // .field__label
+  &__label {
+    position: absolute;
+    top: rem( 6 );
+    left: rem( 16 );
+    z-index: -1; // to stay behind the select it overlaps
+    font-size: em(10);
+  }
+
   // field error states
   &.is-error {
     color: $color__error;
@@ -558,7 +586,90 @@ fieldset {
   }
 }
 
+ //TODO: Create a placeholder selector out of field, field__input, and
+ //field__label, so that this can be broken down into logical chunks.
+.inline-field {
+  @extend .field;
 
+  &__input {
+    @extend .field__input;
+    $selector: &;
+    font-size: em(16);
+
+    &:not(:focus) {
+      &:invalid {
+        &:not(#{$selector}--filled) {
+          background: white;
+        }
+
+        border-color: $color__error;
+        color: $color__error;
+        background-color: transparent;
+      }
+    }
+
+    &:focus {
+      @include placeholder {
+        opacity: 0;
+      }
+    }
+
+    &--selected {
+      padding: {
+        top: 22px;
+        bottom: 4px;
+      }
+    }
+
+    &--filled {
+      padding: {
+        top: 20px;
+        bottom: 6px;
+      }
+    }
+  }
+
+  &__label {
+    @extend .field__label;
+
+    &--invalid {
+      color: $color__error;
+    }
+
+    &--selected,
+    &--filled {
+      top: rem(4);
+      z-index: 1;
+    }
+  }
+}
+
+div.choice-field,
+.choice-field {
+  @extend .field;
+
+  &--invalid {
+    background-color: $color__pink--light;
+  }
+
+  &__label {
+    @extend .field__label;
+
+    &--invalid {
+      color: $color__error;
+    }
+  }
+
+  &__select {
+    @extend select;
+
+    &:not(:focus) {
+      &:invalid {
+        background-color: transparent;
+      }
+    }
+  }
+}
 
 // Underline Style for Input and Select fields
 // ===========================================
@@ -596,6 +707,11 @@ fieldset {
   font-size: smaller;
   font-style: italic;
   line-height: 1;
+
+  &--outside {
+    display: block;
+    margin-top: -10px;
+  }
 }
 
 // Field feedback

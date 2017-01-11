@@ -16,6 +16,7 @@
     &--strikethrough {
       color: $color__grey;
       text-decoration: line-through;
+      padding-left: rem(2);
     }
   }
   //prices__markdown

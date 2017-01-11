@@ -3,66 +3,75 @@ import chai, { expect } from 'chai';
 import chaiJquery from 'chai-jquery';
 
 import showNotification, {
-  WRAP_ID,
+  EL_CLASS,
+  finalSale,
+  sampleDefect,
+  oneLeft,
+  preorder,
 } from './product-notification-show';
-import sizeTemplate from '../../materials/modules/product-options/size.html';
-
-import finalSale from '../../materials/modules/product-notifications/final-sale.html';
-import sampleDefect from '../../materials/modules/product-notifications/final-sale-sample-defect.html';
-import oneLeft from '../../materials/modules/product-notifications/one-left.html';
-import preorder from '../../materials/modules/product-notifications/preorder.html';
 
 chai.use(chaiJquery);
 
 describe('product notification show', () => {
-  const renderSizeTemplate = (data = {}) => {
-    fixture.set(`
-      <div id="${WRAP_ID}"></div>
-      ${sizeTemplate(data)}
-    `);
+  let $product;
+  let data;
+  const WRAP_CLASS = 'product';
+  const notifications = [
+    {
+      attr: 'sample-defect',
+      template: sampleDefect,
+    }, {
+      attr: 'final-sale',
+      template: finalSale,
+    }, {
+      attr: 'one-left',
+      template: oneLeft,
+    }, {
+      attr: 'preorder',
+      template: preorder,
+    }
+  ];
 
-    return $(fixture.el).find('.product-option');
-  };
+  beforeEach(() => {
+    $product = $(fixture.set(`
+      <div class="${WRAP_CLASS}">
+        <p class="${WRAP_CLASS}__${EL_CLASS}"></p>
+      </div>
+    `));
+
+    data = {
+      wrap: $product[0],
+      wrapBlockClass: WRAP_CLASS,
+      chosen: {
+        'delivery-date': 'my bday',
+      },
+    }
+  });
 
   afterEach(() => fixture.cleanup());
 
-  it('should remove any existing elements from the wrap', () => {
-    fixture.set(`<div id="${WRAP_ID}">things</div>`);
-    showNotification($('<option/>')[0]);
-    expect($(`#${WRAP_ID}`).html()).to.be.empty;
+  it(`should not throw an error when the element is found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
+    expect(() => showNotification(data)).to.not.throw(Error);
   });
 
-  it('should render the various option values', () => {
-    const table = [
-      {
-        input: 'sample-defect',
-        expected: sampleDefect,
-      },
-      {
-        input: 'final-sale',
-        expected: finalSale,
-      },
-      {
-        input: 'one-left',
-        expected: oneLeft,
-      },
-      {
-        input: 'preorder',
-        expected: preorder,
-      }
-    ];
+  it(`should throw error when the element is not found ".${WRAP_CLASS}__${EL_CLASS}"`, () => {
+    $product.empty();
+    expect(() => showNotification(data)).to.throw(Error);
+  });
 
-    table.forEach(tt => {
-      const value = 'some-value';
-      const pdp = {
-        sizes: [{
-          value,
-          [tt.input]: true,
-        }]
-      };
-      const $productOption = renderSizeTemplate({ pdp });
-      showNotification($productOption.find(`option[value="${value}"]`)[0]);
-      expect($(`#${WRAP_ID}`)).to.have.html(tt.expected());
+  it('should remove any existing elements from the wrap', () => {
+    data.chosen['one-left'] = true;
+    showNotification(data);
+    data.chosen['one-left'] = false;
+
+    const $notification = showNotification(data);
+    expect($(`.${WRAP_CLASS}__${EL_CLASS}`).html()).to.be.empty;
+  });
+
+  notifications.forEach(notification => {
+    it(`should render ${notification.attr} notification with the correct template`, () => {
+      data.chosen[notification.attr] = true;
+      expect(showNotification(data)).to.have.html(notification.template(data.chosen));
     });
   });
 });

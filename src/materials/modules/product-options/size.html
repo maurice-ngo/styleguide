@@ -2,21 +2,21 @@
 notes:
 ---
 
-<div class="product-option product-option--size">
-  <label for="size" class="product-option__label">Size</label>
-  <select id="size" class="product-option__select u-ellipsis">
+<div class="product-size {{fieldClassName}}">
+  <label for="size" class="product-size__label {{fieldLabelClassName}}">Size</label>
+  <select id="size" class="product-size__select u-ellipsis {{fieldSelectClassName}}" {{{select-size-attrs}}}>
     <!-- add the product's "regular price" to the default option, for comparison -->
     <option value="default" data-delivery-date="{{pdp.delivery-date}}" data-regular-price="{{pdp.regular-price}}">Select Size</option>
-  {{#each pdp.sizes}}
     <!-- attach size-specific data to each option, including price -->
+  {{#each pdp.sizes}}
     <option data-delivery-date="{{delivery-date}}" value="{{value}}" data-price="{{price}}"
-      {{#if oos}}disabled{{/if}}
+      {{#unless ../enableOOS}}{{#if oos}}disabled{{/if}}{{/unless}}
+      {{#if oos}}data-oos="true"{{/if}}
       {{#if preorder}}data-preorder="true"{{/if}}
       {{#if one-left}}data-one-left="true"{{/if}}
       {{#if final-sale}}data-final-sale="true"{{/if}}
       {{#if sample-defect}}data-sample-defect="true"{{/if}}
-    >{{label}}{{#if oos}} (Out of Stock){{/if}}</option>
+    >{{label}}{{#unless ../enableOOS}}{{#if oos}} (Out of Stock){{/if}}{{/unless}}</option>
   {{/each}}
-    <option data-show-bis="true">Can't find your size?</option>
   </select>
 </div>

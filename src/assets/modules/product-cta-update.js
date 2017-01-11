@@ -1,46 +1,54 @@
 /**
- * Updates CTA text when stock id changes
+ * Updates CTA when stock id changes
  * @module updateCTA
  */
 
 import $ from 'jquery';
 
-import { ON_SALE_CLASS } from './product-price-update';
+import ctaAddToBag from '../../materials/modules/cta-buttons/add-to-bag.html'
+import ctaPreorder from '../../materials/modules/cta-buttons/preorder-cart.html'
+import ctaNotifyMeSpecial from '../../materials/modules/cta-buttons/notify-me-special.html'
+import ctaNotifyMe from '../../materials/modules/cta-buttons/notify-me.html'
 
-export const PREORDER = 'Preorder This Item';
-export const OOS = 'Notify Me / Special Order';
-export const OOS_SALE = 'Notify Me When Available';
-export const DEFAULT = 'Add To Bag';
-
-/**
- * Update CTA text based on selected value.
- * @param {jQueryElement} $wrap - The closest '.product' wrap from the select
- * @param {HTMLElement} chosen - Selected option of select dropdown
- */
-export default function updateCTA($wrap, chosen) {
-  // get the cta
-  const btn = $wrap.find('button[type="submit"]');
-
-  // update cta text
-  btn.text(update(chosen, $wrap));
+export { ctaAddToBag, ctaPreorder, ctaNotifyMeSpecial, ctaNotifyMe, };
+export const CTA_CLASS = 'cta';
+const DEFAULT_OPTIONS = {
+  chooseCTA,
 };
 
 /**
- * Get the text based on chosen
- * @param {HTMLElement} chosen - Selected option of select dropdown
- * @return {String} Text to display on CTA btn
+ * Update CTA based on selected value.
+ * @param {HTMLElement} wrap - The .product wrap
+ * @param {String} wrapBlockClass - Class of wrap HTML Element
+ * @param {Boolean} allOnSale - Whether all sizes are on sale
+ * @param {Object} chosen - Selected product size, including relevant data
+ * @param {Function} options.chooseCTA - Function used to choose the CTA
  */
-const update = (option, $wrap) => {
-  // if data-attr, show notification
-  if (check('oos'))
-    return $wrap.hasClass(ON_SALE_CLASS) ? OOS_SALE : OOS;
-  else if (check('preorder'))
-    return PREORDER;
-  else
-    return DEFAULT;
+export default function updateCTA(data , options = {}) {
+  const { wrap, wrapBlockClass, allOnSale, chosen = {} } = data;
+  const { chooseCTA } = Object.assign({}, DEFAULT_OPTIONS, options);
 
-  function check(attr) {
-    return !!option.getAttribute('data-' + attr)
-      && option.getAttribute('data-' + attr) === 'true';
+  const $cta = $(wrap).find(`.${wrapBlockClass}__${CTA_CLASS}`);
+  if (!$cta.length) {
+    throw new Error(`No .${wrapBlockClass}__${CTA_CLASS} was found`);
   }
+
+  $cta.html(chooseCTA(data));
+};
+
+/**
+ * Choose the CTA based on attributes.
+ * @param {Boolean} oos - Whether the chosen size is out of stock
+ * @param {Boolean} preorder - Whether the chosen size is preorder only
+ * @param {Boolean} allOnSale - Whether all sizes are on sale
+ */
+function chooseCTA({ chosen = {}, allOnSale }) {
+  const { oos, preorder } = chosen;
+  if (oos) {
+    return allOnSale ? ctaNotifyMe() : ctaNotifyMeSpecial();
+  }
+  if (preorder) {
+    return ctaPreorder();
+  }
+  return ctaAddToBag();
 }

@@ -5,36 +5,15 @@ fabricator: false
 layout: mock-page
 ---
 
-<section class="product u-margin-l--xl u-margin-r--xl">
+<header class="page__header">
+  {{> page-head.nav }}
+</header>
 
-<!-- Image Carousel -->
-{{> product-image-carousel }}
-
-<!-- Product Title -->
-{{> product-title- }}
-
-<!-- Price -->
-<div class="product__price u-margin-b--xl">
-  {{> price.regular }}
-</div>
-
-<!-- Add To Cart Form -->
-<form method="GET" action="">
-  <input type="hidden" name="confirm" value="true" />
-  {{> product-options.size }}
-  {{> product-options.color }}
-  <!-- wrapper for product notifications -->
-  <div id="product-notifications" class="u-clear-both u-clearfix"></div>
-  {{> buttons.full- addToBag=true }}
-  {{> product-estimated-delivery }}
-</form>
-
-<!-- Favorite button -->
-{{> favorite-buttons.default }}
-
+<section class="page__main u-margin-l--xl u-margin-r--xl">
+  {{> product }}
 </section>
 
-<section>
+<section class="page__secondary">
   <!-- Product Recs -->
   {{> product-recs hed="You May Also Like" }}
   {{> product-recs hed="Recently Viewed" }}
@@ -44,7 +23,9 @@ layout: mock-page
   {{> revolve-me }}
 </section>
 
-<!-- Modal: Product Added to Bag -->
-<script id="product-added-confirmation" type="text/x-handlebars-template">
-  {{> modals.product-added-confirmation }}
-</script>
+<footer class="page__footer">
+  <!-- Modal: Product Added to Bag -->
+  <script id="product-added-confirmation" type="text/x-handlebars-template">
+    {{> modals.product-added-confirmation }}
+  </script>
+</footer>

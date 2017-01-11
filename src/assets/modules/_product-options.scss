@@ -12,17 +12,20 @@
 
 ------------------------------------------------------ */
 
-.product-option {
-  position: relative;
-  float: left;
-  width: 50%;
-  margin-bottom: rem(8);
-  background-color: $color__grey--lighter;
-  z-index: 1; // need this for the label overlap trickery
+%option {
+  @extend %h4;
+  display: block;
+  padding: rem( 14 24 12 );
+}
 
-  @include bp-until($small-mobile) {
-    width: 100%;
-  }
+.product-color,
+.product-size {
+  position: relative;
+  width: 100%;
+  margin-bottom: rem( 16 );
+  background-color: $color__offwhite;
+  text-align: left;
+  z-index: 1; // need this for the label overlap trickery
 
   &:active {
     background-color: $color__black;
@@ -31,50 +34,32 @@
     }
   }
 
-  // .product-option--size
-  &--size {
-    @include bp-at-least($small-mobile) {
-      border-right: rem(4) solid $color__white;
-    }
-  }
-  // .product-option--color
-  &--color {
-    @include bp-at-least($small-mobile) {
-      border-left: rem(4) solid $color__white;
-    }
-  }
-  // .product-option--oos
-  &--oos {
-    background-color: $color__pink--light;
-    .product-option__select {
-      padding: rem(23 14 21);
-      line-height: rem(16);
-      text-align: center;
-      color: $color__error;
-    }
-  }
-
-  // .product-option__label, .product-option__select
+  // .product-color__one, .product-size__one,
+  // .product-color__label, .product-size__label
+  // .product-color__select, .product-size__select,
+  &__one,
   &__label,
   &__select {
+    display: inline-block;
     background-color: transparent;
+    margin-bottom: 0;
+    text-align: left;
   }
-  // .product-option__label
+  // .product-color__label, .product-size__label
   &__label {
     position: absolute;
     top: rem(12);
     left: rem(16);
     z-index: -1; // to stay behind the select it overlaps
     font-size: em(10);
-    text-align: left;
-    // override default form styles
-    margin-bottom: 0;
   }
-  // .product-option__select
+
+  // .product-color__one, .product-size__one,
+  // .product-color__select, .product-size__select
+  &__one,
   &__select {
-    @extend %h4;
-    display: block;
-    padding: rem(30 24 15 16);
+    @extend %option;
+    padding-left: rem( 54 );
     z-index: 2; // to stay behind the select it overlaps
     background-size: rem(16 16);
     // override default form styles
@@ -85,18 +70,48 @@
     }
     border-right-width: rem(16);
     box-shadow: none;
-    // .product-option__select.default
-    &.default {
-      color: $color__grey--light;
+    &:disabled {
+      -webkit-text-fill-color: $color__black;
+      color: $color__black;
+      opacity: 1;
     }
-    // .product-option__select--one
-    &--one {
-      margin-bottom: 0;
-      line-height: rem(15);
-      text-align: left;
-      &:disabled {
-        color: inherit;
-        opacity: 1;
+  }
+}
+
+// .product-size__oos
+.product-size__oos {
+  @extend %option;
+  background-color: $color__pink--light;
+  line-height: rem(16);
+  text-align: center;
+  color: $color__error;
+}
+
+// for larger than "small mobile" screens
+@include bp-at-least($small-mobile) {
+  // for "product" section
+  .product__options {
+    // .product__options .product-color,
+    // .product__options .product-size
+    .product-color,
+    .product-size {
+      float: left;
+      width: 50%;
+      margin-bottom: rem( 8 );
+      &__one,
+      &__select {
+        padding: rem(30 24 15 16);
+      }
+    }
+    // .product__options .product-color
+    .product-color {
+      border-left: rem(4) solid $color__white;
+    }
+    // .product__options .product-size
+    .product-size {
+      border-right: rem(4) solid $color__white;
+      &__oos {
+        padding: rem(23 14 21);
       }
     }
   }

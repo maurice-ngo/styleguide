@@ -61,10 +61,10 @@ module.exports = {
       dest: resolve('site'),
       layout: 'default',
       layouts: resolve('ui/layouts/*'),
-      layoutIncludes: resolve('ui/layouts/includes/*'),
+      layoutIncludes: [resolve('ui/layouts/includes/*'), resolve('src/partials/*')],
       views: resolve('src/views/**/*'),
       materials: resolve('src/materials/**/*'),
-    	data: resolve('src/data/**/*'),
+    	data: resolve('src/data/**/*.json'),
     	docs: resolve('src/docs/**/*.md')
     })
   ]

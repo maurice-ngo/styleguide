@@ -3,11 +3,10 @@
  * @module oosProduct
  */
 
-import $ from 'jquery';
-
+import createProductData  from '../lib/create-product-data';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 import updateCTA from './product-cta-update';
-import updateDelivery from './product-delivery-update';
+import updateDeliveryDate from './delivery-date-update';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'oosProduct';
@@ -18,10 +17,7 @@ registerJQueryPlugin(PLUGIN_NAME, oosProduct);
  * @param {HTMLElement} el - The select dropdown we're attaching to
  */
 export default function oosProduct(el) {
-  const wrap = $(el).closest('.product');
-  const chosen = document.createElement('li');
-  chosen.setAttribute('data-oos', 'true')
-
-  updateDelivery(wrap, chosen);
-  updateCTA(wrap, chosen);
+  const data = createProductData(el);
+  updateDeliveryDate(data);
+  updateCTA(data);
 };

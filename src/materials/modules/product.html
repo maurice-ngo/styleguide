@@ -1,0 +1,36 @@
+---
+notes: A single product
+---
+
+<div class="product">
+
+  <!-- Image Carousel -->
+  <div class="product__image">
+    {{> image-carousel images=pdp.carousel alt=pdp.alt }}
+  </div>
+
+  <!-- Product Title -->
+  <div class="product__title">
+    {{> product-title- }}
+  </div>
+
+  <!-- Product Price -->
+  <div class="product__price">
+    {{> price.regular }}
+  </div>
+
+  <!-- Add To Cart Form -->
+  <form method="GET" action="./shopping-bag.html">
+    <div class="product__options">
+      {{> product-options.size }}
+      {{> product-options.color }}
+    </div>
+    <div class="product__notification u-clear-both u-clearfix"></div>
+    <div class="product__cta">{{> cta-buttons.add-to-bag }}</div>
+    <div class="product__delivery-date u-margin-a--xl">{{> delivery-date }}</div>
+  </form>
+
+  <!-- Favorite button -->
+  {{> favorite-buttons.default }}
+
+</div>

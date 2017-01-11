@@ -9,54 +9,59 @@
 
 ------------------------------------------------------ */
 
-.product {
-  // .product__name
-  // Product title
-  &__name {
-    @extend %headings;
+.product-name {
+  @extend %h3;
+  margin: rem(0 0 2);
+}
+
+.product-brand {
+  margin-bottom: rem(2);
+  font-size: rem(14);
+  // .product-brand__link
+  &__link {
+    color: $color__black;
+  }
+}
+
+.product-name,
+.product-brand {
+  // TODO: Walter made these changes to .product__name & .product__brand
+  // Mocks have explicitly stated to not truncate long names/brands.
+  // Need to update this to a modifier for this use case.
+  // .product-name--walter
+  // .product-brand--walter
+  &--walter {
     @extend %u-ellipsis;
-    font-size: em(14);
-    line-height: 1.2;
-    &--font-primary {
-      font-family: $font-primary;
-      font-weight: normal;
-      font-size: em(12);
-      letter-spacing: em(0);
-      text-transform: none;
+    line-height: rem( 1.2 );
+  }
+  // .product-name--sm
+  // .product-brand--sm
+  &--sm {
+    font-size: em(12);
+    line-height: em(16);
+    margin-bottom: 4px;
+  }
+  // .product-name--font-primary
+  // .product-brand--font-primary
+  &--font-primary {
+    font: {
+      family: $font-primary;
+      weight: normal;
+      size: em(12);
     }
-    // .product__name--sm
-    // Product title small modifier
-    &--sm {
-      font-size: em(12);
-    }
+    letter-spacing: em(0);
+    text-transform: none;
   }
 
-  // .product__brand
-  // Product title brand - smaller font and line height
-  &__brand {
-    @extend %headings;
-    @extend %u-ellipsis;
-    font-size: em(14);
-    line-height: 1.2;
-    &--font-primary {
-      font-family: $font-primary !important;
-      font-weight: normal;
-      font-size: em(12);
-      letter-spacing: em(0);
-      text-transform: none;
-    }
-    &--sm {
-      font-size: em(12);
-    }
-  }
-  
-    // .product--long
+  // .product-name--long
+  // .product-brand--long
   &--long {
     text-overflow: initial !important;
     white-space: normal !important;
     overflow: auto !important
   }
-    // .product--grey
+  // .product-name--grey
+  // .product-brand--grey
   &--grey {
     color: $color__grey;
   }
