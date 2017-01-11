@@ -120,8 +120,10 @@ const submitHandler = (evt, $wrapper, successCallback, errorCallback) => {
 const validateField = el => {
   const $el = $(el);
 
-  if ($el.is(':hidden')) { return false; }
-  
+  if ($el.is(':hidden')) {
+    return false;
+  }
+
   const dataAttrs = $el.data();
   const validatorList = Object.keys(validators);
 
