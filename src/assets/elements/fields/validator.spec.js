@@ -60,6 +60,19 @@ describe('Validator', () => {
       expect(successCallback).to.not.have.been.called;
       expect(errorCallback).to.have.been.calledWith([$required[0], $notEmpty[0]]);
     });
+
+    it('should ignore hidden fields, producing a valid form submission', () => {
+      const { $form, $required, $notEmpty, successCallback, errorCallback } = setupSimpleForm();
+
+      $required.hide();
+      $notEmpty.hide();
+      $form
+        .on('submit', () => false)
+        .trigger('submit');
+
+      expect(errorCallback).to.not.have.been.called;
+      expect(successCallback).to.have.been.calledWith([$notEmpty[0]]);
+    });
   });
 
   describe('when performing a click trigger submission', () => {
@@ -167,6 +180,13 @@ describe('Validator', () => {
       $clickTrigger.trigger('click');
       expect($drink.is(':invalid')).to.be.false;
     });
+
+    it('should submit when input is hidden', () => {
+      const { $drink, $clickTrigger } = setupNotEmpty();
+      $drink.hide();
+      $clickTrigger.trigger('click');
+      expect($drink.is(':invalid')).to.be.false;
+    });
   });
 
   describe('when validating a not validator', () => {
@@ -196,6 +216,13 @@ describe('Validator', () => {
     it('should submit when a value is not the provided value', () => {
       const { $dude, $clickTrigger } = setupNot();
       $dude.val('rug');
+      $clickTrigger.trigger('click');
+      expect($dude.is(':invalid')).to.be.false;
+    });
+
+    it('should submit when the input is hidden', () => {
+      const { $dude, $clickTrigger } = setupNot();
+      $dude.hide();
       $clickTrigger.trigger('click');
       expect($dude.is(':invalid')).to.be.false;
     });

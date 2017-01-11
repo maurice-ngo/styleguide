@@ -6,7 +6,7 @@ import input from '../../partials/input-text.html';
 import updateNotifyMe, {
   chooseCTA,
   notify,
-  toggleEmailDisplay,
+  hideEmail,
   ctaAddToBag,
   ctaPreorder,
   ctaNotifyMe,
@@ -55,9 +55,7 @@ describe('notify me update', () => {
     });
 
     it('should not hide email', () => {
-      const expected = 'u-hide';
-
-      expect(toggleEmailDisplay(data)).to.not.have.class(expected);
+      expect(hideEmail(data)).to.be.false;
     });
   });
 
@@ -96,25 +94,22 @@ describe('notify me update', () => {
       const chosen = {
         preorder: true,
       };
-      const expected = 'u-hide';
       setSpecialOrder($fixture);
 
-      expect(toggleEmailDisplay(updateChosen(data, chosen))).to.have.class(expected);
+      expect(hideEmail(updateChosen(data, chosen))).to.be.true;
     });
 
     it('should not hide email when chosen size is not preorder or in stock', () => {
-      const expected = 'u-hide';
       setSpecialOrder($fixture);
 
-      expect(toggleEmailDisplay(data)).to.not.have.class(expected);
+      expect(hideEmail(data)).to.be.false;
     });
 
     it('should hide email when #auto-order is present', () => {
-      const expected = 'u-hide';
       const $wrap = setSpecialOrder($fixture);
 
       $wrap.append(`${input({ id: "auto-order", label: "auto order" })}`);
-      expect(toggleEmailDisplay(data)).to.have.class(expected);
+      expect(hideEmail(data)).to.be.true;
     });
   });
 
@@ -134,9 +129,8 @@ describe('notify me update', () => {
     });
 
     it('should show email field', () => {
-      const expected = 'u-hide';
-
-      expect(toggleEmailDisplay(updateChosen(data, chosen))).to.not.have.class(expected);
+      updateChosen(data, chosen)
+      expect(hideEmail(data)).to.be.false;
     });
   });
 
@@ -156,9 +150,7 @@ describe('notify me update', () => {
     });
 
     it('should hide email field', () => {
-      const expected = 'u-hide';
-
-      expect(toggleEmailDisplay(updateChosen(data, chosen))).to.have.class(expected);
+      expect(hideEmail(updateChosen(data, chosen))).to.be.true;
     });
   });
 });

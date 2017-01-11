@@ -535,6 +535,11 @@ fieldset {
     display: block;
   }
 
+  // .field--hidden
+  &--hidden {
+    display: none;
+  }
+
   // .field__input
   &__input {
     border: rem(1) solid $color__grey--lighter;
