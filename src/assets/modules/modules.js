@@ -10,11 +10,13 @@ import './product-color-change';
 import './product-oos';
 import './ui-tabs';
 import updateNotifyMe from './notify-me-update';
+import './modal';
 
 $(document).ready(() => {
   $('.js-accordion').accordion();
   $('.ui-tabs').tabs();
   $('.js-toggle-display').toggleDisplay();
+  $(".js-modal").modal();
 
   const $product = $('.product');
 
@@ -26,11 +28,11 @@ $(document).ready(() => {
     arrows: false,
     infinite: false,
   });
+
   $product.find('.product-size__select, .product-size__one').sizeChange().trigger('change');
   $product.find('.product-color__select').colorChange();
   $product.find('.product__cta button[type="submit"]').addToBag();
   $product.find('.product-size__oos').oosProduct();
-
 
   const notifyMeClass = 'notify-me';
 
