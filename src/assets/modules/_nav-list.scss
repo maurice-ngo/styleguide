@@ -15,8 +15,21 @@
   &__link {
     display: block;
     width: 100%;
-    padding: rem(12 10 9 14);
-    border-bottom: rem(1) solid $color__border;
+    padding: rem(12 16 9 16);
+    border-bottom: rem(2) solid $color__white;
+    background-color: #f4f4f4;
+    &:hover
+    &:active {
+      text-decoration: none;
+      color: $color__black;
+    }
+  }
+  &__link--white {
+    display: block;
+    width: 100%;
+    padding: rem(12 16 9 16);
+    border-bottom: rem(1) solid #f4f4f4;
+    background-color: $color__white;
     &:hover {
       text-decoration: none;
       color: $color__black;
@@ -47,23 +60,24 @@
     color: $color__grey--light;
     text-transform: uppercase;
   }
-  &__back-btn {
-    margin-bottom: rem(1);
-    padding: rem(10);
-    background-color: $color__offwhite;
-    color: $color__grey--light;
-    letter-spacing: em(1.26);
-    text-transform: uppercase;
-    @extend %font-secondary--bold;
-  }
-  &__arrow {
+  &__icon {
     margin-top: rem(8);
-    padding-right: rem(20);
+    padding-right: rem(18);
     float: right;
+    &--trun {
+      position: absolute;
+      bottom: 16px;
+      right: 21px;
+    }
     &--down {
       margin-top: rem(5);
     }
   }
   
 }
+
+
+
+
+
 
