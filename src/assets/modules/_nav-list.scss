@@ -15,44 +15,41 @@
   &__link {
     display: block;
     width: 100%;
-    padding: rem(12 16 9 16);
+    padding: rem(15 16 15 16);
     border-bottom: rem(2) solid $color__white;
     background-color: #f4f4f4;
+    color: $color__black;
+    @extend %font-secondary--bold;
+    letter-spacing: em(1.26);
+    text-transform: uppercase;
     &:hover
     &:active {
       text-decoration: none;
-      color: $color__black;
+      background-color: $color__black;
+      color: $color__white;
     }
   }
   &__link--white {
     display: block;
     width: 100%;
-    padding: rem(12 16 9 16);
+    padding: rem(15 16 15 16);
     border-bottom: rem(1) solid #f4f4f4;
     background-color: $color__white;
-    &:hover {
+    color: $color__black;
+    @extend %font-secondary--bold;
+    letter-spacing: em(1.26);
+    text-transform: uppercase;
+    &:hover
+    &:active {
       text-decoration: none;
-      color: $color__black;
+      background-color: $color__black;
+      color: $color__white;
     }
   }
   &__link--dark {
     color: $color__black;
     letter-spacing: em(1,13);
     font-size: em(13)
-  }
-  &__link--dark-bold {
-    color: $color__black;
-    @extend %font-secondary--bold;
-    letter-spacing: em(1.26);
-    text-transform: uppercase;
-  }
-  &__link--grey {
-    padding: rem(12 10 9 14);
-    color: $color__grey--light;
-    @extend %font-secondary;
-    font-size: em(11);
-    letter-spacing: em(1.26);
-    text-transform: uppercase;
   }
   &__section-title {
     padding: rem(17 14 14 14);

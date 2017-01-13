@@ -10,6 +10,24 @@ import './product-color-change';
 import './product-oos';
 import './modal';
 
+
+$.fn.navDropdowns = function( options ) {
+
+    function toggleDropdown($el) {
+      $el.find("ul").slideToggle("slow");
+    }
+    
+ 
+    // Iterate and reformat each matched element.
+    return this.each(function() {
+      $(this).on("click", function(){
+        toggleDropdown($(this));
+      });
+    console.log("BOOMS!!");
+    });
+    
+};
+
 $(document).ready(() => {
   $('.product__image--carousel').slick({
     lazyLoad: 'progressive',
@@ -25,4 +43,6 @@ $(document).ready(() => {
   $('.btn--add-to-bag').addToBag();
   $('.product-option--oos').oosProduct();
   $(".js-modal").modal();
+  $('#js-nav-dropdown').navDropdowns();
+  $('#js-nav-dropdown--full').navDropdowns();
 });
