@@ -12,4 +12,24 @@
 .product {
   position: relative;
   text-align: center;
+
+  // .product__image
+  &__image {
+    position: relative;
+    margin: 0 auto;
+  }
+
+  // .product__title
+  &__title {
+  }
+
+  // .product__price
+  &__price {
+    margin-bottom: rem(16);
+  }
+
+  // .product__notification .delivery-date
+  &__notification .delivery-date {
+    font-size: rem(12);
+  }
 }

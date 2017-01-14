@@ -14,9 +14,7 @@ import $ from 'jquery';
 export default function registerJQueryPlugin(name, cb) {
   $.fn[name] = function(options) {
     return this.each(function() {
-      if (!$.data(this, 'plugin_' + name)) {
-        $.data(this, 'plugin_' + name, cb(this, options) || true);
-      }
+      cb(this, options);
     });
   }
 };

@@ -15,124 +15,72 @@ import smallSaleTemplate from '../../materials/modules/price/small-on-sale.html'
 chai.use(chaiJquery);
 
 describe('product price update', () => {
-  let $fixture;
-  const WRAP_BLOCK_CLASS = 'wrap-block-class';
+  let $wrap;
+  let data;
+  let pdp;
+  const WRAP_BLOCK_CLASS = 'wrap';
+  const SIZE_ELEMENT_CLASS = 'sizeEl';
   const PRICE_SELECTOR_NAME = `${WRAP_BLOCK_CLASS}__price`;
+  const REGULAR_PRICE = '20';
+  const PRICE = '10';
+  const priceEl = (pdp, style) => {
+    data.chosen.price = pdp.price;
+    data.chosen.isOnSale = data.chosen.price < pdp['regular-price'];
+    updatePrice(data, style);
+    return $wrap.find(`.${PRICE_SELECTOR_NAME}`)
+  };
 
   beforeEach(() => {
     fixture.set(`
-      <div id="wrap">
+      <div class="${WRAP_BLOCK_CLASS}">
         <div class="${PRICE_SELECTOR_NAME}"></div>
       </div>
-
-      <select id="size">
-        <option value="1" ${REGULAR_PRICE_ATTR}="10.00">1</option>
-        <option value="2" ${PRICE_ATTR}="20.00">2</option>
-      </select>
-
-      <select id="price">
-        <option value="8.00" ${PRICE_ATTR}="8.00">8.00</option>
-        <option value="20.00" ${PRICE_ATTR}="20.00">20.00</option>
-      </select>
     `);
-    $fixture = $(fixture.el);
+    $wrap = $(fixture.el).find(`.${WRAP_BLOCK_CLASS}`);
+    data = {
+      wrap: $wrap[0],
+      wrapBlockClass: WRAP_BLOCK_CLASS,
+      regularPrice: REGULAR_PRICE,
+      chosen: {
+        price: false,
+        isOnSale: false,
+      }
+    };
+    pdp = {
+      price: PRICE,
+      'regular-price': REGULAR_PRICE,
+    };
   });
 
   afterEach(() => fixture.cleanup());
 
   it('should show an item on sale with a medium template style', () => {
-    updatePrice(
-      $fixture.find('#wrap'),
-      WRAP_BLOCK_CLASS,
-      $fixture.find('option[value="8.00"]')[0],
-      $fixture.find('#size')[0],
-      'medium',
-    );
+    const template = saleTemplate;
+    const style = 'medium';
 
-    expect($fixture.find(`.${PRICE_SELECTOR_NAME}`)).to.have.html(saleTemplate({
-      pdp: {
-        price: '8.00',
-        'regular-price': '10.00',
-      }
-    }));
+    expect(priceEl(pdp, style)).to.have.html(template({ pdp }));
   });
 
   it('should show an item on sale with a small template style', () => {
-    updatePrice(
-      $fixture.find('#wrap'),
-      WRAP_BLOCK_CLASS,
-      $fixture.find('option[value="8.00"]')[0],
-      $fixture.find('#size')[0],
-      'small'
-    );
+    const template = smallSaleTemplate;
+    const style = 'small';
 
-    expect($fixture.find(`.${PRICE_SELECTOR_NAME}`)).to.have.html(smallSaleTemplate({
-      pdp: {
-        price: '8.00',
-        'regular-price': '10.00',
-      }
-    }));
+    expect(priceEl(pdp, style)).to.have.html(template({ pdp }));
   });
 
   it('should show an item not on sale with a small template', () => {
-    updatePrice(
-      $fixture.find('#wrap'),
-      WRAP_BLOCK_CLASS,
-      $fixture.find('option[value="20.00"]')[0],
-      $fixture.find('#size')[0],
-      'small',
-    );
+    const template = smallTemplate;
+    const style = 'small';
+    pdp.price = pdp['regular-price'];
 
-    expect($fixture.find(`.${PRICE_SELECTOR_NAME}`)).to.have.html(smallTemplate({
-      pdp: {
-        price: '20.00',
-        'regular-price': '20.00',
-      }
-    }));
+    expect(priceEl(pdp, style)).to.have.html(template({ pdp }));
   });
 
   it('should show an item not on sale with a medium template', () => {
-    updatePrice(
-      $fixture.find('#wrap'),
-      WRAP_BLOCK_CLASS,
-      $fixture.find('option[value="20.00"]')[0],
-      $fixture.find('#size')[0],
-      'medium',
-    );
+    const template = regularTemplate;
+    const style = 'medium';
+    pdp.price = pdp['regular-price'];
 
-    expect($fixture.find(`.${PRICE_SELECTOR_NAME}`)).to.have.html(regularTemplate({
-      pdp: {
-        price: '20.00',
-        'regular-price': '20.00',
-      }
-    }));
-  });
-
-  it('should show an item on sale with a class of on-sale on the wrap', () => {
-    const $wrap = $fixture.find('#wrap');
-
-    updatePrice(
-      $wrap,
-      WRAP_BLOCK_CLASS,
-      $fixture.find('option[value="8.00"]')[0],
-      $fixture.find('#size')[0],
-      'medium',
-    );
-
-    expect($wrap).to.have.class(ON_SALE_CLASS);
-  });
-
-  it('should show an item not on sale without a class of on-sale on the wrap', () => {
-    const $wrap = $fixture.find('#wrap');
-
-    updatePrice(
-      $wrap,
-      WRAP_BLOCK_CLASS,
-      $fixture.find('option[value="20.00"]')[0],
-      $fixture.find('#size')[0],
-      'medium',
-    );
-
-    expect($wrap).to.not.have.class(ON_SALE_CLASS);
+    expect(priceEl(pdp, style)).to.have.html(template({ pdp }));
   });
 });

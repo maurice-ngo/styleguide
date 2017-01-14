@@ -6,59 +6,76 @@
 
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
-import toggleStyle from './product-size-style';
 import updatePrice from './product-price-update';
 import showNotification from './product-notification-show';
 import updateCTA from './product-cta-update';
-import updateDelivery from './product-delivery-update';
+import updateDeliveryDate from './delivery-date-update';
+import redirectHref from '../lib/redirect-href';
+import updateUnavailable from './product-unavailable-update';
+import createProductData, { updateChosenData } from '../lib/create-product-data';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'sizeChange';
 registerJQueryPlugin(PLUGIN_NAME, sizeChange);
 
 export const PRODUCT_BLOCK_CLASS = 'product';
+export const SIZE_ELEMENT_CLASS = 'product-size__select';
 
 /**
- * List of all updates made on change.
- * @param {HTMLElement} evt - The select dropdown we're attaching to
+ * @namespace
+ * @param {Function} update - Function fired to update page on size change
  */
-export const runUpdates = ({ currentTarget }) => {
-  const wrap = $(currentTarget).closest(`.${PRODUCT_BLOCK_CLASS}`);
-  // whether input or select, find the chosen element
-  const { options, selectedIndex } = currentTarget;
-  const chosen = options ? options[selectedIndex] : currentTarget;
-
-  updatePrice(wrap, PRODUCT_BLOCK_CLASS, chosen, currentTarget);
-  showNotification(chosen);
-  updateCTA(wrap, chosen);
-  updateDelivery(wrap, chosen);
-
-  // only for select dropdown
-  if (options) {
-    toggleStyle(currentTarget, chosen);
-  }
+const DEFAULT_OPTIONS = {
+  update,
 };
 
 /**
  * Initializes size changes.
  * @param {HTMLElement} el - The select dropdown we're attaching to
+ * @see DEFAULT_OPTIONS
  */
-export default function sizeChange(el) {
-  // local jQuery reference to el
-  const dropdown = $(el);
+export default function sizeChange(el, options = {}) {
+  const combinedOptions = Object.assign({}, DEFAULT_OPTIONS, options);
+  const { update } = combinedOptions;
+  const data = createProductData(el, combinedOptions);
 
-  attachChangeListener(dropdown);
-  runOnce(dropdown);
+  attachChangeListener(data, update);
 };
 
 /**
  * Attaches change event to select dropdown.
- * @param {HTMLElement} dropdown - The select dropdown
+ * @param {Object} data - Object containing relevant data about the product
+ * @param {Function} update - Function to update the page
  */
-const attachChangeListener = dropdown => dropdown.change(evt => runUpdates(evt));
+const attachChangeListener = (data, update) => $(data.sizeEl).change( evt => {
+  update(data);
+});
 
 /**
- * Runs once to update on page load.
- * @param {HTMLElement} dropdown - The select dropdown
+ * Callback function to update the page.
+ * @param {Object} data - Object containing relevant data about the product
  */
-const runOnce = dropdown => dropdown.change();
+function update( data ) {
+  const chosen = getChosen(data.sizeEl);
+  updateChosenData(data, chosen);
+
+  // run updates
+  redirectHref(chosen);
+  updatePrice(data);
+  showNotification(data);
+  updateCTA(data);
+  updateDeliveryDate(data);
+  updateUnavailable(data);
+};
+
+/**
+ * Helper to get chosen size
+ * @param {HTMLElement} sizeEl - Size Element
+ * @return {Object} Chosen size data
+ */
+export const getChosen = sizeEl => {
+  // whether input or select, find the chosen element
+  const { options, selectedIndex } = sizeEl;
+
+  return options ? options[selectedIndex] : sizeEl
+};

@@ -1,0 +1,26 @@
+---
+notes:
+---
+
+{{!--
+  @param {Array} images - comprised of either:
+    1. objects - each including `src` & `alt` properties
+    2. strings - each an img.src
+  @param {String} [alt] - if all img.alt are the same,
+    `images` param should be an array of strings (#2 above)
+    and the `alt` param will be used for each image
+--}}
+
+<div class="image-carousel">
+
+  {{#each images}}
+  <img class="image-carousel__image" alt="{{#if alt}}{{alt}}{{else}}{{../alt}}{{/if}}"
+    {{#if @first}}
+      src="{{#if src}}{{src}}{{else}}{{this}}{{/if}}"
+    {{else}}
+      data-lazy="{{#if src}}{{src}}{{else}}{{this}}{{/if}}"
+    {{/if}}
+  />
+  {{/each}}
+
+</div>

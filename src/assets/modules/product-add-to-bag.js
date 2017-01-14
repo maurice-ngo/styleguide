@@ -7,12 +7,11 @@
 import $ from 'jquery';
 import registerJQueryPlugin from '../lib/register-jquery-plugin';
 import addedConfirmation, { displayConfirmation } from './product-added-confirmation';
+import { SIZE_ELEMENT_CLASS } from './product-size-change';
 
 // Expose the function as a jQuery plugin for ease of use
 export const PLUGIN_NAME = 'addToBag';
 registerJQueryPlugin(PLUGIN_NAME, addToBag);
-
-export const SIZE_SELECTOR = '.product-option--size .product-option__select';
 
 /**
  * Initializes color dropdown changes.
@@ -22,10 +21,16 @@ export default function addToBag(el) {
   // create & add confirmation modal once up front
   const confirmation = addedConfirmation();
 
-  // attach handler to el
-  attachSubmitHandler(el, confirmation);
+  if (!confirmation) {
+    // if no modal is returned,
+    // throw an error (and form will submit as god intended)
+    throw new Error(`No template (#${TEMPLATE_ID}) was found`);
+  }
+  else {
+    // attach handler to el
+    attachSubmitHandler(el, confirmation);
+  }
 }
-
 
 /**
  * Adds 'submit' listener to parent 'form'.
@@ -34,38 +39,23 @@ export default function addToBag(el) {
  */
 const attachSubmitHandler = (btn, confirmation) => {
   const form = $(btn).closest('form');
-  const sizeEl = form.find(SIZE_SELECTOR)[0];
-  const $confirmation = $(confirmation);
+  // TODO: pdp constants
+  const sizeEl = form.find(`.${SIZE_ELEMENT_CLASS}, .product-size__one`)[0];
 
   // when the form submits, show the modal
   form.submit(e => {
     e.preventDefault();
 
-    // check that size is chosen
-    const chosen = check(sizeEl);
+    const { options, selectedIndex } = sizeEl;
+    const chosen = options ? options[selectedIndex] : sizeEl;
 
-    if (chosen) // display the confirmation modal
-      displayConfirmation(confirmation, chosen, sizeEl);
+    // if default option is still chosen
+    if (sizeEl.value === 'default') {
+      $(sizeEl).focus();
+      return;
+    }
+
+    // display the confirmation modal
+    displayConfirmation(confirmation, chosen, sizeEl);
   });
-};
-
-/**
- * Checks that size is chosen.
- * @param {jQueryElement} el - The size select/input
- * @return {HTMLElement} Element that's been chosen
- */
-const check = el => {
-  if (!el) // did not find SIZE_SELECTOR within the form
-    return;
-
-  const tagName = el.tagName;
-
-  if (tagName === 'INPUT') // el is INPUT whenever there is only 1 size
-    return el;
-
-  if (tagName === 'SELECT' && el.selectedIndex) // el is chosen from SELECT
-    return el.options[el.selectedIndex];
-
-  $(el).focus(); // this is not working on desktop (crossing fingers for mobile)
-  return; // SELECT is still on default option
 };

@@ -6,7 +6,10 @@
   "scripts": {
     "start": "webpack-dev-server --config tools/webpack.development.config.js",
     "test": "npm run karma:single -- --reporters mocha,junit,coverage",
+    "prebuild": "npm t",
     "build": "cross-env NODE_ENV=production webpack -p --config tools/webpack.build.config.js",
+    "prebuild:externals": "npm t",
+    "build:externals": "cross-env NODE_ENV=production webpack -p --config tools/webpack.externals.config.js",
     "watch": "webpack -w --config tools/webpack.build.config.js",
     "watch:test": "npm run karma",
     "karma": "cross-env NODE_ENV=test karma start tools/karma.conf.js",
@@ -70,6 +73,7 @@
   "dependencies": {
     "jquery": "^2.2.4",
     "jquery-colorbox": "^1.6.4",
+    "lodash": "^4.17.2",
     "slick-carousel": "^1.6.0"
   },
   "files": [

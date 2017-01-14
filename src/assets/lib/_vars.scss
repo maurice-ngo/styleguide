@@ -129,7 +129,7 @@ $customer-text-color: #8b8b8b;
 // Forms
 $input-background-color: $color__white;
 $input-border-color: #eeeeee;
-$input-border-color--darker: #a6a6a6;
+$input-border-color--darker: $color__black;
 $input-border-color--invert: #3b3b3b;
 
 // ERRORS
@@ -260,5 +260,5 @@ $breakpointsViews: (
 --------------------------------------------------------- */
 
 $base-unit:   8 !global; // used in rem function
-$base-margin: 14 !global; // used in rem function
+$base-margin: 16 !global; // used in rem function
 $base-pad:    20 !global; // used in rem function

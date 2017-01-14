@@ -8,6 +8,7 @@
   Page Header Styles : Mainly for PDP + PLP
 
 ------------------------------------------------------ */
+
 .page-header {
   &__title {
     height: rem(60);
@@ -134,5 +135,20 @@
     right: 0;
     padding: rem(12);
     z-index: 2;
+  }
+}
+
+.page__header {
+  background-color: $color__black;
+
+  .title {
+    @extend %font-secondary;
+    margin: 0;
+    padding: 6px;
+    font-size: em(16);
+    letter-spacing: 2px;
+    text-align: center;
+    text-transform: uppercase;;
+    color: $color__white;
   }
 }
