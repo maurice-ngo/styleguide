@@ -22,7 +22,7 @@
     @extend %font-secondary--bold;
     letter-spacing: em(1.26);
     text-transform: uppercase;
-    &:hover
+    &:hover,
     &:active {
       text-decoration: none;
       background-color: $color__black;
@@ -39,7 +39,7 @@
     @extend %font-secondary--bold;
     letter-spacing: em(1.26);
     text-transform: uppercase;
-    &:hover
+    &:hover,
     &:active {
       text-decoration: none;
       background-color: $color__black;
