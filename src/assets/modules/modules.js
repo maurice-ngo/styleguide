@@ -12,7 +12,30 @@ import './ui-tabs';
 import updateNotifyMe from './notify-me-update';
 import './modal';
 
+
+
+$.fn.navDropdowns = function( options ) {
+
+    function toggleDropdown($el) {
+      $el.find("ul").slideToggle("slow");
+    }
+    
+ 
+    // Iterate and reformat each matched element.
+    return this.each(function() {
+      $(this).on("click", function(){
+        toggleDropdown($(this));
+      });
+    console.log("BOOMS!!");
+    });
+    
+};
+
+
+
 $(document).ready(() => {
+  $('#js-nav-dropdown').navDropdowns();
+  $('#js-nav-dropdown--full').navDropdowns();
   $('.js-accordion').accordion();
   $('.ui-tabs').tabs();
   $('.js-toggle-display').toggleDisplay();
