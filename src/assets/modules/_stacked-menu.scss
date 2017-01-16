@@ -12,6 +12,13 @@
   margin: 0;
   border-top: rem(1) solid $color__border;
   list-style: none;
+  &__hed {
+    @extend %h1;
+    text-align: center;
+    margin:0;
+    line-height: rem(60);
+    vertical-align: middle;
+  }
   &__item {
     border-bottom: rem(1) solid $color__border;
   }
@@ -23,6 +30,13 @@
     line-height: rem(50);
     overflow: hidden;
     vertical-align: middle;
+    &--normal {
+      @extend %font-primary;
+      font-size: em(14);
+      font-weight: normal;
+      line-height: rem(60);
+      text-transform: capitalize;
+    }
     &.is-active {
       .icon {
         transform: rotate(90deg);
