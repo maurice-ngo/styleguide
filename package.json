@@ -2,7 +2,10 @@
   "name": "styleguide-test",
   "version": "1.0.3",
   "description": "Test for Revolve Styleguide",
-  "main": "src/assets/styleguide.js",
+  "main": "lib/styleguide.js",
+  "peerDependencies": {
+    "jquery": "^2.2.4"
+  },
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
@@ -23,6 +26,7 @@
     "gray-matter": "^2.0.2",
     "handlebars-loader": "^1.4.0",
     "ignore-loader": "^0.1.1",
+    "jquery": "^2.2.4",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.5",
@@ -51,7 +55,6 @@
     "webpack-svgstore-plugin": "^2.2.2"
   },
   "dependencies": {
-    "jquery": "^2.2.4",
     "jquery-colorbox": "^1.6.4",
     "lodash": "^4.17.2",
     "slick-carousel": "^1.6.0"
@@ -63,6 +66,7 @@
     "build": "cross-env NODE_ENV=production webpack -p --config tools/webpack.build.config.js",
     "prebuild:externals": "npm t",
     "build:externals": "cross-env NODE_ENV=production webpack -p --config tools/webpack.externals.config.js",
+    "prepublish": "npm run build:externals",
     "watch": "webpack -w --config tools/webpack.build.config.js",
     "watch:test": "npm run karma",
     "karma": "cross-env NODE_ENV=test karma start tools/karma.conf.js",
