@@ -1,6 +1,6 @@
 {
   "name": "styleguide-test",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Test for Revolve Styleguide",
   "main": "lib/styleguide.js",
   "peerDependencies": {
