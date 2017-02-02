@@ -1,3 +1,4 @@
+console.log("THIS IS A TEST");
 const resolve = require('./path-helpers').resolve;
 const FabricatorPlugin = require('./fabricator-webpack-plugin');
 const join = require('path').join;
